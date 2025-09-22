@@ -5,6 +5,7 @@ export type Category = keyof typeof CATEGORIES;
 export namespace Schema {
   export interface Signal {
     name: string;
+    terms?: string[];
     image: string;
     form: 'light' | 'sign';
     extra?: {

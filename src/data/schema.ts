@@ -92,6 +92,11 @@ export const SCHEMA: Schema.Root = {
               states: ['NZ:red;NZ:yellow;NZ:green', 'NZ:red;NZ:yellow'],
             },
           },
+          'NZ:shunting_limit': {
+            name: 'Shunting Limit',
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_Shunting_Limit.svg',
+          },
         },
         minor: {
           'NZ:low_speed': {
@@ -104,6 +109,18 @@ export const SCHEMA: Schema.Root = {
             image: 'File:NZ_Railway_Sign_R.svg',
             form: 'light',
           },
+          'NZ:TWC_siding': {
+            name: 'TWC Siding',
+            terms: ['Track Warrant Control Siding'],
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_TWC_Siding.svg',
+          },
+          'NZ:TWC_intermediate': {
+            name: 'TWC Intermediate Board',
+            terms: ['Track Warrant Control Intermediate Board'],
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_TWC_Intermediate_Board.svg',
+          },
         },
         speed_limit: {
           'NZ:speed_indicator': {
@@ -112,12 +129,87 @@ export const SCHEMA: Schema.Root = {
             form: 'light',
             extra: { states: [] },
           },
+          'NZ:permanent': {
+            name: 'Permanent Speed',
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_Speed_Slow.svg',
+            extra: {
+              states: ['SLOW', 'MEDIUM', 'THROUGH TURNOUT SLOW'],
+              speed: [],
+            },
+          },
+          'NZ:curve': {
+            name: 'Curve Speed',
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_Curve_Speed.svg',
+          },
+        },
+        speed_limit_distant: {
+          'NZ:curve_warning': {
+            name: 'Curve Speed - Advance Warning',
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_Curve_Speed_Advance.svg',
+          },
         },
         train_protection: {
           'NZ:A': {
             name: 'A-light',
             image: 'File:NZ_Railway_Sign_A.svg',
             form: 'light',
+          },
+          'NZ:AS_begins': {
+            name: 'AS Begins',
+            terms: ['Automatic Signalling Begins'],
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_AS_Begins.svg',
+          },
+          'NZ:AS_ends': {
+            name: 'AS Ends',
+            terms: ['Automatic Signalling Ends'],
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_AS_Ends.svg',
+          },
+          'NZ:CTC_begins': {
+            name: 'CTC Begins',
+            terms: [
+              'Centralised Train Control Begins',
+              'Centralized Traffic Control Begins',
+            ],
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_CTC_Begins.svg',
+          },
+          'NZ:CTC_ends': {
+            name: 'CTC Ends',
+            terms: [
+              'Centralised Train Control Ends',
+              'Centralized Traffic Control Ends',
+            ],
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_CTC_Ends.svg',
+          },
+          'NZ:ETCS_begins': {
+            name: 'ETCS Begins',
+            terms: ['European Train Control System Begins'],
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_ETCS_Begins.svg',
+          },
+          'NZ:ETCS_ends': {
+            name: 'ETCS Ends',
+            terms: ['European Train Control System Ends'],
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_ETCS_Ends.svg',
+          },
+          'NZ:TWC_begins': {
+            name: 'TWC Begins',
+            terms: ['Track Warrant Control Begins'],
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_TWC_Begins.svg',
+          },
+          'NZ:TWC_ends': {
+            name: 'TWC Ends',
+            terms: ['Track Warrant Control Ends'],
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_TWC_Ends.svg',
           },
         },
         route: {
@@ -136,6 +228,73 @@ export const SCHEMA: Schema.Root = {
             image: 'File:Theatre-boxes.jpg',
             form: 'light',
             extra: { states: [], states_long: [] },
+          },
+        },
+        main_repeated: {
+          'NZ:banner_indicator33': {
+            name: 'Double Banner Indicator',
+            form: 'light',
+            image: 'File:NZ_Railway_Signal_Banner_Indicator_double.svg',
+          },
+          'NZ:banner_indicator3D': {
+            name: 'Single Banner Indicator',
+            form: 'light',
+            image: 'File:NZ_Railway_Signal_Banner_Indicator_single.svg',
+          },
+        },
+        stop: {
+          'NZ:emu_stop': {
+            name: 'EMU Stop',
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_EMU_Stop.svg',
+          },
+          'NZ:stop_disk': {
+            name: 'Stop Disk',
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_Stop_Disk.svg',
+          },
+          'NZ:stop_plate': {
+            name: 'Stop Plate',
+            form: 'sign',
+            image: 'File:NZ Railway Sign Stop Plate.svg',
+          },
+          'NZ:stop_block': {
+            name: 'Stop Block Entry',
+            form: 'sign',
+            image: 'File:NZ Railway Sign Stop Block Entry.svg',
+          },
+          'NZ:all_trains_stop': {
+            name: 'All Trains Stop',
+            form: 'sign',
+            image: 'File:NZ Railway Sign All Trains Stop.svg',
+          },
+        },
+        electricity: {
+          'NZ:electric_limit': {
+            name: 'Electric Services Limit',
+            form: 'sign',
+            image: 'File:NZ Railway Sign Electric Services Limit.svg',
+          },
+        },
+        whistle: {
+          'NZ:whistle': {
+            name: 'Whistle',
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_Whistle.svg',
+          },
+        },
+        crossing_hint: {
+          'NZ:saltire': {
+            name: 'Level Crossing Ahead',
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_Level_Crossing.svg',
+          },
+        },
+        radio: {
+          'NZ:channel_area': {
+            name: 'Radio Channel Area',
+            form: 'sign',
+            image: 'File:NZ_Railway_Sign_Entering_Channel_Area.svg',
           },
         },
       },
