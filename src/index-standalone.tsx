@@ -20,5 +20,8 @@ element.init({
     'railway:signal:main': 'NZ:main_MM',
     'railway:signal:route': 'NZ:route_indicator',
   }),
+  map: {
+    center: [151.0977, -33.8935],
+  },
 });
 document.body.append(element);

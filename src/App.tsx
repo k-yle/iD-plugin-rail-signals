@@ -1,4 +1,4 @@
-import { useState, useSyncExternalStore } from 'react';
+import { useMemo, useState, useSyncExternalStore } from 'react';
 import {
   ActionIcon,
   Button,
@@ -7,6 +7,7 @@ import {
   Flex,
   Group,
   Image,
+  MultiSelect,
   Select,
   Text,
   TextInput,
@@ -14,24 +15,28 @@ import {
 } from '@mantine/core';
 import { IconPlus, IconReplace, IconTrash } from '@tabler/icons-react';
 import type * as iD from '@openstreetmap/id-plugin-sdk';
+import { iso1A2Code } from '@rapideditor/country-coder';
 import { ThemeProvider } from './components/ThemeProvider.js';
-import type { Category } from './data/types.def.js';
-import { CATEGORIES, SCHEMA } from './data/schema.js';
+import type { Category, FieldOption } from './data/types.def.js';
+import { CATEGORIES } from './data/schema.js';
 import { AddModal } from './components/AddModal.js';
 import { useConfirmModal } from './helpers/useConfirmModal.js';
 import { StatesLongEditor } from './components/StatesLongEditor.js';
 import { getImageUrl } from './helpers/image.js';
+import { renderSelectOptionWithIcon } from './components/Select.js';
+import { findPreset } from './helpers/preset.js';
 
 export function isAllTagsHaveSameValue(tags: iD.MultiTags): tags is iD.Tags {
   return Object.values(tags).every((value) => !Array.isArray(value));
 }
 
-const COUNTRY = 'NZ' as const; // TODO: get from upstream
-
 export const App: React.FC<{ domRoot: HTMLElement } & iD.PluginData> = ({
   domRoot,
   tagsStore,
+  map,
 }) => {
+  const country = useMemo(() => iso1A2Code(map.center)!, [map.center]);
+
   const [modal, setModal] = useState<Category | symbol>();
 
   const confirmModal = useConfirmModal();
@@ -49,9 +54,7 @@ export const App: React.FC<{ domRoot: HTMLElement } & iD.PluginData> = ({
         const value = tags[`railway:signal:${cat}`];
         if (!value) return null;
 
-        const def = Object.values(SCHEMA[COUNTRY]!)
-          .map((network) => network.signals[cat]?.[value])
-          .find(Boolean);
+        const def = findPreset(tags, cat);
 
         // these are rendered as a single field
         if (def?.extra?.states && def.extra.states_long) {
@@ -106,6 +109,7 @@ export const App: React.FC<{ domRoot: HTMLElement } & iD.PluginData> = ({
             {def?.extra && (
               <Group p="sm" style={{ textTransform: 'capitalize' }}>
                 {Object.entries(def.extra).map(([key, options]) => {
+                  // fixed value - no input field
                   if (key === 'states_long') {
                     // special field
                     return (
@@ -120,20 +124,55 @@ export const App: React.FC<{ domRoot: HTMLElement } & iD.PluginData> = ({
                     );
                   }
 
-                  if (options.length) {
-                    // there are limited options
+                  if (!options.options.length) {
+                    // there are no fixed options
                     return (
-                      <Select
+                      <TextInput
                         key={key}
                         label={key}
                         size="xs"
-                        data={options}
+                        defaultValue={tags[`railway:signal:${cat}:${key}`]}
+                        onBlur={(event) => {
+                          const newTags = { ...tags };
+                          if (event.target.value) {
+                            newTags[`railway:signal:${cat}:${key}`] =
+                              event.target.value;
+                          } else {
+                            delete newTags[`railway:signal:${cat}:${key}`];
+                          }
+
+                          return tagsStore.setValue(newTags);
+                        }}
+                      />
+                    );
+                  }
+
+                  // there are limited options
+                  const mappedOptions = options.options.map((o) => {
+                    const option: FieldOption =
+                      typeof o === 'string' ? { label: o } : o;
+                    return { value: option.label, ...option };
+                  });
+
+                  // multi-select
+                  if (options.multiple) {
+                    return (
+                      <MultiSelect
+                        key={key}
+                        label={key}
+                        size="xs"
+                        style={{ minWidth: '100%' }}
+                        renderOption={renderSelectOptionWithIcon}
+                        data={mappedOptions}
                         clearable
-                        value={tags[`railway:signal:${cat}:${key}`]}
+                        value={
+                          tags[`railway:signal:${cat}:${key}`]?.split(';') || []
+                        }
                         onChange={(newValue) => {
                           const newTags = { ...tags };
-                          if (newValue) {
-                            newTags[`railway:signal:${cat}:${key}`] = newValue;
+                          if (newValue.length) {
+                            newTags[`railway:signal:${cat}:${key}`] =
+                              newValue.join(';');
                           } else {
                             delete newTags[`railway:signal:${cat}:${key}`];
                           }
@@ -143,19 +182,37 @@ export const App: React.FC<{ domRoot: HTMLElement } & iD.PluginData> = ({
                     );
                   }
 
-                  // there are no fixed options
+                  // single-select
+                  const v = tags[`railway:signal:${cat}:${key}`] || '';
+                  const selected = mappedOptions.find((o) => o.label === v);
                   return (
-                    <TextInput
+                    <Select
                       key={key}
                       label={key}
                       size="xs"
-                      value={tags[`railway:signal:${cat}:${key}`]}
-                      onBlur={(event) =>
-                        tagsStore.setValue({
-                          ...tags,
-                          [`railway:signal:${cat}:${key}`]: event.target.value,
-                        })
+                      renderOption={renderSelectOptionWithIcon}
+                      data={mappedOptions}
+                      clearable
+                      required={options.required}
+                      value={v}
+                      leftSection={
+                        selected?.icon && (
+                          <img
+                            src={getImageUrl(selected.icon)}
+                            alt="icon"
+                            height={20}
+                          />
+                        )
                       }
+                      onChange={(newValue) => {
+                        const newTags = { ...tags };
+                        if (newValue) {
+                          newTags[`railway:signal:${cat}:${key}`] = newValue;
+                        } else {
+                          delete newTags[`railway:signal:${cat}:${key}`];
+                        }
+                        tagsStore.setValue(newTags);
+                      }}
                     />
                   );
                 })}
@@ -174,12 +231,14 @@ export const App: React.FC<{ domRoot: HTMLElement } & iD.PluginData> = ({
       {modal && (
         <AddModal
           limitToCategory={typeof modal === 'string' ? modal : undefined}
-          country={COUNTRY}
+          country={country}
           onClose={() => setModal(undefined)}
           onSelect={async (selected) => {
             const newTags = structuredClone(tags);
 
             const existing = tags[`railway:signal:${selected.category}`];
+
+            const oldPreset = findPreset(tags, selected.category);
 
             // there can only be one per category, so show a confirmation
             // popup before overriding.
@@ -189,8 +248,9 @@ export const App: React.FC<{ domRoot: HTMLElement } & iD.PluginData> = ({
                 description: (
                   <>
                     There is aready a <em>{CATEGORIES[selected.category]}</em>{' '}
-                    signal, so if you continue, <Code>{selected.signalId}</Code>{' '}
-                    will replace <Code>{existing}</Code>.
+                    signal, so if you continue,{' '}
+                    <Code>{selected.signal.name}</Code> will replace{' '}
+                    <Code>{oldPreset?.name || existing}</Code>.
                   </>
                 ),
                 buttonProps: {
@@ -207,9 +267,22 @@ export const App: React.FC<{ domRoot: HTMLElement } & iD.PluginData> = ({
               }
             }
 
-            newTags[`railway:signal:${selected.category}`] = selected.signalId;
+            if (oldPreset?.const) {
+              // delete all extra const tags from the old preset
+              for (const key in oldPreset.const) {
+                delete newTags[`railway:signal:${selected.category}:${key}`];
+              }
+            }
+
+            newTags[`railway:signal:${selected.category}`] = selected.signal.id;
             newTags[`railway:signal:${selected.category}:form`] =
               selected.signal.form;
+
+            for (const [key, value] of Object.entries(
+              selected.signal.const || {},
+            )) {
+              newTags[`railway:signal:${selected.category}:${key}`] = value;
+            }
 
             tagsStore.setValue(newTags);
           }}

@@ -10,6 +10,7 @@
   "dependencies": {
     "@mantine/core": "^7.14.2",
     "@openstreetmap/id-plugin-sdk": "github:k-yle/iD#plugin-sdk",
+    "@rapideditor/country-coder": "^5.5.1",
     "@tabler/icons-react": "^3.22.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
