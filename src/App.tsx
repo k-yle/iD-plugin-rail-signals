@@ -35,7 +35,14 @@ export const App: React.FC<{ domRoot: HTMLElement } & iD.PluginData> = ({
   tagsStore,
   map,
 }) => {
-  const country = useMemo(() => iso1A2Code(map.center)!, [map.center]);
+  const country = useMemo(
+    () =>
+      // just for debugging (since the country currently isn't configurable in the UI)
+      new URLSearchParams(window.location.search)
+        .get('iDpO_country')
+        ?.toUpperCase() || iso1A2Code(map.center)!,
+    [map.center],
+  );
 
   const [modal, setModal] = useState<Category | symbol>();
 

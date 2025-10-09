@@ -1,4 +1,5 @@
 import type { Schema } from './types.def.js';
+import AUTO_GENERATED_SCHEMA from './generated-schema.json' with { type: 'json' };
 
 /** from https://osm.wiki/Tag:railway:signal#List_of_signal_categories */
 export const CATEGORIES = {
@@ -9,7 +10,7 @@ export const CATEGORIES = {
   minor_distant: 'Minor Distant',
   combined: 'Combined',
   shunting: 'Shunting',
-  shunting_route: 'Shunting Route', // TODO: add
+  shunting_route: 'Shunting Route',
   crossing: 'Crossing',
   crossing_distant: 'Crossing Distant',
   crossing_info: 'Crossing Info',
@@ -31,7 +32,7 @@ export const CATEGORIES = {
   resetting_switch: 'Resetting Switch',
   resetting_switch_distant: 'Resetting Switch Distant',
   snowplow: 'Snowplow',
-  switch: 'Switch', // TODO: add
+  switch: 'Switch',
   short_route: 'Short Route',
   brake_test: 'Brake Test',
   fouling_point: 'Fouling Point',
@@ -42,6 +43,7 @@ export const CATEGORIES = {
 };
 
 export const SCHEMA: Schema.Root = {
+  ...(AUTO_GENERATED_SCHEMA as Schema.Root),
   AU: {
     MNWSW: {
       networkName: 'Sydney Metro',

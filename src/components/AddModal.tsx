@@ -22,7 +22,7 @@ export const AddModal: React.FC<{
   onClose(): void;
   onSelect(data: { category: Category; signal: Schema.Signal }): void;
 }> = ({ limitToCategory, country, onClose, onSelect }) => {
-  const networks = Object.values(SCHEMA[country]!);
+  const networks = Object.values(SCHEMA[country] || {});
 
   const [filter, setFilter] = useState('');
   const [network, setNetwork] = useState<Schema.Network | undefined>(() => {
