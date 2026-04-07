@@ -21112,7 +21112,8 @@ const Ay = "" + new URL("styles.css", import.meta.url).href, My = "" + new URL("
       cssVariablesSelector: o.tagName,
       getRootElement: () => o,
       theme: s,
-      defaultColorScheme: i || "auto",
+      defaultColorScheme: i || // iD sends undefined if using the browser's default:
+      (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"),
       children: [
         /* @__PURE__ */ C.jsx("link", { rel: "stylesheet", href: Ay }),
         /* @__PURE__ */ C.jsx("link", { rel: "stylesheet", href: My }),
