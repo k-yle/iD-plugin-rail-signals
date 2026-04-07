@@ -94,7 +94,14 @@ export const App: React.FC<{ domRoot: HTMLElement } & iD.PluginData> = ({
                     onClick={() => {
                       const newTags = structuredClone(tags);
                       for (const key in newTags) {
-                        if (key.startsWith(`railway:signal:${cat}`)) {
+                        if (
+                          key === `railway:signal:${cat}` ||
+                          (key.startsWith(`railway:signal:${cat}:`) &&
+                            // extra check to handle double categories like `train_protection:main`
+                            !key
+                              .replace(`railway:signal:${cat}:`, '')
+                              .includes(':'))
+                        ) {
                           delete newTags[key];
                         }
                       }
