@@ -9,7 +9,13 @@ export type ExtraField =
   | 'states'
   | 'states_long'
   | 'speed'
-  | 'caption';
+  | 'height'
+  | 'caption'
+  | 'turn_direction'
+  | 'frequency'
+  | 'colour'
+  | 'repeated'
+  | 'function';
 
 export interface FieldOption {
   /** the osm tag value */
