@@ -44,7 +44,7 @@ var Er;
 function Bd() {
   return Er || (Er = 1, nt.exports = Ld()), nt.exports;
 }
-var _ = Bd(), ot = { exports: {} }, S7 = {}, rt = { exports: {} }, st = {};
+var C = Bd(), ot = { exports: {} }, S7 = {}, rt = { exports: {} }, st = {};
 var Ar;
 function zd() {
   return Ar || (Ar = 1, (function(i) {
@@ -52,9 +52,9 @@ function zd() {
       var W = V.length;
       V.push(Y);
       e: for (; 0 < W; ) {
-        var Z = W - 1 >>> 1, x = V[Z];
-        if (0 < c(x, Y))
-          V[Z] = Y, V[W] = x, W = Z;
+        var Z = W - 1 >>> 1, T = V[Z];
+        if (0 < c(T, Y))
+          V[Z] = Y, V[W] = T, W = Z;
         else break e;
       }
     }
@@ -66,11 +66,11 @@ function zd() {
       var Y = V[0], W = V.pop();
       if (W !== Y) {
         V[0] = W;
-        e: for (var Z = 0, x = V.length, j = x >>> 1; Z < j; ) {
+        e: for (var Z = 0, T = V.length, j = T >>> 1; Z < j; ) {
           var e1 = 2 * (Z + 1) - 1, o1 = V[e1], a1 = e1 + 1, m1 = V[a1];
           if (0 > c(o1, W))
-            a1 < x && 0 > c(m1, o1) ? (V[Z] = m1, V[a1] = W, Z = a1) : (V[Z] = o1, V[e1] = W, Z = e1);
-          else if (a1 < x && 0 > c(m1, W))
+            a1 < T && 0 > c(m1, o1) ? (V[Z] = m1, V[a1] = W, Z = a1) : (V[Z] = o1, V[e1] = W, Z = e1);
+          else if (a1 < T && 0 > c(m1, W))
             V[Z] = m1, V[a1] = W, Z = a1;
           else break e;
         }
@@ -92,8 +92,8 @@ function zd() {
         return f.now() - g;
       };
     }
-    var p = [], m = [], b = 1, v = null, R = 3, y = !1, N = !1, O = !1, S = typeof setTimeout == "function" ? setTimeout : null, w = typeof clearTimeout == "function" ? clearTimeout : null, E = typeof setImmediate < "u" ? setImmediate : null;
-    function C(V) {
+    var p = [], m = [], b = 1, y = null, R = 3, v = !1, _ = !1, O = !1, S = typeof setTimeout == "function" ? setTimeout : null, w = typeof clearTimeout == "function" ? clearTimeout : null, E = typeof setImmediate < "u" ? setImmediate : null;
+    function N(V) {
       for (var Y = r(m); Y !== null; ) {
         if (Y.callback === null) s(m);
         else if (Y.startTime <= V)
@@ -102,13 +102,13 @@ function zd() {
         Y = r(m);
       }
     }
-    function T(V) {
-      if (O = !1, C(V), !N)
+    function x(V) {
+      if (O = !1, N(V), !_)
         if (r(p) !== null)
-          N = !0, n1();
+          _ = !0, n1();
         else {
           var Y = r(m);
-          Y !== null && t1(T, Y.startTime - V);
+          Y !== null && t1(x, Y.startTime - V);
         }
     }
     var k = !1, F = -1, I = 5, Q = -1;
@@ -122,37 +122,37 @@ function zd() {
         var Y = !0;
         try {
           e: {
-            N = !1, O && (O = !1, w(F), F = -1), y = !0;
+            _ = !1, O && (O = !1, w(F), F = -1), v = !0;
             var W = R;
             try {
               t: {
-                for (C(V), v = r(p); v !== null && !(v.expirationTime > V && B()); ) {
-                  var Z = v.callback;
+                for (N(V), y = r(p); y !== null && !(y.expirationTime > V && B()); ) {
+                  var Z = y.callback;
                   if (typeof Z == "function") {
-                    v.callback = null, R = v.priorityLevel;
-                    var x = Z(
-                      v.expirationTime <= V
+                    y.callback = null, R = y.priorityLevel;
+                    var T = Z(
+                      y.expirationTime <= V
                     );
-                    if (V = i.unstable_now(), typeof x == "function") {
-                      v.callback = x, C(V), Y = !0;
+                    if (V = i.unstable_now(), typeof T == "function") {
+                      y.callback = T, N(V), Y = !0;
                       break t;
                     }
-                    v === r(p) && s(p), C(V);
+                    y === r(p) && s(p), N(V);
                   } else s(p);
-                  v = r(p);
+                  y = r(p);
                 }
-                if (v !== null) Y = !0;
+                if (y !== null) Y = !0;
                 else {
                   var j = r(m);
                   j !== null && t1(
-                    T,
+                    x,
                     j.startTime - V
                   ), Y = !1;
                 }
               }
               break e;
             } finally {
-              v = null, R = W, y = !1;
+              y = null, R = W, v = !1;
             }
             Y = void 0;
           }
@@ -186,7 +186,7 @@ function zd() {
     i.unstable_IdlePriority = 5, i.unstable_ImmediatePriority = 1, i.unstable_LowPriority = 4, i.unstable_NormalPriority = 3, i.unstable_Profiling = null, i.unstable_UserBlockingPriority = 2, i.unstable_cancelCallback = function(V) {
       V.callback = null;
     }, i.unstable_continueExecution = function() {
-      N || y || (N = !0, n1());
+      _ || v || (_ = !0, n1());
     }, i.unstable_forceFrameRate = function(V) {
       0 > V || 125 < V ? console.error(
         "forceFrameRate takes a positive int between 0 and 125, forcing frame rates higher than 125 fps is not supported"
@@ -236,28 +236,28 @@ function zd() {
       var Z = i.unstable_now();
       switch (typeof W == "object" && W !== null ? (W = W.delay, W = typeof W == "number" && 0 < W ? Z + W : Z) : W = Z, V) {
         case 1:
-          var x = -1;
+          var T = -1;
           break;
         case 2:
-          x = 250;
+          T = 250;
           break;
         case 5:
-          x = 1073741823;
+          T = 1073741823;
           break;
         case 4:
-          x = 1e4;
+          T = 1e4;
           break;
         default:
-          x = 5e3;
+          T = 5e3;
       }
-      return x = W + x, V = {
+      return T = W + T, V = {
         id: b++,
         callback: Y,
         priorityLevel: V,
         startTime: W,
-        expirationTime: x,
+        expirationTime: T,
         sortIndex: -1
-      }, W > Z ? (V.sortIndex = W, o(m, V), r(p) === null && V === r(m) && (O ? (w(F), F = -1) : O = !0, t1(T, W - Z))) : (V.sortIndex = x, o(p, V), N || y || (N = !0, n1())), V;
+      }, W > Z ? (V.sortIndex = W, o(m, V), r(p) === null && V === r(m) && (O ? (w(F), F = -1) : O = !0, t1(x, W - Z))) : (V.sortIndex = T, o(p, V), _ || v || (_ = !0, n1())), V;
     }, i.unstable_shouldYield = B, i.unstable_wrapCallback = function(V) {
       var Y = R;
       return function() {
@@ -281,11 +281,11 @@ var _r;
 function Qd() {
   if (_r) return w1;
   _r = 1;
-  var i = Symbol.for("react.transitional.element"), o = Symbol.for("react.portal"), r = Symbol.for("react.fragment"), s = Symbol.for("react.strict_mode"), c = Symbol.for("react.profiler"), d = Symbol.for("react.consumer"), f = Symbol.for("react.context"), g = Symbol.for("react.forward_ref"), p = Symbol.for("react.suspense"), m = Symbol.for("react.memo"), b = Symbol.for("react.lazy"), v = Symbol.iterator;
-  function R(x) {
-    return x === null || typeof x != "object" ? null : (x = v && x[v] || x["@@iterator"], typeof x == "function" ? x : null);
+  var i = Symbol.for("react.transitional.element"), o = Symbol.for("react.portal"), r = Symbol.for("react.fragment"), s = Symbol.for("react.strict_mode"), c = Symbol.for("react.profiler"), d = Symbol.for("react.consumer"), f = Symbol.for("react.context"), g = Symbol.for("react.forward_ref"), p = Symbol.for("react.suspense"), m = Symbol.for("react.memo"), b = Symbol.for("react.lazy"), y = Symbol.iterator;
+  function R(T) {
+    return T === null || typeof T != "object" ? null : (T = y && T[y] || T["@@iterator"], typeof T == "function" ? T : null);
   }
-  var y = {
+  var v = {
     isMounted: function() {
       return !1;
     },
@@ -295,90 +295,90 @@ function Qd() {
     },
     enqueueSetState: function() {
     }
-  }, N = Object.assign, O = {};
-  function S(x, j, e1) {
-    this.props = x, this.context = j, this.refs = O, this.updater = e1 || y;
+  }, _ = Object.assign, O = {};
+  function S(T, j, e1) {
+    this.props = T, this.context = j, this.refs = O, this.updater = e1 || v;
   }
-  S.prototype.isReactComponent = {}, S.prototype.setState = function(x, j) {
-    if (typeof x != "object" && typeof x != "function" && x != null)
+  S.prototype.isReactComponent = {}, S.prototype.setState = function(T, j) {
+    if (typeof T != "object" && typeof T != "function" && T != null)
       throw Error(
         "takes an object of state variables to update or a function which returns an object of state variables."
       );
-    this.updater.enqueueSetState(this, x, j, "setState");
-  }, S.prototype.forceUpdate = function(x) {
-    this.updater.enqueueForceUpdate(this, x, "forceUpdate");
+    this.updater.enqueueSetState(this, T, j, "setState");
+  }, S.prototype.forceUpdate = function(T) {
+    this.updater.enqueueForceUpdate(this, T, "forceUpdate");
   };
   function w() {
   }
   w.prototype = S.prototype;
-  function E(x, j, e1) {
-    this.props = x, this.context = j, this.refs = O, this.updater = e1 || y;
+  function E(T, j, e1) {
+    this.props = T, this.context = j, this.refs = O, this.updater = e1 || v;
   }
-  var C = E.prototype = new w();
-  C.constructor = E, N(C, S.prototype), C.isPureReactComponent = !0;
-  var T = Array.isArray, k = { H: null, A: null, T: null, S: null }, F = Object.prototype.hasOwnProperty;
-  function I(x, j, e1, o1, a1, m1) {
+  var N = E.prototype = new w();
+  N.constructor = E, _(N, S.prototype), N.isPureReactComponent = !0;
+  var x = Array.isArray, k = { H: null, A: null, T: null, S: null }, F = Object.prototype.hasOwnProperty;
+  function I(T, j, e1, o1, a1, m1) {
     return e1 = m1.ref, {
       $$typeof: i,
-      type: x,
+      type: T,
       key: j,
       ref: e1 !== void 0 ? e1 : null,
       props: m1
     };
   }
-  function Q(x, j) {
+  function Q(T, j) {
     return I(
-      x.type,
+      T.type,
       j,
       void 0,
       void 0,
       void 0,
-      x.props
+      T.props
     );
   }
-  function B(x) {
-    return typeof x == "object" && x !== null && x.$$typeof === i;
+  function B(T) {
+    return typeof T == "object" && T !== null && T.$$typeof === i;
   }
-  function K(x) {
+  function K(T) {
     var j = { "=": "=0", ":": "=2" };
-    return "$" + x.replace(/[=:]/g, function(e1) {
+    return "$" + T.replace(/[=:]/g, function(e1) {
       return j[e1];
     });
   }
   var i1 = /\/+/g;
-  function r1(x, j) {
-    return typeof x == "object" && x !== null && x.key != null ? K("" + x.key) : j.toString(36);
+  function r1(T, j) {
+    return typeof T == "object" && T !== null && T.key != null ? K("" + T.key) : j.toString(36);
   }
   function l1() {
   }
-  function n1(x) {
-    switch (x.status) {
+  function n1(T) {
+    switch (T.status) {
       case "fulfilled":
-        return x.value;
+        return T.value;
       case "rejected":
-        throw x.reason;
+        throw T.reason;
       default:
-        switch (typeof x.status == "string" ? x.then(l1, l1) : (x.status = "pending", x.then(
+        switch (typeof T.status == "string" ? T.then(l1, l1) : (T.status = "pending", T.then(
           function(j) {
-            x.status === "pending" && (x.status = "fulfilled", x.value = j);
+            T.status === "pending" && (T.status = "fulfilled", T.value = j);
           },
           function(j) {
-            x.status === "pending" && (x.status = "rejected", x.reason = j);
+            T.status === "pending" && (T.status = "rejected", T.reason = j);
           }
-        )), x.status) {
+        )), T.status) {
           case "fulfilled":
-            return x.value;
+            return T.value;
           case "rejected":
-            throw x.reason;
+            throw T.reason;
         }
     }
-    throw x;
+    throw T;
   }
-  function t1(x, j, e1, o1, a1) {
-    var m1 = typeof x;
-    (m1 === "undefined" || m1 === "boolean") && (x = null);
+  function t1(T, j, e1, o1, a1) {
+    var m1 = typeof T;
+    (m1 === "undefined" || m1 === "boolean") && (T = null);
     var c1 = !1;
-    if (x === null) c1 = !0;
+    if (T === null) c1 = !0;
     else
       switch (m1) {
         case "bigint":
@@ -387,14 +387,14 @@ function Qd() {
           c1 = !0;
           break;
         case "object":
-          switch (x.$$typeof) {
+          switch (T.$$typeof) {
             case i:
             case o:
               c1 = !0;
               break;
             case b:
-              return c1 = x._init, t1(
-                c1(x._payload),
+              return c1 = T._init, t1(
+                c1(T._payload),
                 j,
                 e1,
                 o1,
@@ -403,28 +403,28 @@ function Qd() {
           }
       }
     if (c1)
-      return a1 = a1(x), c1 = o1 === "" ? "." + r1(x, 0) : o1, T(a1) ? (e1 = "", c1 != null && (e1 = c1.replace(i1, "$&/") + "/"), t1(a1, j, e1, "", function(v1) {
+      return a1 = a1(T), c1 = o1 === "" ? "." + r1(T, 0) : o1, x(a1) ? (e1 = "", c1 != null && (e1 = c1.replace(i1, "$&/") + "/"), t1(a1, j, e1, "", function(v1) {
         return v1;
       })) : a1 != null && (B(a1) && (a1 = Q(
         a1,
-        e1 + (a1.key == null || x && x.key === a1.key ? "" : ("" + a1.key).replace(
+        e1 + (a1.key == null || T && T.key === a1.key ? "" : ("" + a1.key).replace(
           i1,
           "$&/"
         ) + "/") + c1
       )), j.push(a1)), 1;
     c1 = 0;
     var _1 = o1 === "" ? "." : o1 + ":";
-    if (T(x))
-      for (var h1 = 0; h1 < x.length; h1++)
-        o1 = x[h1], m1 = _1 + r1(o1, h1), c1 += t1(
+    if (x(T))
+      for (var h1 = 0; h1 < T.length; h1++)
+        o1 = T[h1], m1 = _1 + r1(o1, h1), c1 += t1(
           o1,
           j,
           e1,
           m1,
           a1
         );
-    else if (h1 = R(x), typeof h1 == "function")
-      for (x = h1.call(x), h1 = 0; !(o1 = x.next()).done; )
+    else if (h1 = R(T), typeof h1 == "function")
+      for (T = h1.call(T), h1 = 0; !(o1 = T.next()).done; )
         o1 = o1.value, m1 = _1 + r1(o1, h1++), c1 += t1(
           o1,
           j,
@@ -433,100 +433,100 @@ function Qd() {
           a1
         );
     else if (m1 === "object") {
-      if (typeof x.then == "function")
+      if (typeof T.then == "function")
         return t1(
-          n1(x),
+          n1(T),
           j,
           e1,
           o1,
           a1
         );
-      throw j = String(x), Error(
-        "Objects are not valid as a React child (found: " + (j === "[object Object]" ? "object with keys {" + Object.keys(x).join(", ") + "}" : j) + "). If you meant to render a collection of children, use an array instead."
+      throw j = String(T), Error(
+        "Objects are not valid as a React child (found: " + (j === "[object Object]" ? "object with keys {" + Object.keys(T).join(", ") + "}" : j) + "). If you meant to render a collection of children, use an array instead."
       );
     }
     return c1;
   }
-  function V(x, j, e1) {
-    if (x == null) return x;
+  function V(T, j, e1) {
+    if (T == null) return T;
     var o1 = [], a1 = 0;
-    return t1(x, o1, "", "", function(m1) {
+    return t1(T, o1, "", "", function(m1) {
       return j.call(e1, m1, a1++);
     }), o1;
   }
-  function Y(x) {
-    if (x._status === -1) {
-      var j = x._result;
+  function Y(T) {
+    if (T._status === -1) {
+      var j = T._result;
       j = j(), j.then(
         function(e1) {
-          (x._status === 0 || x._status === -1) && (x._status = 1, x._result = e1);
+          (T._status === 0 || T._status === -1) && (T._status = 1, T._result = e1);
         },
         function(e1) {
-          (x._status === 0 || x._status === -1) && (x._status = 2, x._result = e1);
+          (T._status === 0 || T._status === -1) && (T._status = 2, T._result = e1);
         }
-      ), x._status === -1 && (x._status = 0, x._result = j);
+      ), T._status === -1 && (T._status = 0, T._result = j);
     }
-    if (x._status === 1) return x._result.default;
-    throw x._result;
+    if (T._status === 1) return T._result.default;
+    throw T._result;
   }
-  var W = typeof reportError == "function" ? reportError : function(x) {
+  var W = typeof reportError == "function" ? reportError : function(T) {
     if (typeof window == "object" && typeof window.ErrorEvent == "function") {
       var j = new window.ErrorEvent("error", {
         bubbles: !0,
         cancelable: !0,
-        message: typeof x == "object" && x !== null && typeof x.message == "string" ? String(x.message) : String(x),
-        error: x
+        message: typeof T == "object" && T !== null && typeof T.message == "string" ? String(T.message) : String(T),
+        error: T
       });
       if (!window.dispatchEvent(j)) return;
     } else if (typeof process == "object" && typeof process.emit == "function") {
-      process.emit("uncaughtException", x);
+      process.emit("uncaughtException", T);
       return;
     }
-    console.error(x);
+    console.error(T);
   };
   function Z() {
   }
   return w1.Children = {
     map: V,
-    forEach: function(x, j, e1) {
+    forEach: function(T, j, e1) {
       V(
-        x,
+        T,
         function() {
           j.apply(this, arguments);
         },
         e1
       );
     },
-    count: function(x) {
+    count: function(T) {
       var j = 0;
-      return V(x, function() {
+      return V(T, function() {
         j++;
       }), j;
     },
-    toArray: function(x) {
-      return V(x, function(j) {
+    toArray: function(T) {
+      return V(T, function(j) {
         return j;
       }) || [];
     },
-    only: function(x) {
-      if (!B(x))
+    only: function(T) {
+      if (!B(T))
         throw Error(
           "React.Children.only expected to receive a single React element child."
         );
-      return x;
+      return T;
     }
   }, w1.Component = S, w1.Fragment = r, w1.Profiler = c, w1.PureComponent = E, w1.StrictMode = s, w1.Suspense = p, w1.__CLIENT_INTERNALS_DO_NOT_USE_OR_WARN_USERS_THEY_CANNOT_UPGRADE = k, w1.act = function() {
     throw Error("act(...) is not supported in production builds of React.");
-  }, w1.cache = function(x) {
+  }, w1.cache = function(T) {
     return function() {
-      return x.apply(null, arguments);
+      return T.apply(null, arguments);
     };
-  }, w1.cloneElement = function(x, j, e1) {
-    if (x == null)
+  }, w1.cloneElement = function(T, j, e1) {
+    if (T == null)
       throw Error(
-        "The argument must be a React element, but you passed " + x + "."
+        "The argument must be a React element, but you passed " + T + "."
       );
-    var o1 = N({}, x.props), a1 = x.key, m1 = void 0;
+    var o1 = _({}, T.props), a1 = T.key, m1 = void 0;
     if (j != null)
       for (c1 in j.ref !== void 0 && (m1 = void 0), j.key !== void 0 && (a1 = "" + j.key), j)
         !F.call(j, c1) || c1 === "key" || c1 === "__self" || c1 === "__source" || c1 === "ref" && j.ref === void 0 || (o1[c1] = j[c1]);
@@ -537,20 +537,20 @@ function Qd() {
         _1[h1] = arguments[h1 + 2];
       o1.children = _1;
     }
-    return I(x.type, a1, void 0, void 0, m1, o1);
-  }, w1.createContext = function(x) {
-    return x = {
+    return I(T.type, a1, void 0, void 0, m1, o1);
+  }, w1.createContext = function(T) {
+    return T = {
       $$typeof: f,
-      _currentValue: x,
-      _currentValue2: x,
+      _currentValue: T,
+      _currentValue2: T,
       _threadCount: 0,
       Provider: null,
       Consumer: null
-    }, x.Provider = x, x.Consumer = {
+    }, T.Provider = T, T.Consumer = {
       $$typeof: d,
-      _context: x
-    }, x;
-  }, w1.createElement = function(x, j, e1) {
+      _context: T
+    }, T;
+  }, w1.createElement = function(T, j, e1) {
     var o1, a1 = {}, m1 = null;
     if (j != null)
       for (o1 in j.key !== void 0 && (m1 = "" + j.key), j)
@@ -562,31 +562,31 @@ function Qd() {
         _1[h1] = arguments[h1 + 2];
       a1.children = _1;
     }
-    if (x && x.defaultProps)
-      for (o1 in c1 = x.defaultProps, c1)
+    if (T && T.defaultProps)
+      for (o1 in c1 = T.defaultProps, c1)
         a1[o1] === void 0 && (a1[o1] = c1[o1]);
-    return I(x, m1, void 0, void 0, null, a1);
+    return I(T, m1, void 0, void 0, null, a1);
   }, w1.createRef = function() {
     return { current: null };
-  }, w1.forwardRef = function(x) {
-    return { $$typeof: g, render: x };
-  }, w1.isValidElement = B, w1.lazy = function(x) {
+  }, w1.forwardRef = function(T) {
+    return { $$typeof: g, render: T };
+  }, w1.isValidElement = B, w1.lazy = function(T) {
     return {
       $$typeof: b,
-      _payload: { _status: -1, _result: x },
+      _payload: { _status: -1, _result: T },
       _init: Y
     };
-  }, w1.memo = function(x, j) {
+  }, w1.memo = function(T, j) {
     return {
       $$typeof: m,
-      type: x,
+      type: T,
       compare: j === void 0 ? null : j
     };
-  }, w1.startTransition = function(x) {
+  }, w1.startTransition = function(T) {
     var j = k.T, e1 = {};
     k.T = e1;
     try {
-      var o1 = x(), a1 = k.S;
+      var o1 = T(), a1 = k.S;
       a1 !== null && a1(e1, o1), typeof o1 == "object" && o1 !== null && typeof o1.then == "function" && o1.then(Z, W);
     } catch (m1) {
       W(m1);
@@ -595,40 +595,40 @@ function Qd() {
     }
   }, w1.unstable_useCacheRefresh = function() {
     return k.H.useCacheRefresh();
-  }, w1.use = function(x) {
-    return k.H.use(x);
-  }, w1.useActionState = function(x, j, e1) {
-    return k.H.useActionState(x, j, e1);
-  }, w1.useCallback = function(x, j) {
-    return k.H.useCallback(x, j);
-  }, w1.useContext = function(x) {
-    return k.H.useContext(x);
+  }, w1.use = function(T) {
+    return k.H.use(T);
+  }, w1.useActionState = function(T, j, e1) {
+    return k.H.useActionState(T, j, e1);
+  }, w1.useCallback = function(T, j) {
+    return k.H.useCallback(T, j);
+  }, w1.useContext = function(T) {
+    return k.H.useContext(T);
   }, w1.useDebugValue = function() {
-  }, w1.useDeferredValue = function(x, j) {
-    return k.H.useDeferredValue(x, j);
-  }, w1.useEffect = function(x, j) {
-    return k.H.useEffect(x, j);
+  }, w1.useDeferredValue = function(T, j) {
+    return k.H.useDeferredValue(T, j);
+  }, w1.useEffect = function(T, j) {
+    return k.H.useEffect(T, j);
   }, w1.useId = function() {
     return k.H.useId();
-  }, w1.useImperativeHandle = function(x, j, e1) {
-    return k.H.useImperativeHandle(x, j, e1);
-  }, w1.useInsertionEffect = function(x, j) {
-    return k.H.useInsertionEffect(x, j);
-  }, w1.useLayoutEffect = function(x, j) {
-    return k.H.useLayoutEffect(x, j);
-  }, w1.useMemo = function(x, j) {
-    return k.H.useMemo(x, j);
-  }, w1.useOptimistic = function(x, j) {
-    return k.H.useOptimistic(x, j);
-  }, w1.useReducer = function(x, j, e1) {
-    return k.H.useReducer(x, j, e1);
-  }, w1.useRef = function(x) {
-    return k.H.useRef(x);
-  }, w1.useState = function(x) {
-    return k.H.useState(x);
-  }, w1.useSyncExternalStore = function(x, j, e1) {
+  }, w1.useImperativeHandle = function(T, j, e1) {
+    return k.H.useImperativeHandle(T, j, e1);
+  }, w1.useInsertionEffect = function(T, j) {
+    return k.H.useInsertionEffect(T, j);
+  }, w1.useLayoutEffect = function(T, j) {
+    return k.H.useLayoutEffect(T, j);
+  }, w1.useMemo = function(T, j) {
+    return k.H.useMemo(T, j);
+  }, w1.useOptimistic = function(T, j) {
+    return k.H.useOptimistic(T, j);
+  }, w1.useReducer = function(T, j, e1) {
+    return k.H.useReducer(T, j, e1);
+  }, w1.useRef = function(T) {
+    return k.H.useRef(T);
+  }, w1.useState = function(T) {
+    return k.H.useState(T);
+  }, w1.useSyncExternalStore = function(T, j, e1) {
     return k.H.useSyncExternalStore(
-      x,
+      T,
       j,
       e1
     );
@@ -636,15 +636,15 @@ function Qd() {
     return k.H.useTransition();
   }, w1.version = "19.0.0", w1;
 }
-var Nr;
+var Cr;
 function Gt() {
-  return Nr || (Nr = 1, lt.exports = Qd()), lt.exports;
+  return Cr || (Cr = 1, lt.exports = Qd()), lt.exports;
 }
 var ct = { exports: {} }, v4 = {};
-var Cr;
+var Nr;
 function Hd() {
-  if (Cr) return v4;
-  Cr = 1;
+  if (Nr) return v4;
+  Nr = 1;
   var i = Gt();
   function o(p) {
     var m = "https://react.dev/errors/" + p;
@@ -675,10 +675,10 @@ function Hd() {
     findDOMNode: null
   }, c = Symbol.for("react.portal");
   function d(p, m, b) {
-    var v = 3 < arguments.length && arguments[3] !== void 0 ? arguments[3] : null;
+    var y = 3 < arguments.length && arguments[3] !== void 0 ? arguments[3] : null;
     return {
       $$typeof: c,
-      key: v == null ? null : "" + v,
+      key: y == null ? null : "" + y,
       children: p,
       containerInfo: m,
       implementation: b
@@ -708,19 +708,19 @@ function Hd() {
     typeof p == "string" && s.d.D(p);
   }, v4.preinit = function(p, m) {
     if (typeof p == "string" && m && typeof m.as == "string") {
-      var b = m.as, v = g(b, m.crossOrigin), R = typeof m.integrity == "string" ? m.integrity : void 0, y = typeof m.fetchPriority == "string" ? m.fetchPriority : void 0;
+      var b = m.as, y = g(b, m.crossOrigin), R = typeof m.integrity == "string" ? m.integrity : void 0, v = typeof m.fetchPriority == "string" ? m.fetchPriority : void 0;
       b === "style" ? s.d.S(
         p,
         typeof m.precedence == "string" ? m.precedence : void 0,
         {
-          crossOrigin: v,
+          crossOrigin: y,
           integrity: R,
-          fetchPriority: y
+          fetchPriority: v
         }
       ) : b === "script" && s.d.X(p, {
-        crossOrigin: v,
+        crossOrigin: y,
         integrity: R,
-        fetchPriority: y,
+        fetchPriority: v,
         nonce: typeof m.nonce == "string" ? m.nonce : void 0
       });
     }
@@ -741,9 +741,9 @@ function Hd() {
       } else m == null && s.d.M(p);
   }, v4.preload = function(p, m) {
     if (typeof p == "string" && typeof m == "object" && m !== null && typeof m.as == "string") {
-      var b = m.as, v = g(b, m.crossOrigin);
+      var b = m.as, y = g(b, m.crossOrigin);
       s.d.L(p, b, {
-        crossOrigin: v,
+        crossOrigin: y,
         integrity: typeof m.integrity == "string" ? m.integrity : void 0,
         nonce: typeof m.nonce == "string" ? m.nonce : void 0,
         type: typeof m.type == "string" ? m.type : void 0,
@@ -805,7 +805,7 @@ function jd() {
   function c(e) {
     return !(!e || e.nodeType !== 1 && e.nodeType !== 9 && e.nodeType !== 11);
   }
-  var d = Symbol.for("react.element"), f = Symbol.for("react.transitional.element"), g = Symbol.for("react.portal"), p = Symbol.for("react.fragment"), m = Symbol.for("react.strict_mode"), b = Symbol.for("react.profiler"), v = Symbol.for("react.provider"), R = Symbol.for("react.consumer"), y = Symbol.for("react.context"), N = Symbol.for("react.forward_ref"), O = Symbol.for("react.suspense"), S = Symbol.for("react.suspense_list"), w = Symbol.for("react.memo"), E = Symbol.for("react.lazy"), C = Symbol.for("react.offscreen"), T = Symbol.for("react.memo_cache_sentinel"), k = Symbol.iterator;
+  var d = Symbol.for("react.element"), f = Symbol.for("react.transitional.element"), g = Symbol.for("react.portal"), p = Symbol.for("react.fragment"), m = Symbol.for("react.strict_mode"), b = Symbol.for("react.profiler"), y = Symbol.for("react.provider"), R = Symbol.for("react.consumer"), v = Symbol.for("react.context"), _ = Symbol.for("react.forward_ref"), O = Symbol.for("react.suspense"), S = Symbol.for("react.suspense_list"), w = Symbol.for("react.memo"), E = Symbol.for("react.lazy"), N = Symbol.for("react.offscreen"), x = Symbol.for("react.memo_cache_sentinel"), k = Symbol.iterator;
   function F(e) {
     return e === null || typeof e != "object" ? null : (e = k && e[k] || e["@@iterator"], typeof e == "function" ? e : null);
   }
@@ -831,11 +831,11 @@ function jd() {
     }
     if (typeof e == "object")
       switch (e.$$typeof) {
-        case y:
+        case v:
           return (e.displayName || "Context") + ".Provider";
         case R:
           return (e._context.displayName || "Context") + ".Consumer";
-        case N:
+        case _:
           var t = e.render;
           return e = e.displayName, e || (e = t.displayName || t.name || "", e = e !== "" ? "ForwardRef(" + e + ")" : "ForwardRef"), e;
         case w:
@@ -1007,7 +1007,7 @@ Error generating stack: ` + a.message + `
     }
     return null;
   }
-  function x(e) {
+  function T(e) {
     if (W(e) !== e)
       throw Error(s(188));
   }
@@ -1030,8 +1030,8 @@ Error generating stack: ` + a.message + `
       }
       if (l.child === u.child) {
         for (u = l.child; u; ) {
-          if (u === a) return x(l), e;
-          if (u === n) return x(l), t;
+          if (u === a) return T(l), e;
+          if (u === n) return T(l), t;
           u = u.sibling;
         }
         throw Error(s(188));
@@ -1093,7 +1093,7 @@ Error generating stack: ` + a.message + `
   function A1(e, t) {
     _1++, c1[_1] = e.current, e.current = t;
   }
-  var $1 = h1(null), h4 = h1(null), G1 = h1(null), N4 = h1(null);
+  var $1 = h1(null), h4 = h1(null), G1 = h1(null), C4 = h1(null);
   function b4(e, t) {
     switch (A1(G1, t), A1(h4, e), A1($1, null), e = t.nodeType, e) {
       case 9:
@@ -1121,12 +1121,12 @@ Error generating stack: ` + a.message + `
     v1($1), v1(h4), v1(G1);
   }
   function O1(e) {
-    e.memoizedState !== null && A1(N4, e);
+    e.memoizedState !== null && A1(C4, e);
     var t = $1.current, a = qo(t, e.type);
     t !== a && (A1(h4, e), A1($1, a));
   }
   function U4(e) {
-    h4.current === e && (v1($1), v1(h4)), N4.current === e && (v1(N4), p7._currentValue = m1);
+    h4.current === e && (v1($1), v1(h4)), C4.current === e && (v1(C4), p7._currentValue = m1);
   }
   var t4 = Object.prototype.hasOwnProperty, a4 = i.unstable_scheduleCallback, y2 = i.unstable_cancelCallback, k4 = i.unstable_shouldYield, v2 = i.unstable_requestPaint, V1 = i.unstable_now, v5 = i.unstable_getCurrentPriorityLevel, B3 = i.unstable_ImmediatePriority, z3 = i.unstable_UserBlockingPriority, i4 = i.unstable_NormalPriority, l3 = i.unstable_LowPriority, c3 = i.unstable_IdlePriority, z7 = i.log, K9 = i.unstable_setDisableYieldValue, V3 = null, R4 = null;
   function X9(e) {
@@ -1317,9 +1317,9 @@ Error generating stack: ` + a.message + `
       a1.p = a;
     }
   }
-  var H4 = Math.random().toString(36).slice(2), l4 = "__reactFiber$" + H4, R1 = "__reactProps$" + H4, w2 = "__reactContainer$" + H4, _8 = "__reactEvents$" + H4, Nc = "__reactListeners$" + H4, Cc = "__reactHandles$" + H4, Za = "__reactResources$" + H4, N8 = "__reactMarker$" + H4;
+  var H4 = Math.random().toString(36).slice(2), l4 = "__reactFiber$" + H4, R1 = "__reactProps$" + H4, w2 = "__reactContainer$" + H4, _8 = "__reactEvents$" + H4, Cc = "__reactListeners$" + H4, Nc = "__reactHandles$" + H4, Za = "__reactResources$" + H4, C8 = "__reactMarker$" + H4;
   function te(e) {
-    delete e[l4], delete e[R1], delete e[_8], delete e[Nc], delete e[Cc];
+    delete e[l4], delete e[R1], delete e[_8], delete e[Cc], delete e[Nc];
   }
   function Q3(e) {
     var t = e[l4];
@@ -1345,7 +1345,7 @@ Error generating stack: ` + a.message + `
     }
     return null;
   }
-  function C8(e) {
+  function N8(e) {
     var t = e.tag;
     if (t === 5 || t === 26 || t === 27 || t === 6) return e.stateNode;
     throw Error(s(33));
@@ -1355,7 +1355,7 @@ Error generating stack: ` + a.message + `
     return t || (t = e[Za] = { hoistableStyles: /* @__PURE__ */ new Map(), hoistableScripts: /* @__PURE__ */ new Map() }), t;
   }
   function c4(e) {
-    e[N8] = !0;
+    e[C8] = !0;
   }
   var Ya = /* @__PURE__ */ new Set(), $a = {};
   function H3(e, t) {
@@ -1508,7 +1508,7 @@ Error generating stack: ` + a.message + `
   function ie(e, t, a) {
     t === "number" && G7(e.ownerDocument) === e || e.defaultValue === "" + a || (e.defaultValue = "" + a);
   }
-  function N5(e, t, a, n) {
+  function C5(e, t, a, n) {
     if (e = e.options, t) {
       t = {};
       for (var l = 0; l < a.length; l++)
@@ -1547,7 +1547,7 @@ Error generating stack: ` + a.message + `
     }
     a = j4(t), e.defaultValue = a, n = e.textContent, n === a && n !== "" && n !== null && (e.value = n);
   }
-  function C5(e, t) {
+  function N5(e, t) {
     if (t) {
       var a = e.firstChild;
       if (a && a === e.lastChild && a.nodeType === 3) {
@@ -1728,7 +1728,7 @@ Error generating stack: ` + a.message + `
           ti(e, a.value, a.defaultValue);
           break e;
         case "select":
-          t = a.value, t != null && N5(e, !!a.multiple, t, !1);
+          t = a.value, t != null && C5(e, !!a.multiple, t, !1);
       }
     }
   }
@@ -1805,7 +1805,7 @@ Error generating stack: ` + a.message + `
   function li() {
     return !1;
   }
-  function C4(e) {
+  function N4(e) {
     function t(a, n, l, u, h) {
       this._reactName = a, this._targetInst = l, this.type = n, this.nativeEvent = u, this.target = h, this.currentTarget = null;
       for (var M in e)
@@ -1836,7 +1836,7 @@ Error generating stack: ` + a.message + `
     },
     defaultPrevented: 0,
     isTrusted: 0
-  }, X7 = C4(j3), T8 = K({}, j3, { view: 0, detail: 0 }), Pc = C4(T8), ue, de, U8, q7 = K({}, T8, {
+  }, X7 = N4(j3), T8 = K({}, j3, { view: 0, detail: 0 }), Pc = N4(T8), ue, de, U8, q7 = K({}, T8, {
     screenX: 0,
     screenY: 0,
     clientX: 0,
@@ -1859,15 +1859,15 @@ Error generating stack: ` + a.message + `
     movementY: function(e) {
       return "movementY" in e ? e.movementY : de;
     }
-  }), ci = C4(q7), Lc = K({}, q7, { dataTransfer: 0 }), Bc = C4(Lc), zc = K({}, T8, { relatedTarget: 0 }), fe = C4(zc), Vc = K({}, j3, {
+  }), ci = N4(q7), Lc = K({}, q7, { dataTransfer: 0 }), Bc = N4(Lc), zc = K({}, T8, { relatedTarget: 0 }), fe = N4(zc), Vc = K({}, j3, {
     animationName: 0,
     elapsedTime: 0,
     pseudoElement: 0
-  }), Qc = C4(Vc), Hc = K({}, j3, {
+  }), Qc = N4(Vc), Hc = K({}, j3, {
     clipboardData: function(e) {
       return "clipboardData" in e ? e.clipboardData : window.clipboardData;
     }
-  }), jc = C4(Hc), Wc = K({}, j3, { data: 0 }), ui = C4(Wc), Ic = {
+  }), jc = N4(Hc), Wc = K({}, j3, { data: 0 }), ui = N4(Wc), Ic = {
     Esc: "Escape",
     Spacebar: " ",
     Left: "ArrowLeft",
@@ -1956,7 +1956,7 @@ Error generating stack: ` + a.message + `
     which: function(e) {
       return e.type === "keypress" ? $7(e) : e.type === "keydown" || e.type === "keyup" ? e.keyCode : 0;
     }
-  }), Kc = C4($c), Xc = K({}, q7, {
+  }), Kc = N4($c), Xc = K({}, q7, {
     pointerId: 0,
     width: 0,
     height: 0,
@@ -1967,7 +1967,7 @@ Error generating stack: ` + a.message + `
     twist: 0,
     pointerType: 0,
     isPrimary: 0
-  }), di = C4(Xc), qc = K({}, T8, {
+  }), di = N4(Xc), qc = K({}, T8, {
     touches: 0,
     targetTouches: 0,
     changedTouches: 0,
@@ -1976,11 +1976,11 @@ Error generating stack: ` + a.message + `
     ctrlKey: 0,
     shiftKey: 0,
     getModifierState: ge
-  }), Jc = C4(qc), eu = K({}, j3, {
+  }), Jc = N4(qc), eu = K({}, j3, {
     propertyName: 0,
     elapsedTime: 0,
     pseudoElement: 0
-  }), tu = C4(eu), au = K({}, q7, {
+  }), tu = N4(eu), au = K({}, q7, {
     deltaX: function(e) {
       return "deltaX" in e ? e.deltaX : "wheelDeltaX" in e ? -e.wheelDeltaX : 0;
     },
@@ -1989,10 +1989,10 @@ Error generating stack: ` + a.message + `
     },
     deltaZ: 0,
     deltaMode: 0
-  }), iu = C4(au), nu = K({}, j3, {
+  }), iu = N4(au), nu = K({}, j3, {
     newState: 0,
     oldState: 0
-  }), ou = C4(nu), ru = [9, 13, 27, 32], me = D2 && "CompositionEvent" in window, k8 = null;
+  }), ou = N4(nu), ru = [9, 13, 27, 32], me = D2 && "CompositionEvent" in window, k8 = null;
   D2 && "documentMode" in document && (k8 = document.documentMode);
   var su = D2 && "TextEvent" in window && !k8, fi = D2 && (!me || k8 && 8 < k8 && 11 >= k8), gi = " ", mi = !1;
   function pi(e, t) {
@@ -2079,7 +2079,7 @@ Error generating stack: ` + a.message + `
     Go(e, 0);
   }
   function J7(e) {
-    var t = C8(e);
+    var t = N8(e);
     if (Ja(t)) return e;
   }
   function vi(e, t) {
@@ -2172,7 +2172,7 @@ Error generating stack: ` + a.message + `
   function _i(e, t) {
     return e && t ? e === t ? !0 : e && e.nodeType === 3 ? !1 : t && t.nodeType === 3 ? _i(e, t.parentNode) : "contains" in e ? e.contains(t) : e.compareDocumentPosition ? !!(e.compareDocumentPosition(t) & 16) : !1 : !1;
   }
-  function Ni(e) {
+  function Ci(e) {
     e = e != null && e.ownerDocument != null && e.ownerDocument.defaultView != null ? e.ownerDocument.defaultView : window;
     for (var t = G7(e.document); t instanceof e.HTMLIFrameElement; ) {
       try {
@@ -2191,7 +2191,7 @@ Error generating stack: ` + a.message + `
     return t && (t === "input" && (e.type === "text" || e.type === "search" || e.type === "tel" || e.type === "url" || e.type === "password") || t === "textarea" || e.contentEditable === "true");
   }
   function bu(e, t) {
-    var a = Ni(t);
+    var a = Ci(t);
     t = e.focusedElem;
     var n = e.selectionRange;
     if (a !== t && t && t.ownerDocument && _i(t.ownerDocument.documentElement, t)) {
@@ -2226,7 +2226,7 @@ Error generating stack: ` + a.message + `
     }
   }
   var yu = D2 && "documentMode" in document && 11 >= document.documentMode, U5 = null, ye = null, L8 = null, ve = !1;
-  function Ci(e, t, a) {
+  function Ni(e, t, a) {
     var n = a.window === a ? a.document : a.nodeType === 9 ? a : a.ownerDocument;
     ve || U5 == null || U5 !== G7(n) || (n = U5, "selectionStart" in n && be(n) ? n = { start: n.selectionStart, end: n.selectionEnd } : (n = (n.ownerDocument && n.ownerDocument.defaultView || window).getSelection(), n = {
       anchorNode: n.anchorNode,
@@ -2306,7 +2306,7 @@ Error generating stack: ` + a.message + `
   }
   function a6(e) {
     if (50 < l7)
-      throw l7 = 0, C0 = null, Error(s(185));
+      throw l7 = 0, N0 = null, Error(s(185));
     for (var t = e.return; t !== null; )
       e = t, t = e.return;
     return e.tag === 3 ? e.stateNode : null;
@@ -2362,31 +2362,31 @@ Error generating stack: ` + a.message + `
     var t = e.stateNode, a = e.type, n = e.memoizedProps;
     switch (t[l4] = e, t[R1] = n, a) {
       case "dialog":
-        N1("cancel", t), N1("close", t);
+        C1("cancel", t), C1("close", t);
         break;
       case "iframe":
       case "object":
       case "embed":
-        N1("load", t);
+        C1("load", t);
         break;
       case "video":
       case "audio":
         for (a = 0; a < u7.length; a++)
-          N1(u7[a], t);
+          C1(u7[a], t);
         break;
       case "source":
-        N1("error", t);
+        C1("error", t);
         break;
       case "img":
       case "image":
       case "link":
-        N1("error", t), N1("load", t);
+        C1("error", t), C1("load", t);
         break;
       case "details":
-        N1("toggle", t);
+        C1("toggle", t);
         break;
       case "input":
-        N1("invalid", t), ei(
+        C1("invalid", t), ei(
           t,
           n.value,
           n.defaultValue,
@@ -2398,12 +2398,12 @@ Error generating stack: ` + a.message + `
         ), I7(t);
         break;
       case "select":
-        N1("invalid", t);
+        C1("invalid", t);
         break;
       case "textarea":
-        N1("invalid", t), ai(t, n.value, n.defaultValue, n.children), I7(t);
+        C1("invalid", t), ai(t, n.value, n.defaultValue, n.children), I7(t);
     }
-    a = n.children, typeof a != "string" && typeof a != "number" && typeof a != "bigint" || t.textContent === "" + a || n.suppressHydrationWarning === !0 || Ko(t.textContent, a) ? (n.popover != null && (N1("beforetoggle", t), N1("toggle", t)), n.onScroll != null && N1("scroll", t), n.onScrollEnd != null && N1("scrollend", t), n.onClick != null && (t.onclick = P6), t = !0) : t = !1, t || Y3(e);
+    a = n.children, typeof a != "string" && typeof a != "number" && typeof a != "bigint" || t.textContent === "" + a || n.suppressHydrationWarning === !0 || Ko(t.textContent, a) ? (n.popover != null && (C1("beforetoggle", t), C1("toggle", t)), n.onScroll != null && C1("scroll", t), n.onScrollEnd != null && C1("scrollend", t), n.onClick != null && (t.onclick = P6), t = !0) : t = !1, t || Y3(e);
   }
   function Vi(e) {
     for (A4 = e.return; A4; )
@@ -2614,7 +2614,7 @@ Error generating stack: ` + a.message + `
           ), D.return = L, D;
         if (typeof D.then == "function")
           return J(L, r6(D), z);
-        if (D.$$typeof === y)
+        if (D.$$typeof === v)
           return J(
             L,
             R6(L, D),
@@ -2646,7 +2646,7 @@ Error generating stack: ` + a.message + `
             r6(z),
             q
           );
-        if (z.$$typeof === y)
+        if (z.$$typeof === v)
           return H(
             L,
             D,
@@ -2690,7 +2690,7 @@ Error generating stack: ` + a.message + `
             r6(q),
             u1
           );
-        if (q.$$typeof === y)
+        if (q.$$typeof === v)
           return G(
             L,
             D,
@@ -2866,7 +2866,7 @@ Error generating stack: ` + a.message + `
             r6(z),
             q
           );
-        if (z.$$typeof === y)
+        if (z.$$typeof === v)
           return I1(
             L,
             D,
@@ -2899,10 +2899,10 @@ Error generating stack: ` + a.message + `
   function Yi(e, t) {
     e = $2, A1(l6, e), A1(z5, t), $2 = e | t.baseLanes;
   }
-  function Ne() {
+  function Ce() {
     A1(l6, $2), A1(z5, z5.current);
   }
-  function Ce() {
+  function Ne() {
     $2 = l6.current, v1(z5), v1(l6);
   }
   var $4 = h1(null), R2 = null;
@@ -2959,7 +2959,7 @@ Error generating stack: ` + a.message + `
       });
     };
   }, Eu = i.unstable_scheduleCallback, Au = i.unstable_NormalPriority, r4 = {
-    $$typeof: y,
+    $$typeof: v,
     Consumer: null,
     Provider: null,
     _currentValue: null,
@@ -3036,7 +3036,7 @@ Error generating stack: ` + a.message + `
     var e = Te();
     return e === null ? null : { parent: r4._currentValue, pool: e };
   }
-  var p3 = 0, S1 = null, F1 = null, X1 = null, d6 = !1, H5 = !1, X3 = !1, f6 = 0, Z8 = 0, j5 = null, Nu = 0;
+  var p3 = 0, S1 = null, F1 = null, X1 = null, d6 = !1, H5 = !1, X3 = !1, f6 = 0, Z8 = 0, j5 = null, Cu = 0;
   function Z1() {
     throw Error(s(321));
   }
@@ -3073,7 +3073,7 @@ Error generating stack: ` + a.message + `
     } while (H5);
     return u;
   }
-  function Cu() {
+  function Nu() {
     var e = B.H, t = e.useState()[0];
     return t = typeof t.then == "function" ? Y8(t) : t, e = e.useState()[0], (F1 !== null ? F1.memoizedState : null) !== e && (S1.flags |= 1024), t;
   }
@@ -3136,7 +3136,7 @@ Error generating stack: ` + a.message + `
   function m6(e) {
     if (e !== null && typeof e == "object") {
       if (typeof e.then == "function") return Y8(e);
-      if (e.$$typeof === y) return y4(e);
+      if (e.$$typeof === v) return y4(e);
     }
     throw Error(s(438, String(e)));
   }
@@ -3153,7 +3153,7 @@ Error generating stack: ` + a.message + `
     }
     if (t == null && (t = { data: [], index: 0 }), a === null && (a = g6(), S1.updateQueue = a), a.memoCache = t, a = t.data[t.index], a === void 0)
       for (a = t.data[t.index] = Array(e), n = 0; n < e; n++)
-        a[n] = T;
+        a[n] = x;
     return t.index++, a;
   }
   function V2(e, t) {
@@ -3556,12 +3556,12 @@ Error generating stack: ` + a.message + `
     return a.memoizedState = [n, t], n;
   }
   function We(e, t, a) {
-    return a === void 0 || (p3 & 1073741824) !== 0 ? e.memoizedState = t : (e.memoizedState = a, e = Co(), S1.lanes |= e, M3 |= e, a);
+    return a === void 0 || (p3 & 1073741824) !== 0 ? e.memoizedState = t : (e.memoizedState = a, e = No(), S1.lanes |= e, M3 |= e, a);
   }
   function _n(e, t, a, n) {
-    return F4(a, t) ? a : z5.current !== null ? (e = We(e, a, n), F4(e, t) || (u4 = !0), e) : (p3 & 42) === 0 ? (u4 = !0, e.memoizedState = a) : (e = Co(), S1.lanes |= e, M3 |= e, t);
+    return F4(a, t) ? a : z5.current !== null ? (e = We(e, a, n), F4(e, t) || (u4 = !0), e) : (p3 & 42) === 0 ? (u4 = !0, e.memoizedState = a) : (e = No(), S1.lanes |= e, M3 |= e, t);
   }
-  function Nn(e, t, a, n, l) {
+  function Cn(e, t, a, n, l) {
     var u = a1.p;
     a1.p = u !== 0 && 8 > u ? u : 8;
     var h = B.T, M = {};
@@ -3602,8 +3602,8 @@ Error generating stack: ` + a.message + `
   }
   function Ie(e, t, a, n) {
     if (e.tag !== 5) throw Error(s(476));
-    var l = Cn(e).queue;
-    Nn(
+    var l = Nn(e).queue;
+    Cn(
       e,
       l,
       t,
@@ -3613,7 +3613,7 @@ Error generating stack: ` + a.message + `
       }
     );
   }
-  function Cn(e) {
+  function Nn(e) {
     var t = e.memoizedState;
     if (t !== null) return t;
     t = {
@@ -3645,7 +3645,7 @@ Error generating stack: ` + a.message + `
     }, e.memoizedState = t, e = e.alternate, e !== null && (e.memoizedState = t), t;
   }
   function On(e) {
-    var t = Cn(e).next.queue;
+    var t = Nn(e).next.queue;
     $8(e, t, {}, B4());
   }
   function Ge() {
@@ -3844,7 +3844,7 @@ Error generating stack: ` + a.message + `
     },
     useTransition: function() {
       var e = Ve(!1);
-      return e = Nn.bind(
+      return e = Cn.bind(
         null,
         S1,
         e.queue,
@@ -3885,7 +3885,7 @@ Error generating stack: ` + a.message + `
         var a = B2, n = L2;
         a = (n & ~(1 << 32 - E4(n) - 1)).toString(32) + a, t = ":" + t + "R" + a, a = f6++, 0 < a && (t += "H" + a.toString(32)), t += ":";
       } else
-        a = Nu++, t = ":" + t + "r" + a.toString(32) + ":";
+        a = Cu++, t = ":" + t + "r" + a.toString(32) + ":";
       return e.memoizedState = t;
     },
     useCacheRefresh: function() {
@@ -4247,7 +4247,7 @@ Error generating stack: ` + a.message + `
         t.memoizedState = { baseLanes: 0, cachePool: null }, e !== null && u6(
           t,
           h !== null ? h.cachePool : null
-        ), h !== null ? Yi(t, h) : Ne(), $i(t);
+        ), h !== null ? Yi(t, h) : Ce(), $i(t);
       else
         return t.lanes = t.childLanes = 536870912, Yn(
           e,
@@ -4256,7 +4256,7 @@ Error generating stack: ` + a.message + `
           a
         );
     } else
-      h !== null ? (u6(t, h.cachePool), Yi(t, h), m3(), t.memoizedState = null) : (e !== null && u6(t, null), Ne(), m3());
+      h !== null ? (u6(t, h.cachePool), Yi(t, h), m3(), t.memoizedState = null) : (e !== null && u6(t, null), Ce(), m3());
     return m4(e, t, l, a), t.child;
   }
   function Yn(e, t, a, n) {
@@ -4264,7 +4264,7 @@ Error generating stack: ` + a.message + `
     return l = l === null ? null : { parent: r4._currentValue, pool: l }, t.memoizedState = {
       baseLanes: a,
       cachePool: l
-    }, e !== null && u6(t, null), Ne(), $i(t), e !== null && X8(e, t, n, !0), null;
+    }, e !== null && u6(t, null), Ce(), $i(t), e !== null && X8(e, t, n, !0), null;
   }
   function K8(e, t) {
     var a = t.ref;
@@ -4755,7 +4755,7 @@ Error generating stack: ` + a.message + `
             ));
           else {
             if (n != null) {
-              if (l = n.$$typeof, l === N) {
+              if (l = n.$$typeof, l === _) {
                 t.tag = 11, t = Wn(
                   null,
                   t,
@@ -4903,7 +4903,7 @@ Error generating stack: ` + a.message + `
         ), S2 = !1, l = !0) : l = !1), l || Y3(t)), O1(t), l = t.type, u = t.pendingProps, h = e !== null ? e.memoizedProps : null, n = u.children, I0(l, u) ? n = null : h !== null && I0(l, h) && (t.flags |= 32), t.memoizedState !== null && (l = ke(
           e,
           t,
-          Cu,
+          Nu,
           null,
           null,
           a
@@ -5078,7 +5078,7 @@ Error generating stack: ` + a.message + `
           var M = l.type;
           F4(l.pendingProps.value, h.value) || (e !== null ? e.push(M) : e = [M]);
         }
-      } else if (l === N4.current) {
+      } else if (l === C4.current) {
         if (h = l.alternate, h === null) throw Error(s(387));
         h.memoizedState.memoizedState !== l.memoizedState.memoizedState && (e !== null ? e.push(p7) : e = [p7]);
       }
@@ -5436,7 +5436,7 @@ Error generating stack: ` + a.message + `
   }
   var W2 = !1, j1 = !1, p0 = !1, uo = typeof WeakSet == "function" ? WeakSet : Set, d4 = null, fo = !1;
   function Pu(e, t) {
-    if (e = e.containerInfo, j0 = j6, e = Ni(e), be(e)) {
+    if (e = e.containerInfo, j0 = j6, e = Ci(e), be(e)) {
       if ("selectionStart" in e)
         var a = {
           start: e.selectionStart,
@@ -5823,7 +5823,7 @@ Error generating stack: ` + a.message + `
                   n = e.type, a = e.memoizedProps, l = l.ownerDocument || l;
                   t: switch (n) {
                     case "title":
-                      u = l.getElementsByTagName("title")[0], (!u || u[N8] || u[l4] || u.namespaceURI === "http://www.w3.org/2000/svg" || u.hasAttribute("itemprop")) && (u = l.createElement(n), l.head.insertBefore(
+                      u = l.getElementsByTagName("title")[0], (!u || u[C8] || u[l4] || u.namespaceURI === "http://www.w3.org/2000/svg" || u.hasAttribute("itemprop")) && (u = l.createElement(n), l.head.insertBefore(
                         u,
                         l.querySelector("head > title")
                       )), p4(u, n, a), u[l4] = e, c4(u), n = u;
@@ -5897,7 +5897,7 @@ Error generating stack: ` + a.message + `
           try {
             for (var U = l.firstChild; U; ) {
               var P = U.nextSibling, $ = U.nodeName;
-              U[N8] || $ === "HEAD" || $ === "BODY" || $ === "SCRIPT" || $ === "STYLE" || $ === "LINK" && U.rel.toLowerCase() === "stylesheet" || l.removeChild(U), U = P;
+              U[C8] || $ === "HEAD" || $ === "BODY" || $ === "SCRIPT" || $ === "STYLE" || $ === "LINK" && U.rel.toLowerCase() === "stylesheet" || l.removeChild(U), U = P;
             }
             for (var J = e.type, H = l.attributes; H.length; )
               l.removeAttributeNode(H[0]);
@@ -5910,7 +5910,7 @@ Error generating stack: ` + a.message + `
         if (K4(t, e), X4(e), n & 512 && (j1 || a === null || D4(a, a.return)), e.flags & 32) {
           l = e.stateNode;
           try {
-            C5(l, "");
+            N5(l, "");
           } catch (d1) {
             P1(e, e.return, d1);
           }
@@ -6028,7 +6028,7 @@ Error generating stack: ` + a.message + `
               break;
             case 5:
               var h = n.stateNode;
-              n.flags & 32 && (C5(h, ""), n.flags &= -33);
+              n.flags & 32 && (N5(h, ""), n.flags &= -33);
               var M = g0(e);
               E6(e, M, h);
               break;
@@ -6550,19 +6550,19 @@ Error generating stack: ` + a.message + `
           return e = q4(13, a, t, l), e.elementType = O, e.lanes = u, e;
         case S:
           return e = q4(19, a, t, l), e.elementType = S, e.lanes = u, e;
-        case C:
+        case N:
           return Mo(a, l, u, t);
         default:
           if (typeof e == "object" && e !== null)
             switch (e.$$typeof) {
-              case v:
               case y:
+              case v:
                 h = 10;
                 break e;
               case R:
                 h = 9;
                 break e;
-              case N:
+              case _:
                 h = 11;
                 break e;
               case w:
@@ -6582,7 +6582,7 @@ Error generating stack: ` + a.message + `
     return e = q4(7, e, n, t), e.lanes = a, e;
   }
   function Mo(e, t, a, n) {
-    e = q4(22, e, n, t), e.elementType = C, e.lanes = a;
+    e = q4(22, e, n, t), e.elementType = N, e.lanes = a;
     var l = {
       _visibility: 1,
       _pendingVisibility: 1,
@@ -6847,7 +6847,7 @@ Error generating stack: ` + a.message + `
                 }
                 e = e.sibling;
               }
-            l.tail !== null && V1() > N6 && (t.flags |= 128, n = !0, o7(l, !1), t.lanes = 4194304);
+            l.tail !== null && V1() > C6 && (t.flags |= 128, n = !0, o7(l, !1), t.lanes = 4194304);
           }
         else {
           if (!n)
@@ -6855,13 +6855,13 @@ Error generating stack: ` + a.message + `
               if (t.flags |= 128, n = !0, e = e.updateQueue, t.updateQueue = e, _6(t, e), o7(l, !0), l.tail === null && l.tailMode === "hidden" && !u.alternate && !U1)
                 return Q1(t), null;
             } else
-              2 * V1() - l.renderingStartTime > N6 && a !== 536870912 && (t.flags |= 128, n = !0, o7(l, !1), t.lanes = 4194304);
+              2 * V1() - l.renderingStartTime > C6 && a !== 536870912 && (t.flags |= 128, n = !0, o7(l, !1), t.lanes = 4194304);
           l.isBackwards ? (u.sibling = t.child, t.child = u) : (e = l.last, e !== null ? e.sibling = u : t.child = u, l.last = u);
         }
         return l.tail !== null ? (t = l.tail, l.rendering = t, l.tail = t.sibling, l.renderingStartTime = V1(), t.sibling = null, e = o4.current, A1(o4, n ? e & 1 | 2 : e & 1), t) : (Q1(t), null);
       case 22:
       case 23:
-        return z2(t), Ce(), n = t.memoizedState !== null, e !== null ? e.memoizedState !== null !== n && (t.flags |= 8192) : n && (t.flags |= 8192), n ? (a & 536870912) !== 0 && (t.flags & 128) === 0 && (Q1(t), t.subtreeFlags & 6 && (t.flags |= 8192)) : Q1(t), a = t.updateQueue, a !== null && _6(t, a.retryQueue), a = null, e !== null && e.memoizedState !== null && e.memoizedState.cachePool !== null && (a = e.memoizedState.cachePool.pool), n = null, t.memoizedState !== null && t.memoizedState.cachePool !== null && (n = t.memoizedState.cachePool.pool), n !== a && (t.flags |= 2048), e !== null && v1(K3), null;
+        return z2(t), Ne(), n = t.memoizedState !== null, e !== null ? e.memoizedState !== null !== n && (t.flags |= 8192) : n && (t.flags |= 8192), n ? (a & 536870912) !== 0 && (t.flags & 128) === 0 && (Q1(t), t.subtreeFlags & 6 && (t.flags |= 8192)) : Q1(t), a = t.updateQueue, a !== null && _6(t, a.retryQueue), a = null, e !== null && e.memoizedState !== null && e.memoizedState.cachePool !== null && (a = e.memoizedState.cachePool.pool), n = null, t.memoizedState !== null && t.memoizedState.cachePool !== null && (n = t.memoizedState.cachePool.pool), n !== a && (t.flags |= 2048), e !== null && v1(K3), null;
       case 24:
         return a = null, e !== null && (a = e.memoizedState.cache), t.memoizedState.cache !== a && (t.flags |= 2048), j2(r4), Q1(t), null;
       case 25:
@@ -6894,7 +6894,7 @@ Error generating stack: ` + a.message + `
         return j2(t.type), null;
       case 22:
       case 23:
-        return z2(t), Ce(), e !== null && v1(K3), e = t.flags, e & 65536 ? (t.flags = e & -65537 | 128, t) : null;
+        return z2(t), Ne(), e !== null && v1(K3), e = t.flags, e & 65536 ? (t.flags = e & -65537 | 128, t) : null;
       case 24:
         return j2(r4), null;
       case 25:
@@ -6903,7 +6903,7 @@ Error generating stack: ` + a.message + `
         return null;
     }
   }
-  function No(e, t) {
+  function Co(e, t) {
     switch (Ae(t), t.tag) {
       case 3:
         j2(r4), s4();
@@ -6927,7 +6927,7 @@ Error generating stack: ` + a.message + `
         break;
       case 22:
       case 23:
-        z2(t), Ce(), e !== null && v1(K3);
+        z2(t), Ne(), e !== null && v1(K3);
         break;
       case 24:
         j2(r4);
@@ -6938,7 +6938,7 @@ Error generating stack: ` + a.message + `
       var t = y4(r4), a = t.data.get(e);
       return a === void 0 && (a = e(), t.data.set(e, a)), a;
     }
-  }, Hu = typeof WeakMap == "function" ? WeakMap : Map, H1 = 0, L1 = null, M1 = null, x1 = 0, B1 = 0, L4 = null, Y2 = !1, Y5 = !1, R0 = !1, $2 = 0, W1 = 0, M3 = 0, o5 = 0, E0 = 0, J4 = 0, $5 = 0, r7 = null, A2 = null, A0 = !1, M0 = 0, N6 = 1 / 0, C6 = null, _3 = null, O6 = !1, r5 = null, s7 = 0, _0 = 0, N0 = null, l7 = 0, C0 = null;
+  }, Hu = typeof WeakMap == "function" ? WeakMap : Map, H1 = 0, L1 = null, M1 = null, x1 = 0, B1 = 0, L4 = null, Y2 = !1, Y5 = !1, R0 = !1, $2 = 0, W1 = 0, M3 = 0, o5 = 0, E0 = 0, J4 = 0, $5 = 0, r7 = null, A2 = null, A0 = !1, M0 = 0, C6 = 1 / 0, N6 = null, _3 = null, O6 = !1, r5 = null, s7 = 0, _0 = 0, C0 = null, l7 = 0, N0 = null;
   function B4() {
     if ((H1 & 2) !== 0 && x1 !== 0)
       return x1 & -x1;
@@ -6948,7 +6948,7 @@ Error generating stack: ` + a.message + `
     }
     return H7();
   }
-  function Co() {
+  function No() {
     J4 === 0 && (J4 = (x1 & 536870912) === 0 || U1 ? Q7() : 536870912);
     var e = $4.current;
     return e !== null && (e.flags |= 32), J4;
@@ -7054,7 +7054,7 @@ Error generating stack: ` + a.message + `
                 n,
                 a,
                 A2,
-                C6,
+                N6,
                 A0,
                 t,
                 J4,
@@ -7073,7 +7073,7 @@ Error generating stack: ` + a.message + `
             n,
             a,
             A2,
-            C6,
+            N6,
             A0,
             t,
             J4,
@@ -7173,7 +7173,7 @@ Error generating stack: ` + a.message + `
       else
         e = M1, H2 = t5 = null, Pe(e), B5 = null, j8 = 0, e = M1;
       for (; e !== null; )
-        No(e.alternate, e), e = e.return;
+        Co(e.alternate, e), e = e.return;
       M1 = null;
     }
   }
@@ -7215,7 +7215,7 @@ Error generating stack: ` + a.message + `
     var n = H1;
     H1 |= 2;
     var l = Uo(), u = ko();
-    (L1 !== e || x1 !== t) && (C6 = null, K5(e, t)), t = !1;
+    (L1 !== e || x1 !== t) && (N6 = null, K5(e, t)), t = !1;
     var h = W1;
     e: do
       try {
@@ -7254,7 +7254,7 @@ Error generating stack: ` + a.message + `
     var a = H1;
     H1 |= 2;
     var n = Uo(), l = ko();
-    L1 !== e || x1 !== t ? (C6 = null, N6 = V1() + 500, K5(e, t)) : Y5 = S5(
+    L1 !== e || x1 !== t ? (N6 = null, C6 = V1() + 500, K5(e, t)) : Y5 = S5(
       e,
       t
     );
@@ -7359,7 +7359,7 @@ Error generating stack: ` + a.message + `
       case 5:
         Pe(t);
       default:
-        No(a, t), t = M1 = Ao(t, $2), t = to(a, t, $2);
+        Co(a, t), t = M1 = Ao(t, $2), t = to(a, t, $2);
     }
     e.memoizedProps = e.pendingProps, t === null ? T6(e) : M1 = t;
   }
@@ -7470,14 +7470,14 @@ Error generating stack: ` + a.message + `
       u,
       h,
       M
-    ), e === L1 && (M1 = L1 = null, x1 = 0), (U.subtreeFlags & 10256) === 0 && (U.flags & 10256) === 0 || O6 || (O6 = !0, _0 = P, N0 = a, Xu(i4, function() {
+    ), e === L1 && (M1 = L1 = null, x1 = 0), (U.subtreeFlags & 10256) === 0 && (U.flags & 10256) === 0 || O6 || (O6 = !0, _0 = P, C0 = a, Xu(i4, function() {
       return q5(), null;
     })), a = (U.flags & 15990) !== 0, (U.subtreeFlags & 15990) !== 0 || a ? (a = B.T, B.T = null, u = a1.p, a1.p = 2, h = H1, H1 |= 4, Pu(e, U), bo(U, e), bu(W0, e.containerInfo), j6 = !!j0, W0 = j0 = null, e.current = U, go(e, U.alternate, U), v2(), H1 = h, a1.p = u, B.T = a) : e.current = U, O6 ? (O6 = !1, r5 = e, s7 = n) : Bo(e, P), P = e.pendingLanes, P === 0 && (_3 = null), X9(U.stateNode), M2(e), t !== null)
       for (l = e.onRecoverableError, U = 0; U < t.length; U++)
         P = t[U], l(P.value, {
           componentStack: P.stack
         });
-    return (s7 & 3) !== 0 && q5(), P = e.pendingLanes, (n & 4194218) !== 0 && (P & 42) !== 0 ? e === C0 ? l7++ : (l7 = 0, C0 = e) : l7 = 0, c7(0), null;
+    return (s7 & 3) !== 0 && q5(), P = e.pendingLanes, (n & 4194218) !== 0 && (P & 42) !== 0 ? e === N0 ? l7++ : (l7 = 0, N0 = e) : l7 = 0, c7(0), null;
   }
   function Bo(e, t) {
     (e.pooledCacheLanes &= t) === 0 && (t = e.pooledCache, t != null && (e.pooledCache = null, I8(t)));
@@ -7491,7 +7491,7 @@ Error generating stack: ` + a.message + `
         if (a1.p = 32 > a ? 32 : a, B.T = null, r5 === null)
           var u = !1;
         else {
-          a = N0, N0 = null;
+          a = C0, C0 = null;
           var h = r5, M = s7;
           if (r5 = null, s7 = 0, (H1 & 6) !== 0)
             throw Error(s(331));
@@ -7802,7 +7802,7 @@ Error generating stack: ` + a.message + `
       }
     }
   }
-  function N1(e, t) {
+  function C1(e, t) {
     var a = t[_8];
     a === void 0 && (a = t[_8] = /* @__PURE__ */ new Set());
     var n = e + "__bubble";
@@ -7986,7 +7986,7 @@ Error generating stack: ` + a.message + `
           if (H = e === "mouseover" || e === "pointerover", G = e === "mouseout" || e === "pointerout", H && a !== oe && (d1 = a.relatedTarget || a.fromElement) && (Q3(d1) || d1[w2]))
             break e;
           if ((G || H) && (H = $.window === $ ? $ : (H = $.ownerDocument) ? H.defaultView || H.parentWindow : window, G ? (d1 = a.relatedTarget || a.toElement, G = P, d1 = d1 ? Q3(d1) : null, d1 !== null && (I1 = W(d1), b1 = d1.tag, d1 !== I1 || b1 !== 5 && b1 !== 27 && b1 !== 6) && (d1 = null)) : (G = null, d1 = P), G !== d1)) {
-            if (b1 = ci, q = "onMouseLeave", L = "onMouseEnter", D = "mouse", (e === "pointerout" || e === "pointerover") && (b1 = di, q = "onPointerLeave", L = "onPointerEnter", D = "pointer"), I1 = G == null ? H : C8(G), z = d1 == null ? H : C8(d1), H = new b1(
+            if (b1 = ci, q = "onMouseLeave", L = "onMouseEnter", D = "mouse", (e === "pointerout" || e === "pointerover") && (b1 = di, q = "onPointerLeave", L = "onPointerEnter", D = "pointer"), I1 = G == null ? H : N8(G), z = d1 == null ? H : N8(d1), H = new b1(
               q,
               D + "leave",
               G,
@@ -8032,7 +8032,7 @@ Error generating stack: ` + a.message + `
           }
         }
         e: {
-          if (H = P ? C8(P) : window, G = H.nodeName && H.nodeName.toLowerCase(), G === "select" || G === "input" && H.type === "file")
+          if (H = P ? N8(P) : window, G = H.nodeName && H.nodeName.toLowerCase(), G === "select" || G === "input" && H.type === "file")
             var u1 = vi;
           else if (bi(H))
             if (wi)
@@ -8054,7 +8054,7 @@ Error generating stack: ` + a.message + `
           }
           E1 && E1(e, H, P), e === "focusout" && P && H.type === "number" && P.memoizedProps.value != null && ie(H, "number", H.value);
         }
-        switch (E1 = P ? C8(P) : window, e) {
+        switch (E1 = P ? N8(P) : window, e) {
           case "focusin":
             (bi(E1) || E1.contentEditable === "true") && (U5 = E1, ye = P, L8 = null);
             break;
@@ -8067,13 +8067,13 @@ Error generating stack: ` + a.message + `
           case "contextmenu":
           case "mouseup":
           case "dragend":
-            ve = !1, Ci(J, a, $);
+            ve = !1, Ni(J, a, $);
             break;
           case "selectionchange":
             if (yu) break;
           case "keydown":
           case "keyup":
-            Ci(J, a, $);
+            Ni(J, a, $);
         }
         var f1;
         if (me)
@@ -8169,7 +8169,7 @@ Error generating stack: ` + a.message + `
   function D1(e, t, a, n, l, u) {
     switch (a) {
       case "children":
-        typeof n == "string" ? t === "body" || t === "textarea" && n === "" || C5(e, n) : (typeof n == "number" || typeof n == "bigint") && t !== "body" && C5(e, "" + n);
+        typeof n == "string" ? t === "body" || t === "textarea" && n === "" || N5(e, n) : (typeof n == "number" || typeof n == "bigint") && t !== "body" && N5(e, "" + n);
         break;
       case "className":
         W7(e, "class", n);
@@ -8245,10 +8245,10 @@ Error generating stack: ` + a.message + `
         n != null && (e.onclick = P6);
         break;
       case "onScroll":
-        n != null && N1("scroll", e);
+        n != null && C1("scroll", e);
         break;
       case "onScrollEnd":
-        n != null && N1("scrollend", e);
+        n != null && C1("scrollend", e);
         break;
       case "dangerouslySetInnerHTML":
         if (n != null) {
@@ -8336,7 +8336,7 @@ Error generating stack: ` + a.message + `
         n == null || typeof n == "function" || typeof n == "symbol" || isNaN(n) ? e.removeAttribute(a) : e.setAttribute(a, n);
         break;
       case "popover":
-        N1("beforetoggle", e), N1("toggle", e), j7(e, "popover", n);
+        C1("beforetoggle", e), C1("toggle", e), j7(e, "popover", n);
         break;
       case "xlinkActuate":
         P2(
@@ -8436,13 +8436,13 @@ Error generating stack: ` + a.message + `
         }
         break;
       case "children":
-        typeof n == "string" ? C5(e, n) : (typeof n == "number" || typeof n == "bigint") && C5(e, "" + n);
+        typeof n == "string" ? N5(e, n) : (typeof n == "number" || typeof n == "bigint") && N5(e, "" + n);
         break;
       case "onScroll":
-        n != null && N1("scroll", e);
+        n != null && C1("scroll", e);
         break;
       case "onScrollEnd":
-        n != null && N1("scrollend", e);
+        n != null && C1("scrollend", e);
         break;
       case "onClick":
         n != null && (e.onclick = P6);
@@ -8478,7 +8478,7 @@ Error generating stack: ` + a.message + `
       case "li":
         break;
       case "img":
-        N1("error", e), N1("load", e);
+        C1("error", e), C1("load", e);
         var n = !1, l = !1, u;
         for (u in a)
           if (a.hasOwnProperty(u)) {
@@ -8501,7 +8501,7 @@ Error generating stack: ` + a.message + `
         l && D1(e, t, "srcSet", a.srcSet, a, null), n && D1(e, t, "src", a.src, a, null);
         return;
       case "input":
-        N1("invalid", e);
+        C1("invalid", e);
         var M = u = h = l = null, U = null, P = null;
         for (n in a)
           if (a.hasOwnProperty(n)) {
@@ -8547,7 +8547,7 @@ Error generating stack: ` + a.message + `
         ), I7(e);
         return;
       case "select":
-        N1("invalid", e), n = h = u = null;
+        C1("invalid", e), n = h = u = null;
         for (l in a)
           if (a.hasOwnProperty(l) && (M = a[l], M != null))
             switch (l) {
@@ -8562,10 +8562,10 @@ Error generating stack: ` + a.message + `
               default:
                 D1(e, t, l, M, a, null);
             }
-        t = u, a = h, e.multiple = !!n, t != null ? N5(e, !!n, t, !1) : a != null && N5(e, !!n, a, !0);
+        t = u, a = h, e.multiple = !!n, t != null ? C5(e, !!n, t, !1) : a != null && C5(e, !!n, a, !0);
         return;
       case "textarea":
-        N1("invalid", e), u = l = n = null;
+        C1("invalid", e), u = l = n = null;
         for (h in a)
           if (a.hasOwnProperty(h) && (M = a[h], M != null))
             switch (h) {
@@ -8598,27 +8598,27 @@ Error generating stack: ` + a.message + `
             }
         return;
       case "dialog":
-        N1("cancel", e), N1("close", e);
+        C1("cancel", e), C1("close", e);
         break;
       case "iframe":
       case "object":
-        N1("load", e);
+        C1("load", e);
         break;
       case "video":
       case "audio":
         for (n = 0; n < u7.length; n++)
-          N1(u7[n], e);
+          C1(u7[n], e);
         break;
       case "image":
-        N1("error", e), N1("load", e);
+        C1("error", e), C1("load", e);
         break;
       case "details":
-        N1("toggle", e);
+        C1("toggle", e);
         break;
       case "embed":
       case "source":
       case "link":
-        N1("error", e), N1("load", e);
+        C1("error", e), C1("load", e);
       case "area":
       case "base":
       case "br":
@@ -8773,7 +8773,7 @@ Error generating stack: ` + a.message + `
                   U
                 );
             }
-        t = M, a = h, n = G, H != null ? N5(e, !!a, H, !1) : !!n != !!a && (t != null ? N5(e, !!a, t, !0) : N5(e, !!a, a ? [] : "", !1));
+        t = M, a = h, n = G, H != null ? C5(e, !!a, H, !1) : !!n != !!a && (t != null ? C5(e, !!a, t, !0) : C5(e, !!a, a ? [] : "", !1));
         return;
       case "textarea":
         G = H = null;
@@ -8988,7 +8988,7 @@ Error generating stack: ` + a.message + `
         if (!n && (e.nodeName !== "INPUT" || e.type !== "hidden"))
           break;
       } else if (n) {
-        if (!e[N8])
+        if (!e[C8])
           switch (t) {
             case "meta":
               if (!e.hasAttribute("itemprop")) break;
@@ -9379,7 +9379,7 @@ Error generating stack: ` + a.message + `
     if (n.has(e)) return n;
     for (n.set(e, null), a = a.getElementsByTagName(e), l = 0; l < a.length; l++) {
       var u = a[l];
-      if (!(u[N8] || u[l4] || e === "link" && u.getAttribute("rel") === "stylesheet") && u.namespaceURI !== "http://www.w3.org/2000/svg") {
+      if (!(u[C8] || u[l4] || e === "link" && u.getAttribute("rel") === "stylesheet") && u.namespaceURI !== "http://www.w3.org/2000/svg") {
         var h = u.getAttribute(t) || "";
         h = e + h;
         var M = n.get(h);
@@ -9472,9 +9472,9 @@ Error generating stack: ` + a.message + `
   }
   var H6 = null;
   function X0(e, t) {
-    e.stylesheets = null, e.unsuspend !== null && (e.count++, H6 = /* @__PURE__ */ new Map(), t.forEach(Nd, e), H6 = null, Q6.call(e));
+    e.stylesheets = null, e.unsuspend !== null && (e.count++, H6 = /* @__PURE__ */ new Map(), t.forEach(Cd, e), H6 = null, Q6.call(e));
   }
-  function Nd(e, t) {
+  function Cd(e, t) {
     if (!(t.state.loading & 4)) {
       var a = H6.get(e);
       if (a) var n = a.get(null);
@@ -9492,18 +9492,18 @@ Error generating stack: ` + a.message + `
     }
   }
   var p7 = {
-    $$typeof: y,
+    $$typeof: v,
     Provider: null,
     Consumer: null,
     _currentValue: m1,
     _currentValue2: m1,
     _threadCount: 0
   };
-  function Cd(e, t, a, n, l, u, h, M) {
+  function Nd(e, t, a, n, l, u, h, M) {
     this.tag = 1, this.containerInfo = e, this.finishedWork = this.pingCache = this.current = this.pendingChildren = null, this.timeoutHandle = -1, this.callbackNode = this.next = this.pendingContext = this.context = this.cancelPendingCommit = null, this.callbackPriority = 0, this.expirationTimes = k2(-1), this.entangledLanes = this.shellSuspendCounter = this.errorRecoveryDisabledLanes = this.finishedLanes = this.expiredLanes = this.warmLanes = this.pingedLanes = this.suspendedLanes = this.pendingLanes = 0, this.entanglements = k2(0), this.hiddenUpdates = k2(null), this.identifierPrefix = n, this.onUncaughtError = l, this.onCaughtError = u, this.onRecoverableError = h, this.pooledCache = null, this.pooledCacheLanes = 0, this.formState = M, this.incompleteTransitions = /* @__PURE__ */ new Map();
   }
   function dr(e, t, a, n, l, u, h, M, U, P, $, J) {
-    return e = new Cd(
+    return e = new Nd(
       e,
       t,
       a,
@@ -9593,7 +9593,7 @@ Error generating stack: ` + a.message + `
                       var U = 1 << 31 - E4(h);
                       M.entanglements[1] |= U, h &= ~U;
                     }
-                    M2(u), (H1 & 6) === 0 && (N6 = V1() + 500, c7(0));
+                    M2(u), (H1 & 6) === 0 && (C6 = V1() + 500, c7(0));
                   }
                 }
                 break;
@@ -9735,18 +9735,18 @@ Error generating stack: ` + a.message + `
         return 32;
     }
   }
-  var at = !1, N3 = null, C3 = null, O3 = null, h7 = /* @__PURE__ */ new Map(), b7 = /* @__PURE__ */ new Map(), x3 = [], Td = "mousedown mouseup touchcancel touchend touchstart auxclick dblclick pointercancel pointerdown pointerup dragend dragstart drop compositionend compositionstart keydown keypress keyup input textInput copy cut paste click change contextmenu reset".split(
+  var at = !1, C3 = null, N3 = null, O3 = null, h7 = /* @__PURE__ */ new Map(), b7 = /* @__PURE__ */ new Map(), x3 = [], Td = "mousedown mouseup touchcancel touchend touchstart auxclick dblclick pointercancel pointerdown pointerup dragend dragstart drop compositionend compositionstart keydown keypress keyup input textInput copy cut paste click change contextmenu reset".split(
     " "
   );
   function br(e, t) {
     switch (e) {
       case "focusin":
       case "focusout":
-        N3 = null;
+        C3 = null;
         break;
       case "dragenter":
       case "dragleave":
-        C3 = null;
+        N3 = null;
         break;
       case "mouseover":
       case "mouseout":
@@ -9773,8 +9773,8 @@ Error generating stack: ` + a.message + `
   function Ud(e, t, a, n, l) {
     switch (t) {
       case "focusin":
-        return N3 = y7(
-          N3,
+        return C3 = y7(
+          C3,
           e,
           t,
           a,
@@ -9782,8 +9782,8 @@ Error generating stack: ` + a.message + `
           l
         ), !0;
       case "dragenter":
-        return C3 = y7(
-          C3,
+        return N3 = y7(
+          N3,
           e,
           t,
           a,
@@ -9871,7 +9871,7 @@ Error generating stack: ` + a.message + `
     I6(e) && a.delete(t);
   }
   function kd() {
-    at = !1, N3 !== null && I6(N3) && (N3 = null), C3 !== null && I6(C3) && (C3 = null), O3 !== null && I6(O3) && (O3 = null), h7.forEach(vr), b7.forEach(vr);
+    at = !1, C3 !== null && I6(C3) && (C3 = null), N3 !== null && I6(N3) && (N3 = null), O3 !== null && I6(O3) && (O3 = null), h7.forEach(vr), b7.forEach(vr);
   }
   function G6(e, t) {
     e.blockedOn === t && (e.blockedOn = null, at || (at = !0, i.unstable_scheduleCallback(
@@ -9912,7 +9912,7 @@ Error generating stack: ` + a.message + `
     function t(U) {
       return G6(U, e);
     }
-    N3 !== null && G6(N3, e), C3 !== null && G6(C3, e), O3 !== null && G6(O3, e), h7.forEach(t), b7.forEach(t);
+    C3 !== null && G6(C3, e), N3 !== null && G6(N3, e), O3 !== null && G6(O3, e), h7.forEach(t), b7.forEach(t);
     for (var a = 0; a < x3.length; a++) {
       var n = x3[a];
       n.blockedOn === e && (n.blockedOn = null);
@@ -10052,14 +10052,14 @@ const l9 = /* @__PURE__ */ It(A), Gd = /* @__PURE__ */ Pd({
   __proto__: null,
   default: l9
 }, [A]);
-var N2 = function() {
-  return N2 = Object.assign || function(o) {
+var C2 = function() {
+  return C2 = Object.assign || function(o) {
     for (var r, s = 1, c = arguments.length; s < c; s++) {
       r = arguments[s];
       for (var d in r) Object.prototype.hasOwnProperty.call(r, d) && (o[d] = r[d]);
     }
     return o;
-  }, N2.apply(this, arguments);
+  }, C2.apply(this, arguments);
 };
 function As(i, o) {
   var r = {};
@@ -10180,7 +10180,7 @@ function ef(i, o) {
 function tf(i) {
   i === void 0 && (i = {});
   var o = ef(null);
-  return o.options = N2({ async: !0, ssr: !1 }, i), o;
+  return o.options = C2({ async: !0, ssr: !1 }, i), o;
 }
 var Ms = function(i) {
   var o = i.sideCar, r = As(i, ["sideCar"]);
@@ -10189,7 +10189,7 @@ var Ms = function(i) {
   var s = o.read();
   if (!s)
     throw new Error("Sidecar medium not found");
-  return A.createElement(s, N2({}, r));
+  return A.createElement(s, C2({}, r));
 };
 Ms.isSideCarExport = !0;
 function af(i, o) {
@@ -10201,12 +10201,12 @@ var _s = tf(), dt = function() {
     onScrollCapture: dt,
     onWheelCapture: dt,
     onTouchMoveCapture: dt
-  }), c = s[0], d = s[1], f = i.forwardProps, g = i.children, p = i.className, m = i.removeScrollBar, b = i.enabled, v = i.shards, R = i.sideCar, y = i.noIsolation, N = i.inert, O = i.allowPinchZoom, S = i.as, w = S === void 0 ? "div" : S, E = i.gapMode, C = As(i, ["forwardProps", "children", "className", "removeScrollBar", "enabled", "shards", "sideCar", "noIsolation", "inert", "allowPinchZoom", "as", "gapMode"]), T = R, k = qd([r, o]), F = N2(N2({}, C), c);
+  }), c = s[0], d = s[1], f = i.forwardProps, g = i.children, p = i.className, m = i.removeScrollBar, b = i.enabled, y = i.shards, R = i.sideCar, v = i.noIsolation, _ = i.inert, O = i.allowPinchZoom, S = i.as, w = S === void 0 ? "div" : S, E = i.gapMode, N = As(i, ["forwardProps", "children", "className", "removeScrollBar", "enabled", "shards", "sideCar", "noIsolation", "inert", "allowPinchZoom", "as", "gapMode"]), x = R, k = qd([r, o]), F = C2(C2({}, N), c);
   return A.createElement(
     A.Fragment,
     null,
-    b && A.createElement(T, { sideCar: _s, removeScrollBar: m, shards: v, noIsolation: y, inert: N, setCallbacks: d, allowPinchZoom: !!O, lockRef: r, gapMode: E }),
-    f ? A.cloneElement(A.Children.only(g), N2(N2({}, F), { ref: k })) : A.createElement(w, N2({}, F, { className: p, ref: k }), g)
+    b && A.createElement(x, { sideCar: _s, removeScrollBar: m, shards: y, noIsolation: v, inert: _, setCallbacks: d, allowPinchZoom: !!O, lockRef: r, gapMode: E }),
+    f ? A.cloneElement(A.Children.only(g), C2(C2({}, F), { ref: k })) : A.createElement(w, C2({}, F, { className: p, ref: k }), g)
   );
 });
 h9.defaultProps = {
@@ -10256,7 +10256,7 @@ var lf = function() {
       };
     }, [o && r]);
   };
-}, Ns = function() {
+}, Cs = function() {
   var i = cf(), o = function(r) {
     var s = r.styles, c = r.dynamic;
     return i(s, c), null;
@@ -10282,7 +10282,7 @@ var lf = function() {
     right: o[2],
     gap: Math.max(0, s - r + o[2] - o[0])
   };
-}, gf = Ns(), u8 = "data-scroll-locked", mf = function(i, o, r, s) {
+}, gf = Cs(), u8 = "data-scroll-locked", mf = function(i, o, r, s) {
   var c = i.left, d = i.top, f = i.right, g = i.gap;
   return r === void 0 && (r = "margin"), `
   .`.concat(Yd, ` {
@@ -10357,7 +10357,7 @@ if (typeof window < "u")
   }
 var n8 = xt ? { passive: !1 } : !1, bf = function(i) {
   return i.tagName === "TEXTAREA";
-}, Cs = function(i, o) {
+}, Ns = function(i, o) {
   if (!(i instanceof Element))
     return !1;
   var r = window.getComputedStyle(i);
@@ -10367,9 +10367,9 @@ var n8 = xt ? { passive: !1 } : !1, bf = function(i) {
     !(r.overflowY === r.overflowX && !bf(i) && r[o] === "visible")
   );
 }, yf = function(i) {
-  return Cs(i, "overflowY");
+  return Ns(i, "overflowY");
 }, vf = function(i) {
-  return Cs(i, "overflowX");
+  return Ns(i, "overflowX");
 }, Fr = function(i, o) {
   var r = o.ownerDocument, s = o;
   do {
@@ -10404,16 +10404,16 @@ var n8 = xt ? { passive: !1 } : !1, bf = function(i) {
 }, Rf = function(i, o) {
   return i === "h" && o === "rtl" ? -1 : 1;
 }, Ef = function(i, o, r, s, c) {
-  var d = Rf(i, window.getComputedStyle(o).direction), f = d * s, g = r.target, p = o.contains(g), m = !1, b = f > 0, v = 0, R = 0;
+  var d = Rf(i, window.getComputedStyle(o).direction), f = d * s, g = r.target, p = o.contains(g), m = !1, b = f > 0, y = 0, R = 0;
   do {
-    var y = xs(i, g), N = y[0], O = y[1], S = y[2], w = O - S - d * N;
-    (N || w) && Os(i, g) && (v += w, R += N), g instanceof ShadowRoot ? g = g.host : g = g.parentNode;
+    var v = xs(i, g), _ = v[0], O = v[1], S = v[2], w = O - S - d * _;
+    (_ || w) && Os(i, g) && (y += w, R += _), g instanceof ShadowRoot ? g = g.host : g = g.parentNode;
   } while (
     // portaled content
     !p && g !== document.body || // self content
     p && (o.contains(g) || o === g)
   );
-  return (b && Math.abs(v) < 1 || !b && Math.abs(R) < 1) && (m = !0), m;
+  return (b && Math.abs(y) < 1 || !b && Math.abs(R) < 1) && (m = !0), m;
 }, X6 = function(i) {
   return "changedTouches" in i ? [i.changedTouches[0].clientX, i.changedTouches[0].clientY] : [0, 0];
 }, Dr = function(i) {
@@ -10428,8 +10428,8 @@ var n8 = xt ? { passive: !1 } : !1, bf = function(i) {
   .allow-interactivity-`).concat(i, ` {pointer-events: all;}
 `);
 }, _f = 0, o8 = [];
-function Nf(i) {
-  var o = A.useRef([]), r = A.useRef([0, 0]), s = A.useRef(), c = A.useState(_f++)[0], d = A.useState(Ns)[0], f = A.useRef(i);
+function Cf(i) {
+  var o = A.useRef([]), r = A.useRef([0, 0]), s = A.useRef(), c = A.useState(_f++)[0], d = A.useState(Cs)[0], f = A.useRef(i);
   A.useEffect(function() {
     f.current = i;
   }, [i]), A.useEffect(function() {
@@ -10448,7 +10448,7 @@ function Nf(i) {
   var g = A.useCallback(function(O, S) {
     if ("touches" in O && O.touches.length === 2 || O.type === "wheel" && O.ctrlKey)
       return !f.current.allowPinchZoom;
-    var w = X6(O), E = r.current, C = "deltaX" in O ? O.deltaX : E[0] - w[0], T = "deltaY" in O ? O.deltaY : E[1] - w[1], k, F = O.target, I = Math.abs(C) > Math.abs(T) ? "h" : "v";
+    var w = X6(O), E = r.current, N = "deltaX" in O ? O.deltaX : E[0] - w[0], x = "deltaY" in O ? O.deltaY : E[1] - w[1], k, F = O.target, I = Math.abs(N) > Math.abs(x) ? "h" : "v";
     if ("touches" in O && I === "h" && F.type === "range")
       return !1;
     var Q = Fr(I, F);
@@ -10456,10 +10456,10 @@ function Nf(i) {
       return !0;
     if (Q ? k = I : (k = I === "v" ? "h" : "v", Q = Fr(I, F)), !Q)
       return !1;
-    if (!s.current && "changedTouches" in O && (C || T) && (s.current = k), !k)
+    if (!s.current && "changedTouches" in O && (N || x) && (s.current = k), !k)
       return !0;
     var B = s.current || k;
-    return Ef(B, S, O, B === "h" ? C : T);
+    return Ef(B, S, O, B === "h" ? N : x);
   }, []), p = A.useCallback(function(O) {
     var S = O;
     if (!(!o8.length || o8[o8.length - 1] !== d)) {
@@ -10471,30 +10471,30 @@ function Nf(i) {
         return;
       }
       if (!E) {
-        var C = (f.current.shards || []).map(Pr).filter(Boolean).filter(function(k) {
+        var N = (f.current.shards || []).map(Pr).filter(Boolean).filter(function(k) {
           return k.contains(S.target);
-        }), T = C.length > 0 ? g(S, C[0]) : !f.current.noIsolation;
-        T && S.cancelable && S.preventDefault();
+        }), x = N.length > 0 ? g(S, N[0]) : !f.current.noIsolation;
+        x && S.cancelable && S.preventDefault();
       }
     }
   }, []), m = A.useCallback(function(O, S, w, E) {
-    var C = { name: O, delta: S, target: w, should: E, shadowParent: Cf(w) };
-    o.current.push(C), setTimeout(function() {
-      o.current = o.current.filter(function(T) {
-        return T !== C;
+    var N = { name: O, delta: S, target: w, should: E, shadowParent: Nf(w) };
+    o.current.push(N), setTimeout(function() {
+      o.current = o.current.filter(function(x) {
+        return x !== N;
       });
     }, 1);
   }, []), b = A.useCallback(function(O) {
     r.current = X6(O), s.current = void 0;
-  }, []), v = A.useCallback(function(O) {
+  }, []), y = A.useCallback(function(O) {
     m(O.type, Dr(O), O.target, g(O, i.lockRef.current));
   }, []), R = A.useCallback(function(O) {
     m(O.type, X6(O), O.target, g(O, i.lockRef.current));
   }, []);
   A.useEffect(function() {
     return o8.push(d), i.setCallbacks({
-      onScrollCapture: v,
-      onWheelCapture: v,
+      onScrollCapture: y,
+      onWheelCapture: y,
       onTouchMoveCapture: R
     }), document.addEventListener("wheel", p, n8), document.addEventListener("touchmove", p, n8), document.addEventListener("touchstart", b, n8), function() {
       o8 = o8.filter(function(O) {
@@ -10502,25 +10502,25 @@ function Nf(i) {
       }), document.removeEventListener("wheel", p, n8), document.removeEventListener("touchmove", p, n8), document.removeEventListener("touchstart", b, n8);
     };
   }, []);
-  var y = i.removeScrollBar, N = i.inert;
+  var v = i.removeScrollBar, _ = i.inert;
   return A.createElement(
     A.Fragment,
     null,
-    N ? A.createElement(d, { styles: Mf(c) }) : null,
-    y ? A.createElement(hf, { gapMode: i.gapMode }) : null
+    _ ? A.createElement(d, { styles: Mf(c) }) : null,
+    v ? A.createElement(hf, { gapMode: i.gapMode }) : null
   );
 }
-function Cf(i) {
+function Nf(i) {
   for (var o = null; i !== null; )
     i instanceof ShadowRoot && (o = i.host, i = i.host), i = i.parentNode;
   return o;
 }
-const Of = af(_s, Nf);
+const Of = af(_s, Cf);
 var Ts = A.forwardRef(function(i, o) {
-  return A.createElement(h9, N2({}, i, { ref: o, sideCar: Of }));
+  return A.createElement(h9, C2({}, i, { ref: o, sideCar: Of }));
 });
 Ts.classNames = h9.classNames;
-function C2(i) {
+function N2(i) {
   return Object.keys(i);
 }
 function gt(i) {
@@ -10592,7 +10592,7 @@ function m5(i) {
 }
 function p5(i) {
   const o = A.createContext(null);
-  return [({ children: c, value: d }) => /* @__PURE__ */ _.jsx(o.Provider, { value: d, children: c }), () => {
+  return [({ children: c, value: d }) => /* @__PURE__ */ C.jsx(o.Provider, { value: d, children: c }), () => {
     const c = A.useContext(o);
     if (c === null)
       throw new Error(i);
@@ -10601,7 +10601,7 @@ function p5(i) {
 }
 function y9(i = null) {
   const o = A.createContext(i);
-  return [({ children: c, value: d }) => /* @__PURE__ */ _.jsx(o.Provider, { value: d, children: c }), () => A.useContext(o)];
+  return [({ children: c, value: d }) => /* @__PURE__ */ C.jsx(o.Provider, { value: d, children: c }), () => A.useContext(o)];
 }
 const kf = {
   app: 100,
@@ -10955,11 +10955,11 @@ function ug(i) {
       a: 1
     };
   const s = parseInt(r[1], 10), c = parseInt(r[2], 10) / 100, d = parseInt(r[3], 10) / 100, f = r[5] ? parseFloat(r[5]) : void 0, g = (1 - Math.abs(2 * d - 1)) * c, p = s / 60, m = g * (1 - Math.abs(p % 2 - 1)), b = d - g / 2;
-  let v, R, y;
-  return p >= 0 && p < 1 ? (v = g, R = m, y = 0) : p >= 1 && p < 2 ? (v = m, R = g, y = 0) : p >= 2 && p < 3 ? (v = 0, R = g, y = m) : p >= 3 && p < 4 ? (v = 0, R = m, y = g) : p >= 4 && p < 5 ? (v = m, R = 0, y = g) : (v = g, R = 0, y = m), {
-    r: Math.round((v + b) * 255),
+  let y, R, v;
+  return p >= 0 && p < 1 ? (y = g, R = m, v = 0) : p >= 1 && p < 2 ? (y = m, R = g, v = 0) : p >= 2 && p < 3 ? (y = 0, R = g, v = m) : p >= 3 && p < 4 ? (y = 0, R = m, v = g) : p >= 4 && p < 5 ? (y = m, R = 0, v = g) : (y = g, R = 0, v = m), {
+    r: Math.round((y + b) * 255),
     g: Math.round((R + b) * 255),
-    b: Math.round((y + b) * 255),
+    b: Math.round((v + b) * 255),
     a: f || 1
   };
 }
@@ -11551,15 +11551,15 @@ function Hs({
     () => bg(r ? s : Xt, i),
     [i, s, r]
   );
-  return /* @__PURE__ */ _.jsx(qt.Provider, { value: c, children: o });
+  return /* @__PURE__ */ C.jsx(qt.Provider, { value: c, children: o });
 }
 Hs.displayName = "@mantine/core/MantineThemeProvider";
 function vg() {
-  const i = T2(), o = $t(), r = C2(i.breakpoints).reduce((s, c) => {
+  const i = T2(), o = $t(), r = N2(i.breakpoints).reduce((s, c) => {
     const d = i.breakpoints[c].includes("px"), f = Uf(i.breakpoints[c]), g = d ? `${f - 0.1}px` : Lr(f - 0.1), p = d ? `${f}px` : Lr(f);
     return `${s}@media (max-width: ${g}) {.mantine-visible-from-${c} {display: none !important;}}@media (min-width: ${p}) {.mantine-hidden-from-${c} {display: none !important;}}`;
   }, "");
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     "style",
     {
       "data-mantine-styles": "classes",
@@ -11659,7 +11659,7 @@ function Rg(i) {
   return !!i && typeof i == "object" && "mantine-virtual-color" in i;
 }
 function s8(i, o, r) {
-  C2(o).forEach(
+  N2(o).forEach(
     (s) => Object.assign(i, { [`--mantine-${r}-${s}`]: o[s] })
   );
 }
@@ -11718,7 +11718,7 @@ const js = (i) => {
   };
   s8(s.variables, i.breakpoints, "breakpoint"), s8(s.variables, i.spacing, "spacing"), s8(s.variables, i.fontSizes, "font-size"), s8(s.variables, i.lineHeights, "line-height"), s8(s.variables, i.shadows, "shadow"), s8(s.variables, i.radius, "radius"), i.colors[i.primaryColor].forEach((d, f) => {
     s.variables[`--mantine-primary-color-${f}`] = `var(--mantine-color-${i.primaryColor}-${f})`;
-  }), C2(i.colors).forEach((d) => {
+  }), N2(i.colors).forEach((d) => {
     const f = i.colors[d];
     if (Rg(f)) {
       Object.assign(
@@ -11763,7 +11763,7 @@ const js = (i) => {
     );
   });
   const c = i.headings.sizes;
-  return C2(c).forEach((d) => {
+  return N2(c).forEach((d) => {
     s.variables[`--mantine-${d}-font-size`] = c[d].fontSize, s.variables[`--mantine-${d}-line-height`] = c[d].lineHeight, s.variables[`--mantine-${d}-font-weight`] = c[d].fontWeight || i.headings.fontWeight;
   }), s;
 };
@@ -11778,11 +11778,11 @@ function Ag(i) {
     light: {},
     dark: {}
   };
-  return C2(i.variables).forEach((r) => {
+  return N2(i.variables).forEach((r) => {
     yt.variables[r] !== i.variables[r] && (o.variables[r] = i.variables[r]);
-  }), C2(i.light).forEach((r) => {
+  }), N2(i.light).forEach((r) => {
     yt.light[r] !== i.light[r] && (o.light[r] = i.light[r]);
-  }), C2(i.dark).forEach((r) => {
+  }), N2(i.dark).forEach((r) => {
     yt.dark[r] !== i.dark[r] && (o.dark[r] = i.dark[r]);
   }), o;
 }
@@ -11797,7 +11797,7 @@ function Ws({
   deduplicateCssVariables: o
 }) {
   const r = T2(), s = $t(), c = tg(), d = Eg({ theme: r, generator: c }), f = i === ":root" && o, g = f ? Ag(d) : d, p = wg(g, i);
-  return p ? /* @__PURE__ */ _.jsx(
+  return p ? /* @__PURE__ */ C.jsx(
     "style",
     {
       "data-mantine-styles": !0,
@@ -11819,7 +11819,7 @@ function l8(i, o) {
   const r = typeof window < "u" && "matchMedia" in window && window.matchMedia("(prefers-color-scheme: dark)").matches, s = i !== "auto" ? i : r ? "dark" : "light";
   o()?.setAttribute("data-mantine-color-scheme", s);
 }
-function Ng({
+function Cg({
   manager: i,
   defaultColorScheme: o,
   getRootElement: r,
@@ -11840,13 +11840,13 @@ function Ng({
       return l8(s, r), () => {
       };
     s === void 0 && l8(d, r), typeof window < "u" && "matchMedia" in window && (c.current = window.matchMedia("(prefers-color-scheme: dark)"));
-    const b = (v) => {
-      d === "auto" && l8(v.matches ? "dark" : "light", r);
+    const b = (y) => {
+      d === "auto" && l8(y.matches ? "dark" : "light", r);
     };
     return c.current?.addEventListener("change", b), () => c.current?.removeEventListener("change", b);
   }, [d, s]), { colorScheme: g, setColorScheme: p, clearColorScheme: m };
 }
-function Cg({
+function Ng({
   respectReducedMotion: i,
   getRootElement: o
 }) {
@@ -11867,44 +11867,44 @@ function Is({
   classNamesPrefix: p = "mantine",
   colorSchemeManager: m = pg(),
   defaultColorScheme: b = "light",
-  getRootElement: v = () => document.documentElement,
+  getRootElement: y = () => document.documentElement,
   cssVariablesResolver: R,
-  forceColorScheme: y,
-  stylesTransform: N
+  forceColorScheme: v,
+  stylesTransform: _
 }) {
-  const { colorScheme: O, setColorScheme: S, clearColorScheme: w } = Ng({
+  const { colorScheme: O, setColorScheme: S, clearColorScheme: w } = Cg({
     defaultColorScheme: b,
-    forceColorScheme: y,
+    forceColorScheme: v,
     manager: m,
-    getRootElement: v
+    getRootElement: y
   });
-  return Cg({
+  return Ng({
     respectReducedMotion: i?.respectReducedMotion || !1,
-    getRootElement: v
-  }), /* @__PURE__ */ _.jsx(
+    getRootElement: y
+  }), /* @__PURE__ */ C.jsx(
     Qs.Provider,
     {
       value: {
         colorScheme: O,
         setColorScheme: S,
         clearColorScheme: w,
-        getRootElement: v,
+        getRootElement: y,
         classNamesPrefix: p,
         getStyleNonce: r,
         cssVariablesResolver: R,
         cssVariablesSelector: g,
         withStaticClasses: s,
-        stylesTransform: N
+        stylesTransform: _
       },
-      children: /* @__PURE__ */ _.jsxs(Hs, { theme: i, children: [
-        f && /* @__PURE__ */ _.jsx(
+      children: /* @__PURE__ */ C.jsxs(Hs, { theme: i, children: [
+        f && /* @__PURE__ */ C.jsx(
           Ws,
           {
             cssVariablesSelector: g,
             deduplicateCssVariables: d
           }
         ),
-        c && /* @__PURE__ */ _.jsx(vg, {}),
+        c && /* @__PURE__ */ C.jsx(vg, {}),
         o
       ] })
     }
@@ -12017,21 +12017,21 @@ function Lg({
   className: p,
   rootSelector: m,
   props: b,
-  stylesCtx: v,
+  stylesCtx: y,
   withStaticClasses: R,
-  headless: y,
-  transformedStyles: N
+  headless: v,
+  transformedStyles: _
 }) {
   return S4(
-    xg({ theme: i, options: o, unstyled: g || y }),
-    Dg({ theme: i, themeName: r, selector: s, props: b, stylesCtx: v }),
+    xg({ theme: i, options: o, unstyled: g || v }),
+    Dg({ theme: i, themeName: r, selector: s, props: b, stylesCtx: y }),
     Pg({ options: o, classes: f, selector: s, unstyled: g }),
-    Wr({ selector: s, stylesCtx: v, theme: i, classNames: d, props: b }),
-    Wr({ selector: s, stylesCtx: v, theme: i, classNames: N, props: b }),
-    Tg({ selector: s, stylesCtx: v, options: o, props: b, theme: i }),
+    Wr({ selector: s, stylesCtx: y, theme: i, classNames: d, props: b }),
+    Wr({ selector: s, stylesCtx: y, theme: i, classNames: _, props: b }),
+    Tg({ selector: s, stylesCtx: y, options: o, props: b, theme: i }),
     Ug({ rootSelector: m, selector: s, className: p }),
-    kg({ selector: s, classes: f, unstyled: g || y }),
-    R && !y && Fg({
+    kg({ selector: s, classes: f, unstyled: g || v }),
+    R && !v && Fg({
       themeName: r,
       classNamesPrefix: c,
       selector: s,
@@ -12095,14 +12095,14 @@ function Qg({
   style: p,
   vars: m,
   varsResolver: b,
-  headless: v,
+  headless: y,
   withStylesTransform: R
 }) {
   return {
     ...!R && Bg({ theme: i, themeName: o, props: c, stylesCtx: d, selector: r }),
     ...!R && c9({ theme: i, styles: g, props: c, stylesCtx: d })[r],
     ...!R && c9({ theme: i, styles: s?.styles, props: s?.props || c, stylesCtx: d })[r],
-    ...Vg({ theme: i, props: c, stylesCtx: d, vars: m, varsResolver: b, selector: r, themeName: o, headless: v }),
+    ...Vg({ theme: i, props: c, stylesCtx: d, vars: m, varsResolver: b, selector: r, themeName: o, headless: y }),
     ...f === r ? kt({ style: p, theme: i }) : null,
     ...kt({ style: s?.style, theme: i })
   };
@@ -12133,20 +12133,20 @@ function T1({
   classNames: p,
   styles: m,
   vars: b,
-  varsResolver: v
+  varsResolver: y
 }) {
-  const R = T2(), y = ag(), N = ig(), O = ng(), S = (Array.isArray(i) ? i : [i]).filter((C) => C), { withStylesTransform: w, getTransformedStyles: E } = Hg({
+  const R = T2(), v = ag(), _ = ig(), O = ng(), S = (Array.isArray(i) ? i : [i]).filter((N) => N), { withStylesTransform: w, getTransformedStyles: E } = Hg({
     props: r,
     stylesCtx: s,
     themeName: S
   });
-  return (C, T) => ({
+  return (N, x) => ({
     className: Lg({
       theme: R,
-      options: T,
+      options: x,
       themeName: S,
-      selector: C,
-      classNamesPrefix: y,
+      selector: N,
+      classNamesPrefix: v,
       classNames: p,
       classes: o,
       unstyled: g,
@@ -12154,22 +12154,22 @@ function T1({
       rootSelector: f,
       props: r,
       stylesCtx: s,
-      withStaticClasses: N,
+      withStaticClasses: _,
       headless: O,
-      transformedStyles: E([T?.styles, m])
+      transformedStyles: E([x?.styles, m])
     }),
     style: Qg({
       theme: R,
       themeName: S,
-      selector: C,
-      options: T,
+      selector: N,
+      options: x,
       props: r,
       stylesCtx: s,
       rootSelector: f,
       styles: m,
       style: d,
       vars: b,
-      varsResolver: v,
+      varsResolver: y,
       headless: O,
       withStylesTransform: w
     })
@@ -12180,7 +12180,7 @@ function s1(i, o, r) {
   return { ...o, ...d, ...b9(r) };
 }
 function vt(i) {
-  return C2(i).reduce(
+  return N2(i).reduce(
     (o, r) => i[r] !== void 0 ? `${o}${xf(r)}:${i[r]};` : o,
     ""
   ).trim();
@@ -12193,7 +12193,7 @@ function jg({ selector: i, styles: o, media: r, container: s }) {
 }
 function Gs(i) {
   const o = $t();
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     "style",
     {
       "data-mantine-styles": "inline",
@@ -12214,16 +12214,16 @@ function E9(i) {
     me: p,
     ms: m,
     p: b,
-    px: v,
+    px: y,
     py: R,
-    pt: y,
-    pb: N,
+    pt: v,
+    pb: _,
     pl: O,
     pr: S,
     pe: w,
     ps: E,
-    bd: C,
-    bg: T,
+    bd: N,
+    bg: x,
     c: k,
     opacity: F,
     ff: I,
@@ -12239,7 +12239,7 @@ function E9(i) {
     miw: Y,
     maw: W,
     h: Z,
-    mih: x,
+    mih: T,
     mah: j,
     bgsz: e1,
     bgp: o1,
@@ -12253,7 +12253,7 @@ function E9(i) {
     inset: $1,
     display: h4,
     flex: G1,
-    hiddenFrom: N4,
+    hiddenFrom: C4,
     visibleFrom: b4,
     lightHidden: s4,
     darkHidden: O1,
@@ -12271,16 +12271,16 @@ function E9(i) {
     me: p,
     ms: m,
     p: b,
-    px: v,
+    px: y,
     py: R,
-    pt: y,
-    pb: N,
+    pt: v,
+    pb: _,
     pl: O,
     pr: S,
     pe: w,
     ps: E,
-    bd: C,
-    bg: T,
+    bd: N,
+    bg: x,
     c: k,
     opacity: F,
     ff: I,
@@ -12296,7 +12296,7 @@ function E9(i) {
     miw: Y,
     maw: W,
     h: Z,
-    mih: x,
+    mih: T,
     mah: j,
     bgsz: e1,
     bgp: o1,
@@ -12310,7 +12310,7 @@ function E9(i) {
     inset: $1,
     display: h4,
     flex: G1,
-    hiddenFrom: N4,
+    hiddenFrom: C4,
     visibleFrom: b4,
     lightHidden: s4,
     darkHidden: O1,
@@ -12453,7 +12453,7 @@ function im(i) {
   return typeof i == "object" && i !== null ? "base" in i ? i.base : void 0 : i;
 }
 function nm(i) {
-  return typeof i == "object" && i !== null ? C2(i).filter((o) => o !== "base") : [];
+  return typeof i == "object" && i !== null ? N2(i).filter((o) => o !== "base") : [];
 }
 function om(i, o) {
   return typeof i == "object" && i !== null && o in i ? i[o] : i;
@@ -12464,7 +12464,7 @@ function Zs({
   theme: r
 }) {
   return tm(
-    C2(i).reduce(
+    N2(i).reduce(
       (s, c) => {
         if (c === "hiddenFrom" || c === "visibleFrom" || c === "sx")
           return s;
@@ -12477,9 +12477,9 @@ function Zs({
         const p = nm(i[c]);
         return f.forEach((m) => {
           g && (s.styles[m] = wt[d.type](g, r)), p.forEach((b) => {
-            const v = `(min-width: ${r.breakpoints[b]})`;
-            s.media[v] = {
-              ...s.media[v],
+            const y = `(min-width: ${r.breakpoints[b]})`;
+            s.media[y] = {
+              ...s.media[y],
               [m]: wt[d.type](
                 om(i[c], b),
                 r
@@ -12549,23 +12549,23 @@ const qs = A.forwardRef(
     visibleFrom: p,
     lightHidden: m,
     darkHidden: b,
-    renderRoot: v,
+    renderRoot: y,
     __size: R,
-    ...y
-  }, N) => {
-    const O = T2(), S = i || "div", { styleProps: w, rest: E } = E9(y), T = og()?.()?.(w.sx), k = Ys(), F = Zs({
+    ...v
+  }, _) => {
+    const O = T2(), S = i || "div", { styleProps: w, rest: E } = E9(v), x = og()?.()?.(w.sx), k = Ys(), F = Zs({
       styleProps: w,
       theme: O,
       data: Wg
     }), I = {
-      ref: N,
+      ref: _,
       style: sm({
         theme: O,
         style: o,
         vars: r,
         styleProps: F.inlineStyles
       }),
-      className: S4(s, T, {
+      className: S4(s, x, {
         [k]: F.hasResponsiveStyles,
         "mantine-light-hidden": m,
         "mantine-dark-hidden": b,
@@ -12578,8 +12578,8 @@ const qs = A.forwardRef(
       ...Xs(d),
       ...E
     };
-    return /* @__PURE__ */ _.jsxs(_.Fragment, { children: [
-      F.hasResponsiveStyles && /* @__PURE__ */ _.jsx(
+    return /* @__PURE__ */ C.jsxs(C.Fragment, { children: [
+      F.hasResponsiveStyles && /* @__PURE__ */ C.jsx(
         Gs,
         {
           selector: `.${k}`,
@@ -12587,7 +12587,7 @@ const qs = A.forwardRef(
           media: F.media
         }
       ),
-      typeof v == "function" ? v(I) : /* @__PURE__ */ _.jsx(S, { ...I })
+      typeof y == "function" ? y(I) : /* @__PURE__ */ C.jsx(S, { ...I })
     ] });
   }
 );
@@ -12599,14 +12599,14 @@ function Js(i) {
 function y1(i) {
   const o = A.forwardRef(i);
   return o.extend = Js, o.withProps = (r) => {
-    const s = A.forwardRef((c, d) => /* @__PURE__ */ _.jsx(o, { ...r, ...c, ref: d }));
+    const s = A.forwardRef((c, d) => /* @__PURE__ */ C.jsx(o, { ...r, ...c, ref: d }));
     return s.extend = o.extend, s.displayName = `WithProps(${o.displayName})`, s;
   }, o;
 }
 function V4(i) {
   const o = A.forwardRef(i);
   return o.withProps = (r) => {
-    const s = A.forwardRef((c, d) => /* @__PURE__ */ _.jsx(o, { ...r, ...c, ref: d }));
+    const s = A.forwardRef((c, d) => /* @__PURE__ */ C.jsx(o, { ...r, ...c, ref: d }));
     return s.extend = o.extend, s.displayName = `WithProps(${o.displayName})`, s;
   }, o.extend = Js, o;
 }
@@ -12646,16 +12646,16 @@ const dm = A.forwardRef((i, o) => {
   }), g8(c.scrollbarY, () => {
     const b = c.scrollbarY?.offsetWidth || 0;
     c.onCornerWidthChange(b), f(b);
-  }), m ? /* @__PURE__ */ _.jsx("div", { ...s, ref: o, style: { ...r, width: d, height: g } }) : null;
+  }), m ? /* @__PURE__ */ C.jsx("div", { ...s, ref: o, style: { ...r, width: d, height: g } }) : null;
 }), fm = A.forwardRef((i, o) => {
   const r = o2(), s = !!(r.scrollbarX && r.scrollbarY);
-  return r.type !== "scroll" && s ? /* @__PURE__ */ _.jsx(dm, { ...i, ref: o }) : null;
+  return r.type !== "scroll" && s ? /* @__PURE__ */ C.jsx(dm, { ...i, ref: o }) : null;
 }), gm = {
   scrollHideDelay: 1e3,
   type: "hover"
 }, el = A.forwardRef((i, o) => {
-  const r = s1("ScrollAreaRoot", gm, i), { type: s, scrollHideDelay: c, scrollbars: d, ...f } = r, [g, p] = A.useState(null), [m, b] = A.useState(null), [v, R] = A.useState(null), [y, N] = A.useState(null), [O, S] = A.useState(null), [w, E] = A.useState(0), [C, T] = A.useState(0), [k, F] = A.useState(!1), [I, Q] = A.useState(!1), B = _4(o, (K) => p(K));
-  return /* @__PURE__ */ _.jsx(
+  const r = s1("ScrollAreaRoot", gm, i), { type: s, scrollHideDelay: c, scrollbars: d, ...f } = r, [g, p] = A.useState(null), [m, b] = A.useState(null), [y, R] = A.useState(null), [v, _] = A.useState(null), [O, S] = A.useState(null), [w, E] = A.useState(0), [N, x] = A.useState(0), [k, F] = A.useState(!1), [I, Q] = A.useState(!1), B = _4(o, (K) => p(K));
+  return /* @__PURE__ */ C.jsx(
     um,
     {
       value: {
@@ -12664,10 +12664,10 @@ const dm = A.forwardRef((i, o) => {
         scrollArea: g,
         viewport: m,
         onViewportChange: b,
-        content: v,
+        content: y,
         onContentChange: R,
-        scrollbarX: y,
-        onScrollbarXChange: N,
+        scrollbarX: v,
+        onScrollbarXChange: _,
         scrollbarXEnabled: k,
         onScrollbarXEnabledChange: F,
         scrollbarY: O,
@@ -12675,16 +12675,16 @@ const dm = A.forwardRef((i, o) => {
         scrollbarYEnabled: I,
         onScrollbarYEnabledChange: Q,
         onCornerWidthChange: E,
-        onCornerHeightChange: T
+        onCornerHeightChange: x
       },
-      children: /* @__PURE__ */ _.jsx(
+      children: /* @__PURE__ */ C.jsx(
         g1,
         {
           ...f,
           ref: B,
           __vars: {
             "--sa-corner-width": d !== "xy" ? "0px" : `${w}px`,
-            "--sa-corner-height": d !== "xy" ? "0px" : `${C}px`
+            "--sa-corner-height": d !== "xy" ? "0px" : `${N}px`
           }
         }
       )
@@ -12716,8 +12716,8 @@ function Zr(i, o, r = "ltr") {
   return al([0, f], [0, g])(m);
 }
 function pm(i, o, r, s = "ltr") {
-  const c = M9(r), d = c / 2, f = o || d, g = c - f, p = r.scrollbar.paddingStart + f, m = r.scrollbar.size - r.scrollbar.paddingEnd - g, b = r.content - r.viewport, v = s === "ltr" ? [0, b] : [b * -1, 0];
-  return al([p, m], v)(i);
+  const c = M9(r), d = c / 2, f = o || d, g = c - f, p = r.scrollbar.paddingStart + f, m = r.scrollbar.size - r.scrollbar.paddingEnd - g, b = r.content - r.viewport, y = s === "ltr" ? [0, b] : [b * -1, 0];
+  return al([p, m], y)(i);
 }
 function il(i, o) {
   return i > 0 && i < o;
@@ -12743,8 +12743,8 @@ const [hm, nl] = p5(
     onDragScroll: p,
     onWheelScroll: m,
     onResize: b,
-    ...v
-  } = i, R = o2(), [y, N] = A.useState(null), O = _4(o, (Q) => N(Q)), S = A.useRef(null), w = A.useRef(""), { viewport: E } = R, C = r.content - r.viewport, T = l5(m), k = l5(g), F = w9(b, 10), I = (Q) => {
+    ...y
+  } = i, R = o2(), [v, _] = A.useState(null), O = _4(o, (Q) => _(Q)), S = A.useRef(null), w = A.useRef(""), { viewport: E } = R, N = r.content - r.viewport, x = l5(m), k = l5(g), F = w9(b, 10), I = (Q) => {
     if (S.current) {
       const B = Q.clientX - S.current.left, K = Q.clientY - S.current.top;
       p({ x: B, y: K });
@@ -12753,29 +12753,29 @@ const [hm, nl] = p5(
   return A.useEffect(() => {
     const Q = (B) => {
       const K = B.target;
-      y?.contains(K) && T(B, C);
+      v?.contains(K) && x(B, N);
     };
     return document.addEventListener("wheel", Q, { passive: !1 }), () => document.removeEventListener("wheel", Q, { passive: !1 });
-  }, [E, y, C, T]), A.useEffect(k, [r, k]), g8(y, F), g8(R.content, F), /* @__PURE__ */ _.jsx(
+  }, [E, v, N, x]), A.useEffect(k, [r, k]), g8(v, F), g8(R.content, F), /* @__PURE__ */ C.jsx(
     hm,
     {
       value: {
-        scrollbar: y,
+        scrollbar: v,
         hasThumb: s,
         onThumbChange: l5(c),
         onThumbPointerUp: l5(d),
         onThumbPositionChange: k,
         onThumbPointerDown: l5(f)
       },
-      children: /* @__PURE__ */ _.jsx(
+      children: /* @__PURE__ */ C.jsx(
         "div",
         {
-          ...v,
+          ...y,
           ref: O,
           "data-mantine-scrollbar": !0,
-          style: { position: "absolute", ...v.style },
+          style: { position: "absolute", ...y.style },
           onPointerDown: u5(i.onPointerDown, (Q) => {
-            Q.preventDefault(), Q.button === 0 && (Q.target.setPointerCapture(Q.pointerId), S.current = y.getBoundingClientRect(), w.current = document.body.style.webkitUserSelect, document.body.style.webkitUserSelect = "none", I(Q));
+            Q.preventDefault(), Q.button === 0 && (Q.target.setPointerCapture(Q.pointerId), S.current = v.getBoundingClientRect(), w.current = document.body.style.webkitUserSelect, document.body.style.webkitUserSelect = "none", I(Q));
           }),
           onPointerMove: u5(i.onPointerMove, I),
           onPointerUp: u5(i.onPointerUp, (Q) => {
@@ -12792,7 +12792,7 @@ const [hm, nl] = p5(
     const { sizes: r, onSizesChange: s, style: c, ...d } = i, f = o2(), [g, p] = A.useState(), m = A.useRef(null), b = _4(o, m, f.onScrollbarXChange);
     return A.useEffect(() => {
       m.current && p(getComputedStyle(m.current));
-    }, [m]), /* @__PURE__ */ _.jsx(
+    }, [m]), /* @__PURE__ */ C.jsx(
       ol,
       {
         "data-orientation": "horizontal",
@@ -12803,12 +12803,12 @@ const [hm, nl] = p5(
           ...c,
           "--sa-thumb-width": `${M9(r)}px`
         },
-        onThumbPointerDown: (v) => i.onThumbPointerDown(v.x),
-        onDragScroll: (v) => i.onDragScroll(v.x),
-        onWheelScroll: (v, R) => {
+        onThumbPointerDown: (y) => i.onThumbPointerDown(y.x),
+        onDragScroll: (y) => i.onDragScroll(y.x),
+        onWheelScroll: (y, R) => {
           if (f.viewport) {
-            const y = f.viewport.scrollLeft + v.deltaX;
-            i.onWheelScroll(y), il(y, R) && v.preventDefault();
+            const v = f.viewport.scrollLeft + y.deltaX;
+            i.onWheelScroll(v), il(v, R) && y.preventDefault();
           }
         },
         onResize: () => {
@@ -12832,7 +12832,7 @@ const sl = A.forwardRef(
     const { sizes: r, onSizesChange: s, style: c, ...d } = i, f = o2(), [g, p] = A.useState(), m = A.useRef(null), b = _4(o, m, f.onScrollbarYChange);
     return A.useEffect(() => {
       m.current && p(window.getComputedStyle(m.current));
-    }, []), /* @__PURE__ */ _.jsx(
+    }, []), /* @__PURE__ */ C.jsx(
       ol,
       {
         ...d,
@@ -12843,12 +12843,12 @@ const sl = A.forwardRef(
           "--sa-thumb-height": `${M9(r)}px`,
           ...c
         },
-        onThumbPointerDown: (v) => i.onThumbPointerDown(v.y),
-        onDragScroll: (v) => i.onDragScroll(v.y),
-        onWheelScroll: (v, R) => {
+        onThumbPointerDown: (y) => i.onThumbPointerDown(y.y),
+        onDragScroll: (y) => i.onDragScroll(y.y),
+        onWheelScroll: (y, R) => {
           if (f.viewport) {
-            const y = f.viewport.scrollTop + v.deltaY;
-            i.onWheelScroll(y), il(y, R) && v.preventDefault();
+            const v = f.viewport.scrollTop + y.deltaY;
+            i.onWheelScroll(v), il(v, R) && y.preventDefault();
           }
         },
         onResize: () => {
@@ -12872,55 +12872,55 @@ const _9 = A.forwardRef((i, o) => {
     content: 0,
     viewport: 0,
     scrollbar: { size: 0, paddingStart: 0, paddingEnd: 0 }
-  }), b = tl(p.viewport, p.content), v = {
+  }), b = tl(p.viewport, p.content), y = {
     ...s,
     sizes: p,
     onSizesChange: m,
     hasThumb: b > 0 && b < 1,
-    onThumbChange: (y) => {
-      f.current = y;
+    onThumbChange: (v) => {
+      f.current = v;
     },
     onThumbPointerUp: () => {
       g.current = 0;
     },
-    onThumbPointerDown: (y) => {
-      g.current = y;
+    onThumbPointerDown: (v) => {
+      g.current = v;
     }
-  }, R = (y, N) => pm(y, g.current, p, N);
-  return r === "horizontal" ? /* @__PURE__ */ _.jsx(
+  }, R = (v, _) => pm(v, g.current, p, _);
+  return r === "horizontal" ? /* @__PURE__ */ C.jsx(
     rl,
     {
-      ...v,
+      ...y,
       ref: o,
       onThumbPositionChange: () => {
         if (d.viewport && f.current) {
-          const y = d.viewport.scrollLeft, N = Zr(y, p, c);
-          f.current.style.transform = `translate3d(${N}px, 0, 0)`;
+          const v = d.viewport.scrollLeft, _ = Zr(v, p, c);
+          f.current.style.transform = `translate3d(${_}px, 0, 0)`;
         }
       },
-      onWheelScroll: (y) => {
-        d.viewport && (d.viewport.scrollLeft = y);
+      onWheelScroll: (v) => {
+        d.viewport && (d.viewport.scrollLeft = v);
       },
-      onDragScroll: (y) => {
-        d.viewport && (d.viewport.scrollLeft = R(y, c));
+      onDragScroll: (v) => {
+        d.viewport && (d.viewport.scrollLeft = R(v, c));
       }
     }
-  ) : r === "vertical" ? /* @__PURE__ */ _.jsx(
+  ) : r === "vertical" ? /* @__PURE__ */ C.jsx(
     sl,
     {
-      ...v,
+      ...y,
       ref: o,
       onThumbPositionChange: () => {
         if (d.viewport && f.current) {
-          const y = d.viewport.scrollTop, N = Zr(y, p);
-          p.scrollbar.size === 0 ? f.current.style.opacity = "0" : f.current.style.opacity = "1", f.current.style.transform = `translate3d(0, ${N}px, 0)`;
+          const v = d.viewport.scrollTop, _ = Zr(v, p);
+          p.scrollbar.size === 0 ? f.current.style.opacity = "0" : f.current.style.opacity = "1", f.current.style.transform = `translate3d(0, ${_}px, 0)`;
         }
       },
-      onWheelScroll: (y) => {
-        d.viewport && (d.viewport.scrollTop = y);
+      onWheelScroll: (v) => {
+        d.viewport && (d.viewport.scrollTop = v);
       },
-      onDragScroll: (y) => {
-        d.viewport && (d.viewport.scrollTop = R(y));
+      onDragScroll: (v) => {
+        d.viewport && (d.viewport.scrollTop = R(v));
       }
     }
   ) : null;
@@ -12934,7 +12934,7 @@ const aa = A.forwardRef(
         f(g ? m : b);
       }
     }, 10);
-    return g8(r.viewport, p), g8(r.content, p), s || d ? /* @__PURE__ */ _.jsx(
+    return g8(r.viewport, p), g8(r.content, p), s || d ? /* @__PURE__ */ C.jsx(
       _9,
       {
         "data-state": d ? "visible" : "hidden",
@@ -12961,7 +12961,7 @@ const ll = A.forwardRef(
           window.clearTimeout(p), g.removeEventListener("pointerenter", m), g.removeEventListener("pointerleave", b);
         };
       }
-    }, [c.scrollArea, c.scrollHideDelay]), r || d ? /* @__PURE__ */ _.jsx(
+    }, [c.scrollArea, c.scrollHideDelay]), r || d ? /* @__PURE__ */ C.jsx(
       aa,
       {
         "data-state": d ? "visible" : "hidden",
@@ -12983,14 +12983,14 @@ const bm = A.forwardRef(
     }, [f, c.scrollHideDelay]), A.useEffect(() => {
       const { viewport: m } = c, b = d ? "scrollLeft" : "scrollTop";
       if (m) {
-        let v = m[b];
+        let y = m[b];
         const R = () => {
-          const y = m[b];
-          v !== y && (g("scrolling"), p()), v = y;
+          const v = m[b];
+          y !== v && (g("scrolling"), p()), y = v;
         };
         return m.addEventListener("scroll", R), () => m.removeEventListener("scroll", R);
       }
-    }, [c.viewport, d, p]), r || f !== "hidden" ? /* @__PURE__ */ _.jsx(
+    }, [c.viewport, d, p]), r || f !== "hidden" ? /* @__PURE__ */ C.jsx(
       _9,
       {
         "data-state": f === "hidden" ? "hidden" : "visible",
@@ -13006,7 +13006,7 @@ const bm = A.forwardRef(
     const { forceMount: r, ...s } = i, c = o2(), { onScrollbarXEnabledChange: d, onScrollbarYEnabledChange: f } = c, g = i.orientation === "horizontal";
     return A.useEffect(() => (g ? d(!0) : f(!0), () => {
       g ? d(!1) : f(!1);
-    }), [g, d, f]), c.type === "hover" ? /* @__PURE__ */ _.jsx(ll, { ...s, ref: o, forceMount: r }) : c.type === "scroll" ? /* @__PURE__ */ _.jsx(bm, { ...s, ref: o, forceMount: r }) : c.type === "auto" ? /* @__PURE__ */ _.jsx(aa, { ...s, ref: o, forceMount: r }) : c.type === "always" ? /* @__PURE__ */ _.jsx(_9, { ...s, ref: o }) : null;
+    }), [g, d, f]), c.type === "hover" ? /* @__PURE__ */ C.jsx(ll, { ...s, ref: o, forceMount: r }) : c.type === "scroll" ? /* @__PURE__ */ C.jsx(bm, { ...s, ref: o, forceMount: r }) : c.type === "auto" ? /* @__PURE__ */ C.jsx(aa, { ...s, ref: o, forceMount: r }) : c.type === "always" ? /* @__PURE__ */ C.jsx(_9, { ...s, ref: o }) : null;
   }
 );
 Dt.displayName = "@mantine/core/ScrollAreaScrollbar";
@@ -13025,15 +13025,15 @@ const cl = A.forwardRef((i, o) => {
   return A.useEffect(() => {
     const { viewport: b } = c;
     if (b) {
-      const v = () => {
+      const y = () => {
         if (m(), !p.current) {
           const R = ym(b, f);
           p.current = R, f();
         }
       };
-      return f(), b.addEventListener("scroll", v), () => b.removeEventListener("scroll", v);
+      return f(), b.addEventListener("scroll", y), () => b.removeEventListener("scroll", y);
     }
-  }, [c.viewport, m, f]), /* @__PURE__ */ _.jsx(
+  }, [c.viewport, m, f]), /* @__PURE__ */ C.jsx(
     "div",
     {
       "data-state": d.hasThumb ? "visible" : "hidden",
@@ -13045,8 +13045,8 @@ const cl = A.forwardRef((i, o) => {
         ...r
       },
       onPointerDownCapture: u5(i.onPointerDownCapture, (b) => {
-        const R = b.target.getBoundingClientRect(), y = b.clientX - R.left, N = b.clientY - R.top;
-        d.onThumbPointerDown({ x: y, y: N });
+        const R = b.target.getBoundingClientRect(), v = b.clientX - R.left, _ = b.clientY - R.top;
+        d.onThumbPointerDown({ x: v, y: _ });
       }),
       onPointerUp: u5(i.onPointerUp, d.onThumbPointerUp)
     }
@@ -13056,14 +13056,14 @@ cl.displayName = "@mantine/core/ScrollAreaThumb";
 const Pt = A.forwardRef(
   (i, o) => {
     const { forceMount: r, ...s } = i, c = nl();
-    return r || c.hasThumb ? /* @__PURE__ */ _.jsx(cl, { ref: o, ...s }) : null;
+    return r || c.hasThumb ? /* @__PURE__ */ C.jsx(cl, { ref: o, ...s }) : null;
   }
 );
 Pt.displayName = "@mantine/core/ScrollAreaThumb";
 const ul = A.forwardRef(
   ({ children: i, style: o, ...r }, s) => {
     const c = o2(), d = _4(s, c.onViewportChange);
-    return /* @__PURE__ */ _.jsx(
+    return /* @__PURE__ */ C.jsx(
       g1,
       {
         ...r,
@@ -13073,7 +13073,7 @@ const ul = A.forwardRef(
           overflowY: c.scrollbarYEnabled ? "scroll" : "hidden",
           ...o
         },
-        children: /* @__PURE__ */ _.jsx("div", { style: { minWidth: "100%", display: "table" }, ref: c.onContentChange, children: i })
+        children: /* @__PURE__ */ C.jsx("div", { style: { minWidth: "100%", display: "table" }, ref: c.onContentChange, children: i })
       }
     );
   }
@@ -13098,16 +13098,16 @@ const dl = {
     scrollbarSize: p,
     vars: m,
     type: b,
-    scrollHideDelay: v,
+    scrollHideDelay: y,
     viewportProps: R,
-    viewportRef: y,
-    onScrollPositionChange: N,
+    viewportRef: v,
+    onScrollPositionChange: _,
     children: O,
     offsetScrollbars: S,
     scrollbars: w,
     onBottomReached: E,
-    onTopReached: C,
-    ...T
+    onTopReached: N,
+    ...x
   } = r, [k, F] = A.useState(!1), I = T1({
     name: "ScrollArea",
     props: r,
@@ -13120,33 +13120,33 @@ const dl = {
     vars: m,
     varsResolver: vm
   });
-  return /* @__PURE__ */ _.jsxs(
+  return /* @__PURE__ */ C.jsxs(
     el,
     {
       type: b === "never" ? "always" : b,
-      scrollHideDelay: v,
+      scrollHideDelay: y,
       ref: o,
       scrollbars: w,
       ...I("root"),
-      ...T,
+      ...x,
       children: [
-        /* @__PURE__ */ _.jsx(
+        /* @__PURE__ */ C.jsx(
           ul,
           {
             ...R,
             ...I("viewport", { style: R?.style }),
-            ref: y,
+            ref: v,
             "data-offset-scrollbars": S === !0 ? "xy" : S || void 0,
             "data-scrollbars": w || void 0,
             onScroll: (Q) => {
-              R?.onScroll?.(Q), N?.({ x: Q.currentTarget.scrollLeft, y: Q.currentTarget.scrollTop });
+              R?.onScroll?.(Q), _?.({ x: Q.currentTarget.scrollLeft, y: Q.currentTarget.scrollTop });
               const { scrollTop: B, scrollHeight: K, clientHeight: i1 } = Q.currentTarget;
-              B - (K - i1) >= 0 && E?.(), B === 0 && C?.();
+              B - (K - i1) >= 0 && E?.(), B === 0 && N?.();
             },
             children: O
           }
         ),
-        (w === "xy" || w === "x") && /* @__PURE__ */ _.jsx(
+        (w === "xy" || w === "x") && /* @__PURE__ */ C.jsx(
           Dt,
           {
             ...I("scrollbar"),
@@ -13155,10 +13155,10 @@ const dl = {
             forceMount: !0,
             onMouseEnter: () => F(!0),
             onMouseLeave: () => F(!1),
-            children: /* @__PURE__ */ _.jsx(Pt, { ...I("thumb") })
+            children: /* @__PURE__ */ C.jsx(Pt, { ...I("thumb") })
           }
         ),
-        (w === "xy" || w === "y") && /* @__PURE__ */ _.jsx(
+        (w === "xy" || w === "y") && /* @__PURE__ */ C.jsx(
           Dt,
           {
             ...I("scrollbar"),
@@ -13167,10 +13167,10 @@ const dl = {
             forceMount: !0,
             onMouseEnter: () => F(!0),
             onMouseLeave: () => F(!1),
-            children: /* @__PURE__ */ _.jsx(Pt, { ...I("thumb") })
+            children: /* @__PURE__ */ C.jsx(Pt, { ...I("thumb") })
           }
         ),
-        /* @__PURE__ */ _.jsx(
+        /* @__PURE__ */ C.jsx(
           fm,
           {
             ...I("corner"),
@@ -13194,18 +13194,18 @@ const na = y1((i, o) => {
     dir: p,
     offsetScrollbars: m,
     viewportRef: b,
-    onScrollPositionChange: v,
+    onScrollPositionChange: y,
     unstyled: R,
-    variant: y,
-    viewportProps: N,
+    variant: v,
+    viewportProps: _,
     scrollbars: O,
     style: S,
     vars: w,
     onBottomReached: E,
-    onTopReached: C,
-    ...T
+    onTopReached: N,
+    ...x
   } = s1("ScrollAreaAutosize", dl, i);
-  return /* @__PURE__ */ _.jsx(g1, { ...T, ref: o, style: [{ display: "flex", overflow: "auto" }, S], children: /* @__PURE__ */ _.jsx(g1, { style: { display: "flex", flexDirection: "column", flex: 1 }, children: /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(g1, { ...x, ref: o, style: [{ display: "flex", overflow: "auto" }, S], children: /* @__PURE__ */ C.jsx(g1, { style: { display: "flex", flexDirection: "column", flex: 1 }, children: /* @__PURE__ */ C.jsx(
     v8,
     {
       classNames: s,
@@ -13216,14 +13216,14 @@ const na = y1((i, o) => {
       dir: p,
       offsetScrollbars: m,
       viewportRef: b,
-      onScrollPositionChange: v,
+      onScrollPositionChange: y,
       unstyled: R,
-      variant: y,
-      viewportProps: N,
+      variant: v,
+      viewportProps: _,
       vars: w,
       scrollbars: O,
       onBottomReached: E,
-      onTopReached: C,
+      onTopReached: N,
       children: r
     }
   ) }) });
@@ -13246,7 +13246,7 @@ const wm = {
       styles: p,
       style: m,
       ...b
-    } = r, v = T1({
+    } = r, y = T1({
       name: d,
       props: r,
       classes: fl,
@@ -13256,10 +13256,10 @@ const wm = {
       styles: p,
       unstyled: f
     });
-    return /* @__PURE__ */ _.jsx(
+    return /* @__PURE__ */ C.jsx(
       g1,
       {
-        ...v("root", { focusable: !0 }),
+        ...y("root", { focusable: !0 }),
         component: c,
         ref: o,
         type: c === "button" ? "button" : void 0,
@@ -13282,7 +13282,7 @@ const Sm = {}, oa = y1((i, o) => {
     styles: f,
     unstyled: g
   });
-  return /* @__PURE__ */ _.jsx(g1, { component: "span", ref: o, ...b("root"), ...m });
+  return /* @__PURE__ */ C.jsx(g1, { component: "span", ref: o, ...b("root"), ...m });
 });
 oa.classes = gl;
 oa.displayName = "@mantine/core/VisuallyHidden";
@@ -13292,7 +13292,7 @@ const Rm = {}, Em = (i, { radius: o, shadow: r }) => ({
     "--paper-radius": o === void 0 ? void 0 : n2(o),
     "--paper-shadow": Yt(r)
   }
-}), N9 = V4((i, o) => {
+}), C9 = V4((i, o) => {
   const r = s1("Paper", Rm, i), {
     classNames: s,
     className: c,
@@ -13302,10 +13302,10 @@ const Rm = {}, Em = (i, { radius: o, shadow: r }) => ({
     withBorder: p,
     vars: m,
     radius: b,
-    shadow: v,
+    shadow: y,
     variant: R,
-    mod: y,
-    ...N
+    mod: v,
+    ..._
   } = r, O = T1({
     name: "Paper",
     props: r,
@@ -13318,20 +13318,20 @@ const Rm = {}, Em = (i, { radius: o, shadow: r }) => ({
     vars: m,
     varsResolver: Em
   });
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
       ref: o,
-      mod: [{ "data-with-border": p }, y],
+      mod: [{ "data-with-border": p }, v],
       ...O("root"),
       variant: R,
-      ...N
+      ..._
     }
   );
 });
-N9.classes = ml;
-N9.displayName = "@mantine/core/Paper";
-function C9() {
+C9.classes = ml;
+C9.displayName = "@mantine/core/Paper";
+function N9() {
   return typeof window < "u";
 }
 function w8(i) {
@@ -13346,16 +13346,16 @@ function U2(i) {
   return (o = (pl(i) ? i.ownerDocument : i.document) || window.document) == null ? void 0 : o.documentElement;
 }
 function pl(i) {
-  return C9() ? i instanceof Node || i instanceof x4(i).Node : !1;
+  return N9() ? i instanceof Node || i instanceof x4(i).Node : !1;
 }
 function z1(i) {
-  return C9() ? i instanceof Element || i instanceof x4(i).Element : !1;
+  return N9() ? i instanceof Element || i instanceof x4(i).Element : !1;
 }
 function z4(i) {
-  return C9() ? i instanceof HTMLElement || i instanceof x4(i).HTMLElement : !1;
+  return N9() ? i instanceof HTMLElement || i instanceof x4(i).HTMLElement : !1;
 }
 function Lt(i) {
-  return !C9() || typeof ShadowRoot > "u" ? !1 : i instanceof ShadowRoot || i instanceof x4(i).ShadowRoot;
+  return !N9() || typeof ShadowRoot > "u" ? !1 : i instanceof ShadowRoot || i instanceof x4(i).ShadowRoot;
 }
 function F7(i) {
   const {
@@ -13448,7 +13448,7 @@ function Yr(i) {
   }
   return o;
 }
-function N7(i, o) {
+function C7(i, o) {
   if (!i || !o)
     return !1;
   const r = o.getRootNode == null ? void 0 : o.getRootNode();
@@ -13482,14 +13482,14 @@ function _m(i) {
   return Om() ? !1 : !$r() && i.width === 0 && i.height === 0 || $r() && i.width === 1 && i.height === 1 && i.pressure === 0 && i.detail === 0 && i.pointerType === "mouse" || // iOS VoiceOver returns 0.333• for width/height.
   i.width < 1 && i.height < 1 && i.pressure === 0 && i.detail === 0 && i.pointerType === "touch";
 }
-function Nm() {
+function Cm() {
   return /apple/i.test(navigator.vendor);
 }
 function $r() {
   const i = /android/i;
   return i.test(bl()) || i.test(yl());
 }
-function Cm() {
+function Nm() {
   return bl().toLowerCase().startsWith("mac") && !navigator.maxTouchPoints;
 }
 function Om() {
@@ -13633,48 +13633,48 @@ function Kr(i, o, r) {
     reference: s,
     floating: c
   } = i;
-  const d = n3(o), f = ca(o), g = la(f), p = b2(o), m = d === "y", b = s.x + s.width / 2 - c.width / 2, v = s.y + s.height / 2 - c.height / 2, R = s[g] / 2 - c[g] / 2;
-  let y;
+  const d = n3(o), f = ca(o), g = la(f), p = b2(o), m = d === "y", b = s.x + s.width / 2 - c.width / 2, y = s.y + s.height / 2 - c.height / 2, R = s[g] / 2 - c[g] / 2;
+  let v;
   switch (p) {
     case "top":
-      y = {
+      v = {
         x: b,
         y: s.y - c.height
       };
       break;
     case "bottom":
-      y = {
+      v = {
         x: b,
         y: s.y + s.height
       };
       break;
     case "right":
-      y = {
+      v = {
         x: s.x + s.width,
-        y: v
+        y
       };
       break;
     case "left":
-      y = {
+      v = {
         x: s.x - c.width,
-        y: v
+        y
       };
       break;
     default:
-      y = {
+      v = {
         x: s.x,
         y: s.y
       };
   }
   switch (S8(o)) {
     case "start":
-      y[f] -= R * (r && m ? -1 : 1);
+      v[f] -= R * (r && m ? -1 : 1);
       break;
     case "end":
-      y[f] += R * (r && m ? -1 : 1);
+      v[f] += R * (r && m ? -1 : 1);
       break;
   }
-  return y;
+  return v;
 }
 const Qm = async (i, o, r) => {
   const {
@@ -13689,24 +13689,24 @@ const Qm = async (i, o, r) => {
     strategy: c
   }), {
     x: b,
-    y: v
-  } = Kr(m, s, p), R = s, y = {}, N = 0;
+    y
+  } = Kr(m, s, p), R = s, v = {}, _ = 0;
   for (let O = 0; O < g.length; O++) {
     const {
       name: S,
       fn: w
     } = g[O], {
       x: E,
-      y: C,
-      data: T,
+      y: N,
+      data: x,
       reset: k
     } = await w({
       x: b,
-      y: v,
+      y,
       initialPlacement: s,
       placement: R,
       strategy: c,
-      middlewareData: y,
+      middlewareData: v,
       rects: m,
       platform: f,
       elements: {
@@ -13714,27 +13714,27 @@ const Qm = async (i, o, r) => {
         floating: o
       }
     });
-    b = E ?? b, v = C ?? v, y = {
-      ...y,
+    b = E ?? b, y = N ?? y, v = {
+      ...v,
       [S]: {
-        ...y[S],
-        ...T
+        ...v[S],
+        ...x
       }
-    }, k && N <= 50 && (N++, typeof k == "object" && (k.placement && (R = k.placement), k.rects && (m = k.rects === !0 ? await f.getElementRects({
+    }, k && _ <= 50 && (_++, typeof k == "object" && (k.placement && (R = k.placement), k.rects && (m = k.rects === !0 ? await f.getElementRects({
       reference: i,
       floating: o,
       strategy: c
     }) : k.rects), {
       x: b,
-      y: v
+      y
     } = Kr(m, R, p)), O = -1);
   }
   return {
     x: b,
-    y: v,
+    y,
     placement: R,
     strategy: c,
-    middlewareData: y
+    middlewareData: v
   };
 };
 async function da(i, o) {
@@ -13750,20 +13750,20 @@ async function da(i, o) {
   } = i, {
     boundary: m = "clippingAncestors",
     rootBoundary: b = "viewport",
-    elementContext: v = "floating",
+    elementContext: y = "floating",
     altBoundary: R = !1,
-    padding: y = 0
-  } = i3(o, i), N = ua(y), S = g[R ? v === "floating" ? "reference" : "floating" : v], w = m8(await d.getClippingRect({
+    padding: v = 0
+  } = i3(o, i), _ = ua(v), S = g[R ? y === "floating" ? "reference" : "floating" : y], w = m8(await d.getClippingRect({
     element: (r = await (d.isElement == null ? void 0 : d.isElement(S))) == null || r ? S : S.contextElement || await (d.getDocumentElement == null ? void 0 : d.getDocumentElement(g.floating)),
     boundary: m,
     rootBoundary: b,
     strategy: p
-  })), E = v === "floating" ? {
+  })), E = y === "floating" ? {
     x: s,
     y: c,
     width: f.floating.width,
     height: f.floating.height
-  } : f.reference, C = await (d.getOffsetParent == null ? void 0 : d.getOffsetParent(g.floating)), T = await (d.isElement == null ? void 0 : d.isElement(C)) ? await (d.getScale == null ? void 0 : d.getScale(C)) || {
+  } : f.reference, N = await (d.getOffsetParent == null ? void 0 : d.getOffsetParent(g.floating)), x = await (d.isElement == null ? void 0 : d.isElement(N)) ? await (d.getScale == null ? void 0 : d.getScale(N)) || {
     x: 1,
     y: 1
   } : {
@@ -13772,14 +13772,14 @@ async function da(i, o) {
   }, k = m8(d.convertOffsetParentRelativeRectToViewportRelativeRect ? await d.convertOffsetParentRelativeRectToViewportRelativeRect({
     elements: g,
     rect: E,
-    offsetParent: C,
+    offsetParent: N,
     strategy: p
   }) : E);
   return {
-    top: (w.top - k.top + N.top) / T.y,
-    bottom: (k.bottom - w.bottom + N.bottom) / T.y,
-    left: (w.left - k.left + N.left) / T.x,
-    right: (k.right - w.right + N.right) / T.x
+    top: (w.top - k.top + _.top) / x.y,
+    bottom: (k.bottom - w.bottom + _.bottom) / x.y,
+    left: (w.left - k.left + _.left) / x.x,
+    right: (k.right - w.right + _.right) / x.x
   };
 }
 const Hm = (i) => ({
@@ -13800,17 +13800,17 @@ const Hm = (i) => ({
     } = i3(i, o) || {};
     if (m == null)
       return {};
-    const v = ua(b), R = {
+    const y = ua(b), R = {
       x: r,
       y: s
-    }, y = ca(c), N = la(y), O = await f.getDimensions(m), S = y === "y", w = S ? "top" : "left", E = S ? "bottom" : "right", C = S ? "clientHeight" : "clientWidth", T = d.reference[N] + d.reference[y] - R[y] - d.floating[N], k = R[y] - d.reference[y], F = await (f.getOffsetParent == null ? void 0 : f.getOffsetParent(m));
-    let I = F ? F[C] : 0;
-    (!I || !await (f.isElement == null ? void 0 : f.isElement(F))) && (I = g.floating[C] || d.floating[N]);
-    const Q = T / 2 - k / 2, B = I / 2 - O[N] / 2 - 1, K = h2(v[w], B), i1 = h2(v[E], B), r1 = K, l1 = I - O[N] - i1, n1 = I / 2 - O[N] / 2 + Q, t1 = Vt(r1, n1, l1), V = !p.arrow && S8(c) != null && n1 !== t1 && d.reference[N] / 2 - (n1 < r1 ? K : i1) - O[N] / 2 < 0, Y = V ? n1 < r1 ? n1 - r1 : n1 - l1 : 0;
+    }, v = ca(c), _ = la(v), O = await f.getDimensions(m), S = v === "y", w = S ? "top" : "left", E = S ? "bottom" : "right", N = S ? "clientHeight" : "clientWidth", x = d.reference[_] + d.reference[v] - R[v] - d.floating[_], k = R[v] - d.reference[v], F = await (f.getOffsetParent == null ? void 0 : f.getOffsetParent(m));
+    let I = F ? F[N] : 0;
+    (!I || !await (f.isElement == null ? void 0 : f.isElement(F))) && (I = g.floating[N] || d.floating[_]);
+    const Q = x / 2 - k / 2, B = I / 2 - O[_] / 2 - 1, K = h2(y[w], B), i1 = h2(y[E], B), r1 = K, l1 = I - O[_] - i1, n1 = I / 2 - O[_] / 2 + Q, t1 = Vt(r1, n1, l1), V = !p.arrow && S8(c) != null && n1 !== t1 && d.reference[_] / 2 - (n1 < r1 ? K : i1) - O[_] / 2 < 0, Y = V ? n1 < r1 ? n1 - r1 : n1 - l1 : 0;
     return {
-      [y]: R[y] + Y,
+      [v]: R[v] + Y,
       data: {
-        [y]: t1,
+        [v]: t1,
         centerOffset: n1 - t1 - Y,
         ...V && {
           alignmentOffset: Y
@@ -13834,21 +13834,21 @@ const Hm = (i) => ({
         elements: m
       } = o, {
         mainAxis: b = !0,
-        crossAxis: v = !0,
+        crossAxis: y = !0,
         fallbackPlacements: R,
-        fallbackStrategy: y = "bestFit",
-        fallbackAxisSideDirection: N = "none",
+        fallbackStrategy: v = "bestFit",
+        fallbackAxisSideDirection: _ = "none",
         flipAlignment: O = !0,
         ...S
       } = i3(i, o);
       if ((r = d.arrow) != null && r.alignmentOffset)
         return {};
-      const w = b2(c), E = n3(g), C = b2(g) === g, T = await (p.isRTL == null ? void 0 : p.isRTL(m.floating)), k = R || (C || !O ? [f9(g)] : Lm(g)), F = N !== "none";
-      !R && F && k.push(...zm(g, O, N, T));
+      const w = b2(c), E = n3(g), N = b2(g) === g, x = await (p.isRTL == null ? void 0 : p.isRTL(m.floating)), k = R || (N || !O ? [f9(g)] : Lm(g)), F = _ !== "none";
+      !R && F && k.push(...zm(g, O, _, x));
       const I = [g, ...k], Q = await da(o, S), B = [];
       let K = ((s = d.flip) == null ? void 0 : s.overflows) || [];
-      if (b && B.push(Q[w]), v) {
-        const n1 = Pm(c, f, T);
+      if (b && B.push(Q[w]), y) {
+        const n1 = Pm(c, f, x);
         B.push(Q[n1[0]], Q[n1[1]]);
       }
       if (K = [...K, {
@@ -13869,7 +13869,7 @@ const Hm = (i) => ({
           };
         let V = (r1 = K.filter((Y) => Y.overflows[0] <= 0).sort((Y, W) => Y.overflows[1] - W.overflows[1])[0]) == null ? void 0 : r1.placement;
         if (!V)
-          switch (y) {
+          switch (v) {
             case "bestFit": {
               var l1;
               const Y = (l1 = K.filter((W) => {
@@ -13880,7 +13880,7 @@ const Hm = (i) => ({
                   Z === "y";
                 }
                 return !0;
-              }).map((W) => [W.placement, W.overflows.filter((Z) => Z > 0).reduce((Z, x) => Z + x, 0)]).sort((W, Z) => W[1] - Z[1])[0]) == null ? void 0 : l1[0];
+              }).map((W) => [W.placement, W.overflows.filter((Z) => Z > 0).reduce((Z, T) => Z + T, 0)]).sort((W, Z) => W[1] - Z[1])[0]) == null ? void 0 : l1[0];
               Y && (V = Y);
               break;
             }
@@ -13932,13 +13932,13 @@ const Im = function(i) {
         padding: g = 2,
         x: p,
         y: m
-      } = i3(i, o), b = Array.from(await (d.getClientRects == null ? void 0 : d.getClientRects(s.reference)) || []), v = Wm(b), R = m8(vl(b)), y = ua(g);
-      function N() {
-        if (v.length === 2 && v[0].left > v[1].right && p != null && m != null)
-          return v.find((S) => p > S.left - y.left && p < S.right + y.right && m > S.top - y.top && m < S.bottom + y.bottom) || R;
-        if (v.length >= 2) {
+      } = i3(i, o), b = Array.from(await (d.getClientRects == null ? void 0 : d.getClientRects(s.reference)) || []), y = Wm(b), R = m8(vl(b)), v = ua(g);
+      function _() {
+        if (y.length === 2 && y[0].left > y[1].right && p != null && m != null)
+          return y.find((S) => p > S.left - v.left && p < S.right + v.right && m > S.top - v.top && m < S.bottom + v.bottom) || R;
+        if (y.length >= 2) {
           if (n3(r) === "y") {
-            const K = v[0], i1 = v[v.length - 1], r1 = b2(r) === "top", l1 = K.top, n1 = i1.bottom, t1 = r1 ? K.left : i1.left, V = r1 ? K.right : i1.right, Y = V - t1, W = n1 - l1;
+            const K = y[0], i1 = y[y.length - 1], r1 = b2(r) === "top", l1 = K.top, n1 = i1.bottom, t1 = r1 ? K.left : i1.left, V = r1 ? K.right : i1.right, Y = V - t1, W = n1 - l1;
             return {
               top: l1,
               bottom: n1,
@@ -13950,23 +13950,23 @@ const Im = function(i) {
               y: l1
             };
           }
-          const S = b2(r) === "left", w = w4(...v.map((K) => K.right)), E = h2(...v.map((K) => K.left)), C = v.filter((K) => S ? K.left === E : K.right === w), T = C[0].top, k = C[C.length - 1].bottom, F = E, I = w, Q = I - F, B = k - T;
+          const S = b2(r) === "left", w = w4(...y.map((K) => K.right)), E = h2(...y.map((K) => K.left)), N = y.filter((K) => S ? K.left === E : K.right === w), x = N[0].top, k = N[N.length - 1].bottom, F = E, I = w, Q = I - F, B = k - x;
           return {
-            top: T,
+            top: x,
             bottom: k,
             left: F,
             right: I,
             width: Q,
             height: B,
             x: F,
-            y: T
+            y: x
           };
         }
         return R;
       }
       const O = await d.getElementRects({
         reference: {
-          getBoundingClientRect: N
+          getBoundingClientRect: _
         },
         floating: s.floating,
         strategy: f
@@ -13984,26 +13984,26 @@ async function Gm(i, o) {
     placement: r,
     platform: s,
     elements: c
-  } = i, d = await (s.isRTL == null ? void 0 : s.isRTL(c.floating)), f = b2(r), g = S8(r), p = n3(r) === "y", m = ["left", "top"].includes(f) ? -1 : 1, b = d && p ? -1 : 1, v = i3(o, i);
+  } = i, d = await (s.isRTL == null ? void 0 : s.isRTL(c.floating)), f = b2(r), g = S8(r), p = n3(r) === "y", m = ["left", "top"].includes(f) ? -1 : 1, b = d && p ? -1 : 1, y = i3(o, i);
   let {
     mainAxis: R,
-    crossAxis: y,
-    alignmentAxis: N
-  } = typeof v == "number" ? {
-    mainAxis: v,
+    crossAxis: v,
+    alignmentAxis: _
+  } = typeof y == "number" ? {
+    mainAxis: y,
     crossAxis: 0,
     alignmentAxis: null
   } : {
-    mainAxis: v.mainAxis || 0,
-    crossAxis: v.crossAxis || 0,
-    alignmentAxis: v.alignmentAxis
+    mainAxis: y.mainAxis || 0,
+    crossAxis: y.crossAxis || 0,
+    alignmentAxis: y.alignmentAxis
   };
-  return g && typeof N == "number" && (y = g === "end" ? N * -1 : N), p ? {
-    x: y * b,
+  return g && typeof _ == "number" && (v = g === "end" ? _ * -1 : _), p ? {
+    x: v * b,
     y: R * m
   } : {
     x: R * m,
-    y: y * b
+    y: v * b
   };
 }
 const Zm = function(i) {
@@ -14056,20 +14056,20 @@ const Zm = function(i) {
       } = i3(i, o), m = {
         x: r,
         y: s
-      }, b = await da(o, p), v = n3(b2(c)), R = sa(v);
-      let y = m[R], N = m[v];
+      }, b = await da(o, p), y = n3(b2(c)), R = sa(y);
+      let v = m[R], _ = m[y];
       if (d) {
-        const S = R === "y" ? "top" : "left", w = R === "y" ? "bottom" : "right", E = y + b[S], C = y - b[w];
-        y = Vt(E, y, C);
+        const S = R === "y" ? "top" : "left", w = R === "y" ? "bottom" : "right", E = v + b[S], N = v - b[w];
+        v = Vt(E, v, N);
       }
       if (f) {
-        const S = v === "y" ? "top" : "left", w = v === "y" ? "bottom" : "right", E = N + b[S], C = N - b[w];
-        N = Vt(E, N, C);
+        const S = y === "y" ? "top" : "left", w = y === "y" ? "bottom" : "right", E = _ + b[S], N = _ - b[w];
+        _ = Vt(E, _, N);
       }
       const O = g.fn({
         ...o,
-        [R]: y,
-        [v]: N
+        [R]: v,
+        [y]: _
       });
       return {
         ...O,
@@ -14078,7 +14078,7 @@ const Zm = function(i) {
           y: O.y - s,
           enabled: {
             [R]: d,
-            [v]: f
+            [y]: f
           }
         }
       };
@@ -14101,8 +14101,8 @@ const Zm = function(i) {
       } = i3(i, o), b = {
         x: r,
         y: s
-      }, v = n3(c), R = sa(v);
-      let y = b[R], N = b[v];
+      }, y = n3(c), R = sa(y);
+      let v = b[R], _ = b[y];
       const O = i3(g, o), S = typeof O == "number" ? {
         mainAxis: O,
         crossAxis: 0
@@ -14112,17 +14112,17 @@ const Zm = function(i) {
         ...O
       };
       if (p) {
-        const C = R === "y" ? "height" : "width", T = d.reference[R] - d.floating[C] + S.mainAxis, k = d.reference[R] + d.reference[C] - S.mainAxis;
-        y < T ? y = T : y > k && (y = k);
+        const N = R === "y" ? "height" : "width", x = d.reference[R] - d.floating[N] + S.mainAxis, k = d.reference[R] + d.reference[N] - S.mainAxis;
+        v < x ? v = x : v > k && (v = k);
       }
       if (m) {
         var w, E;
-        const C = R === "y" ? "width" : "height", T = ["top", "left"].includes(b2(c)), k = d.reference[v] - d.floating[C] + (T && ((w = f.offset) == null ? void 0 : w[v]) || 0) + (T ? 0 : S.crossAxis), F = d.reference[v] + d.reference[C] + (T ? 0 : ((E = f.offset) == null ? void 0 : E[v]) || 0) - (T ? S.crossAxis : 0);
-        N < k ? N = k : N > F && (N = F);
+        const N = R === "y" ? "width" : "height", x = ["top", "left"].includes(b2(c)), k = d.reference[y] - d.floating[N] + (x && ((w = f.offset) == null ? void 0 : w[y]) || 0) + (x ? 0 : S.crossAxis), F = d.reference[y] + d.reference[N] + (x ? 0 : ((E = f.offset) == null ? void 0 : E[y]) || 0) - (x ? S.crossAxis : 0);
+        _ < k ? _ = k : _ > F && (_ = F);
       }
       return {
-        [R]: y,
-        [v]: N
+        [R]: v,
+        [y]: _
       };
     }
   };
@@ -14141,17 +14141,17 @@ const Zm = function(i) {
         apply: p = () => {
         },
         ...m
-      } = i3(i, o), b = await da(o, m), v = b2(c), R = S8(c), y = n3(c) === "y", {
-        width: N,
+      } = i3(i, o), b = await da(o, m), y = b2(c), R = S8(c), v = n3(c) === "y", {
+        width: _,
         height: O
       } = d.floating;
       let S, w;
-      v === "top" || v === "bottom" ? (S = v, w = R === (await (f.isRTL == null ? void 0 : f.isRTL(g.floating)) ? "start" : "end") ? "left" : "right") : (w = v, S = R === "end" ? "top" : "bottom");
-      const E = O - b.top - b.bottom, C = N - b.left - b.right, T = h2(O - b[S], E), k = h2(N - b[w], C), F = !o.middlewareData.shift;
-      let I = T, Q = k;
-      if ((r = o.middlewareData.shift) != null && r.enabled.x && (Q = C), (s = o.middlewareData.shift) != null && s.enabled.y && (I = E), F && !R) {
+      y === "top" || y === "bottom" ? (S = y, w = R === (await (f.isRTL == null ? void 0 : f.isRTL(g.floating)) ? "start" : "end") ? "left" : "right") : (w = y, S = R === "end" ? "top" : "bottom");
+      const E = O - b.top - b.bottom, N = _ - b.left - b.right, x = h2(O - b[S], E), k = h2(_ - b[w], N), F = !o.middlewareData.shift;
+      let I = x, Q = k;
+      if ((r = o.middlewareData.shift) != null && r.enabled.x && (Q = N), (s = o.middlewareData.shift) != null && s.enabled.y && (I = E), F && !R) {
         const K = w4(b.left, 0), i1 = w4(b.right, 0), r1 = w4(b.top, 0), l1 = w4(b.bottom, 0);
-        y ? Q = N - 2 * (K !== 0 || i1 !== 0 ? K + i1 : w4(b.left, b.right)) : I = O - 2 * (r1 !== 0 || l1 !== 0 ? r1 + l1 : w4(b.top, b.bottom));
+        v ? Q = _ - 2 * (K !== 0 || i1 !== 0 ? K + i1 : w4(b.left, b.right)) : I = O - 2 * (r1 !== 0 || l1 !== 0 ? r1 + l1 : w4(b.top, b.bottom));
       }
       await p({
         ...o,
@@ -14159,7 +14159,7 @@ const Zm = function(i) {
         availableHeight: I
       });
       const B = await f.getDimensions(g.floating);
-      return N !== B.width || O !== B.height ? {
+      return _ !== B.width || O !== B.height ? {
         reset: {
           rects: !0
         }
@@ -14212,18 +14212,18 @@ function g5(i, o, r, s) {
   let f = O2(1);
   o && (s ? z1(s) && (f = d8(s)) : f = d8(i));
   const g = qm(d, r, s) ? Sl(d) : O2(0);
-  let p = (c.left + g.x) / f.x, m = (c.top + g.y) / f.y, b = c.width / f.x, v = c.height / f.y;
+  let p = (c.left + g.x) / f.x, m = (c.top + g.y) / f.y, b = c.width / f.x, y = c.height / f.y;
   if (d) {
-    const R = x4(d), y = s && z1(s) ? x4(s) : s;
-    let N = R, O = Bt(N);
-    for (; O && s && y !== N; ) {
-      const S = d8(O), w = O.getBoundingClientRect(), E = a2(O), C = w.left + (O.clientLeft + parseFloat(E.paddingLeft)) * S.x, T = w.top + (O.clientTop + parseFloat(E.paddingTop)) * S.y;
-      p *= S.x, m *= S.y, b *= S.x, v *= S.y, p += C, m += T, N = x4(O), O = Bt(N);
+    const R = x4(d), v = s && z1(s) ? x4(s) : s;
+    let _ = R, O = Bt(_);
+    for (; O && s && v !== _; ) {
+      const S = d8(O), w = O.getBoundingClientRect(), E = a2(O), N = w.left + (O.clientLeft + parseFloat(E.paddingLeft)) * S.x, x = w.top + (O.clientTop + parseFloat(E.paddingTop)) * S.y;
+      p *= S.x, m *= S.y, b *= S.x, y *= S.y, p += N, m += x, _ = x4(O), O = Bt(_);
     }
   }
   return m8({
     width: b,
-    height: v,
+    height: y,
     x: p,
     y: m
   });
@@ -14257,12 +14257,12 @@ function Jm(i) {
     scrollLeft: 0,
     scrollTop: 0
   }, m = O2(1);
-  const b = O2(0), v = z4(s);
-  if ((v || !v && !d) && ((w8(s) !== "body" || F7(f)) && (p = T9(s)), z4(s))) {
-    const y = g5(s);
-    m = d8(s), b.x = y.x + s.clientLeft, b.y = y.y + s.clientTop;
+  const b = O2(0), y = z4(s);
+  if ((y || !y && !d) && ((w8(s) !== "body" || F7(f)) && (p = T9(s)), z4(s))) {
+    const v = g5(s);
+    m = d8(s), b.x = v.x + s.clientLeft, b.y = v.y + s.clientTop;
   }
-  const R = f && !v && !d ? Rl(f, p, !0) : O2(0);
+  const R = f && !y && !d ? Rl(f, p, !0) : O2(0);
   return {
     width: r.width * m.x,
     height: r.height * m.y,
@@ -14352,8 +14352,8 @@ function op(i) {
     strategy: c
   } = i;
   const f = [...r === "clippingAncestors" ? O9(o) ? [] : np(o, this._c) : [].concat(r), s], g = f[0], p = f.reduce((m, b) => {
-    const v = Xr(o, b, c);
-    return m.top = w4(v.top, m.top), m.right = h2(v.right, m.right), m.bottom = h2(v.bottom, m.bottom), m.left = w4(v.left, m.left), m;
+    const y = Xr(o, b, c);
+    return m.top = w4(y.top, m.top), m.right = h2(y.right, m.right), m.bottom = h2(y.bottom, m.bottom), m.left = w4(y.left, m.left), m;
   }, Xr(o, g, c));
   return {
     width: p.right - p.left,
@@ -14384,10 +14384,10 @@ function sp(i, o, r) {
       const R = g5(o, !0, d, o);
       p.x = R.x + o.clientLeft, p.y = R.y + o.clientTop;
     } else c && (p.x = ga(c));
-  const m = c && !s && !d ? Rl(c, g) : O2(0), b = f.left + g.scrollLeft - p.x - m.x, v = f.top + g.scrollTop - p.y - m.y;
+  const m = c && !s && !d ? Rl(c, g) : O2(0), b = f.left + g.scrollLeft - p.x - m.x, y = f.top + g.scrollTop - p.y - m.y;
   return {
     x: b,
-    y: v,
+    y,
     width: f.width,
     height: f.height
   };
@@ -14460,35 +14460,35 @@ function dp(i, o) {
     const {
       left: m,
       top: b,
-      width: v,
+      width: y,
       height: R
     } = i.getBoundingClientRect();
-    if (g || o(), !v || !R)
+    if (g || o(), !y || !R)
       return;
-    const y = e9(b), N = e9(c.clientWidth - (m + v)), O = e9(c.clientHeight - (b + R)), S = e9(m), E = {
-      rootMargin: -y + "px " + -N + "px " + -O + "px " + -S + "px",
+    const v = e9(b), _ = e9(c.clientWidth - (m + y)), O = e9(c.clientHeight - (b + R)), S = e9(m), E = {
+      rootMargin: -v + "px " + -_ + "px " + -O + "px " + -S + "px",
       threshold: w4(0, h2(1, p)) || 1
     };
-    let C = !0;
-    function T(k) {
+    let N = !0;
+    function x(k) {
       const F = k[0].intersectionRatio;
       if (F !== p) {
-        if (!C)
+        if (!N)
           return f();
         F ? f(!1, F) : s = setTimeout(() => {
           f(!1, 1e-7);
         }, 1e3);
       }
-      C = !1;
+      N = !1;
     }
     try {
-      r = new IntersectionObserver(T, {
+      r = new IntersectionObserver(x, {
         ...E,
         // Handle <iframe>s
         root: c.ownerDocument
       });
     } catch {
-      r = new IntersectionObserver(T, E);
+      r = new IntersectionObserver(x, E);
     }
     r.observe(i);
   }
@@ -14508,26 +14508,26 @@ function fp(i, o, r, s) {
       passive: !0
     }), d && w.addEventListener("resize", r);
   });
-  const v = m && g ? dp(m, r) : null;
-  let R = -1, y = null;
-  f && (y = new ResizeObserver((w) => {
+  const y = m && g ? dp(m, r) : null;
+  let R = -1, v = null;
+  f && (v = new ResizeObserver((w) => {
     let [E] = w;
-    E && E.target === m && y && (y.unobserve(o), cancelAnimationFrame(R), R = requestAnimationFrame(() => {
-      var C;
-      (C = y) == null || C.observe(o);
+    E && E.target === m && v && (v.unobserve(o), cancelAnimationFrame(R), R = requestAnimationFrame(() => {
+      var N;
+      (N = v) == null || N.observe(o);
     })), r();
-  }), m && !p && y.observe(m), y.observe(o));
-  let N, O = p ? g5(i) : null;
+  }), m && !p && v.observe(m), v.observe(o));
+  let _, O = p ? g5(i) : null;
   p && S();
   function S() {
     const w = g5(i);
-    O && (w.x !== O.x || w.y !== O.y || w.width !== O.width || w.height !== O.height) && r(), O = w, N = requestAnimationFrame(S);
+    O && (w.x !== O.x || w.y !== O.y || w.width !== O.width || w.height !== O.height) && r(), O = w, _ = requestAnimationFrame(S);
   }
   return r(), () => {
     var w;
     b.forEach((E) => {
       c && E.removeEventListener("scroll", r), d && E.removeEventListener("resize", r);
-    }), v?.(), (w = y) == null || w.disconnect(), y = null, p && cancelAnimationFrame(N);
+    }), y?.(), (w = v) == null || w.disconnect(), v = null, p && cancelAnimationFrame(_);
   };
 }
 const gp = Zm, mp = Ym, pp = jm, hp = Km, Jr = Hm, bp = Im, yp = $m, vp = (i, o, r) => {
@@ -14601,20 +14601,20 @@ function wp(i) {
     transform: g = !0,
     whileElementsMounted: p,
     open: m
-  } = i, [b, v] = A.useState({
+  } = i, [b, y] = A.useState({
     x: 0,
     y: 0,
     strategy: r,
     placement: o,
     middlewareData: {},
     isPositioned: !1
-  }), [R, y] = A.useState(s);
-  g9(R, s) || y(s);
-  const [N, O] = A.useState(null), [S, w] = A.useState(null), E = A.useCallback((W) => {
+  }), [R, v] = A.useState(s);
+  g9(R, s) || v(s);
+  const [_, O] = A.useState(null), [S, w] = A.useState(null), E = A.useCallback((W) => {
     W !== F.current && (F.current = W, O(W));
-  }, []), C = A.useCallback((W) => {
+  }, []), N = A.useCallback((W) => {
     W !== I.current && (I.current = W, w(W));
-  }, []), T = d || N, k = f || S, F = A.useRef(null), I = A.useRef(null), Q = A.useRef(b), B = p != null, K = Et(p), i1 = Et(c), r1 = Et(m), l1 = A.useCallback(() => {
+  }, []), x = d || _, k = f || S, F = A.useRef(null), I = A.useRef(null), Q = A.useRef(b), B = p != null, K = Et(p), i1 = Et(c), r1 = Et(m), l1 = A.useCallback(() => {
     if (!F.current || !I.current)
       return;
     const W = {
@@ -14623,7 +14623,7 @@ function wp(i) {
       middleware: R
     };
     i1.current && (W.platform = i1.current), vp(F.current, I.current, W).then((Z) => {
-      const x = {
+      const T = {
         ...Z,
         // The floating element's position may be recomputed while it's closed
         // but still mounted (such as when transitioning out). To ensure
@@ -14631,13 +14631,13 @@ function wp(i) {
         // setting it to `true` when `open === false` (must be specified).
         isPositioned: r1.current !== !1
       };
-      n1.current && !g9(Q.current, x) && (Q.current = x, ta.flushSync(() => {
-        v(x);
+      n1.current && !g9(Q.current, T) && (Q.current = T, ta.flushSync(() => {
+        y(T);
       }));
     });
   }, [R, o, r, i1, r1]);
   o9(() => {
-    m === !1 && Q.current.isPositioned && (Q.current.isPositioned = !1, v((W) => ({
+    m === !1 && Q.current.isPositioned && (Q.current.isPositioned = !1, y((W) => ({
       ...W,
       isPositioned: !1
     })));
@@ -14646,21 +14646,21 @@ function wp(i) {
   o9(() => (n1.current = !0, () => {
     n1.current = !1;
   }), []), o9(() => {
-    if (T && (F.current = T), k && (I.current = k), T && k) {
+    if (x && (F.current = x), k && (I.current = k), x && k) {
       if (K.current)
-        return K.current(T, k, l1);
+        return K.current(x, k, l1);
       l1();
     }
-  }, [T, k, l1, K, B]);
+  }, [x, k, l1, K, B]);
   const t1 = A.useMemo(() => ({
     reference: F,
     floating: I,
     setReference: E,
-    setFloating: C
-  }), [E, C]), V = A.useMemo(() => ({
-    reference: T,
+    setFloating: N
+  }), [E, N]), V = A.useMemo(() => ({
+    reference: x,
     floating: k
-  }), [T, k]), Y = A.useMemo(() => {
+  }), [x, k]), Y = A.useMemo(() => {
     const W = {
       position: r,
       left: 0,
@@ -14668,17 +14668,17 @@ function wp(i) {
     };
     if (!V.floating)
       return W;
-    const Z = es(V.floating, b.x), x = es(V.floating, b.y);
+    const Z = es(V.floating, b.x), T = es(V.floating, b.y);
     return g ? {
       ...W,
-      transform: "translate(" + Z + "px, " + x + "px)",
+      transform: "translate(" + Z + "px, " + T + "px)",
       ...Ml(V.floating) >= 1.5 && {
         willChange: "transform"
       }
     } : {
       position: r,
       left: Z,
-      top: x
+      top: T
     };
   }, [r, g, V.floating, b.x, b.y]);
   return A.useMemo(() => ({
@@ -14728,12 +14728,12 @@ const Sp = (i) => {
 }), jt = (i, o) => ({
   ...bp(i),
   options: [i, o]
-}), Nl = (i, o) => ({
+}), Cl = (i, o) => ({
   ...Sp(i),
   options: [i, o]
-}), Cl = {
+}), Nl = {
   ...Gd
-}, Ep = Cl.useInsertionEffect, Ap = Ep || ((i) => i());
+}, Ep = Nl.useInsertionEffect, Ap = Ep || ((i) => i());
 function J2(i) {
   const o = A.useRef(() => {
   });
@@ -14760,8 +14760,8 @@ function _p() {
     as = !0;
   }, []), i;
 }
-const Np = Cl.useId, Ol = Np || _p;
-function Cp() {
+const Cp = Nl.useId, Ol = Cp || _p;
+function Np() {
   const i = /* @__PURE__ */ new Map();
   return {
     emit(o, r) {
@@ -14807,9 +14807,9 @@ function Tp(i, o) {
     delay: p = 0,
     handleClose: m = null,
     mouseOnly: b = !1,
-    restMs: v = 0,
+    restMs: y = 0,
     move: R = !0
-  } = o, y = ha(), N = pa(), O = At(m), S = At(p), w = At(r), E = A.useRef(), C = A.useRef(-1), T = A.useRef(), k = A.useRef(-1), F = A.useRef(!0), I = A.useRef(!1), Q = A.useRef(() => {
+  } = o, v = ha(), _ = pa(), O = At(m), S = At(p), w = At(r), E = A.useRef(), N = A.useRef(-1), x = A.useRef(), k = A.useRef(-1), F = A.useRef(!0), I = A.useRef(!1), Q = A.useRef(() => {
   }), B = A.useRef(!1), K = A.useCallback(() => {
     var Y;
     const W = (Y = c.current.openEvent) == null ? void 0 : Y.type;
@@ -14821,7 +14821,7 @@ function Tp(i, o) {
       let {
         open: Z
       } = W;
-      Z || (clearTimeout(C.current), clearTimeout(k.current), F.current = !0, B.current = !1);
+      Z || (clearTimeout(N.current), clearTimeout(k.current), F.current = !0, B.current = !1);
     }
     return d.on("openchange", Y), () => {
       d.off("openchange", Y);
@@ -14838,10 +14838,10 @@ function Tp(i, o) {
   }, [f.floating, r, s, g, O, K]);
   const i1 = A.useCallback(function(Y, W, Z) {
     W === void 0 && (W = !0), Z === void 0 && (Z = "hover");
-    const x = r9(S.current, "close", E.current);
-    x && !T.current ? (clearTimeout(C.current), C.current = window.setTimeout(() => s(!1, Y, Z), x)) : W && (clearTimeout(C.current), s(!1, Y, Z));
+    const T = r9(S.current, "close", E.current);
+    T && !x.current ? (clearTimeout(N.current), N.current = window.setTimeout(() => s(!1, Y, Z), T)) : W && (clearTimeout(N.current), s(!1, Y, Z));
   }, [S, s]), r1 = J2(() => {
-    Q.current(), T.current = void 0;
+    Q.current(), x.current = void 0;
   }), l1 = J2(() => {
     if (I.current) {
       const Y = c5(f.floating).body;
@@ -14851,10 +14851,10 @@ function Tp(i, o) {
   A.useEffect(() => {
     if (!g) return;
     function Y(j) {
-      if (clearTimeout(C.current), F.current = !1, b && !zt(E.current) || v > 0 && !r9(S.current, "open"))
+      if (clearTimeout(N.current), F.current = !1, b && !zt(E.current) || y > 0 && !r9(S.current, "open"))
         return;
       const e1 = r9(S.current, "open", E.current);
-      e1 ? C.current = window.setTimeout(() => {
+      e1 ? N.current = window.setTimeout(() => {
         w.current || s(!0, j, "hover");
       }, e1) : r || s(!0, j, "hover");
     }
@@ -14863,27 +14863,27 @@ function Tp(i, o) {
       Q.current();
       const e1 = c5(f.floating);
       if (clearTimeout(k.current), B.current = !1, O.current && c.current.floatingContext) {
-        r || clearTimeout(C.current), T.current = O.current({
+        r || clearTimeout(N.current), x.current = O.current({
           ...c.current.floatingContext,
-          tree: y,
+          tree: v,
           x: j.clientX,
           y: j.clientY,
           onClose() {
             l1(), r1(), n1() || i1(j, !0, "safe-polygon");
           }
         });
-        const a1 = T.current;
+        const a1 = x.current;
         e1.addEventListener("mousemove", a1), Q.current = () => {
           e1.removeEventListener("mousemove", a1);
         };
         return;
       }
-      (E.current === "touch" ? !N7(f.floating, j.relatedTarget) : !0) && i1(j);
+      (E.current === "touch" ? !C7(f.floating, j.relatedTarget) : !0) && i1(j);
     }
     function Z(j) {
       n1() || c.current.floatingContext && (O.current == null || O.current({
         ...c.current.floatingContext,
-        tree: y,
+        tree: v,
         x: j.clientX,
         y: j.clientY,
         onClose() {
@@ -14892,34 +14892,34 @@ function Tp(i, o) {
       })(j));
     }
     if (z1(f.domReference)) {
-      var x;
+      var T;
       const j = f.domReference;
-      return r && j.addEventListener("mouseleave", Z), (x = f.floating) == null || x.addEventListener("mouseleave", Z), R && j.addEventListener("mousemove", Y, {
+      return r && j.addEventListener("mouseleave", Z), (T = f.floating) == null || T.addEventListener("mouseleave", Z), R && j.addEventListener("mousemove", Y, {
         once: !0
       }), j.addEventListener("mouseenter", Y), j.addEventListener("mouseleave", W), () => {
         var e1;
         r && j.removeEventListener("mouseleave", Z), (e1 = f.floating) == null || e1.removeEventListener("mouseleave", Z), R && j.removeEventListener("mousemove", Y), j.removeEventListener("mouseenter", Y), j.removeEventListener("mouseleave", W);
       };
     }
-  }, [f, g, i, b, v, R, i1, r1, l1, s, r, w, y, S, O, c, n1]), x2(() => {
+  }, [f, g, i, b, y, R, i1, r1, l1, s, r, w, v, S, O, c, n1]), x2(() => {
     var Y;
     if (g && r && (Y = O.current) != null && Y.__options.blockPointerEvents && K()) {
       I.current = !0;
       const Z = f.floating;
       if (z1(f.domReference) && Z) {
         var W;
-        const x = c5(f.floating).body;
-        x.setAttribute(ns, "");
-        const j = f.domReference, e1 = y == null || (W = y.nodesRef.current.find((o1) => o1.id === N)) == null || (W = W.context) == null ? void 0 : W.elements.floating;
-        return e1 && (e1.style.pointerEvents = ""), x.style.pointerEvents = "none", j.style.pointerEvents = "auto", Z.style.pointerEvents = "auto", () => {
-          x.style.pointerEvents = "", j.style.pointerEvents = "", Z.style.pointerEvents = "";
+        const T = c5(f.floating).body;
+        T.setAttribute(ns, "");
+        const j = f.domReference, e1 = v == null || (W = v.nodesRef.current.find((o1) => o1.id === _)) == null || (W = W.context) == null ? void 0 : W.elements.floating;
+        return e1 && (e1.style.pointerEvents = ""), T.style.pointerEvents = "none", j.style.pointerEvents = "auto", Z.style.pointerEvents = "auto", () => {
+          T.style.pointerEvents = "", j.style.pointerEvents = "", Z.style.pointerEvents = "";
         };
       }
     }
-  }, [g, r, N, f, y, O, K]), x2(() => {
+  }, [g, r, _, f, v, O, K]), x2(() => {
     r || (E.current = void 0, B.current = !1, r1(), l1());
   }, [r, r1, l1]), A.useEffect(() => () => {
-    r1(), clearTimeout(C.current), clearTimeout(k.current), l1();
+    r1(), clearTimeout(N.current), clearTimeout(k.current), l1();
   }, [g, f.domReference, r1, l1]);
   const t1 = A.useMemo(() => {
     function Y(W) {
@@ -14932,15 +14932,15 @@ function Tp(i, o) {
         const {
           nativeEvent: Z
         } = W;
-        function x() {
+        function T() {
           !F.current && !w.current && s(!0, Z, "hover");
         }
-        b && !zt(E.current) || r || v === 0 || B.current && W.movementX ** 2 + W.movementY ** 2 < 2 || (clearTimeout(k.current), E.current === "touch" ? x() : (B.current = !0, k.current = window.setTimeout(x, v)));
+        b && !zt(E.current) || r || y === 0 || B.current && W.movementX ** 2 + W.movementY ** 2 < 2 || (clearTimeout(k.current), E.current === "touch" ? T() : (B.current = !0, k.current = window.setTimeout(T, y)));
       }
     };
-  }, [b, s, r, w, v]), V = A.useMemo(() => ({
+  }, [b, s, r, w, y]), V = A.useMemo(() => ({
     onMouseEnter() {
-      clearTimeout(C.current);
+      clearTimeout(N.current);
     },
     onMouseLeave(Y) {
       n1() || i1(Y.nativeEvent, !1);
@@ -15006,34 +15006,34 @@ function kp(i, o) {
   } = o, g = d ?? c, p = Tl(), {
     currentId: m,
     setCurrentId: b,
-    initialDelay: v,
+    initialDelay: y,
     setState: R,
-    timeoutMs: y
+    timeoutMs: v
   } = p;
   return x2(() => {
     f && m && (R({
       delay: {
         open: 1,
-        close: r9(v, "close")
+        close: r9(y, "close")
       }
     }), m !== g && s(!1));
-  }, [f, g, s, R, m, v]), x2(() => {
-    function N() {
+  }, [f, g, s, R, m, y]), x2(() => {
+    function _() {
       s(!1), R({
-        delay: v,
+        delay: y,
         currentId: null
       });
     }
     if (f && m && !r && m === g) {
-      if (y) {
-        const O = window.setTimeout(N, y);
+      if (v) {
+        const O = window.setTimeout(_, v);
         return () => {
           clearTimeout(O);
         };
       }
-      N();
+      _();
     }
-  }, [f, r, R, m, g, s, v, y]), x2(() => {
+  }, [f, r, R, m, g, s, y, v]), x2(() => {
     f && (b === Wt || !r || b(g));
   }, [f, r, b, g]), p;
 }
@@ -15080,26 +15080,26 @@ function Lp(i, o) {
     outsidePress: p = !0,
     outsidePressEvent: m = "pointerdown",
     referencePress: b = !1,
-    referencePressEvent: v = "pointerdown",
+    referencePressEvent: y = "pointerdown",
     ancestorScroll: R = !1,
-    bubbles: y,
-    capture: N
-  } = o, O = ha(), S = J2(typeof p == "function" ? p : () => !1), w = typeof p == "function" ? S : p, E = A.useRef(!1), C = A.useRef(!1), {
-    escapeKey: T,
+    bubbles: v,
+    capture: _
+  } = o, O = ha(), S = J2(typeof p == "function" ? p : () => !1), w = typeof p == "function" ? S : p, E = A.useRef(!1), N = A.useRef(!1), {
+    escapeKey: x,
     outsidePress: k
-  } = os(y), {
+  } = os(v), {
     escapeKey: F,
     outsidePress: I
-  } = os(N), Q = A.useRef(!1), B = J2((t1) => {
+  } = os(_), Q = A.useRef(!1), B = J2((t1) => {
     var V;
     if (!r || !f || !g || t1.key !== "Escape" || Q.current)
       return;
     const Y = (V = d.current.floatingContext) == null ? void 0 : V.nodeId, W = O ? Mt(O.nodesRef.current, Y) : [];
-    if (!T && (t1.stopPropagation(), W.length > 0)) {
+    if (!x && (t1.stopPropagation(), W.length > 0)) {
       let Z = !0;
-      if (W.forEach((x) => {
+      if (W.forEach((T) => {
         var j;
-        if ((j = x.context) != null && j.open && !x.context.dataRef.current.__escapeKeyBubbles) {
+        if ((j = T.context) != null && j.open && !T.context.dataRef.current.__escapeKeyBubbles) {
           Z = !1;
           return;
         }
@@ -15118,10 +15118,10 @@ function Lp(i, o) {
     var V;
     const Y = E.current;
     E.current = !1;
-    const W = C.current;
-    if (C.current = !1, m === "click" && W || Y || typeof w == "function" && !w(t1))
+    const W = N.current;
+    if (N.current = !1, m === "click" && W || Y || typeof w == "function" && !w(t1))
       return;
-    const Z = c8(t1), x = "[" + ba("inert") + "]", j = c5(c.floating).querySelectorAll(x);
+    const Z = c8(t1), T = "[" + ba("inert") + "]", j = c5(c.floating).querySelectorAll(T);
     let e1 = z1(Z) ? Z : null;
     for (; e1 && !F3(e1); ) {
       const c1 = a3(e1);
@@ -15130,9 +15130,9 @@ function Lp(i, o) {
       e1 = c1;
     }
     if (j.length && z1(Z) && !Tm(Z) && // Clicked on a direct ancestor (e.g. FloatingOverlay).
-    !N7(Z, c.floating) && // If the target root element contains none of the markers, then the
+    !C7(Z, c.floating) && // If the target root element contains none of the markers, then the
     // element was injected after the floating element rendered.
-    Array.from(j).every((c1) => !N7(e1, c1)))
+    Array.from(j).every((c1) => !C7(e1, c1)))
       return;
     if (z4(Z) && n1) {
       const c1 = Z.clientWidth > 0 && Z.scrollWidth > Z.clientWidth, _1 = Z.clientHeight > 0 && Z.scrollHeight > Z.clientHeight;
@@ -15170,7 +15170,7 @@ function Lp(i, o) {
   A.useEffect(() => {
     if (!r || !f)
       return;
-    d.current.__escapeKeyBubbles = T, d.current.__outsidePressBubbles = k;
+    d.current.__escapeKeyBubbles = x, d.current.__outsidePressBubbles = k;
     let t1 = -1;
     function V(j) {
       s(!1, j, "ancestor-scroll");
@@ -15190,34 +15190,34 @@ function Lp(i, o) {
     }
     const Z = c5(c.floating);
     g && (Z.addEventListener("keydown", F ? K : B, F), Z.addEventListener("compositionstart", Y), Z.addEventListener("compositionend", W)), w && Z.addEventListener(m, I ? r1 : i1, I);
-    let x = [];
-    return R && (z1(c.domReference) && (x = e3(c.domReference)), z1(c.floating) && (x = x.concat(e3(c.floating))), !z1(c.reference) && c.reference && c.reference.contextElement && (x = x.concat(e3(c.reference.contextElement)))), x = x.filter((j) => {
+    let T = [];
+    return R && (z1(c.domReference) && (T = e3(c.domReference)), z1(c.floating) && (T = T.concat(e3(c.floating))), !z1(c.reference) && c.reference && c.reference.contextElement && (T = T.concat(e3(c.reference.contextElement)))), T = T.filter((j) => {
       var e1;
       return j !== ((e1 = Z.defaultView) == null ? void 0 : e1.visualViewport);
-    }), x.forEach((j) => {
+    }), T.forEach((j) => {
       j.addEventListener("scroll", V, {
         passive: !0
       });
     }), () => {
-      g && (Z.removeEventListener("keydown", F ? K : B, F), Z.removeEventListener("compositionstart", Y), Z.removeEventListener("compositionend", W)), w && Z.removeEventListener(m, I ? r1 : i1, I), x.forEach((j) => {
+      g && (Z.removeEventListener("keydown", F ? K : B, F), Z.removeEventListener("compositionstart", Y), Z.removeEventListener("compositionend", W)), w && Z.removeEventListener(m, I ? r1 : i1, I), T.forEach((j) => {
         j.removeEventListener("scroll", V);
       }), window.clearTimeout(t1);
     };
-  }, [d, c, g, w, m, r, s, R, f, T, k, B, F, K, i1, I, r1]), A.useEffect(() => {
+  }, [d, c, g, w, m, r, s, R, f, x, k, B, F, K, i1, I, r1]), A.useEffect(() => {
     E.current = !1;
   }, [w, m]);
   const l1 = A.useMemo(() => ({
     onKeyDown: B,
-    [Dp[v]]: (t1) => {
+    [Dp[y]]: (t1) => {
       b && s(!1, t1.nativeEvent, "reference-press");
     }
-  }), [B, s, b, v]), n1 = A.useMemo(() => ({
+  }), [B, s, b, y]), n1 = A.useMemo(() => ({
     onKeyDown: B,
     onMouseDown() {
-      C.current = !0;
+      N.current = !0;
     },
     onMouseUp() {
-      C.current = !0;
+      N.current = !0;
     },
     [Pp[m]]: () => {
       E.current = !0;
@@ -15233,14 +15233,14 @@ function Bp(i) {
     open: o = !1,
     onOpenChange: r,
     elements: s
-  } = i, c = Ol(), d = A.useRef({}), [f] = A.useState(() => Cp()), g = pa() != null, [p, m] = A.useState(s.reference), b = J2((y, N, O) => {
-    d.current.openEvent = y ? N : void 0, f.emit("openchange", {
-      open: y,
-      event: N,
+  } = i, c = Ol(), d = A.useRef({}), [f] = A.useState(() => Np()), g = pa() != null, [p, m] = A.useState(s.reference), b = J2((v, _, O) => {
+    d.current.openEvent = v ? _ : void 0, f.emit("openchange", {
+      open: v,
+      event: _,
       reason: O,
       nested: g
-    }), r?.(y, N, O);
-  }), v = A.useMemo(() => ({
+    }), r?.(v, _, O);
+  }), y = A.useMemo(() => ({
     setPositionReference: m
   }), []), R = A.useMemo(() => ({
     reference: p || s.reference || null,
@@ -15254,8 +15254,8 @@ function Bp(i) {
     elements: R,
     events: f,
     floatingId: c,
-    refs: v
-  }), [o, b, R, f, c, v]);
+    refs: y
+  }), [o, b, R, f, c, y]);
 }
 function ya(i) {
   i === void 0 && (i = {});
@@ -15268,11 +15268,11 @@ function ya(i) {
       floating: null,
       ...i.elements
     }
-  }), s = i.rootContext || r, c = s.elements, [d, f] = A.useState(null), [g, p] = A.useState(null), b = c?.domReference || d, v = A.useRef(null), R = ha();
+  }), s = i.rootContext || r, c = s.elements, [d, f] = A.useState(null), [g, p] = A.useState(null), b = c?.domReference || d, y = A.useRef(null), R = ha();
   x2(() => {
-    b && (v.current = b);
+    b && (y.current = b);
   }, [b]);
-  const y = wp({
+  const v = wp({
     ...i,
     elements: {
       ...c,
@@ -15280,42 +15280,42 @@ function ya(i) {
         reference: g
       }
     }
-  }), N = A.useCallback((C) => {
-    const T = z1(C) ? {
-      getBoundingClientRect: () => C.getBoundingClientRect(),
-      contextElement: C
-    } : C;
-    p(T), y.refs.setReference(T);
-  }, [y.refs]), O = A.useCallback((C) => {
-    (z1(C) || C === null) && (v.current = C, f(C)), (z1(y.refs.reference.current) || y.refs.reference.current === null || // Don't allow setting virtual elements using the old technique back to
+  }), _ = A.useCallback((N) => {
+    const x = z1(N) ? {
+      getBoundingClientRect: () => N.getBoundingClientRect(),
+      contextElement: N
+    } : N;
+    p(x), v.refs.setReference(x);
+  }, [v.refs]), O = A.useCallback((N) => {
+    (z1(N) || N === null) && (y.current = N, f(N)), (z1(v.refs.reference.current) || v.refs.reference.current === null || // Don't allow setting virtual elements using the old technique back to
     // `null` to support `positionReference` + an unstable `reference`
     // callback ref.
-    C !== null && !z1(C)) && y.refs.setReference(C);
-  }, [y.refs]), S = A.useMemo(() => ({
-    ...y.refs,
+    N !== null && !z1(N)) && v.refs.setReference(N);
+  }, [v.refs]), S = A.useMemo(() => ({
+    ...v.refs,
     setReference: O,
-    setPositionReference: N,
-    domReference: v
-  }), [y.refs, O, N]), w = A.useMemo(() => ({
-    ...y.elements,
+    setPositionReference: _,
+    domReference: y
+  }), [v.refs, O, _]), w = A.useMemo(() => ({
+    ...v.elements,
     domReference: b
-  }), [y.elements, b]), E = A.useMemo(() => ({
-    ...y,
+  }), [v.elements, b]), E = A.useMemo(() => ({
+    ...v,
     ...s,
     refs: S,
     elements: w,
     nodeId: o
-  }), [y, S, w, o, s]);
+  }), [v, S, w, o, s]);
   return x2(() => {
     s.dataRef.current.floatingContext = E;
-    const C = R?.nodesRef.current.find((T) => T.id === o);
-    C && (C.context = E);
+    const N = R?.nodesRef.current.find((x) => x.id === o);
+    N && (N.context = E);
   }), A.useMemo(() => ({
-    ...y,
+    ...v,
     context: E,
     refs: S,
     elements: w
-  }), [y, S, w, E]);
+  }), [v, S, w, E]);
 }
 function zp(i, o) {
   o === void 0 && (o = {});
@@ -15328,60 +15328,60 @@ function zp(i, o) {
   } = i, {
     enabled: g = !0,
     visibleOnly: p = !0
-  } = o, m = A.useRef(!1), b = A.useRef(), v = A.useRef(!0);
+  } = o, m = A.useRef(!1), b = A.useRef(), y = A.useRef(!0);
   A.useEffect(() => {
     if (!g) return;
-    const y = x4(f.domReference);
-    function N() {
+    const v = x4(f.domReference);
+    function _() {
       !r && z4(f.domReference) && f.domReference === Yr(c5(f.domReference)) && (m.current = !0);
     }
     function O() {
-      v.current = !0;
+      y.current = !0;
     }
-    return y.addEventListener("blur", N), y.addEventListener("keydown", O, !0), () => {
-      y.removeEventListener("blur", N), y.removeEventListener("keydown", O, !0);
+    return v.addEventListener("blur", _), v.addEventListener("keydown", O, !0), () => {
+      v.removeEventListener("blur", _), v.removeEventListener("keydown", O, !0);
     };
   }, [f.domReference, r, g]), A.useEffect(() => {
     if (!g) return;
-    function y(N) {
+    function v(_) {
       let {
         reason: O
-      } = N;
+      } = _;
       (O === "reference-press" || O === "escape-key") && (m.current = !0);
     }
-    return c.on("openchange", y), () => {
-      c.off("openchange", y);
+    return c.on("openchange", v), () => {
+      c.off("openchange", v);
     };
   }, [c, g]), A.useEffect(() => () => {
     clearTimeout(b.current);
   }, []);
   const R = A.useMemo(() => ({
-    onPointerDown(y) {
-      _m(y.nativeEvent) || (v.current = !1);
+    onPointerDown(v) {
+      _m(v.nativeEvent) || (y.current = !1);
     },
     onMouseLeave() {
       m.current = !1;
     },
-    onFocus(y) {
+    onFocus(v) {
       if (m.current) return;
-      const N = c8(y.nativeEvent);
-      if (p && z1(N))
+      const _ = c8(v.nativeEvent);
+      if (p && z1(_))
         try {
-          if (Nm() && Cm()) throw Error();
-          if (!N.matches(":focus-visible")) return;
+          if (Cm() && Nm()) throw Error();
+          if (!_.matches(":focus-visible")) return;
         } catch {
-          if (!v.current && !km(N))
+          if (!y.current && !km(_))
             return;
         }
-      s(!0, y.nativeEvent, "focus");
+      s(!0, v.nativeEvent, "focus");
     },
-    onBlur(y) {
+    onBlur(v) {
       m.current = !1;
-      const N = y.relatedTarget, O = y.nativeEvent, S = z1(N) && N.hasAttribute(ba("focus-guard")) && N.getAttribute("data-type") === "outside";
+      const _ = v.relatedTarget, O = v.nativeEvent, S = z1(_) && _.hasAttribute(ba("focus-guard")) && _.getAttribute("data-type") === "outside";
       b.current = window.setTimeout(() => {
         var w;
         const E = Yr(f.domReference ? f.domReference.ownerDocument : document);
-        !N && E === f.domReference || N7((w = d.current.floatingContext) == null ? void 0 : w.refs.floating.current, E) || N7(f.domReference, E) || S || s(!1, O, "focus");
+        !_ && E === f.domReference || C7((w = d.current.floatingContext) == null ? void 0 : w.refs.floating.current, E) || C7(f.domReference, E) || S || s(!1, O, "focus");
       });
     }
   }), [d, f.domReference, s, p]);
@@ -15415,11 +15415,11 @@ function _t(i, o, r) {
       if (!(c && [rs, ss].includes(m)))
         if (m.indexOf("on") === 0) {
           if (s.has(m) || s.set(m, []), typeof b == "function") {
-            var v;
-            (v = s.get(m)) == null || v.push(b), f[m] = function() {
-              for (var R, y = arguments.length, N = new Array(y), O = 0; O < y; O++)
-                N[O] = arguments[O];
-              return (R = s.get(m)) == null ? void 0 : R.map((S) => S(...N)).find((S) => S !== void 0);
+            var y;
+            (y = s.get(m)) == null || y.push(b), f[m] = function() {
+              for (var R, v = arguments.length, _ = new Array(v), O = 0; O < v; O++)
+                _[O] = arguments[O];
+              return (R = s.get(m)) == null ? void 0 : R.map((S) => S(..._)).find((S) => S !== void 0);
             };
           }
         } else
@@ -15458,7 +15458,7 @@ function Hp(i, o) {
   } = i, {
     enabled: d = !0,
     role: f = "dialog"
-  } = o, g = (r = Qp.get(f)) != null ? r : f, p = Ol(), b = pa() != null, v = A.useMemo(() => g === "tooltip" || f === "label" ? {
+  } = o, g = (r = Qp.get(f)) != null ? r : f, p = Ol(), b = pa() != null, y = A.useMemo(() => g === "tooltip" || f === "label" ? {
     ["aria-" + (f === "label" ? "labelledby" : "describedby")]: s ? c : void 0
   } : {
     "aria-expanded": s ? "true" : "false",
@@ -15480,23 +15480,23 @@ function Hp(i, o) {
       "aria-autocomplete": "list"
     }
   }, [g, c, b, s, p, f]), R = A.useMemo(() => {
-    const N = {
+    const _ = {
       id: c,
       ...g && {
         role: g
       }
     };
-    return g === "tooltip" || f === "label" ? N : {
-      ...N,
+    return g === "tooltip" || f === "label" ? _ : {
+      ..._,
       ...g === "menu" && {
         "aria-labelledby": p
       }
     };
-  }, [g, c, p, f]), y = A.useCallback((N) => {
+  }, [g, c, p, f]), v = A.useCallback((_) => {
     let {
       active: O,
       selected: S
-    } = N;
+    } = _;
     const w = {
       role: "option",
       ...O && {
@@ -15520,10 +15520,10 @@ function Hp(i, o) {
     return {};
   }, [c, f]);
   return A.useMemo(() => d ? {
-    reference: v,
+    reference: y,
     floating: R,
-    item: y
-  } : {}, [d, v, R, y]);
+    item: v
+  } : {}, [d, y, R, v]);
 }
 function Ul(i, o) {
   if (i === "rtl" && (o.includes("right") || o.includes("left"))) {
@@ -15560,32 +15560,32 @@ function Wp({
     transform: "rotate(45deg)",
     position: "absolute",
     [jp[p]]: s
-  }, v = -o / 2;
+  }, y = -o / 2;
   return p === "left" ? {
     ...b,
     ...ls(m, f, r, c),
-    right: v,
+    right: y,
     borderLeftColor: "transparent",
     borderBottomColor: "transparent",
     clipPath: "polygon(100% 0, 0 0, 100% 100%)"
   } : p === "right" ? {
     ...b,
     ...ls(m, f, r, c),
-    left: v,
+    left: y,
     borderRightColor: "transparent",
     borderTopColor: "transparent",
     clipPath: "polygon(0 100%, 0 0, 100% 100%)"
   } : p === "top" ? {
     ...b,
     ...cs(m, d, r, c, g),
-    bottom: v,
+    bottom: y,
     borderTopColor: "transparent",
     borderLeftColor: "transparent",
     clipPath: "polygon(0 100%, 100% 100%, 100% 0)"
   } : p === "bottom" ? {
     ...b,
     ...cs(m, d, r, c, g),
-    top: v,
+    top: y,
     borderBottomColor: "transparent",
     borderRightColor: "transparent",
     clipPath: "polygon(0 100%, 0 0, 100% 0)"
@@ -15604,8 +15604,8 @@ const va = A.forwardRef(
     style: p,
     ...m
   }, b) => {
-    const { dir: v } = A9();
-    return d ? /* @__PURE__ */ _.jsx(
+    const { dir: y } = A9();
+    return d ? /* @__PURE__ */ C.jsx(
       "div",
       {
         ...m,
@@ -15618,7 +15618,7 @@ const va = A.forwardRef(
             arrowOffset: r,
             arrowRadius: s,
             arrowPosition: c,
-            dir: v,
+            dir: y,
             arrowX: f,
             arrowY: g
           })
@@ -15641,7 +15641,7 @@ function U9({
   return m5(i) ? A.cloneElement(i, { [r]: d }) : i;
 }
 function Fl(i) {
-  return /* @__PURE__ */ _.jsx(oa, { tabIndex: -1, "data-autofocus": !0, ...i });
+  return /* @__PURE__ */ C.jsx(oa, { tabIndex: -1, "data-autofocus": !0, ...i });
 }
 U9.displayName = "@mantine/core/FocusTrap";
 Fl.displayName = "@mantine/core/FocusTrapInitialFocus";
@@ -15654,11 +15654,11 @@ const Zp = {}, Dl = A.forwardRef((i, o) => {
   const { children: r, target: s, ...c } = s1("Portal", Zp, i), [d, f] = A.useState(!1), g = A.useRef(null);
   return T7(() => (f(!0), g.current = s ? typeof s == "string" ? document.querySelector(s) : s : Gp(c), Bs(o, g.current), !s && g.current && document.body.appendChild(g.current), () => {
     !s && g.current && document.body.removeChild(g.current);
-  }), [s]), !d || !g.current ? null : ta.createPortal(/* @__PURE__ */ _.jsx(_.Fragment, { children: r }), g.current);
+  }), [s]), !d || !g.current ? null : ta.createPortal(/* @__PURE__ */ C.jsx(C.Fragment, { children: r }), g.current);
 });
 Dl.displayName = "@mantine/core/Portal";
 function D7({ withinPortal: i = !0, children: o, ...r }) {
-  return i ? /* @__PURE__ */ _.jsx(Dl, { ...r, children: o }) : /* @__PURE__ */ _.jsx(_.Fragment, { children: o });
+  return i ? /* @__PURE__ */ C.jsx(Dl, { ...r, children: o }) : /* @__PURE__ */ C.jsx(C.Fragment, { children: o });
 }
 D7.displayName = "@mantine/core/OptionalPortal";
 const A7 = (i) => ({
@@ -15819,14 +15819,14 @@ function $p({
   enterDelay: p,
   exitDelay: m
 }) {
-  const b = T2(), v = zs(), R = b.respectReducedMotion ? v : !1, [y, N] = A.useState(R ? 0 : i), [O, S] = A.useState(s ? "entered" : "exited"), w = A.useRef(-1), E = A.useRef(-1), C = A.useRef(-1), T = (F) => {
+  const b = T2(), y = zs(), R = b.respectReducedMotion ? y : !1, [v, _] = A.useState(R ? 0 : i), [O, S] = A.useState(s ? "entered" : "exited"), w = A.useRef(-1), E = A.useRef(-1), N = A.useRef(-1), x = (F) => {
     const I = F ? c : d, Q = F ? f : g;
     window.clearTimeout(w.current);
     const B = R ? 0 : F ? i : o;
-    N(B), B === 0 ? (typeof I == "function" && I(), typeof Q == "function" && Q(), S(F ? "entered" : "exited")) : C.current = requestAnimationFrame(() => {
+    _(B), B === 0 ? (typeof I == "function" && I(), typeof Q == "function" && Q(), S(F ? "entered" : "exited")) : N.current = requestAnimationFrame(() => {
       cm.flushSync(() => {
         S(F ? "pre-entering" : "pre-exiting");
-      }), C.current = requestAnimationFrame(() => {
+      }), N.current = requestAnimationFrame(() => {
         typeof I == "function" && I(), S(F ? "entering" : "exiting"), w.current = window.setTimeout(() => {
           typeof Q == "function" && Q(), S(F ? "entered" : "exited");
         }, B);
@@ -15834,12 +15834,12 @@ function $p({
     });
   }, k = (F) => {
     if (window.clearTimeout(E.current), typeof (F ? p : m) != "number") {
-      T(F);
+      x(F);
       return;
     }
     E.current = window.setTimeout(
       () => {
-        T(F);
+        x(F);
       },
       F ? p : m
     );
@@ -15848,11 +15848,11 @@ function $p({
     k(s);
   }, [s]), A.useEffect(
     () => () => {
-      window.clearTimeout(w.current), cancelAnimationFrame(C.current);
+      window.clearTimeout(w.current), cancelAnimationFrame(N.current);
     },
     []
   ), {
-    transitionDuration: y,
+    transitionDuration: v,
     transitionStatus: O,
     transitionTimingFunction: r || "ease"
   };
@@ -15869,10 +15869,10 @@ function y5({
   onEntered: p,
   onEnter: m,
   onExited: b,
-  enterDelay: v,
+  enterDelay: y,
   exitDelay: R
 }) {
-  const { transitionDuration: y, transitionStatus: N, transitionTimingFunction: O } = $p({
+  const { transitionDuration: v, transitionStatus: _, transitionTimingFunction: O } = $p({
     mounted: c,
     exitDuration: s,
     duration: r,
@@ -15881,14 +15881,14 @@ function y5({
     onEntered: p,
     onEnter: m,
     onExited: b,
-    enterDelay: v,
+    enterDelay: y,
     exitDelay: R
   });
-  return y === 0 ? c ? /* @__PURE__ */ _.jsx(_.Fragment, { children: d({}) }) : i ? d({ display: "none" }) : null : N === "exited" ? i ? d({ display: "none" }) : null : /* @__PURE__ */ _.jsx(_.Fragment, { children: d(
+  return v === 0 ? c ? /* @__PURE__ */ C.jsx(C.Fragment, { children: d({}) }) : i ? d({ display: "none" }) : null : _ === "exited" ? i ? d({ display: "none" }) : null : /* @__PURE__ */ C.jsx(C.Fragment, { children: d(
     Yp({
       transition: o,
-      duration: y,
-      state: N,
+      duration: v,
+      state: _,
       timingFunction: O
     })
   ) });
@@ -15905,17 +15905,17 @@ const Kp = {}, wa = y1((i, o) => {
     variant: p,
     classNames: m,
     styles: b,
-    ...v
-  } = r, R = kl(), y = Fs({
+    ...y
+  } = r, R = kl(), v = Fs({
     opened: R.opened,
     shouldReturnFocus: R.returnFocus
-  }), N = R.withRoles ? {
+  }), _ = R.withRoles ? {
     "aria-labelledby": R.getTargetId(),
     id: R.getDropdownId(),
     role: "dialog",
     tabIndex: -1
   } : {}, O = _4(o, R.floating);
-  return R.disabled ? null : /* @__PURE__ */ _.jsx(D7, { ...R.portalProps, withinPortal: R.withinPortal, children: /* @__PURE__ */ _.jsx(
+  return R.disabled ? null : /* @__PURE__ */ C.jsx(D7, { ...R.portalProps, withinPortal: R.withinPortal, children: /* @__PURE__ */ C.jsx(
     y5,
     {
       mounted: R.opened,
@@ -15924,15 +15924,15 @@ const Kp = {}, wa = y1((i, o) => {
       duration: R.transitionProps?.duration ?? 150,
       keepMounted: R.keepMounted,
       exitDuration: typeof R.transitionProps?.exitDuration == "number" ? R.transitionProps.exitDuration : R.transitionProps?.duration,
-      children: (S) => /* @__PURE__ */ _.jsx(U9, { active: R.trapFocus && R.opened, innerRef: O, children: /* @__PURE__ */ _.jsxs(
+      children: (S) => /* @__PURE__ */ C.jsx(U9, { active: R.trapFocus && R.opened, innerRef: O, children: /* @__PURE__ */ C.jsxs(
         g1,
         {
-          ...N,
-          ...v,
+          ..._,
+          ...y,
           variant: p,
           onKeyDownCapture: Df(R.onClose, {
             active: R.closeOnEscape,
-            onTrigger: y,
+            onTrigger: v,
             onKeyDown: g
           }),
           "data-position": R.placement,
@@ -15957,7 +15957,7 @@ const Kp = {}, wa = y1((i, o) => {
           }),
           children: [
             f,
-            /* @__PURE__ */ _.jsx(
+            /* @__PURE__ */ C.jsx(
               va,
               {
                 ref: R.arrowRef,
@@ -16055,7 +16055,7 @@ function Jp(i, o) {
     typeof r.flip == "boolean" ? Ht() : Ht(r.flip)
   ), r.inline && s.push(
     typeof r.inline == "boolean" ? jt() : jt(r.inline)
-  ), s.push(Nl({ element: i.arrowRef, padding: i.arrowOffset })), (r.size || i.width === "target") && s.push(
+  ), s.push(Cl({ element: i.arrowRef, padding: i.arrowOffset })), (r.size || i.width === "target") && s.push(
     Rp({
       ...typeof r.size == "boolean" ? {} : r.size,
       apply({ rects: c, availableWidth: d, availableHeight: f, ...g }) {
@@ -16137,16 +16137,16 @@ function P3(i) {
     transitionProps: p,
     onExitTransitionEnd: m,
     onEnterTransitionEnd: b,
-    width: v,
+    width: y,
     middlewares: R,
-    withArrow: y,
-    arrowSize: N,
+    withArrow: v,
+    arrowSize: _,
     arrowOffset: O,
     arrowRadius: S,
     arrowPosition: w,
     unstyled: E,
-    classNames: C,
-    styles: T,
+    classNames: N,
+    styles: x,
     closeOnClickOutside: k,
     withinPortal: F,
     portalProps: I,
@@ -16162,7 +16162,7 @@ function P3(i) {
     id: Y,
     defaultOpened: W,
     __staticSelector: Z,
-    withRoles: x,
+    withRoles: T,
     disabled: j,
     returnFocus: e1,
     variant: o1,
@@ -16174,17 +16174,17 @@ function P3(i) {
     name: Z,
     props: o,
     classes: Pl,
-    classNames: C,
-    styles: T,
+    classNames: N,
+    styles: x,
     unstyled: E,
     rootSelector: "dropdown",
     vars: m1,
     varsResolver: ah
-  }), { resolvedStyles: v1 } = Jt({ classNames: C, styles: T, props: o }), A1 = A.useRef(null), [$1, h4] = A.useState(null), [G1, N4] = A.useState(null), { dir: b4 } = A9(), s4 = h5(Y), O1 = eh({
+  }), { resolvedStyles: v1 } = Jt({ classNames: N, styles: x, props: o }), A1 = A.useRef(null), [$1, h4] = A.useState(null), [G1, C4] = A.useState(null), { dir: b4 } = A9(), s4 = h5(Y), O1 = eh({
     middlewares: R,
-    width: v,
+    width: y,
     position: Ul(b4, s),
-    offset: typeof c == "number" ? c + (y ? N / 2 : 0) : c,
+    offset: typeof c == "number" ? c + (v ? _ / 2 : 0) : c,
     arrowRef: A1,
     arrowOffset: O,
     onPositionChange: d,
@@ -16207,7 +16207,7 @@ function P3(i) {
     [O1.floating.refs.setReference]
   ), t4 = A.useCallback(
     (k4) => {
-      N4(k4), O1.floating.refs.setFloating(k4);
+      C4(k4), O1.floating.refs.setFloating(k4);
     },
     [O1.floating.refs.setFloating]
   ), a4 = A.useCallback(() => {
@@ -16215,7 +16215,7 @@ function P3(i) {
   }, [p?.onExited, m]), y2 = A.useCallback(() => {
     p?.onEntered?.(), b?.();
   }, [p?.onEntered, b]);
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     Ip,
     {
       value: {
@@ -16231,9 +16231,9 @@ function P3(i) {
         opened: O1.opened,
         arrowRef: A1,
         transitionProps: { ...p, onExited: a4, onEntered: y2 },
-        width: v,
-        withArrow: y,
-        arrowSize: N,
+        width: y,
+        withArrow: v,
+        arrowSize: _,
         arrowOffset: O,
         arrowRadius: S,
         arrowPosition: w,
@@ -16249,11 +16249,11 @@ function P3(i) {
         onToggle: O1.onToggle,
         getTargetId: () => `${s4}-target`,
         getDropdownId: () => `${s4}-dropdown`,
-        withRoles: x,
+        withRoles: T,
         targetProps: _1,
         __staticSelector: Z,
-        classNames: C,
-        styles: T,
+        classNames: N,
+        styles: x,
         unstyled: E,
         variant: o1,
         keepMounted: a1,
@@ -16270,19 +16270,19 @@ P3.Dropdown = wa;
 P3.displayName = "@mantine/core/Popover";
 P3.extend = (i) => i;
 var m2 = { root: "m_5ae2e3c", barsLoader: "m_7a2bd4cd", bar: "m_870bb79", "bars-loader-animation": "m_5d2b3b9d", dotsLoader: "m_4e3f22d7", dot: "m_870c4af", "loader-dots-animation": "m_aac34a1", ovalLoader: "m_b34414df", "oval-loader-animation": "m_f8e89c4b" };
-const zl = A.forwardRef(({ className: i, ...o }, r) => /* @__PURE__ */ _.jsxs(g1, { component: "span", className: S4(m2.barsLoader, i), ...o, ref: r, children: [
-  /* @__PURE__ */ _.jsx("span", { className: m2.bar }),
-  /* @__PURE__ */ _.jsx("span", { className: m2.bar }),
-  /* @__PURE__ */ _.jsx("span", { className: m2.bar })
+const zl = A.forwardRef(({ className: i, ...o }, r) => /* @__PURE__ */ C.jsxs(g1, { component: "span", className: S4(m2.barsLoader, i), ...o, ref: r, children: [
+  /* @__PURE__ */ C.jsx("span", { className: m2.bar }),
+  /* @__PURE__ */ C.jsx("span", { className: m2.bar }),
+  /* @__PURE__ */ C.jsx("span", { className: m2.bar })
 ] }));
 zl.displayName = "@mantine/core/Bars";
-const Vl = A.forwardRef(({ className: i, ...o }, r) => /* @__PURE__ */ _.jsxs(g1, { component: "span", className: S4(m2.dotsLoader, i), ...o, ref: r, children: [
-  /* @__PURE__ */ _.jsx("span", { className: m2.dot }),
-  /* @__PURE__ */ _.jsx("span", { className: m2.dot }),
-  /* @__PURE__ */ _.jsx("span", { className: m2.dot })
+const Vl = A.forwardRef(({ className: i, ...o }, r) => /* @__PURE__ */ C.jsxs(g1, { component: "span", className: S4(m2.dotsLoader, i), ...o, ref: r, children: [
+  /* @__PURE__ */ C.jsx("span", { className: m2.dot }),
+  /* @__PURE__ */ C.jsx("span", { className: m2.dot }),
+  /* @__PURE__ */ C.jsx("span", { className: m2.dot })
 ] }));
 Vl.displayName = "@mantine/core/Dots";
-const Ql = A.forwardRef(({ className: i, ...o }, r) => /* @__PURE__ */ _.jsx(g1, { component: "span", className: S4(m2.ovalLoader, i), ...o, ref: r }));
+const Ql = A.forwardRef(({ className: i, ...o }, r) => /* @__PURE__ */ C.jsx(g1, { component: "span", className: S4(m2.ovalLoader, i), ...o, ref: r }));
 Ql.displayName = "@mantine/core/Oval";
 const Hl = {
   bars: zl,
@@ -16306,10 +16306,10 @@ const Hl = {
     style: p,
     classNames: m,
     styles: b,
-    unstyled: v,
+    unstyled: y,
     loaders: R,
-    variant: y,
-    children: N,
+    variant: v,
+    children: _,
     ...O
   } = r, S = T1({
     name: "Loader",
@@ -16319,17 +16319,17 @@ const Hl = {
     style: p,
     classNames: m,
     styles: b,
-    unstyled: v,
+    unstyled: y,
     vars: f,
     varsResolver: nh
   });
-  return N ? /* @__PURE__ */ _.jsx(g1, { ...S("root"), ref: o, ...O, children: N }) : /* @__PURE__ */ _.jsx(
+  return _ ? /* @__PURE__ */ C.jsx(g1, { ...S("root"), ref: o, ...O, children: _ }) : /* @__PURE__ */ C.jsx(
     g1,
     {
       ...S("root"),
       ref: o,
       component: R[d],
-      variant: y,
+      variant: v,
       size: s,
       ...O
     }
@@ -16353,10 +16353,10 @@ const ds = {
     orientation: p,
     vars: m,
     borderWidth: b,
-    variant: v,
+    variant: y,
     mod: R,
-    ...y
-  } = s1("ActionIconGroup", ds, i), N = T1({
+    ...v
+  } = s1("ActionIconGroup", ds, i), _ = T1({
     name: "ActionIconGroup",
     props: r,
     classes: k9,
@@ -16369,15 +16369,15 @@ const ds = {
     varsResolver: oh,
     rootSelector: "group"
   });
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
-      ...N("group"),
+      ..._("group"),
       ref: o,
-      variant: v,
+      variant: y,
       mod: [{ "data-orientation": p }, R],
       role: "group",
-      ...y
+      ...v
     }
   );
 });
@@ -16412,20 +16412,20 @@ const rh = {}, sh = (i, { size: o, radius: r, variant: s, gradient: c, color: d,
     style: p,
     loading: m,
     loaderProps: b,
-    size: v,
+    size: y,
     color: R,
-    radius: y,
-    __staticSelector: N,
+    radius: v,
+    __staticSelector: _,
     gradient: O,
     vars: S,
     children: w,
     disabled: E,
-    "data-disabled": C,
-    autoContrast: T,
+    "data-disabled": N,
+    autoContrast: x,
     mod: k,
     ...F
   } = r, I = T1({
-    name: ["ActionIcon", N],
+    name: ["ActionIcon", _],
     props: r,
     className: s,
     style: p,
@@ -16436,20 +16436,20 @@ const rh = {}, sh = (i, { size: o, radius: r, variant: s, gradient: c, color: d,
     vars: S,
     varsResolver: sh
   });
-  return /* @__PURE__ */ _.jsxs(
+  return /* @__PURE__ */ C.jsxs(
     k7,
     {
-      ...I("root", { active: !E && !m && !C }),
+      ...I("root", { active: !E && !m && !N }),
       ...F,
       unstyled: c,
       variant: d,
-      size: v,
+      size: y,
       disabled: E || m,
       ref: o,
-      mod: [{ loading: m, disabled: E || C }, k],
+      mod: [{ loading: m, disabled: E || N }, k],
       children: [
-        /* @__PURE__ */ _.jsx(y5, { mounted: !!m, transition: "slide-down", duration: 150, children: (Q) => /* @__PURE__ */ _.jsx(g1, { component: "span", ...I("loader", { style: Q }), "aria-hidden": !0, children: /* @__PURE__ */ _.jsx(P7, { color: "var(--ai-color)", size: "calc(var(--ai-size) * 0.55)", ...b }) }) }),
-        /* @__PURE__ */ _.jsx(g1, { component: "span", mod: { loading: m }, ...I("icon"), children: w })
+        /* @__PURE__ */ C.jsx(y5, { mounted: !!m, transition: "slide-down", duration: 150, children: (Q) => /* @__PURE__ */ C.jsx(g1, { component: "span", ...I("loader", { style: Q }), "aria-hidden": !0, children: /* @__PURE__ */ C.jsx(P7, { color: "var(--ai-color)", size: "calc(var(--ai-size) * 0.55)", ...b }) }) }),
+        /* @__PURE__ */ C.jsx(g1, { component: "span", mod: { loading: m }, ...I("icon"), children: w })
       ]
     }
   );
@@ -16458,7 +16458,7 @@ p8.classes = k9;
 p8.displayName = "@mantine/core/ActionIcon";
 p8.Group = Sa;
 const jl = A.forwardRef(
-  ({ size: i = "var(--cb-icon-size, 70%)", style: o, ...r }, s) => /* @__PURE__ */ _.jsx(
+  ({ size: i = "var(--cb-icon-size, 70%)", style: o, ...r }, s) => /* @__PURE__ */ C.jsx(
     "svg",
     {
       viewBox: "0 0 15 15",
@@ -16467,7 +16467,7 @@ const jl = A.forwardRef(
       style: { ...o, width: i, height: i },
       ref: s,
       ...r,
-      children: /* @__PURE__ */ _.jsx(
+      children: /* @__PURE__ */ C.jsx(
         "path",
         {
           d: "M11.7816 4.03157C12.0062 3.80702 12.0062 3.44295 11.7816 3.2184C11.5571 2.99385 11.193 2.99385 10.9685 3.2184L7.50005 6.68682L4.03164 3.2184C3.80708 2.99385 3.44301 2.99385 3.21846 3.2184C2.99391 3.44295 2.99391 3.80702 3.21846 4.03157L6.68688 7.49999L3.21846 10.9684C2.99391 11.193 2.99391 11.557 3.21846 11.7816C3.44301 12.0061 3.80708 12.0061 4.03164 11.7816L7.50005 8.31316L10.9685 11.7816C11.193 12.0061 11.5571 12.0061 11.7816 11.7816C12.0062 11.557 12.0062 11.193 11.7816 10.9684L8.31322 7.49999L11.7816 4.03157Z",
@@ -16499,10 +16499,10 @@ const lh = {
     classNames: p,
     style: m,
     styles: b,
-    unstyled: v,
+    unstyled: y,
     "data-disabled": R,
-    disabled: y,
-    variant: N,
+    disabled: v,
+    variant: _,
     icon: O,
     mod: S,
     ...w
@@ -16514,22 +16514,22 @@ const lh = {
     classes: Wl,
     classNames: p,
     styles: b,
-    unstyled: v,
+    unstyled: y,
     vars: d,
     varsResolver: ch
   });
-  return /* @__PURE__ */ _.jsxs(
+  return /* @__PURE__ */ C.jsxs(
     k7,
     {
       ref: o,
       ...w,
-      unstyled: v,
-      variant: N,
-      disabled: y,
-      mod: [{ disabled: y || R }, S],
-      ...E("root", { variant: N, active: !y && !R }),
+      unstyled: y,
+      variant: _,
+      disabled: v,
+      mod: [{ disabled: v || R }, S],
+      ...E("root", { variant: _, active: !v && !R }),
       children: [
-        O || /* @__PURE__ */ _.jsx(jl, {}),
+        O || /* @__PURE__ */ C.jsx(jl, {}),
         c
       ]
     }
@@ -16565,16 +16565,16 @@ const dh = {
     children: p,
     gap: m,
     align: b,
-    justify: v,
+    justify: y,
     wrap: R,
-    grow: y,
-    preventGrowOverflow: N,
+    grow: v,
+    preventGrowOverflow: _,
     vars: O,
     variant: S,
     __size: w,
     mod: E,
-    ...C
-  } = r, T = uh(p), k = T.length, F = v9(m ?? "md"), Q = { childWidth: `calc(${100 / k}% - (${F} - ${F} / ${k}))` }, B = T1({
+    ...N
+  } = r, x = uh(p), k = x.length, F = v9(m ?? "md"), Q = { childWidth: `calc(${100 / k}% - (${F} - ${F} / ${k}))` }, B = T1({
     name: "Group",
     props: r,
     stylesCtx: Q,
@@ -16587,16 +16587,16 @@ const dh = {
     vars: O,
     varsResolver: fh
   });
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
       ...B("root"),
       ref: o,
       variant: S,
-      mod: [{ grow: y }, E],
+      mod: [{ grow: v }, E],
       size: w,
-      ...C,
-      children: T
+      ...N,
+      children: x
     }
   );
 });
@@ -16622,16 +16622,16 @@ const gh = {
     vars: p,
     fixed: m,
     center: b,
-    children: v,
+    children: y,
     radius: R,
-    zIndex: y,
-    gradient: N,
+    zIndex: v,
+    gradient: _,
     blur: O,
     color: S,
     backgroundOpacity: w,
     mod: E,
-    ...C
-  } = r, T = T1({
+    ...N
+  } = r, x = T1({
     name: "Overlay",
     props: r,
     classes: Gl,
@@ -16643,7 +16643,7 @@ const gh = {
     vars: p,
     varsResolver: mh
   });
-  return /* @__PURE__ */ _.jsx(g1, { ref: o, ...T("root"), mod: [{ center: b, fixed: m }, E], ...C, children: v });
+  return /* @__PURE__ */ C.jsx(g1, { ref: o, ...x("root"), mod: [{ center: b, fixed: m }, E], ...N, children: y });
 });
 Ra.classes = Gl;
 Ra.displayName = "@mantine/core/Overlay";
@@ -16663,20 +16663,20 @@ function bh({
   onClose: d,
   returnFocus: f
 }) {
-  const g = h5(i), [p, m] = A.useState(!1), [b, v] = A.useState(!1), R = typeof o?.duration == "number" ? o?.duration : 200, y = hh({ opened: r, transitionDuration: R });
+  const g = h5(i), [p, m] = A.useState(!1), [b, y] = A.useState(!1), R = typeof o?.duration == "number" ? o?.duration : 200, v = hh({ opened: r, transitionDuration: R });
   return Kf(
     "keydown",
-    (N) => {
-      N.key === "Escape" && c && r && N.target?.getAttribute("data-mantine-stop-propagation") !== "true" && d();
+    (_) => {
+      _.key === "Escape" && c && r && _.target?.getAttribute("data-mantine-stop-propagation") !== "true" && d();
     },
     { capture: !0 }
   ), Fs({ opened: r, shouldReturnFocus: s && f }), {
     _id: g,
     titleMounted: p,
     bodyMounted: b,
-    shouldLockScroll: y,
+    shouldLockScroll: v,
     setTitleMounted: m,
-    setBodyMounted: v
+    setBodyMounted: y
   };
 }
 const Zl = A.forwardRef(
@@ -16692,20 +16692,20 @@ const Zl = A.forwardRef(
     closeOnEscape: p,
     returnFocus: m,
     closeOnClickOutside: b,
-    withinPortal: v,
+    withinPortal: y,
     portalProps: R,
-    lockScroll: y,
-    children: N,
+    lockScroll: v,
+    children: _,
     zIndex: O,
     shadow: S,
     padding: w,
     __vars: E,
-    unstyled: C,
-    removeScrollProps: T,
+    unstyled: N,
+    removeScrollProps: x,
     ...k
   }, F) => {
-    const { _id: I, titleMounted: Q, bodyMounted: B, shouldLockScroll: K, setTitleMounted: i1, setBodyMounted: r1 } = bh({ id: s, transitionProps: c, opened: o, trapFocus: g, closeOnEscape: p, onClose: r, returnFocus: m }), { key: l1, ...n1 } = T || {};
-    return /* @__PURE__ */ _.jsx(D7, { ...R, withinPortal: v, children: /* @__PURE__ */ _.jsx(
+    const { _id: I, titleMounted: Q, bodyMounted: B, shouldLockScroll: K, setTitleMounted: i1, setBodyMounted: r1 } = bh({ id: s, transitionProps: c, opened: o, trapFocus: g, closeOnEscape: p, onClose: r, returnFocus: m }), { key: l1, ...n1 } = x || {};
+    return /* @__PURE__ */ C.jsx(D7, { ...R, withinPortal: y, children: /* @__PURE__ */ C.jsx(
       ph,
       {
         value: {
@@ -16724,14 +16724,14 @@ const Zl = A.forwardRef(
           trapFocus: g,
           closeOnEscape: p,
           zIndex: O,
-          unstyled: C
+          unstyled: N
         },
-        children: /* @__PURE__ */ _.jsx(
+        children: /* @__PURE__ */ C.jsx(
           Ts,
           {
-            enabled: K && y,
+            enabled: K && v,
             ...n1,
-            children: /* @__PURE__ */ _.jsx(
+            children: /* @__PURE__ */ C.jsx(
               g1,
               {
                 ref: F,
@@ -16742,7 +16742,7 @@ const Zl = A.forwardRef(
                   "--mb-shadow": Yt(S),
                   "--mb-padding": v9(w)
                 },
-                children: N
+                children: _
               }
             )
           },
@@ -16761,7 +16761,7 @@ var h8 = { title: "m_615af6c9", header: "m_b5489c3c", inner: "m_60c222c7", conte
 const Yl = A.forwardRef(
   ({ className: i, ...o }, r) => {
     const s = yh(), c = r3();
-    return /* @__PURE__ */ _.jsx(
+    return /* @__PURE__ */ C.jsx(
       g1,
       {
         ref: r,
@@ -16776,7 +16776,7 @@ Yl.displayName = "@mantine/core/ModalBaseBody";
 const $l = A.forwardRef(
   ({ className: i, onClick: o, ...r }, s) => {
     const c = r3();
-    return /* @__PURE__ */ _.jsx(
+    return /* @__PURE__ */ C.jsx(
       L7,
       {
         ref: s,
@@ -16794,7 +16794,7 @@ $l.displayName = "@mantine/core/ModalBaseCloseButton";
 const Kl = A.forwardRef(
   ({ transitionProps: i, className: o, innerProps: r, onKeyDown: s, style: c, ...d }, f) => {
     const g = r3();
-    return /* @__PURE__ */ _.jsx(
+    return /* @__PURE__ */ C.jsx(
       y5,
       {
         mounted: g.opened,
@@ -16807,13 +16807,13 @@ const Kl = A.forwardRef(
           g.onEnterTransitionEnd?.(), g.transitionProps?.onEntered?.();
         },
         ...i,
-        children: (p) => /* @__PURE__ */ _.jsx(
+        children: (p) => /* @__PURE__ */ C.jsx(
           "div",
           {
             ...r,
             className: S4({ [h8.inner]: !g.unstyled }, r.className),
-            children: /* @__PURE__ */ _.jsx(U9, { active: g.opened && g.trapFocus, innerRef: f, children: /* @__PURE__ */ _.jsx(
-              N9,
+            children: /* @__PURE__ */ C.jsx(U9, { active: g.opened && g.trapFocus, innerRef: f, children: /* @__PURE__ */ C.jsx(
+              C9,
               {
                 ...d,
                 component: "section",
@@ -16838,7 +16838,7 @@ Kl.displayName = "@mantine/core/ModalBaseContent";
 const Xl = A.forwardRef(
   ({ className: i, ...o }, r) => {
     const s = r3();
-    return /* @__PURE__ */ _.jsx(
+    return /* @__PURE__ */ C.jsx(
       g1,
       {
         component: "header",
@@ -16862,13 +16862,13 @@ function wh(i) {
 const ql = A.forwardRef(
   ({ onClick: i, transitionProps: o, style: r, visible: s, ...c }, d) => {
     const f = r3(), g = wh(o);
-    return /* @__PURE__ */ _.jsx(
+    return /* @__PURE__ */ C.jsx(
       y5,
       {
         mounted: s !== void 0 ? s : f.opened,
         ...g,
         transition: "fade",
-        children: (p) => /* @__PURE__ */ _.jsx(
+        children: (p) => /* @__PURE__ */ C.jsx(
           Ra,
           {
             ref: d,
@@ -16894,7 +16894,7 @@ function Sh() {
 const Jl = A.forwardRef(
   ({ className: i, ...o }, r) => {
     const s = Sh(), c = r3();
-    return /* @__PURE__ */ _.jsx(
+    return /* @__PURE__ */ C.jsx(
       g1,
       {
         component: "h2",
@@ -16908,7 +16908,7 @@ const Jl = A.forwardRef(
 );
 Jl.displayName = "@mantine/core/ModalBaseTitle";
 function Rh({ children: i }) {
-  return /* @__PURE__ */ _.jsx(_.Fragment, { children: i });
+  return /* @__PURE__ */ C.jsx(C.Fragment, { children: i });
 }
 const [Eh, B7] = y9({
   offsetBottom: !1,
@@ -16933,10 +16933,10 @@ const fs = {}, Ah = (i, { size: o }) => ({
     vars: p,
     size: m,
     __staticSelector: b,
-    __inheritStyles: v = !0,
+    __inheritStyles: y = !0,
     variant: R,
-    ...y
-  } = s1("InputDescription", fs, r), N = B7(), O = T1({
+    ...v
+  } = s1("InputDescription", fs, r), _ = B7(), O = T1({
     name: ["InputWrapper", b],
     props: r,
     classes: r2,
@@ -16948,16 +16948,16 @@ const fs = {}, Ah = (i, { size: o }) => ({
     rootSelector: "description",
     vars: p,
     varsResolver: Ah
-  }), S = v && N?.getStyles || O;
-  return /* @__PURE__ */ _.jsx(
+  }), S = y && _?.getStyles || O;
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
       component: "p",
       ref: o,
       variant: R,
       size: m,
-      ...S("description", N?.getStyles ? { className: c, style: d } : void 0),
-      ...y
+      ...S("description", _?.getStyles ? { className: c, style: d } : void 0),
+      ...v
     }
   );
 });
@@ -16977,10 +16977,10 @@ const Mh = {}, _h = (i, { size: o }) => ({
     vars: p,
     size: m,
     __staticSelector: b,
-    __inheritStyles: v = !0,
+    __inheritStyles: y = !0,
     variant: R,
-    ...y
-  } = r, N = T1({
+    ...v
+  } = r, _ = T1({
     name: ["InputWrapper", b],
     props: r,
     classes: r2,
@@ -16992,8 +16992,8 @@ const Mh = {}, _h = (i, { size: o }) => ({
     rootSelector: "error",
     vars: p,
     varsResolver: _h
-  }), O = B7(), S = v && O?.getStyles || N;
-  return /* @__PURE__ */ _.jsx(
+  }), O = B7(), S = y && O?.getStyles || _;
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
       component: "p",
@@ -17001,7 +17001,7 @@ const Mh = {}, _h = (i, { size: o }) => ({
       variant: R,
       size: m,
       ...S("error", O?.getStyles ? { className: c, style: d } : void 0),
-      ...y
+      ...v
     }
   );
 });
@@ -17009,7 +17009,7 @@ D9.classes = r2;
 D9.displayName = "@mantine/core/InputError";
 const gs = {
   labelElement: "label"
-}, Nh = (i, { size: o }) => ({
+}, Ch = (i, { size: o }) => ({
   label: {
     "--input-label-size": t2(o),
     "--input-asterisk-color": void 0
@@ -17024,15 +17024,15 @@ const gs = {
     vars: p,
     labelElement: m,
     size: b,
-    required: v,
+    required: y,
     htmlFor: R,
-    onMouseDown: y,
-    children: N,
+    onMouseDown: v,
+    children: _,
     __staticSelector: O,
     variant: S,
     mod: w,
     ...E
-  } = s1("InputLabel", gs, r), C = T1({
+  } = s1("InputLabel", gs, r), N = T1({
     name: ["InputWrapper", O],
     props: r,
     classes: r2,
@@ -17043,25 +17043,25 @@ const gs = {
     unstyled: g,
     rootSelector: "label",
     vars: p,
-    varsResolver: Nh
-  }), T = B7(), k = T?.getStyles || C;
-  return /* @__PURE__ */ _.jsxs(
+    varsResolver: Ch
+  }), x = B7(), k = x?.getStyles || N;
+  return /* @__PURE__ */ C.jsxs(
     g1,
     {
-      ...k("label", T?.getStyles ? { className: c, style: d } : void 0),
+      ...k("label", x?.getStyles ? { className: c, style: d } : void 0),
       component: m,
       variant: S,
       size: b,
       ref: o,
       htmlFor: m === "label" ? R : void 0,
-      mod: [{ required: v }, w],
+      mod: [{ required: y }, w],
       onMouseDown: (F) => {
-        y?.(F), !F.defaultPrevented && F.detail > 1 && F.preventDefault();
+        v?.(F), !F.defaultPrevented && F.detail > 1 && F.preventDefault();
       },
       ...E,
       children: [
-        N,
-        v && /* @__PURE__ */ _.jsx("span", { ...k("required"), "aria-hidden": !0, children: " *" })
+        _,
+        y && /* @__PURE__ */ C.jsx("span", { ...k("required"), "aria-hidden": !0, children: " *" })
       ]
     }
   );
@@ -17078,10 +17078,10 @@ const ms = {}, Ea = y1((i, o) => {
     vars: p,
     __staticSelector: m,
     variant: b,
-    error: v,
+    error: y,
     mod: R,
-    ...y
-  } = s1("InputPlaceholder", ms, r), N = T1({
+    ...v
+  } = s1("InputPlaceholder", ms, r), _ = T1({
     name: ["InputPlaceholder", m],
     props: r,
     classes: r2,
@@ -17092,21 +17092,21 @@ const ms = {}, Ea = y1((i, o) => {
     unstyled: g,
     rootSelector: "placeholder"
   });
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
-      ...N("placeholder"),
-      mod: [{ error: !!v }, R],
+      ..._("placeholder"),
+      mod: [{ error: !!y }, R],
       component: "span",
       variant: b,
       ref: o,
-      ...y
+      ...v
     }
   );
 });
 Ea.classes = r2;
 Ea.displayName = "@mantine/core/InputPlaceholder";
-function Ch(i, { hasDescription: o, hasError: r }) {
+function Nh(i, { hasDescription: o, hasError: r }) {
   const s = i.findIndex((p) => p === "input"), c = i.slice(0, s), d = i.slice(s + 1), f = o && c.includes("description") || r && c.includes("error");
   return { offsetBottom: o && d.includes("description") || r && d.includes("error"), offsetTop: f };
 }
@@ -17135,16 +17135,16 @@ const Oh = {
     vars: p,
     size: m,
     variant: b,
-    __staticSelector: v,
+    __staticSelector: y,
     inputContainer: R,
-    inputWrapperOrder: y,
-    label: N,
+    inputWrapperOrder: v,
+    label: _,
     error: O,
     description: S,
     labelProps: w,
     descriptionProps: E,
-    errorProps: C,
-    labelElement: T,
+    errorProps: N,
+    labelElement: x,
     children: k,
     withAsterisk: F,
     id: I,
@@ -17153,7 +17153,7 @@ const Oh = {
     mod: K,
     ...i1
   } = r, r1 = T1({
-    name: ["InputWrapper", v],
+    name: ["InputWrapper", y],
     props: B || r,
     classes: r2,
     className: c,
@@ -17166,20 +17166,20 @@ const Oh = {
   }), l1 = {
     size: m,
     variant: b,
-    __staticSelector: v
-  }, n1 = h5(I), t1 = typeof F == "boolean" ? F : Q, V = C?.id || `${n1}-error`, Y = E?.id || `${n1}-description`, W = n1, Z = !!O && typeof O != "boolean", x = !!S, j = `${Z ? V : ""} ${x ? Y : ""}`, e1 = j.trim().length > 0 ? j.trim() : void 0, o1 = w?.id || `${n1}-label`, a1 = N && /* @__PURE__ */ _.jsx(
+    __staticSelector: y
+  }, n1 = h5(I), t1 = typeof F == "boolean" ? F : Q, V = N?.id || `${n1}-error`, Y = E?.id || `${n1}-description`, W = n1, Z = !!O && typeof O != "boolean", T = !!S, j = `${Z ? V : ""} ${T ? Y : ""}`, e1 = j.trim().length > 0 ? j.trim() : void 0, o1 = w?.id || `${n1}-label`, a1 = _ && /* @__PURE__ */ C.jsx(
     P9,
     {
-      labelElement: T,
+      labelElement: x,
       id: o1,
       htmlFor: W,
       required: t1,
       ...l1,
       ...w,
-      children: N
+      children: _
     },
     "label"
-  ), m1 = x && /* @__PURE__ */ _.jsx(
+  ), m1 = T && /* @__PURE__ */ C.jsx(
     F9,
     {
       ...E,
@@ -17189,17 +17189,17 @@ const Oh = {
       children: S
     },
     "description"
-  ), c1 = /* @__PURE__ */ _.jsx(A.Fragment, { children: R(k) }, "input"), _1 = Z && /* @__PURE__ */ A.createElement(
+  ), c1 = /* @__PURE__ */ C.jsx(A.Fragment, { children: R(k) }, "input"), _1 = Z && /* @__PURE__ */ A.createElement(
     D9,
     {
-      ...C,
+      ...N,
       ...l1,
-      size: C?.size || l1.size,
+      size: N?.size || l1.size,
       key: "error",
-      id: C?.id || V
+      id: N?.id || V
     },
     O
-  ), h1 = y.map((v1) => {
+  ), h1 = v.map((v1) => {
     switch (v1) {
       case "label":
         return a1;
@@ -17213,7 +17213,7 @@ const Oh = {
         return null;
     }
   });
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     Eh,
     {
       value: {
@@ -17221,9 +17221,9 @@ const Oh = {
         describedBy: e1,
         inputId: W,
         labelId: o1,
-        ...Ch(y, { hasDescription: x, hasError: Z })
+        ...Nh(v, { hasDescription: T, hasError: Z })
       },
-      children: /* @__PURE__ */ _.jsx(
+      children: /* @__PURE__ */ C.jsx(
         g1,
         {
           ref: o,
@@ -17269,16 +17269,16 @@ const Th = {
     required: p,
     __staticSelector: m,
     __stylesApiProps: b,
-    size: v,
+    size: y,
     wrapperProps: R,
-    error: y,
-    disabled: N,
+    error: v,
+    disabled: _,
     leftSection: O,
     leftSectionProps: S,
     leftSectionWidth: w,
     rightSection: E,
-    rightSectionProps: C,
-    rightSectionWidth: T,
+    rightSectionProps: N,
+    rightSectionWidth: x,
     rightSectionPointerEvents: k,
     leftSectionPointerEvents: F,
     variant: I,
@@ -17292,7 +17292,7 @@ const Th = {
     mod: t1,
     inputSize: V,
     ...Y
-  } = r, { styleProps: W, rest: Z } = E9(Y), x = B7(), j = { offsetBottom: x?.offsetBottom, offsetTop: x?.offsetTop }, e1 = T1({
+  } = r, { styleProps: W, rest: Z } = E9(Y), T = B7(), j = { offsetBottom: T?.offsetBottom, offsetTop: T?.offsetTop }, e1 = T1({
     name: ["Input", m],
     props: b || r,
     classes: r2,
@@ -17307,12 +17307,12 @@ const Th = {
     varsResolver: Uh
   }), o1 = l1 ? {
     required: p,
-    disabled: N,
-    "aria-invalid": !!y,
-    "aria-describedby": x?.describedBy,
-    id: x?.inputId || r1
+    disabled: _,
+    "aria-invalid": !!v,
+    "aria-describedby": T?.describedBy,
+    id: T?.inputId || r1
   } : {};
-  return /* @__PURE__ */ _.jsxs(
+  return /* @__PURE__ */ C.jsxs(
     g1,
     {
       ...e1("wrapper"),
@@ -17320,9 +17320,9 @@ const Th = {
       ...R,
       mod: [
         {
-          error: !!y && n1,
+          error: !!v && n1,
           pointer: B,
-          disabled: N,
+          disabled: _,
           multiline: K,
           "data-with-right-section": !!E,
           "data-with-left-section": !!O
@@ -17330,9 +17330,9 @@ const Th = {
         t1
       ],
       variant: I,
-      size: v,
+      size: y,
       children: [
-        O && /* @__PURE__ */ _.jsx(
+        O && /* @__PURE__ */ C.jsx(
           "div",
           {
             ...S,
@@ -17344,7 +17344,7 @@ const Th = {
             children: O
           }
         ),
-        /* @__PURE__ */ _.jsx(
+        /* @__PURE__ */ C.jsx(
           g1,
           {
             component: "input",
@@ -17352,20 +17352,20 @@ const Th = {
             ...o1,
             ref: o,
             required: p,
-            mod: { disabled: N, error: !!y && n1 },
+            mod: { disabled: _, error: !!v && n1 },
             variant: I,
             __size: V,
             ...e1("input")
           }
         ),
-        E && /* @__PURE__ */ _.jsx(
+        E && /* @__PURE__ */ C.jsx(
           "div",
           {
-            ...C,
+            ...N,
             "data-position": "right",
             ...e1("section", {
-              className: C?.className,
-              style: C?.style
+              className: N?.className,
+              style: N?.style
             }),
             children: E
           }
@@ -17390,16 +17390,16 @@ function kh(i, o, r) {
     classNames: p,
     styles: m,
     className: b,
-    unstyled: v,
+    unstyled: y,
     __staticSelector: R,
-    __stylesApiProps: y,
-    errorProps: N,
+    __stylesApiProps: v,
+    errorProps: _,
     labelProps: O,
     descriptionProps: S,
     wrapperProps: w,
     id: E,
-    size: C,
-    style: T,
+    size: N,
+    style: x,
     inputContainer: k,
     inputWrapperOrder: F,
     withAsterisk: I,
@@ -17415,14 +17415,14 @@ function kh(i, o, r) {
     classNames: p,
     className: b,
     __staticSelector: R,
-    __stylesApiProps: y || s,
-    errorProps: N,
+    __stylesApiProps: v || s,
+    errorProps: _,
     labelProps: O,
     descriptionProps: S,
-    unstyled: v,
+    unstyled: y,
     styles: m,
-    size: C,
-    style: T,
+    size: N,
+    style: x,
     inputContainer: k,
     inputWrapperOrder: F,
     withAsterisk: I,
@@ -17435,16 +17435,16 @@ function kh(i, o, r) {
     ...l1,
     classNames: p,
     styles: m,
-    unstyled: v,
+    unstyled: y,
     wrapperProps: { ...n1, ...r1 },
     inputProps: {
       required: g,
       classNames: p,
       styles: m,
-      unstyled: v,
-      size: C,
+      unstyled: y,
+      size: N,
       __staticSelector: R,
-      __stylesApiProps: y || s,
+      __stylesApiProps: v || s,
       error: f,
       variant: Q,
       id: E
@@ -17456,7 +17456,7 @@ const Fh = {
   withAria: !0
 }, L3 = V4((i, o) => {
   const { inputProps: r, wrapperProps: s, ...c } = kh("InputBase", Fh, i);
-  return /* @__PURE__ */ _.jsx(i2.Wrapper, { ...s, children: /* @__PURE__ */ _.jsx(i2, { ...r, ...c, ref: o }) });
+  return /* @__PURE__ */ C.jsx(i2.Wrapper, { ...s, children: /* @__PURE__ */ C.jsx(i2, { ...r, ...c, ref: o }) });
 });
 L3.classes = { ...i2.classes, ...i2.Wrapper.classes };
 L3.displayName = "@mantine/core/InputBase";
@@ -17480,10 +17480,10 @@ const Ph = {}, k3 = V4((i, o) => {
     vars: p,
     gap: m,
     rowGap: b,
-    columnGap: v,
+    columnGap: y,
     align: R,
-    justify: y,
-    wrap: N,
+    justify: v,
+    wrap: _,
     direction: O,
     ...S
   } = r, w = T1({
@@ -17496,27 +17496,27 @@ const Ph = {}, k3 = V4((i, o) => {
     styles: f,
     unstyled: g,
     vars: p
-  }), E = T2(), C = Ys(), T = Zs({
-    styleProps: { gap: m, rowGap: b, columnGap: v, align: R, justify: y, wrap: N, direction: O },
+  }), E = T2(), N = Ys(), x = Zs({
+    styleProps: { gap: m, rowGap: b, columnGap: y, align: R, justify: v, wrap: _, direction: O },
     theme: E,
     data: Dh
   });
-  return /* @__PURE__ */ _.jsxs(_.Fragment, { children: [
-    T.hasResponsiveStyles && /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsxs(C.Fragment, { children: [
+    x.hasResponsiveStyles && /* @__PURE__ */ C.jsx(
       Gs,
       {
-        selector: `.${C}`,
-        styles: T.styles,
-        media: T.media
+        selector: `.${N}`,
+        styles: x.styles,
+        media: x.media
       }
     ),
-    /* @__PURE__ */ _.jsx(
+    /* @__PURE__ */ C.jsx(
       g1,
       {
         ref: o,
         ...w("root", {
-          className: C,
-          style: b9(T.inlineStyles)
+          className: N,
+          style: b9(x.inlineStyles)
         }),
         ...S
       }
@@ -17552,31 +17552,31 @@ const Bh = {
     span: p,
     __staticSelector: m,
     vars: b,
-    className: v,
+    className: y,
     style: R,
-    classNames: y,
-    styles: N,
+    classNames: v,
+    styles: _,
     unstyled: O,
     variant: S,
     mod: w,
     size: E,
-    ...C
-  } = r, T = T1({
+    ...N
+  } = r, x = T1({
     name: ["Text", m],
     props: r,
     classes: tc,
-    className: v,
+    className: y,
     style: R,
-    classNames: y,
-    styles: N,
+    classNames: v,
+    styles: _,
     unstyled: O,
     vars: b,
     varsResolver: zh
   });
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
-      ...T("root", { focusable: !0 }),
+      ...x("root", { focusable: !0 }),
       ref: o,
       component: p ? "span" : "p",
       variant: S,
@@ -17590,7 +17590,7 @@ const Bh = {
         w
       ],
       size: E,
-      ...C
+      ...N
     }
   );
 });
@@ -17616,7 +17616,7 @@ const Vh = {
     "--combobox-chevron-size": e4(o, "combobox-chevron-size")
   }
 }), _a = y1((i, o) => {
-  const r = s1("ComboboxChevron", Vh, i), { size: s, error: c, style: d, className: f, classNames: g, styles: p, unstyled: m, vars: b, mod: v, ...R } = r, y = T1({
+  const r = s1("ComboboxChevron", Vh, i), { size: s, error: c, style: d, className: f, classNames: g, styles: p, unstyled: m, vars: b, mod: y, ...R } = r, v = T1({
     name: "ComboboxChevron",
     classes: T4,
     props: r,
@@ -17629,19 +17629,19 @@ const Vh = {
     varsResolver: Qh,
     rootSelector: "chevron"
   });
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
       component: "svg",
       ...R,
-      ...y("chevron"),
+      ...v("chevron"),
       size: s,
       viewBox: "0 0 15 15",
       fill: "none",
       xmlns: "http://www.w3.org/2000/svg",
-      mod: ["combobox-chevron", { error: c }, v],
+      mod: ["combobox-chevron", { error: c }, y],
       ref: o,
-      children: /* @__PURE__ */ _.jsx(
+      children: /* @__PURE__ */ C.jsx(
         "path",
         {
           d: "M4.93179 5.43179C4.75605 5.60753 4.75605 5.89245 4.93179 6.06819C5.10753 6.24392 5.39245 6.24392 5.56819 6.06819L7.49999 4.13638L9.43179 6.06819C9.60753 6.24392 9.89245 6.24392 10.0682 6.06819C10.2439 5.89245 10.2439 5.60753 10.0682 5.43179L7.81819 3.18179C7.73379 3.0974 7.61933 3.04999 7.49999 3.04999C7.38064 3.04999 7.26618 3.0974 7.18179 3.18179L4.93179 5.43179ZM10.0682 9.56819C10.2439 9.39245 10.2439 9.10753 10.0682 8.93179C9.89245 8.75606 9.60753 8.75606 9.43179 8.93179L7.49999 10.8636L5.56819 8.93179C5.39245 8.75606 5.10753 8.75606 4.93179 8.93179C4.75605 9.10753 4.75605 9.39245 4.93179 9.56819L7.18179 11.8182C7.35753 11.9939 7.64245 11.9939 7.81819 11.8182L10.0682 9.56819Z",
@@ -17658,7 +17658,7 @@ _a.displayName = "@mantine/core/ComboboxChevron";
 const [Hh, s2] = p5(
   "Combobox component was not found in tree"
 ), nc = A.forwardRef(
-  ({ size: i, onMouseDown: o, onClick: r, onClear: s, ...c }, d) => /* @__PURE__ */ _.jsx(
+  ({ size: i, onMouseDown: o, onClick: r, onClear: s, ...c }, d) => /* @__PURE__ */ C.jsx(
     L7,
     {
       ref: d,
@@ -17677,13 +17677,13 @@ const [Hh, s2] = p5(
   )
 );
 nc.displayName = "@mantine/core/ComboboxClearButton";
-const jh = {}, Na = y1((i, o) => {
+const jh = {}, Ca = y1((i, o) => {
   const { classNames: r, styles: s, className: c, style: d, hidden: f, ...g } = s1(
     "ComboboxDropdown",
     jh,
     i
   ), p = s2();
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     P3.Dropdown,
     {
       ...g,
@@ -17694,8 +17694,8 @@ const jh = {}, Na = y1((i, o) => {
     }
   );
 });
-Na.classes = T4;
-Na.displayName = "@mantine/core/ComboboxDropdown";
+Ca.classes = T4;
+Ca.displayName = "@mantine/core/ComboboxDropdown";
 const Wh = {
   refProp: "ref"
 }, oc = y1((i, o) => {
@@ -17704,16 +17704,16 @@ const Wh = {
     throw new Error(
       "Combobox.DropdownTarget component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported"
     );
-  return /* @__PURE__ */ _.jsx(P3.Target, { ref: o, refProp: s, children: r });
+  return /* @__PURE__ */ C.jsx(P3.Target, { ref: o, refProp: s, children: r });
 });
 oc.displayName = "@mantine/core/ComboboxDropdownTarget";
-const Ih = {}, Ca = y1((i, o) => {
+const Ih = {}, Na = y1((i, o) => {
   const { classNames: r, className: s, style: c, styles: d, vars: f, ...g } = s1(
     "ComboboxEmpty",
     Ih,
     i
   ), p = s2();
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
       ref: o,
@@ -17722,8 +17722,8 @@ const Ih = {}, Ca = y1((i, o) => {
     }
   );
 });
-Ca.classes = T4;
-Ca.displayName = "@mantine/core/ComboboxEmpty";
+Na.classes = T4;
+Na.displayName = "@mantine/core/ComboboxEmpty";
 function Oa({
   onKeyDown: i,
   withKeyboardNavigation: o,
@@ -17732,17 +17732,17 @@ function Oa({
   targetType: c,
   autoComplete: d
 }) {
-  const f = s2(), [g, p] = A.useState(null), m = (v) => {
-    if (i?.(v), !f.readOnly && o) {
-      if (v.nativeEvent.isComposing)
+  const f = s2(), [g, p] = A.useState(null), m = (y) => {
+    if (i?.(y), !f.readOnly && o) {
+      if (y.nativeEvent.isComposing)
         return;
-      if (v.nativeEvent.code === "ArrowDown" && (v.preventDefault(), f.store.dropdownOpened ? p(f.store.selectNextOption()) : (f.store.openDropdown("keyboard"), p(f.store.selectActiveOption()), f.store.updateSelectedOptionIndex("selected", { scrollIntoView: !0 }))), v.nativeEvent.code === "ArrowUp" && (v.preventDefault(), f.store.dropdownOpened ? p(f.store.selectPreviousOption()) : (f.store.openDropdown("keyboard"), p(f.store.selectActiveOption()), f.store.updateSelectedOptionIndex("selected", { scrollIntoView: !0 }))), v.nativeEvent.code === "Enter" || v.nativeEvent.code === "NumpadEnter") {
-        if (v.nativeEvent.keyCode === 229)
+      if (y.nativeEvent.code === "ArrowDown" && (y.preventDefault(), f.store.dropdownOpened ? p(f.store.selectNextOption()) : (f.store.openDropdown("keyboard"), p(f.store.selectActiveOption()), f.store.updateSelectedOptionIndex("selected", { scrollIntoView: !0 }))), y.nativeEvent.code === "ArrowUp" && (y.preventDefault(), f.store.dropdownOpened ? p(f.store.selectPreviousOption()) : (f.store.openDropdown("keyboard"), p(f.store.selectActiveOption()), f.store.updateSelectedOptionIndex("selected", { scrollIntoView: !0 }))), y.nativeEvent.code === "Enter" || y.nativeEvent.code === "NumpadEnter") {
+        if (y.nativeEvent.keyCode === 229)
           return;
         const R = f.store.getSelectedOptionIndex();
-        f.store.dropdownOpened && R !== -1 ? (v.preventDefault(), f.store.clickSelectedOption()) : c === "button" && (v.preventDefault(), f.store.openDropdown("keyboard"));
+        f.store.dropdownOpened && R !== -1 ? (y.preventDefault(), f.store.clickSelectedOption()) : c === "button" && (y.preventDefault(), f.store.openDropdown("keyboard"));
       }
-      v.nativeEvent.code === "Escape" && f.store.closeDropdown("keyboard"), v.nativeEvent.code === "Space" && c === "button" && (v.preventDefault(), f.store.toggleDropdown("keyboard"));
+      y.nativeEvent.code === "Escape" && f.store.closeDropdown("keyboard"), y.nativeEvent.code === "Space" && c === "button" && (y.preventDefault(), f.store.toggleDropdown("keyboard"));
     }
   };
   return {
@@ -17780,7 +17780,7 @@ const Gh = {
     throw new Error(
       "Combobox.EventsTarget component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported"
     );
-  const b = s2(), v = Oa({
+  const b = s2(), y = Oa({
     targetType: g,
     withAriaAttributes: d,
     withKeyboardNavigation: c,
@@ -17789,7 +17789,7 @@ const Gh = {
     autoComplete: p
   });
   return A.cloneElement(r, {
-    ...v,
+    ...y,
     ...m,
     [s]: _4(o, b.store.targetRef, S9(r))
   });
@@ -17801,7 +17801,7 @@ const Zh = {}, xa = y1((i, o) => {
     Zh,
     i
   ), p = s2();
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
       ref: o,
@@ -17821,14 +17821,14 @@ const Yh = {}, Ta = y1((i, o) => {
     Yh,
     i
   ), b = s2();
-  return /* @__PURE__ */ _.jsxs(
+  return /* @__PURE__ */ C.jsxs(
     g1,
     {
       ref: o,
       ...b.getStyles("group", { className: s, classNames: r, style: c, styles: d }),
       ...m,
       children: [
-        p && /* @__PURE__ */ _.jsx("div", { ...b.getStyles("groupLabel", { classNames: r, styles: d }), children: p }),
+        p && /* @__PURE__ */ C.jsx("div", { ...b.getStyles("groupLabel", { classNames: r, styles: d }), children: p }),
         g
       ]
     }
@@ -17842,7 +17842,7 @@ const $h = {}, Ua = y1((i, o) => {
     $h,
     i
   ), p = s2();
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
       ref: o,
@@ -17861,7 +17861,7 @@ function sc({
   valuesDivider: o = ",",
   ...r
 }) {
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     "input",
     {
       type: "hidden",
@@ -17881,34 +17881,34 @@ const Kh = {}, ka = y1((i, o) => {
     onClick: p,
     id: m,
     active: b,
-    onMouseDown: v,
+    onMouseDown: y,
     onMouseOver: R,
-    disabled: y,
-    selected: N,
+    disabled: v,
+    selected: _,
     mod: O,
     ...S
-  } = r, w = s2(), E = A.useId(), C = m || E;
-  return /* @__PURE__ */ _.jsx(
+  } = r, w = s2(), E = A.useId(), N = m || E;
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
       ...w.getStyles("option", { className: c, classNames: s, styles: f, style: d }),
       ...S,
       ref: o,
-      id: C,
+      id: N,
       mod: [
         "combobox-option",
-        { "combobox-active": b, "combobox-disabled": y, "combobox-selected": N },
+        { "combobox-active": b, "combobox-disabled": v, "combobox-selected": _ },
         O
       ],
       role: "option",
-      onClick: (T) => {
-        y ? T.preventDefault() : (w.onOptionSubmit?.(r.value, r), p?.(T));
+      onClick: (x) => {
+        v ? x.preventDefault() : (w.onOptionSubmit?.(r.value, r), p?.(x));
       },
-      onMouseDown: (T) => {
-        T.preventDefault(), v?.(T);
+      onMouseDown: (x) => {
+        x.preventDefault(), y?.(x);
       },
-      onMouseOver: (T) => {
-        w.resetSelectionOnOptionHover && w.store.resetSelectedOption(), R?.(T);
+      onMouseOver: (x) => {
+        w.resetSelectionOnOptionHover && w.store.resetSelectedOption(), R?.(x);
       }
     }
   );
@@ -17916,20 +17916,20 @@ const Kh = {}, ka = y1((i, o) => {
 ka.classes = T4;
 ka.displayName = "@mantine/core/ComboboxOption";
 const Xh = {}, Fa = y1((i, o) => {
-  const r = s1("ComboboxOptions", Xh, i), { classNames: s, className: c, style: d, styles: f, id: g, onMouseDown: p, labelledBy: m, ...b } = r, v = s2(), R = h5(g);
+  const r = s1("ComboboxOptions", Xh, i), { classNames: s, className: c, style: d, styles: f, id: g, onMouseDown: p, labelledBy: m, ...b } = r, y = s2(), R = h5(g);
   return A.useEffect(() => {
-    v.store.setListId(R);
-  }, [R]), /* @__PURE__ */ _.jsx(
+    y.store.setListId(R);
+  }, [R]), /* @__PURE__ */ C.jsx(
     g1,
     {
       ref: o,
-      ...v.getStyles("options", { className: c, style: d, classNames: s, styles: f }),
+      ...y.getStyles("options", { className: c, style: d, classNames: s, styles: f }),
       ...b,
       id: R,
       role: "listbox",
       "aria-labelledby": m,
-      onMouseDown: (y) => {
-        y.preventDefault(), p?.(y);
+      onMouseDown: (v) => {
+        v.preventDefault(), p?.(v);
       }
     }
   );
@@ -17949,8 +17949,8 @@ const qh = {
     onKeyDown: p,
     withKeyboardNavigation: m,
     size: b,
-    ...v
-  } = r, R = s2(), y = R.getStyles("search"), N = Oa({
+    ...y
+  } = r, R = s2(), v = R.getStyles("search"), _ = Oa({
     targetType: "input",
     withAriaAttributes: g,
     withKeyboardNavigation: m,
@@ -17958,15 +17958,15 @@ const qh = {
     onKeyDown: p,
     autoComplete: "off"
   });
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     i2,
     {
       ref: _4(o, R.store.searchRef),
-      classNames: [{ input: y.className }, s],
-      styles: [{ input: y.style }, c],
+      classNames: [{ input: v.className }, s],
+      styles: [{ input: v.style }, c],
       size: b || R.size,
-      ...N,
-      ...v,
+      ..._,
+      ...y,
       __staticSelector: "Combobox"
     }
   );
@@ -17995,7 +17995,7 @@ const Jh = {
     throw new Error(
       "Combobox.Target component children should be an element or a component that accepts ref. Fragments, strings, numbers and other primitive values are not supported"
     );
-  const b = s2(), v = Oa({
+  const b = s2(), y = Oa({
     targetType: g,
     withAriaAttributes: d,
     withKeyboardNavigation: c,
@@ -18003,10 +18003,10 @@ const Jh = {
     onKeyDown: r.props.onKeyDown,
     autoComplete: p
   }), R = A.cloneElement(r, {
-    ...v,
+    ...y,
     ...m
   });
-  return /* @__PURE__ */ _.jsx(P3.Target, { ref: _4(o, b.store.targetRef), children: R });
+  return /* @__PURE__ */ C.jsx(P3.Target, { ref: _4(o, b.store.targetRef), children: R });
 });
 lc.displayName = "@mantine/core/ComboboxTarget";
 function eb(i, o, r) {
@@ -18051,7 +18051,7 @@ function Pa({
     defaultValue: i,
     finalValue: !1,
     onChange: r
-  }), m = A.useRef(null), b = A.useRef(-1), v = A.useRef(null), R = A.useRef(null), y = A.useRef(-1), N = A.useRef(-1), O = A.useRef(-1), S = A.useCallback(
+  }), m = A.useRef(null), b = A.useRef(-1), y = A.useRef(null), R = A.useRef(null), v = A.useRef(-1), _ = A.useRef(-1), O = A.useRef(-1), S = A.useCallback(
     (V = "unknown") => {
       g || (p(!0), c?.(V));
     },
@@ -18066,18 +18066,18 @@ function Pa({
       g ? w(V) : S(V);
     },
     [w, S, g]
-  ), C = A.useCallback(() => {
+  ), N = A.useCallback(() => {
     const V = document.querySelector(`#${m.current} [data-combobox-selected]`);
     V?.removeAttribute("data-combobox-selected"), V?.removeAttribute("aria-selected");
-  }, []), T = A.useCallback(
+  }, []), x = A.useCallback(
     (V) => {
       const W = document.getElementById(m.current)?.querySelectorAll("[data-combobox-option]");
       if (!W)
         return null;
       const Z = V >= W.length ? 0 : V < 0 ? W.length - 1 : V;
-      return b.current = Z, W?.[Z] && !W[Z].hasAttribute("data-combobox-disabled") ? (C(), W[Z].setAttribute("data-combobox-selected", "true"), W[Z].setAttribute("aria-selected", "true"), W[Z].scrollIntoView({ block: "nearest", behavior: f }), W[Z].id) : null;
+      return b.current = Z, W?.[Z] && !W[Z].hasAttribute("data-combobox-disabled") ? (N(), W[Z].setAttribute("data-combobox-selected", "true"), W[Z].setAttribute("aria-selected", "true"), W[Z].scrollIntoView({ block: "nearest", behavior: f }), W[Z].id) : null;
     },
-    [f, C]
+    [f, N]
   ), k = A.useCallback(() => {
     const V = document.querySelector(
       `#${m.current} [data-combobox-active]`
@@ -18086,62 +18086,62 @@ function Pa({
       const Y = document.querySelectorAll(
         `#${m.current} [data-combobox-option]`
       ), W = Array.from(Y).findIndex((Z) => Z === V);
-      return T(W);
+      return x(W);
     }
-    return T(0);
-  }, [T]), F = A.useCallback(
-    () => T(
+    return x(0);
+  }, [x]), F = A.useCallback(
+    () => x(
       tb(
         b.current,
         document.querySelectorAll(`#${m.current} [data-combobox-option]`),
         d
       )
     ),
-    [T, d]
+    [x, d]
   ), I = A.useCallback(
-    () => T(
+    () => x(
       eb(
         b.current,
         document.querySelectorAll(`#${m.current} [data-combobox-option]`),
         d
       )
     ),
-    [T, d]
+    [x, d]
   ), Q = A.useCallback(
-    () => T(
+    () => x(
       ab(
         document.querySelectorAll(`#${m.current} [data-combobox-option]`)
       )
     ),
-    [T]
+    [x]
   ), B = A.useCallback(
     (V = "selected", Y) => {
       O.current = window.setTimeout(() => {
         const W = document.querySelectorAll(
           `#${m.current} [data-combobox-option]`
         ), Z = Array.from(W).findIndex(
-          (x) => x.hasAttribute(`data-combobox-${V}`)
+          (T) => T.hasAttribute(`data-combobox-${V}`)
         );
         b.current = Z, Y?.scrollIntoView && W[Z]?.scrollIntoView({ block: "nearest", behavior: f });
       }, 0);
     },
     []
   ), K = A.useCallback(() => {
-    b.current = -1, C();
-  }, [C]), i1 = A.useCallback(() => {
+    b.current = -1, N();
+  }, [N]), i1 = A.useCallback(() => {
     document.querySelectorAll(
       `#${m.current} [data-combobox-option]`
     )?.[b.current]?.click();
   }, []), r1 = A.useCallback((V) => {
     m.current = V;
   }, []), l1 = A.useCallback(() => {
-    y.current = window.setTimeout(() => v.current.focus(), 0);
+    v.current = window.setTimeout(() => y.current.focus(), 0);
   }, []), n1 = A.useCallback(() => {
-    N.current = window.setTimeout(() => R.current.focus(), 0);
+    _.current = window.setTimeout(() => R.current.focus(), 0);
   }, []), t1 = A.useCallback(() => b.current, []);
   return A.useEffect(
     () => () => {
-      window.clearTimeout(y.current), window.clearTimeout(N.current), window.clearTimeout(O.current);
+      window.clearTimeout(v.current), window.clearTimeout(_.current), window.clearTimeout(O.current);
     },
     []
   ), {
@@ -18151,7 +18151,7 @@ function Pa({
     toggleDropdown: E,
     selectedOptionIndex: b.current,
     getSelectedOptionIndex: t1,
-    selectOption: T,
+    selectOption: x,
     selectFirstOption: Q,
     selectActiveOption: k,
     selectNextOption: F,
@@ -18161,7 +18161,7 @@ function Pa({
     listId: m.current,
     setListId: r1,
     clickSelectedOption: i1,
-    searchRef: v,
+    searchRef: y,
     focusSearchInput: l1,
     targetRef: R,
     focusTarget: n1
@@ -18184,7 +18184,7 @@ const ib = {
     "--combobox-option-padding": e4(o, "combobox-option-padding")
   }
 });
-function C1(i) {
+function N1(i) {
   const o = s1("Combobox", ib, i), {
     classNames: r,
     styles: s,
@@ -18195,13 +18195,13 @@ function C1(i) {
     onOptionSubmit: p,
     onClose: m,
     size: b,
-    dropdownPadding: v,
+    dropdownPadding: y,
     resetSelectionOnOptionHover: R,
-    __staticSelector: y,
-    readOnly: N,
+    __staticSelector: v,
+    readOnly: _,
     ...O
   } = o, S = Pa(), w = f || S, E = T1({
-    name: y || "Combobox",
+    name: v || "Combobox",
     classes: T4,
     props: o,
     classNames: r,
@@ -18209,10 +18209,10 @@ function C1(i) {
     unstyled: c,
     vars: g,
     varsResolver: nb
-  }), C = () => {
+  }), N = () => {
     m?.(), w.closeDropdown();
   };
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     Hh,
     {
       value: {
@@ -18221,14 +18221,14 @@ function C1(i) {
         onOptionSubmit: p,
         size: b,
         resetSelectionOnOptionHover: R,
-        readOnly: N
+        readOnly: _
       },
-      children: /* @__PURE__ */ _.jsx(
+      children: /* @__PURE__ */ C.jsx(
         P3,
         {
           opened: w.dropdownOpened,
           ...O,
-          onChange: (T) => !T && C(),
+          onChange: (x) => !x && N(),
           withRoles: !1,
           unstyled: c,
           children: d
@@ -18238,26 +18238,26 @@ function C1(i) {
   );
 }
 const ob = (i) => i;
-C1.extend = ob;
-C1.classes = T4;
-C1.displayName = "@mantine/core/Combobox";
-C1.Target = lc;
-C1.Dropdown = Na;
-C1.Options = Fa;
-C1.Option = ka;
-C1.Search = Da;
-C1.Empty = Ca;
-C1.Chevron = _a;
-C1.Footer = xa;
-C1.Header = Ua;
-C1.EventsTarget = rc;
-C1.DropdownTarget = oc;
-C1.Group = Ta;
-C1.ClearButton = nc;
-C1.HiddenInput = sc;
+N1.extend = ob;
+N1.classes = T4;
+N1.displayName = "@mantine/core/Combobox";
+N1.Target = lc;
+N1.Dropdown = Ca;
+N1.Options = Fa;
+N1.Option = ka;
+N1.Search = Da;
+N1.Empty = Na;
+N1.Chevron = _a;
+N1.Footer = xa;
+N1.Header = Ua;
+N1.EventsTarget = rc;
+N1.DropdownTarget = oc;
+N1.Group = Ta;
+N1.ClearButton = nc;
+N1.HiddenInput = sc;
 function rb({ size: i, style: o, ...r }) {
   const s = i !== void 0 ? { width: X(i), height: X(i), ...o } : o;
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     "svg",
     {
       viewBox: "0 0 10 7",
@@ -18266,7 +18266,7 @@ function rb({ size: i, style: o, ...r }) {
       style: s,
       "aria-hidden": !0,
       ...r,
-      children: /* @__PURE__ */ _.jsx(
+      children: /* @__PURE__ */ C.jsx(
         "path",
         {
           d: "M4 4.586L1.707 2.293A1 1 0 1 0 .293 3.707l3 3a.997.997 0 0 0 1.414 0l5-5A1 1 0 1 0 8.293.293L4 4.586z",
@@ -18341,13 +18341,13 @@ function dc({
   renderOption: d
 }) {
   if (!b8(i)) {
-    const g = lb(r, i.value), p = o && g && /* @__PURE__ */ _.jsx(rb, { className: T4.optionsDropdownCheckIcon }), m = /* @__PURE__ */ _.jsxs(_.Fragment, { children: [
+    const g = lb(r, i.value), p = o && g && /* @__PURE__ */ C.jsx(rb, { className: T4.optionsDropdownCheckIcon }), m = /* @__PURE__ */ C.jsxs(C.Fragment, { children: [
       s === "left" && p,
-      /* @__PURE__ */ _.jsx("span", { children: i.label }),
+      /* @__PURE__ */ C.jsx("span", { children: i.label }),
       s === "right" && p
     ] });
-    return /* @__PURE__ */ _.jsx(
-      C1.Option,
+    return /* @__PURE__ */ C.jsx(
+      N1.Option,
       {
         value: i.value,
         disabled: i.disabled,
@@ -18360,7 +18360,7 @@ function dc({
       }
     );
   }
-  const f = i.items.map((g) => /* @__PURE__ */ _.jsx(
+  const f = i.items.map((g) => /* @__PURE__ */ C.jsx(
     dc,
     {
       data: g,
@@ -18372,7 +18372,7 @@ function dc({
     },
     g.value
   ));
-  return /* @__PURE__ */ _.jsx(C1.Group, { label: i.group, children: f });
+  return /* @__PURE__ */ C.jsx(N1.Group, { label: i.group, children: f });
 }
 function fc({
   data: i,
@@ -18386,33 +18386,33 @@ function fc({
   filterOptions: p = !0,
   withCheckIcon: m = !1,
   value: b,
-  checkIconPosition: v,
+  checkIconPosition: y,
   nothingFoundMessage: R,
-  unstyled: y,
-  labelId: N,
+  unstyled: v,
+  labelId: _,
   renderOption: O,
   scrollAreaProps: S,
   "aria-label": w
 }) {
   uc(i);
-  const C = typeof c == "string" ? (s || cc)({
+  const N = typeof c == "string" ? (s || cc)({
     options: i,
     search: p ? c : "",
     limit: d ?? 1 / 0
-  }) : i, T = sb(C), k = C.map((F) => /* @__PURE__ */ _.jsx(
+  }) : i, x = sb(N), k = N.map((F) => /* @__PURE__ */ C.jsx(
     dc,
     {
       data: F,
       withCheckIcon: m,
       value: b,
-      checkIconPosition: v,
-      unstyled: y,
+      checkIconPosition: y,
+      unstyled: v,
       renderOption: O
     },
     b8(F) ? F.group : F.value
   ));
-  return /* @__PURE__ */ _.jsx(C1.Dropdown, { hidden: o || r && T, children: /* @__PURE__ */ _.jsxs(C1.Options, { labelledBy: N, "aria-label": w, children: [
-    g ? /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(N1.Dropdown, { hidden: o || r && x, children: /* @__PURE__ */ C.jsxs(N1.Options, { labelledBy: _, "aria-label": w, children: [
+    g ? /* @__PURE__ */ C.jsx(
       v8.Autosize,
       {
         mah: f ?? 220,
@@ -18423,7 +18423,7 @@ function fc({
         children: k
       }
     ) : k,
-    T && R && /* @__PURE__ */ _.jsx(C1.Empty, { children: R })
+    x && R && /* @__PURE__ */ C.jsx(N1.Empty, { children: R })
   ] }) });
 }
 var L9 = { root: "m_77c9d27d", inner: "m_80f1301b", label: "m_811560b9", section: "m_a74036a", loader: "m_a25b86ee", group: "m_80d6d844" };
@@ -18441,10 +18441,10 @@ const ps = {
     orientation: p,
     vars: m,
     borderWidth: b,
-    variant: v,
+    variant: y,
     mod: R,
-    ...y
-  } = s1("ButtonGroup", ps, i), N = T1({
+    ...v
+  } = s1("ButtonGroup", ps, i), _ = T1({
     name: "ButtonGroup",
     props: r,
     classes: L9,
@@ -18457,15 +18457,15 @@ const ps = {
     varsResolver: cb,
     rootSelector: "group"
   });
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
-      ...N("group"),
+      ..._("group"),
       ref: o,
-      variant: v,
+      variant: y,
       mod: [{ "data-orientation": p }, R],
       role: "group",
-      ...y
+      ...v
     }
   );
 });
@@ -18508,16 +18508,16 @@ const ub = {
     children: p,
     leftSection: m,
     rightSection: b,
-    fullWidth: v,
+    fullWidth: y,
     variant: R,
-    radius: y,
-    loading: N,
+    radius: v,
+    loading: _,
     loaderProps: O,
     gradient: S,
     classNames: w,
     styles: E,
-    unstyled: C,
-    "data-disabled": T,
+    unstyled: N,
+    "data-disabled": x,
     autoContrast: k,
     mod: F,
     ...I
@@ -18529,23 +18529,23 @@ const ub = {
     style: s,
     classNames: w,
     styles: E,
-    unstyled: C,
+    unstyled: N,
     vars: c,
     varsResolver: fb
   }), B = !!m, K = !!b;
-  return /* @__PURE__ */ _.jsxs(
+  return /* @__PURE__ */ C.jsxs(
     k7,
     {
       ref: o,
-      ...Q("root", { active: !g && !N && !T }),
-      unstyled: C,
+      ...Q("root", { active: !g && !_ && !x }),
+      unstyled: N,
       variant: R,
-      disabled: g || N,
+      disabled: g || _,
       mod: [
         {
-          disabled: g || T,
-          loading: N,
-          block: v,
+          disabled: g || x,
+          loading: _,
+          block: y,
           "with-left-section": B,
           "with-right-section": K
         },
@@ -18553,7 +18553,7 @@ const ub = {
       ],
       ...I,
       children: [
-        /* @__PURE__ */ _.jsx(y5, { mounted: !!N, transition: ub, duration: 150, children: (i1) => /* @__PURE__ */ _.jsx(g1, { component: "span", ...Q("loader", { style: i1 }), "aria-hidden": !0, children: /* @__PURE__ */ _.jsx(
+        /* @__PURE__ */ C.jsx(y5, { mounted: !!_, transition: ub, duration: 150, children: (i1) => /* @__PURE__ */ C.jsx(g1, { component: "span", ...Q("loader", { style: i1 }), "aria-hidden": !0, children: /* @__PURE__ */ C.jsx(
           P7,
           {
             color: "var(--button-color)",
@@ -18561,10 +18561,10 @@ const ub = {
             ...O
           }
         ) }) }),
-        /* @__PURE__ */ _.jsxs("span", { ...Q("inner"), children: [
-          m && /* @__PURE__ */ _.jsx(g1, { component: "span", ...Q("section"), mod: { position: "left" }, children: m }),
-          /* @__PURE__ */ _.jsx(g1, { component: "span", mod: { loading: N }, ...Q("label"), children: p }),
-          b && /* @__PURE__ */ _.jsx(g1, { component: "span", ...Q("section"), mod: { position: "right" }, children: b })
+        /* @__PURE__ */ C.jsxs("span", { ...Q("inner"), children: [
+          m && /* @__PURE__ */ C.jsx(g1, { component: "span", ...Q("section"), mod: { position: "left" }, children: m }),
+          /* @__PURE__ */ C.jsx(g1, { component: "span", mod: { loading: _ }, ...Q("label"), children: p }),
+          b && /* @__PURE__ */ C.jsx(g1, { component: "span", ...Q("section"), mod: { position: "right" }, children: b })
         ] })
       ]
     }
@@ -18578,14 +18578,14 @@ const [gb, mb] = p5(
 );
 var Ba = { root: "m_e615b15f", section: "m_599a2148" };
 const pb = {}, B9 = V4((i, o) => {
-  const r = s1("CardSection", pb, i), { classNames: s, className: c, style: d, styles: f, vars: g, withBorder: p, inheritPadding: m, mod: b, ...v } = r, R = mb();
-  return /* @__PURE__ */ _.jsx(
+  const r = s1("CardSection", pb, i), { classNames: s, className: c, style: d, styles: f, vars: g, withBorder: p, inheritPadding: m, mod: b, ...y } = r, R = mb();
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
       ref: o,
       mod: [{ "with-border": p, "inherit-padding": m }, b],
       ...R.getStyles("section", { className: c, style: d, styles: f, classNames: s }),
-      ...v
+      ...y
     }
   );
 });
@@ -18596,7 +18596,7 @@ const hb = {}, bb = (i, { padding: o }) => ({
     "--card-padding": v9(o)
   }
 }), z9 = V4((i, o) => {
-  const r = s1("Card", hb, i), { classNames: s, className: c, style: d, styles: f, unstyled: g, vars: p, children: m, padding: b, ...v } = r, R = T1({
+  const r = s1("Card", hb, i), { classNames: s, className: c, style: d, styles: f, unstyled: g, vars: p, children: m, padding: b, ...y } = r, R = T1({
     name: "Card",
     props: r,
     classes: Ba,
@@ -18607,11 +18607,11 @@ const hb = {}, bb = (i, { padding: o }) => ({
     unstyled: g,
     vars: p,
     varsResolver: bb
-  }), y = A.Children.toArray(m), N = y.map((O, S) => typeof O == "object" && O && "type" in O && O.type === B9 ? A.cloneElement(O, {
+  }), v = A.Children.toArray(m), _ = v.map((O, S) => typeof O == "object" && O && "type" in O && O.type === B9 ? A.cloneElement(O, {
     "data-first-section": S === 0 || void 0,
-    "data-last-section": S === y.length - 1 || void 0
+    "data-last-section": S === v.length - 1 || void 0
   }) : O);
-  return /* @__PURE__ */ _.jsx(gb, { value: { getStyles: R }, children: /* @__PURE__ */ _.jsx(N9, { ref: o, unstyled: g, ...R("root"), ...v, children: N }) });
+  return /* @__PURE__ */ C.jsx(gb, { value: { getStyles: R }, children: /* @__PURE__ */ C.jsx(C9, { ref: o, unstyled: g, ...R("root"), ...y, children: _ }) });
 });
 z9.classes = Ba;
 z9.displayName = "@mantine/core/Card";
@@ -18631,10 +18631,10 @@ const yb = {}, vb = (i, { color: o }) => ({
     vars: p,
     color: m,
     block: b,
-    variant: v,
+    variant: y,
     mod: R,
-    ...y
-  } = r, N = T1({
+    ...v
+  } = r, _ = T1({
     name: "Code",
     props: r,
     classes: gc,
@@ -18646,15 +18646,15 @@ const yb = {}, vb = (i, { color: o }) => ({
     vars: p,
     varsResolver: vb
   });
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
       component: b ? "pre" : "code",
-      variant: v,
+      variant: y,
       ref: o,
       mod: [{ block: b }, R],
-      ...N("root"),
-      ...y,
+      ..._("root"),
+      ...v,
       dir: "ltr"
     }
   );
@@ -18667,7 +18667,7 @@ const wb = {}, Sb = (i, { radius: o, fit: r }) => ({
     "--image-radius": o === void 0 ? void 0 : n2(o),
     "--image-object-fit": r
   }
-}), C7 = V4((i, o) => {
+}), N7 = V4((i, o) => {
   const r = s1("Image", wb, i), {
     classNames: s,
     className: c,
@@ -18677,10 +18677,10 @@ const wb = {}, Sb = (i, { radius: o, fit: r }) => ({
     vars: p,
     onError: m,
     src: b,
-    radius: v,
+    radius: y,
     fit: R,
-    fallbackSrc: y,
-    mod: N,
+    fallbackSrc: v,
+    mod: _,
     ...O
   } = r, [S, w] = A.useState(!b);
   A.useEffect(() => w(!b), [b]);
@@ -18696,41 +18696,41 @@ const wb = {}, Sb = (i, { radius: o, fit: r }) => ({
     vars: p,
     varsResolver: Sb
   });
-  return S && y ? /* @__PURE__ */ _.jsx(
+  return S && v ? /* @__PURE__ */ C.jsx(
     g1,
     {
       component: "img",
       ref: o,
-      src: y,
+      src: v,
       ...E("root"),
       onError: m,
-      mod: ["fallback", N],
+      mod: ["fallback", _],
       ...O
     }
-  ) : /* @__PURE__ */ _.jsx(
+  ) : /* @__PURE__ */ C.jsx(
     g1,
     {
       component: "img",
       ref: o,
       ...E("root"),
       src: b,
-      onError: (C) => {
-        m?.(C), w(!0);
+      onError: (N) => {
+        m?.(N), w(!0);
       },
-      mod: N,
+      mod: _,
       ...O
     }
   );
 });
-C7.classes = mc;
-C7.displayName = "@mantine/core/Image";
+N7.classes = mc;
+N7.displayName = "@mantine/core/Image";
 const [Rb, R8] = p5(
   "Modal component was not found in tree"
 );
 var s3 = { root: "m_9df02822", content: "m_54c44539", inner: "m_1f958f16", header: "m_d0e2b9cd" };
 const Eb = {}, V9 = y1((i, o) => {
   const r = s1("ModalBody", Eb, i), { classNames: s, className: c, style: d, styles: f, vars: g, ...p } = r, m = R8();
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     Yl,
     {
       ref: o,
@@ -18743,7 +18743,7 @@ V9.classes = s3;
 V9.displayName = "@mantine/core/ModalBody";
 const Ab = {}, Q9 = y1((i, o) => {
   const r = s1("ModalCloseButton", Ab, i), { classNames: s, className: c, style: d, styles: f, vars: g, ...p } = r, m = R8();
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     $l,
     {
       ref: o,
@@ -18755,22 +18755,22 @@ const Ab = {}, Q9 = y1((i, o) => {
 Q9.classes = s3;
 Q9.displayName = "@mantine/core/ModalCloseButton";
 const Mb = {}, H9 = y1((i, o) => {
-  const r = s1("ModalContent", Mb, i), { classNames: s, className: c, style: d, styles: f, vars: g, children: p, __hidden: m, ...b } = r, v = R8(), R = v.scrollAreaComponent || Rh;
-  return /* @__PURE__ */ _.jsx(
+  const r = s1("ModalContent", Mb, i), { classNames: s, className: c, style: d, styles: f, vars: g, children: p, __hidden: m, ...b } = r, y = R8(), R = y.scrollAreaComponent || Rh;
+  return /* @__PURE__ */ C.jsx(
     Kl,
     {
-      ...v.getStyles("content", { className: c, style: d, styles: f, classNames: s }),
-      innerProps: v.getStyles("inner", { className: c, style: d, styles: f, classNames: s }),
-      "data-full-screen": v.fullScreen || void 0,
+      ...y.getStyles("content", { className: c, style: d, styles: f, classNames: s }),
+      innerProps: y.getStyles("inner", { className: c, style: d, styles: f, classNames: s }),
+      "data-full-screen": y.fullScreen || void 0,
       "data-modal-content": !0,
       "data-hidden": m || void 0,
       ref: o,
       ...b,
-      children: /* @__PURE__ */ _.jsx(
+      children: /* @__PURE__ */ C.jsx(
         R,
         {
           style: {
-            maxHeight: v.fullScreen ? "100dvh" : `calc(100dvh - (${X(v.yOffset)} * 2))`
+            maxHeight: y.fullScreen ? "100dvh" : `calc(100dvh - (${X(y.yOffset)} * 2))`
           },
           children: p
         }
@@ -18782,7 +18782,7 @@ H9.classes = s3;
 H9.displayName = "@mantine/core/ModalContent";
 const _b = {}, j9 = y1((i, o) => {
   const r = s1("ModalHeader", _b, i), { classNames: s, className: c, style: d, styles: f, vars: g, ...p } = r, m = R8();
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     Xl,
     {
       ref: o,
@@ -18793,9 +18793,9 @@ const _b = {}, j9 = y1((i, o) => {
 });
 j9.classes = s3;
 j9.displayName = "@mantine/core/ModalHeader";
-const Nb = {}, W9 = y1((i, o) => {
-  const r = s1("ModalOverlay", Nb, i), { classNames: s, className: c, style: d, styles: f, vars: g, ...p } = r, m = R8();
-  return /* @__PURE__ */ _.jsx(
+const Cb = {}, W9 = y1((i, o) => {
+  const r = s1("ModalOverlay", Cb, i), { classNames: s, className: c, style: d, styles: f, vars: g, ...p } = r, m = R8();
+  return /* @__PURE__ */ C.jsx(
     ql,
     {
       ref: o,
@@ -18806,7 +18806,7 @@ const Nb = {}, W9 = y1((i, o) => {
 });
 W9.classes = s3;
 W9.displayName = "@mantine/core/ModalOverlay";
-const Cb = {
+const Nb = {
   __staticSelector: "Modal",
   closeOnClickOutside: !0,
   withinPortal: !0,
@@ -18826,7 +18826,7 @@ const Cb = {
     "--modal-x-offset": X(c)
   }
 }), I9 = y1((i, o) => {
-  const r = s1("ModalRoot", Cb, i), {
+  const r = s1("ModalRoot", Nb, i), {
     classNames: s,
     className: c,
     style: d,
@@ -18835,10 +18835,10 @@ const Cb = {
     vars: p,
     yOffset: m,
     scrollAreaComponent: b,
-    radius: v,
+    radius: y,
     fullScreen: R,
-    centered: y,
-    xOffset: N,
+    centered: v,
+    xOffset: _,
     __staticSelector: O,
     ...S
   } = r, w = T1({
@@ -18853,13 +18853,13 @@ const Cb = {
     vars: p,
     varsResolver: Ob
   });
-  return /* @__PURE__ */ _.jsx(Rb, { value: { yOffset: m, scrollAreaComponent: b, getStyles: w, fullScreen: R }, children: /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(Rb, { value: { yOffset: m, scrollAreaComponent: b, getStyles: w, fullScreen: R }, children: /* @__PURE__ */ C.jsx(
     Zl,
     {
       ref: o,
       ...w("root"),
       "data-full-screen": R || void 0,
-      "data-centered": y || void 0,
+      "data-centered": v || void 0,
       unstyled: g,
       ...S
     }
@@ -18870,7 +18870,7 @@ I9.displayName = "@mantine/core/ModalRoot";
 const [xb, Tb] = y9();
 function pc({ children: i }) {
   const [o, r] = A.useState([]), [s, c] = A.useState(o3("modal"));
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     xb,
     {
       value: {
@@ -18892,7 +18892,7 @@ function pc({ children: i }) {
 pc.displayName = "@mantine/core/ModalStack";
 const Ub = {}, G9 = y1((i, o) => {
   const r = s1("ModalTitle", Ub, i), { classNames: s, className: c, style: d, styles: f, vars: g, ...p } = r, m = R8();
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     Jl,
     {
       ref: o,
@@ -18926,44 +18926,44 @@ const kb = {
     radius: p,
     opened: m,
     stackId: b,
-    zIndex: v,
+    zIndex: y,
     ...R
-  } = s1("Modal", kb, i), y = Tb(), N = !!r || d, O = y && b ? {
-    closeOnEscape: y.currentId === b,
-    trapFocus: y.currentId === b,
-    zIndex: y.getZIndex(b)
-  } : {}, S = s === !1 ? !1 : b && y ? y.currentId === b : m;
+  } = s1("Modal", kb, i), v = Tb(), _ = !!r || d, O = v && b ? {
+    closeOnEscape: v.currentId === b,
+    trapFocus: v.currentId === b,
+    zIndex: v.getZIndex(b)
+  } : {}, S = s === !1 ? !1 : b && v ? v.currentId === b : m;
   return A.useEffect(() => {
-    y && b && (m ? y.addModal(b, v || o3("modal")) : y.removeModal(b));
-  }, [m, b, v]), /* @__PURE__ */ _.jsxs(
+    v && b && (m ? v.addModal(b, y || o3("modal")) : v.removeModal(b));
+  }, [m, b, y]), /* @__PURE__ */ C.jsxs(
     I9,
     {
       ref: o,
       radius: p,
       opened: m,
-      zIndex: y && b ? y.getZIndex(b) : v,
+      zIndex: v && b ? v.getZIndex(b) : y,
       ...R,
       ...O,
       children: [
-        s && /* @__PURE__ */ _.jsx(
+        s && /* @__PURE__ */ C.jsx(
           W9,
           {
             visible: S,
-            transitionProps: y && b ? { duration: 0 } : void 0,
+            transitionProps: v && b ? { duration: 0 } : void 0,
             ...c
           }
         ),
-        /* @__PURE__ */ _.jsxs(
+        /* @__PURE__ */ C.jsxs(
           H9,
           {
             radius: p,
-            __hidden: y && b && m ? b !== y.currentId : !1,
+            __hidden: v && b && m ? b !== v.currentId : !1,
             children: [
-              N && /* @__PURE__ */ _.jsxs(j9, { children: [
-                r && /* @__PURE__ */ _.jsx(G9, { children: r }),
-                d && /* @__PURE__ */ _.jsx(Q9, { ...f })
+              _ && /* @__PURE__ */ C.jsxs(j9, { children: [
+                r && /* @__PURE__ */ C.jsx(G9, { children: r }),
+                d && /* @__PURE__ */ C.jsx(Q9, { ...f })
               ] }),
-              /* @__PURE__ */ _.jsx(V9, { children: g })
+              /* @__PURE__ */ C.jsx(V9, { children: g })
             ]
           }
         )
@@ -18988,7 +18988,7 @@ const Lb = {}, Bb = (i, { gap: o }, { size: r }) => ({
     "--pg-gap": o !== void 0 ? e4(o) : e4(r, "pg-gap")
   }
 }), Va = y1((i, o) => {
-  const r = s1("PillGroup", Lb, i), { classNames: s, className: c, style: d, styles: f, unstyled: g, vars: p, size: m, disabled: b, ...v } = r, y = za()?.size || m || void 0, N = T1({
+  const r = s1("PillGroup", Lb, i), { classNames: s, className: c, style: d, styles: f, unstyled: g, vars: p, size: m, disabled: b, ...y } = r, v = za()?.size || m || void 0, _ = T1({
     name: "PillGroup",
     classes: Z9,
     props: r,
@@ -18999,10 +18999,10 @@ const Lb = {}, Bb = (i, { gap: o }, { size: r }) => ({
     unstyled: g,
     vars: p,
     varsResolver: Bb,
-    stylesCtx: { size: y },
+    stylesCtx: { size: v },
     rootSelector: "group"
   });
-  return /* @__PURE__ */ _.jsx(Db, { value: { size: y, disabled: b }, children: /* @__PURE__ */ _.jsx(g1, { ref: o, size: y, ...N("group"), ...v }) });
+  return /* @__PURE__ */ C.jsx(Db, { value: { size: v, disabled: b }, children: /* @__PURE__ */ C.jsx(g1, { ref: o, size: v, ..._("group"), ...y }) });
 });
 Va.classes = Z9;
 Va.displayName = "@mantine/core/PillGroup";
@@ -19024,15 +19024,15 @@ const zb = {
     vars: p,
     variant: m,
     children: b,
-    withRemoveButton: v,
+    withRemoveButton: y,
     onRemove: R,
-    removeButtonProps: y,
-    radius: N,
+    removeButtonProps: v,
+    radius: _,
     size: O,
     disabled: S,
     mod: w,
     ...E
-  } = r, C = Pb(), T = za(), k = O || C?.size || void 0, F = T?.variant === "filled" ? "contrast" : m || "default", I = T1({
+  } = r, N = Pb(), x = za(), k = O || N?.size || void 0, F = x?.variant === "filled" ? "contrast" : m || "default", I = T1({
     name: "Pill",
     classes: Z9,
     props: r,
@@ -19045,7 +19045,7 @@ const zb = {
     varsResolver: Vb,
     stylesCtx: { size: k }
   });
-  return /* @__PURE__ */ _.jsxs(
+  return /* @__PURE__ */ C.jsxs(
     g1,
     {
       component: "span",
@@ -19054,30 +19054,30 @@ const zb = {
       size: k,
       ...I("root", { variant: F }),
       mod: [
-        { "with-remove": v && !S, disabled: S || C?.disabled },
+        { "with-remove": y && !S, disabled: S || N?.disabled },
         w
       ],
       ...E,
       children: [
-        /* @__PURE__ */ _.jsx("span", { ...I("label"), children: b }),
-        v && /* @__PURE__ */ _.jsx(
+        /* @__PURE__ */ C.jsx("span", { ...I("label"), children: b }),
+        y && /* @__PURE__ */ C.jsx(
           L7,
           {
             variant: "transparent",
-            radius: N,
+            radius: _,
             tabIndex: -1,
             "aria-hidden": !0,
             unstyled: g,
-            ...y,
+            ...v,
             ...I("remove", {
-              className: y?.className,
-              style: y?.style
+              className: v?.className,
+              style: v?.style
             }),
             onMouseDown: (Q) => {
-              Q.preventDefault(), Q.stopPropagation(), y?.onMouseDown?.(Q);
+              Q.preventDefault(), Q.stopPropagation(), v?.onMouseDown?.(Q);
             },
             onClick: (Q) => {
-              Q.stopPropagation(), R?.(), y?.onClick?.(Q);
+              Q.stopPropagation(), R?.(), v?.onClick?.(Q);
             }
           }
         )
@@ -19101,10 +19101,10 @@ const Qb = {
     vars: p,
     type: m,
     disabled: b,
-    id: v,
+    id: y,
     pointer: R,
-    mod: y,
-    ...N
+    mod: v,
+    ..._
   } = r, O = za(), S = B7(), w = T1({
     name: "PillsInputField",
     classes: hc,
@@ -19116,21 +19116,21 @@ const Qb = {
     unstyled: g,
     rootSelector: "field"
   }), E = b || O?.disabled;
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     g1,
     {
       component: "input",
       ref: _4(o, O?.fieldRef),
       "data-type": m,
       disabled: E,
-      mod: [{ disabled: E, pointer: R }, y],
+      mod: [{ disabled: E, pointer: R }, v],
       ...w("field"),
-      ...N,
-      id: S?.inputId || v,
+      ..._,
+      id: S?.inputId || y,
       "aria-invalid": O?.hasError,
       "aria-describedby": S?.describedBy,
       type: "text",
-      onMouseDown: (C) => !R && C.stopPropagation()
+      onMouseDown: (N) => !R && N.stopPropagation()
     }
   );
 });
@@ -19146,9 +19146,9 @@ const Hb = {}, p9 = y1((i, o) => {
     __staticSelector: p,
     error: m,
     variant: b,
-    ...v
+    ...y
   } = r, R = A.useRef();
-  return /* @__PURE__ */ _.jsx(Fb, { value: { fieldRef: R, size: f, disabled: g, hasError: !!m, variant: b }, children: /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(Fb, { value: { fieldRef: R, size: f, disabled: g, hasError: !!m, variant: b }, children: /* @__PURE__ */ C.jsx(
     L3,
     {
       size: f,
@@ -19156,13 +19156,13 @@ const Hb = {}, p9 = y1((i, o) => {
       variant: b,
       component: "div",
       ref: o,
-      onMouseDown: (y) => {
-        y.preventDefault(), c?.(y), R.current?.focus();
+      onMouseDown: (v) => {
+        v.preventDefault(), c?.(v), R.current?.focus();
       },
-      onClick: (y) => {
-        y.preventDefault(), d?.(y), R.current?.focus();
+      onClick: (v) => {
+        v.preventDefault(), d?.(v), R.current?.focus();
       },
-      ...v,
+      ...y,
       multiline: !0,
       disabled: g,
       __staticSelector: p || "PillsInput",
@@ -19197,16 +19197,16 @@ const Wb = {
     vars: p,
     size: m,
     value: b,
-    defaultValue: v,
+    defaultValue: y,
     onChange: R,
-    onKeyDown: y,
-    variant: N,
+    onKeyDown: v,
+    variant: _,
     data: O,
     dropdownOpened: S,
     defaultDropdownOpened: w,
     onDropdownOpen: E,
-    onDropdownClose: C,
-    selectFirstOptionOnChange: T,
+    onDropdownClose: N,
+    selectFirstOptionOnChange: x,
     onOptionSubmit: k,
     comboboxProps: F,
     filter: I,
@@ -19222,7 +19222,7 @@ const Wb = {
     onBlur: Y,
     onPaste: W,
     radius: Z,
-    rightSection: x,
+    rightSection: T,
     rightSectionWidth: j,
     rightSectionPointerEvents: e1,
     rightSectionProps: o1,
@@ -19236,7 +19236,7 @@ const Wb = {
     labelProps: $1,
     descriptionProps: h4,
     errorProps: G1,
-    wrapperProps: N4,
+    wrapperProps: C4,
     description: b4,
     label: s4,
     error: O1,
@@ -19267,14 +19267,14 @@ const Wb = {
     defaultOpened: w,
     onDropdownOpen: E,
     onDropdownClose: () => {
-      C?.(), K1.resetSelectedOption();
+      N?.(), K1.resetSelectedOption();
     }
   }), {
     styleProps: w5,
     rest: { type: S5, autoComplete: J9, ...Q7 }
   } = E9(V7), [n4, k2] = f8({
     value: b,
-    defaultValue: v,
+    defaultValue: y,
     finalValue: [],
     onChange: R
   }), [F2, R5] = f8({
@@ -19294,8 +19294,8 @@ const Wb = {
     styles: f,
     classNames: s
   }), H7 = (R1) => {
-    y?.(R1), R1.key === " " && !t4 && (R1.preventDefault(), K1.toggleDropdown()), R1.key === "Backspace" && F2.length === 0 && n4.length > 0 && (Q4?.(n4[n4.length - 1]), k2(n4.slice(0, n4.length - 1)));
-  }, ee = n4.map((R1, w2) => /* @__PURE__ */ _.jsx(
+    v?.(R1), R1.key === " " && !t4 && (R1.preventDefault(), K1.toggleDropdown()), R1.key === "Backspace" && F2.length === 0 && n4.length > 0 && (Q4?.(n4[n4.length - 1]), k2(n4.slice(0, n4.length - 1)));
+  }, ee = n4.map((R1, w2) => /* @__PURE__ */ C.jsx(
     O7,
     {
       withRemoveButton: !n1 && !c2[R1]?.disabled,
@@ -19310,10 +19310,10 @@ const Wb = {
     `${R1}-${w2}`
   ));
   A.useEffect(() => {
-    T && K1.selectFirstOption();
-  }, [T, n4]);
-  const H4 = i4 && n4.length > 0 && !t1 && !n1 && /* @__PURE__ */ _.jsx(
-    C1.ClearButton,
+    x && K1.selectFirstOption();
+  }, [x, n4]);
+  const H4 = i4 && n4.length > 0 && !t1 && !n1 && /* @__PURE__ */ C.jsx(
+    N1.ClearButton,
     {
       size: m,
       ...l3,
@@ -19322,9 +19322,9 @@ const Wb = {
       }
     }
   ), l4 = jb({ data: u3, value: n4 });
-  return /* @__PURE__ */ _.jsxs(_.Fragment, { children: [
-    /* @__PURE__ */ _.jsxs(
-      C1,
+  return /* @__PURE__ */ C.jsxs(C.Fragment, { children: [
+    /* @__PURE__ */ C.jsxs(
+      N1,
       {
         store: K1,
         classNames: A8,
@@ -19338,7 +19338,7 @@ const Wb = {
         },
         ...F,
         children: [
-          /* @__PURE__ */ _.jsx(C1.DropdownTarget, { children: /* @__PURE__ */ _.jsx(
+          /* @__PURE__ */ C.jsx(N1.DropdownTarget, { children: /* @__PURE__ */ C.jsx(
             p9,
             {
               ...w5,
@@ -19349,10 +19349,10 @@ const Wb = {
               size: m,
               className: c,
               style: d,
-              variant: N,
+              variant: _,
               disabled: t1,
               radius: Z,
-              rightSection: x || H4 || /* @__PURE__ */ _.jsx(C1.Chevron, { size: m, error: O1, unstyled: g }),
+              rightSection: T || H4 || /* @__PURE__ */ C.jsx(N1.Chevron, { size: m, error: O1, unstyled: g }),
               rightSectionPointerEvents: e1 || (H4 ? "all" : "none"),
               rightSectionWidth: j,
               rightSectionProps: o1,
@@ -19366,7 +19366,7 @@ const Wb = {
               labelProps: $1,
               descriptionProps: h4,
               errorProps: G1,
-              wrapperProps: N4,
+              wrapperProps: C4,
               description: b4,
               label: s4,
               error: O1,
@@ -19383,9 +19383,9 @@ const Wb = {
               id: E8,
               required: V3,
               mod: R4,
-              children: /* @__PURE__ */ _.jsxs(O7.Group, { disabled: t1, unstyled: g, ...E5("pillsList"), children: [
+              children: /* @__PURE__ */ C.jsxs(O7.Group, { disabled: t1, unstyled: g, ...E5("pillsList"), children: [
                 ee,
-                /* @__PURE__ */ _.jsx(C1.EventsTarget, { autoComplete: J9, children: /* @__PURE__ */ _.jsx(
+                /* @__PURE__ */ C.jsx(N1.EventsTarget, { autoComplete: J9, children: /* @__PURE__ */ C.jsx(
                   p9.Field,
                   {
                     ...Q7,
@@ -19404,7 +19404,7 @@ const Wb = {
                     onKeyDown: H7,
                     value: F2,
                     onChange: (R1) => {
-                      R5(R1.currentTarget.value), t4 && K1.openDropdown(), T && K1.selectFirstOption();
+                      R5(R1.currentTarget.value), t4 && K1.openDropdown(), x && K1.selectFirstOption();
                     },
                     disabled: t1,
                     readOnly: n1 || !t4,
@@ -19414,7 +19414,7 @@ const Wb = {
               ] })
             }
           ) }),
-          /* @__PURE__ */ _.jsx(
+          /* @__PURE__ */ C.jsx(
             fc,
             {
               data: v2 ? l4 : u3,
@@ -19440,8 +19440,8 @@ const Wb = {
         ]
       }
     ),
-    /* @__PURE__ */ _.jsx(
-      C1.HiddenInput,
+    /* @__PURE__ */ C.jsx(
+      N1.HiddenInput,
       {
         name: v5,
         valuesDivider: K9,
@@ -19453,7 +19453,7 @@ const Wb = {
     )
   ] });
 });
-Ha.classes = { ...L3.classes, ...C1.classes };
+Ha.classes = { ...L3.classes, ...N1.classes };
 Ha.displayName = "@mantine/core/MultiSelect";
 const Ib = {
   duration: 100,
@@ -19467,7 +19467,7 @@ function Zb({
   position: o,
   defaultOpened: r
 }) {
-  const [s, c] = A.useState(r), d = A.useRef(), { x: f, y: g, elements: p, refs: m, update: b, placement: v } = ya({
+  const [s, c] = A.useState(r), d = A.useRef(), { x: f, y: g, elements: p, refs: m, update: b, placement: y } = ya({
     placement: o,
     middleware: [
       ma({
@@ -19476,7 +19476,7 @@ function Zb({
         rootBoundary: "document"
       })
     ]
-  }), R = v.includes("right") ? i : o.includes("left") ? i * -1 : 0, y = v.includes("bottom") ? i : o.includes("top") ? i * -1 : 0, N = A.useCallback(
+  }), R = y.includes("right") ? i : o.includes("left") ? i * -1 : 0, v = y.includes("bottom") ? i : o.includes("top") ? i * -1 : 0, _ = A.useCallback(
     ({ clientX: O, clientY: S }) => {
       m.setPositionReference({
         getBoundingClientRect() {
@@ -19486,7 +19486,7 @@ function Zb({
             x: O,
             y: S,
             left: O + R,
-            top: S + y,
+            top: S + v,
             right: O,
             bottom: S
           };
@@ -19498,17 +19498,17 @@ function Zb({
   return A.useEffect(() => {
     if (m.floating.current) {
       const O = d.current;
-      O.addEventListener("mousemove", N);
+      O.addEventListener("mousemove", _);
       const S = e3(m.floating.current);
       return S.forEach((w) => {
         w.addEventListener("scroll", b);
       }), () => {
-        O.removeEventListener("mousemove", N), S.forEach((w) => {
+        O.removeEventListener("mousemove", _), S.forEach((w) => {
           w.removeEventListener("scroll", b);
         });
       };
     }
-  }, [p.reference, m.floating.current, b, N, s]), { handleMouseMove: N, x: f, y: g, opened: s, setOpened: c, boundaryRef: d, floating: m.setFloating };
+  }, [p.reference, m.floating.current, b, _, s]), { handleMouseMove: _, x: f, y: g, opened: s, setOpened: c, boundaryRef: d, floating: m.setFloating };
 }
 var Y9 = { tooltip: "m_1b3c8819", arrow: "m_f898399f" };
 const Yb = {
@@ -19534,16 +19534,16 @@ const Yb = {
     classNames: p,
     styles: m,
     unstyled: b,
-    radius: v,
+    radius: y,
     color: R,
-    label: y,
-    offset: N,
+    label: v,
+    offset: _,
     position: O,
     multiline: S,
     zIndex: w,
     disabled: E,
-    defaultOpened: C,
-    variant: T,
+    defaultOpened: N,
+    variant: x,
     vars: k,
     portalProps: F,
     ...I
@@ -19560,21 +19560,21 @@ const Yb = {
     vars: k,
     varsResolver: $b
   }), { handleMouseMove: K, x: i1, y: r1, opened: l1, boundaryRef: n1, floating: t1, setOpened: V } = Zb({
-    offset: N,
+    offset: _,
     position: O,
-    defaultOpened: C
+    defaultOpened: N
   });
   if (!m5(s))
     throw new Error(
       "[@mantine/core] Tooltip.Floating component children should be an element or a component that accepts ref, fragments, strings, numbers and other primitive values are not supported"
     );
-  const Y = _4(n1, S9(s), o), W = (x) => {
-    s.props.onMouseEnter?.(x), K(x), V(!0);
-  }, Z = (x) => {
-    s.props.onMouseLeave?.(x), V(!1);
+  const Y = _4(n1, S9(s), o), W = (T) => {
+    s.props.onMouseEnter?.(T), K(T), V(!0);
+  }, Z = (T) => {
+    s.props.onMouseLeave?.(T), V(!1);
   };
-  return /* @__PURE__ */ _.jsxs(_.Fragment, { children: [
-    /* @__PURE__ */ _.jsx(D7, { ...F, withinPortal: d, children: /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsxs(C.Fragment, { children: [
+    /* @__PURE__ */ C.jsx(D7, { ...F, withinPortal: d, children: /* @__PURE__ */ C.jsx(
       g1,
       {
         ...I,
@@ -19587,10 +19587,10 @@ const Yb = {
             left: (i1 && Math.round(i1)) ?? ""
           }
         }),
-        variant: T,
+        variant: x,
         ref: t1,
         mod: { multiline: S },
-        children: y
+        children: v
       }
     ) }),
     A.cloneElement(s, {
@@ -19609,7 +19609,7 @@ const bc = A.createContext(!1), Kb = bc.Provider, Xb = () => A.useContext(bc), q
 };
 function Wa(i) {
   const { openDelay: o, closeDelay: r, children: s } = s1("TooltipGroup", qb, i);
-  return /* @__PURE__ */ _.jsx(Kb, { value: !0, children: /* @__PURE__ */ _.jsx(Up, { delay: { open: o, close: r }, children: s }) });
+  return /* @__PURE__ */ C.jsx(Kb, { value: !0, children: /* @__PURE__ */ C.jsx(Up, { delay: { open: o, close: r }, children: s }) });
 }
 Wa.displayName = "@mantine/core/TooltipGroup";
 Wa.extend = (i) => i;
@@ -19620,10 +19620,10 @@ function Jb(i) {
     },
     [m, f]
   ), {
-    x: v,
+    x: y,
     y: R,
-    context: y,
-    refs: N,
+    context: v,
+    refs: _,
     update: O,
     placement: S,
     middlewareData: { arrow: { x: w, y: E } = {} }
@@ -19636,40 +19636,40 @@ function Jb(i) {
       _l(i.offset),
       ma({ padding: 8 }),
       Ht(),
-      Nl({ element: i.arrowRef, padding: i.arrowOffset }),
+      Cl({ element: i.arrowRef, padding: i.arrowOffset }),
       ...i.inline ? [jt()] : []
     ]
   });
-  kp(y, { id: f });
-  const { getReferenceProps: C, getFloatingProps: T } = Vp([
-    Tp(y, {
+  kp(v, { id: f });
+  const { getReferenceProps: N, getFloatingProps: x } = Vp([
+    Tp(v, {
       enabled: i.events?.hover,
       delay: d ? g : { open: i.openDelay, close: i.closeDelay },
       mouseOnly: !i.events?.touch
     }),
-    zp(y, { enabled: i.events?.focus, visibleOnly: !0 }),
-    Hp(y, { role: "tooltip" }),
+    zp(v, { enabled: i.events?.focus, visibleOnly: !0 }),
+    Hp(v, { role: "tooltip" }),
     // Cannot be used with controlled tooltip, page jumps
-    Lp(y, { enabled: typeof i.opened > "u" })
+    Lp(v, { enabled: typeof i.opened > "u" })
   ]);
   Bl({
     opened: c,
     position: i.position,
     positionDependencies: i.positionDependencies,
-    floating: { refs: N, update: O }
+    floating: { refs: _, update: O }
   }), d5(() => {
     i.onPositionChange?.(S);
   }, [S]);
   const k = c && p && p !== f;
   return {
-    x: v,
+    x: y,
     y: R,
     arrowX: w,
     arrowY: E,
-    reference: N.setReference,
-    floating: N.setFloating,
-    getFloatingProps: T,
-    getReferenceProps: C,
+    reference: _.setReference,
+    floating: _.setFloating,
+    getFloatingProps: x,
+    getReferenceProps: N,
     isGroupPhase: k,
     opened: c,
     placement: S
@@ -19706,16 +19706,16 @@ const hs = {
     closeDelay: p,
     onPositionChange: m,
     opened: b,
-    defaultOpened: v,
+    defaultOpened: y,
     withinPortal: R,
-    radius: y,
-    color: N,
+    radius: v,
+    color: _,
     classNames: O,
     styles: S,
     unstyled: w,
     style: E,
-    className: C,
-    withArrow: T,
+    className: N,
+    withArrow: x,
     arrowSize: k,
     arrowOffset: F,
     arrowRadius: I,
@@ -19731,7 +19731,7 @@ const hs = {
     onMouseEnter: Y,
     onMouseLeave: W,
     inline: Z,
-    variant: x,
+    variant: T,
     keepMounted: j,
     vars: e1,
     portalProps: o1,
@@ -19744,11 +19744,11 @@ const hs = {
     openDelay: g,
     onPositionChange: m,
     opened: b,
-    defaultOpened: v,
+    defaultOpened: y,
     events: r1,
     arrowRef: h1,
     arrowOffset: F,
-    offset: typeof B == "number" ? B + (T ? k / 2 : 0) : B,
+    offset: typeof B == "number" ? B + (x ? k / 2 : 0) : B,
     positionDependencies: [...t1, s],
     inline: Z,
     strategy: m1
@@ -19756,7 +19756,7 @@ const hs = {
     name: "Tooltip",
     props: r,
     classes: Y9,
-    className: C,
+    className: N,
     style: E,
     classNames: O,
     styles: S,
@@ -19770,20 +19770,20 @@ const hs = {
       "[@mantine/core] Tooltip component children should be an element or a component that accepts ref, fragments, strings, numbers and other primitive values are not supported"
     );
   const $1 = _4(v1.reference, S9(s), o), h4 = Gb(K, { duration: 100, transition: "fade" });
-  return /* @__PURE__ */ _.jsxs(_.Fragment, { children: [
-    /* @__PURE__ */ _.jsx(D7, { ...o1, withinPortal: R, children: /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsxs(C.Fragment, { children: [
+    /* @__PURE__ */ C.jsx(D7, { ...o1, withinPortal: R, children: /* @__PURE__ */ C.jsx(
       y5,
       {
         ...h4,
         keepMounted: j,
         mounted: !n1 && !!v1.opened,
         duration: v1.isGroupPhase ? 10 : h4.duration,
-        children: (G1) => /* @__PURE__ */ _.jsxs(
+        children: (G1) => /* @__PURE__ */ C.jsxs(
           g1,
           {
             ...c1,
             "data-fixed": m1 === "fixed" || void 0,
-            variant: x,
+            variant: T,
             mod: [{ multiline: i1 }, a1],
             ...v1.getFloatingProps({
               ref: v1.floating,
@@ -19798,13 +19798,13 @@ const hs = {
             }),
             children: [
               f,
-              /* @__PURE__ */ _.jsx(
+              /* @__PURE__ */ C.jsx(
                 va,
                 {
                   ref: h1,
                   arrowX: v1.arrowX,
                   arrowY: v1.arrowY,
-                  visible: T,
+                  visible: x,
                   position: v1.placement,
                   arrowSize: k,
                   arrowOffset: F,
@@ -19828,7 +19828,7 @@ const hs = {
         onPointerDown: r.onPointerDown,
         onPointerEnter: r.onPointerEnter,
         [d]: $1,
-        className: S4(C, s.props.className),
+        className: S4(N, s.props.className),
         ...s.props
       })
     )
@@ -19853,16 +19853,16 @@ const ty = {
     defaultDropdownOpened: p,
     onDropdownClose: m,
     onDropdownOpen: b,
-    onFocus: v,
+    onFocus: y,
     onBlur: R,
-    onClick: y,
-    onChange: N,
+    onClick: v,
+    onChange: _,
     data: O,
     value: S,
     defaultValue: w,
     selectFirstOptionOnChange: E,
-    onOptionSubmit: C,
-    comboboxProps: T,
+    onOptionSubmit: N,
+    comboboxProps: x,
     readOnly: k,
     disabled: F,
     filter: I,
@@ -19878,7 +19878,7 @@ const ty = {
     name: Y,
     form: W,
     searchValue: Z,
-    defaultSearchValue: x,
+    defaultSearchValue: T,
     onSearchChange: j,
     allowDeselect: e1,
     error: o1,
@@ -19892,14 +19892,14 @@ const ty = {
     autoComplete: $1,
     scrollAreaProps: h4,
     ...G1
-  } = r, N4 = A.useMemo(() => ic(O), [O]), b4 = A.useMemo(() => Ma(N4), [N4]), s4 = h5(m1), [O1, U4, t4] = f8({
+  } = r, C4 = A.useMemo(() => ic(O), [O]), b4 = A.useMemo(() => Ma(C4), [C4]), s4 = h5(m1), [O1, U4, t4] = f8({
     value: S,
     defaultValue: w,
     finalValue: null,
-    onChange: N
+    onChange: _
   }), a4 = typeof O1 == "string" ? b4[O1] : void 0, y2 = qf(a4), [k4, v2] = f8({
     value: Z,
-    defaultValue: x,
+    defaultValue: T,
     finalValue: a4 ? a4.label : "",
     onChange: j
   }), V1 = Pa({
@@ -19921,8 +19921,8 @@ const ty = {
   }, [E, O1]), A.useEffect(() => {
     S === null && v2(""), typeof S == "string" && a4 && (y2?.value !== a4.value || y2?.label !== a4.label) && v2(a4.label);
   }, [S, a4]);
-  const z3 = c1 && !!O1 && !F && !k && /* @__PURE__ */ _.jsx(
-    C1.ClearButton,
+  const z3 = c1 && !!O1 && !F && !k && /* @__PURE__ */ C.jsx(
+    N1.ClearButton,
     {
       size: i1,
       ..._1,
@@ -19931,9 +19931,9 @@ const ty = {
       }
     }
   );
-  return /* @__PURE__ */ _.jsxs(_.Fragment, { children: [
-    /* @__PURE__ */ _.jsxs(
-      C1,
+  return /* @__PURE__ */ C.jsxs(C.Fragment, { children: [
+    /* @__PURE__ */ C.jsxs(
+      N1,
       {
         store: V1,
         __staticSelector: "Select",
@@ -19942,19 +19942,19 @@ const ty = {
         unstyled: d,
         readOnly: k,
         onOptionSubmit: (i4) => {
-          C?.(i4);
+          N?.(i4);
           const l3 = e1 && b4[i4].value === O1 ? null : b4[i4], c3 = l3 ? l3.value : null;
           c3 !== O1 && U4(c3, l3), !t4 && v2(typeof c3 == "string" && l3?.label || ""), V1.closeDropdown();
         },
         size: i1,
-        ...T,
+        ...x,
         children: [
-          /* @__PURE__ */ _.jsx(C1.Target, { targetType: r1 ? "input" : "button", autoComplete: $1, children: /* @__PURE__ */ _.jsx(
+          /* @__PURE__ */ C.jsx(N1.Target, { targetType: r1 ? "input" : "button", autoComplete: $1, children: /* @__PURE__ */ C.jsx(
             L3,
             {
               id: s4,
               ref: o,
-              rightSection: l1 || z3 || /* @__PURE__ */ _.jsx(C1.Chevron, { size: i1, error: o1, unstyled: d }),
+              rightSection: l1 || z3 || /* @__PURE__ */ C.jsx(N1.Chevron, { size: i1, error: o1, unstyled: d }),
               rightSectionPointerEvents: a1 || (z3 ? "all" : "none"),
               ...G1,
               size: i1,
@@ -19966,13 +19966,13 @@ const ty = {
                 v2(i4.currentTarget.value), V1.openDropdown(), E && V1.selectFirstOption();
               },
               onFocus: (i4) => {
-                r1 && V1.openDropdown(), v?.(i4);
+                r1 && V1.openDropdown(), y?.(i4);
               },
               onBlur: (i4) => {
                 r1 && V1.closeDropdown(), v2(O1 != null && b4[O1]?.label || ""), R?.(i4);
               },
               onClick: (i4) => {
-                r1 ? V1.openDropdown() : V1.toggleDropdown(), y?.(i4);
+                r1 ? V1.openDropdown() : V1.toggleDropdown(), v?.(i4);
               },
               classNames: v5,
               styles: B3,
@@ -19981,10 +19981,10 @@ const ty = {
               error: o1
             }
           ) }),
-          /* @__PURE__ */ _.jsx(
+          /* @__PURE__ */ C.jsx(
             fc,
             {
-              data: N4,
+              data: C4,
               hidden: k || F,
               filter: I,
               search: k4,
@@ -20007,8 +20007,8 @@ const ty = {
         ]
       }
     ),
-    /* @__PURE__ */ _.jsx(
-      C1.HiddenInput,
+    /* @__PURE__ */ C.jsx(
+      N1.HiddenInput,
       {
         value: O1,
         name: Y,
@@ -20019,11 +20019,11 @@ const ty = {
     )
   ] });
 });
-Ia.classes = { ...L3.classes, ...C1.classes };
+Ia.classes = { ...L3.classes, ...N1.classes };
 Ia.displayName = "@mantine/core/Select";
 const ay = {}, y8 = y1((i, o) => {
   const r = s1("TextInput", ay, i);
-  return /* @__PURE__ */ _.jsx(L3, { component: "input", ref: o, ...r, __staticSelector: "TextInput" });
+  return /* @__PURE__ */ C.jsx(L3, { component: "input", ref: o, ...r, __staticSelector: "TextInput" });
 });
 y8.classes = L3.classes;
 y8.displayName = "@mantine/core/TextInput";
@@ -20050,7 +20050,7 @@ var iy = {
 };
 const $9 = (i, o, r, s) => {
   const c = A.forwardRef(
-    ({ color: d = "currentColor", size: f = 24, stroke: g = 2, title: p, className: m, children: b, ...v }, R) => A.createElement(
+    ({ color: d = "currentColor", size: f = 24, stroke: g = 2, title: p, className: m, children: b, ...y }, R) => A.createElement(
       "svg",
       {
         ref: R,
@@ -20060,11 +20060,11 @@ const $9 = (i, o, r, s) => {
         className: ["tabler-icon", `tabler-icon-${o}`, m].join(" "),
         strokeWidth: g,
         stroke: d,
-        ...v
+        ...y
       },
       [
         p && A.createElement("title", { key: "svg-title" }, p),
-        ...s.map(([y, N]) => A.createElement(y, N)),
+        ...s.map(([v, _]) => A.createElement(v, _)),
         ...Array.isArray(b) ? b : [b]
       ]
     )
@@ -20086,15 +20086,15 @@ function ry() {
       function s(f, g, p, m, b) {
         for (; m > p; ) {
           if (m - p > 600) {
-            var v = m - p + 1, R = g - p + 1, y = Math.log(v), N = 0.5 * Math.exp(2 * y / 3), O = 0.5 * Math.sqrt(y * N * (v - N) / v) * (R - v / 2 < 0 ? -1 : 1), S = Math.max(p, Math.floor(g - R * N / v + O)), w = Math.min(m, Math.floor(g + (v - R) * N / v + O));
+            var y = m - p + 1, R = g - p + 1, v = Math.log(y), _ = 0.5 * Math.exp(2 * v / 3), O = 0.5 * Math.sqrt(v * _ * (y - _) / y) * (R - y / 2 < 0 ? -1 : 1), S = Math.max(p, Math.floor(g - R * _ / y + O)), w = Math.min(m, Math.floor(g + (y - R) * _ / y + O));
             s(f, g, S, w, b);
           }
-          var E = f[g], C = p, T = m;
-          for (c(f, p, g), b(f[m], E) > 0 && c(f, p, m); C < T; ) {
-            for (c(f, C, T), C++, T--; b(f[C], E) < 0; ) C++;
-            for (; b(f[T], E) > 0; ) T--;
+          var E = f[g], N = p, x = m;
+          for (c(f, p, g), b(f[m], E) > 0 && c(f, p, m); N < x; ) {
+            for (c(f, N, x), N++, x--; b(f[N], E) < 0; ) N++;
+            for (; b(f[x], E) > 0; ) x--;
           }
-          b(f[p], E) === 0 ? c(f, p, T) : (T++, c(f, T, m)), T <= g && (p = T + 1), g <= T && (m = T - 1);
+          b(f[p], E) === 0 ? c(f, p, x) : (x++, c(f, x, m)), x <= g && (p = x + 1), g <= x && (m = x - 1);
         }
       }
       function c(f, g, p) {
@@ -20122,25 +20122,25 @@ function sy() {
       return this._all(this.data, []);
     },
     search: function(S) {
-      var w = this.data, E = [], C = this.toBBox;
-      if (!y(S, w)) return E;
-      for (var T = [], k, F, I, Q; w; ) {
+      var w = this.data, E = [], N = this.toBBox;
+      if (!v(S, w)) return E;
+      for (var x = [], k, F, I, Q; w; ) {
         for (k = 0, F = w.children.length; k < F; k++)
-          I = w.children[k], Q = w.leaf ? C(I) : I, y(S, Q) && (w.leaf ? E.push(I) : R(S, Q) ? this._all(I, E) : T.push(I));
-        w = T.pop();
+          I = w.children[k], Q = w.leaf ? N(I) : I, v(S, Q) && (w.leaf ? E.push(I) : R(S, Q) ? this._all(I, E) : x.push(I));
+        w = x.pop();
       }
       return E;
     },
     collides: function(S) {
       var w = this.data, E = this.toBBox;
-      if (!y(S, w)) return !1;
-      for (var C = [], T, k, F, I; w; ) {
-        for (T = 0, k = w.children.length; T < k; T++)
-          if (F = w.children[T], I = w.leaf ? E(F) : F, y(S, I)) {
+      if (!v(S, w)) return !1;
+      for (var N = [], x, k, F, I; w; ) {
+        for (x = 0, k = w.children.length; x < k; x++)
+          if (F = w.children[x], I = w.leaf ? E(F) : F, v(S, I)) {
             if (w.leaf || R(S, I)) return !0;
-            C.push(F);
+            N.push(F);
           }
-        w = C.pop();
+        w = N.pop();
       }
       return !1;
     },
@@ -20151,17 +20151,17 @@ function sy() {
           this.insert(S[w]);
         return this;
       }
-      var C = this._build(S.slice(), 0, S.length - 1, 0);
+      var N = this._build(S.slice(), 0, S.length - 1, 0);
       if (!this.data.children.length)
-        this.data = C;
-      else if (this.data.height === C.height)
-        this._splitRoot(this.data, C);
+        this.data = N;
+      else if (this.data.height === N.height)
+        this._splitRoot(this.data, N);
       else {
-        if (this.data.height < C.height) {
-          var T = this.data;
-          this.data = C, C = T;
+        if (this.data.height < N.height) {
+          var x = this.data;
+          this.data = N, N = x;
         }
-        this._insert(C, this.data.height - C.height - 1, !0);
+        this._insert(N, this.data.height - N.height - 1, !0);
       }
       return this;
     },
@@ -20169,14 +20169,14 @@ function sy() {
       return S && this._insert(S, this.data.height - 1), this;
     },
     clear: function() {
-      return this.data = N([]), this;
+      return this.data = _([]), this;
     },
     remove: function(S, w) {
       if (!S) return this;
-      for (var E = this.data, C = this.toBBox(S), T = [], k = [], F, I, Q, B; E || T.length; ) {
-        if (E || (E = T.pop(), I = T[T.length - 1], F = k.pop(), B = !0), E.leaf && (Q = r(S, E.children, w), Q !== -1))
-          return E.children.splice(Q, 1), T.push(E), this._condense(T), this;
-        !B && !E.leaf && R(E, C) ? (T.push(E), k.push(F), F = 0, I = E, E = E.children[0]) : I ? (F++, E = I.children[F], B = !1) : E = null;
+      for (var E = this.data, N = this.toBBox(S), x = [], k = [], F, I, Q, B; E || x.length; ) {
+        if (E || (E = x.pop(), I = x[x.length - 1], F = k.pop(), B = !0), E.leaf && (Q = r(S, E.children, w), Q !== -1))
+          return E.children.splice(Q, 1), x.push(E), this._condense(x), this;
+        !B && !E.leaf && R(E, N) ? (x.push(E), k.push(F), F = 0, I = E, E = E.children[0]) : I ? (F++, E = I.children[F], B = !1) : E = null;
       }
       return this;
     },
@@ -20196,65 +20196,65 @@ function sy() {
         S.leaf ? w.push.apply(w, S.children) : E.push.apply(E, S.children), S = E.pop();
       return w;
     },
-    _build: function(S, w, E, C) {
-      var T = E - w + 1, k = this._maxEntries, F;
-      if (T <= k)
-        return F = N(S.slice(w, E + 1)), s(F, this.toBBox), F;
-      C || (C = Math.ceil(Math.log(T) / Math.log(k)), k = Math.ceil(T / Math.pow(k, C - 1))), F = N([]), F.leaf = !1, F.height = C;
-      var I = Math.ceil(T / k), Q = I * Math.ceil(Math.sqrt(k)), B, K, i1, r1;
+    _build: function(S, w, E, N) {
+      var x = E - w + 1, k = this._maxEntries, F;
+      if (x <= k)
+        return F = _(S.slice(w, E + 1)), s(F, this.toBBox), F;
+      N || (N = Math.ceil(Math.log(x) / Math.log(k)), k = Math.ceil(x / Math.pow(k, N - 1))), F = _([]), F.leaf = !1, F.height = N;
+      var I = Math.ceil(x / k), Q = I * Math.ceil(Math.sqrt(k)), B, K, i1, r1;
       for (O(S, w, E, Q, this.compareMinX), B = w; B <= E; B += Q)
         for (i1 = Math.min(B + Q - 1, E), O(S, B, i1, I, this.compareMinY), K = B; K <= i1; K += I)
-          r1 = Math.min(K + I - 1, i1), F.children.push(this._build(S, K, r1, C - 1));
+          r1 = Math.min(K + I - 1, i1), F.children.push(this._build(S, K, r1, N - 1));
       return s(F, this.toBBox), F;
     },
-    _chooseSubtree: function(S, w, E, C) {
-      for (var T, k, F, I, Q, B, K, i1; C.push(w), !(w.leaf || C.length - 1 === E); ) {
-        for (K = i1 = 1 / 0, T = 0, k = w.children.length; T < k; T++)
-          F = w.children[T], Q = p(F), B = b(S, F) - Q, B < i1 ? (i1 = B, K = Q < K ? Q : K, I = F) : B === i1 && Q < K && (K = Q, I = F);
+    _chooseSubtree: function(S, w, E, N) {
+      for (var x, k, F, I, Q, B, K, i1; N.push(w), !(w.leaf || N.length - 1 === E); ) {
+        for (K = i1 = 1 / 0, x = 0, k = w.children.length; x < k; x++)
+          F = w.children[x], Q = p(F), B = b(S, F) - Q, B < i1 ? (i1 = B, K = Q < K ? Q : K, I = F) : B === i1 && Q < K && (K = Q, I = F);
         w = I || w.children[0];
       }
       return w;
     },
     _insert: function(S, w, E) {
-      var C = this.toBBox, T = E ? S : C(S), k = [], F = this._chooseSubtree(T, this.data, w, k);
-      for (F.children.push(S), d(F, T); w >= 0 && k[w].children.length > this._maxEntries; )
+      var N = this.toBBox, x = E ? S : N(S), k = [], F = this._chooseSubtree(x, this.data, w, k);
+      for (F.children.push(S), d(F, x); w >= 0 && k[w].children.length > this._maxEntries; )
         this._split(k, w), w--;
-      this._adjustParentBBoxes(T, k, w);
+      this._adjustParentBBoxes(x, k, w);
     },
     // split overflowed node into two
     _split: function(S, w) {
-      var E = S[w], C = E.children.length, T = this._minEntries;
-      this._chooseSplitAxis(E, T, C);
-      var k = this._chooseSplitIndex(E, T, C), F = N(E.children.splice(k, E.children.length - k));
+      var E = S[w], N = E.children.length, x = this._minEntries;
+      this._chooseSplitAxis(E, x, N);
+      var k = this._chooseSplitIndex(E, x, N), F = _(E.children.splice(k, E.children.length - k));
       F.height = E.height, F.leaf = E.leaf, s(E, this.toBBox), s(F, this.toBBox), w ? S[w - 1].children.push(F) : this._splitRoot(E, F);
     },
     _splitRoot: function(S, w) {
-      this.data = N([S, w]), this.data.height = S.height + 1, this.data.leaf = !1, s(this.data, this.toBBox);
+      this.data = _([S, w]), this.data.height = S.height + 1, this.data.leaf = !1, s(this.data, this.toBBox);
     },
     _chooseSplitIndex: function(S, w, E) {
-      var C, T, k, F, I, Q, B, K;
-      for (Q = B = 1 / 0, C = w; C <= E - w; C++)
-        T = c(S, 0, C, this.toBBox), k = c(S, C, E, this.toBBox), F = v(T, k), I = p(T) + p(k), F < Q ? (Q = F, K = C, B = I < B ? I : B) : F === Q && I < B && (B = I, K = C);
+      var N, x, k, F, I, Q, B, K;
+      for (Q = B = 1 / 0, N = w; N <= E - w; N++)
+        x = c(S, 0, N, this.toBBox), k = c(S, N, E, this.toBBox), F = y(x, k), I = p(x) + p(k), F < Q ? (Q = F, K = N, B = I < B ? I : B) : F === Q && I < B && (B = I, K = N);
       return K;
     },
     // sorts node children by the best axis for split
     _chooseSplitAxis: function(S, w, E) {
-      var C = S.leaf ? this.compareMinX : f, T = S.leaf ? this.compareMinY : g, k = this._allDistMargin(S, w, E, C), F = this._allDistMargin(S, w, E, T);
-      k < F && S.children.sort(C);
+      var N = S.leaf ? this.compareMinX : f, x = S.leaf ? this.compareMinY : g, k = this._allDistMargin(S, w, E, N), F = this._allDistMargin(S, w, E, x);
+      k < F && S.children.sort(N);
     },
     // total margin of all possible split distributions where each node is at least m full
-    _allDistMargin: function(S, w, E, C) {
-      S.children.sort(C);
-      var T = this.toBBox, k = c(S, 0, w, T), F = c(S, E - w, E, T), I = m(k) + m(F), Q, B;
+    _allDistMargin: function(S, w, E, N) {
+      S.children.sort(N);
+      var x = this.toBBox, k = c(S, 0, w, x), F = c(S, E - w, E, x), I = m(k) + m(F), Q, B;
       for (Q = w; Q < E - w; Q++)
-        B = S.children[Q], d(k, S.leaf ? T(B) : B), I += m(k);
+        B = S.children[Q], d(k, S.leaf ? x(B) : B), I += m(k);
       for (Q = E - w - 1; Q >= w; Q--)
-        B = S.children[Q], d(F, S.leaf ? T(B) : B), I += m(F);
+        B = S.children[Q], d(F, S.leaf ? x(B) : B), I += m(F);
       return I;
     },
     _adjustParentBBoxes: function(S, w, E) {
-      for (var C = E; C >= 0; C--)
-        d(w[C], S);
+      for (var N = E; N >= 0; N--)
+        d(w[N], S);
     },
     _condense: function(S) {
       for (var w = S.length - 1, E; w >= 0; w--)
@@ -20270,18 +20270,18 @@ function sy() {
   };
   function r(S, w, E) {
     if (!E) return w.indexOf(S);
-    for (var C = 0; C < w.length; C++)
-      if (E(S, w[C])) return C;
+    for (var N = 0; N < w.length; N++)
+      if (E(S, w[N])) return N;
     return -1;
   }
   function s(S, w) {
     c(S, 0, S.children.length, w, S);
   }
-  function c(S, w, E, C, T) {
-    T || (T = N(null)), T.minX = 1 / 0, T.minY = 1 / 0, T.maxX = -1 / 0, T.maxY = -1 / 0;
+  function c(S, w, E, N, x) {
+    x || (x = _(null)), x.minX = 1 / 0, x.minY = 1 / 0, x.maxX = -1 / 0, x.maxY = -1 / 0;
     for (var k = w, F; k < E; k++)
-      F = S.children[k], d(T, S.leaf ? C(F) : F);
-    return T;
+      F = S.children[k], d(x, S.leaf ? N(F) : F);
+    return x;
   }
   function d(S, w) {
     return S.minX = Math.min(S.minX, w.minX), S.minY = Math.min(S.minY, w.minY), S.maxX = Math.max(S.maxX, w.maxX), S.maxY = Math.max(S.maxY, w.maxY), S;
@@ -20301,17 +20301,17 @@ function sy() {
   function b(S, w) {
     return (Math.max(w.maxX, S.maxX) - Math.min(w.minX, S.minX)) * (Math.max(w.maxY, S.maxY) - Math.min(w.minY, S.minY));
   }
-  function v(S, w) {
-    var E = Math.max(S.minX, w.minX), C = Math.max(S.minY, w.minY), T = Math.min(S.maxX, w.maxX), k = Math.min(S.maxY, w.maxY);
-    return Math.max(0, T - E) * Math.max(0, k - C);
+  function y(S, w) {
+    var E = Math.max(S.minX, w.minX), N = Math.max(S.minY, w.minY), x = Math.min(S.maxX, w.maxX), k = Math.min(S.maxY, w.maxY);
+    return Math.max(0, x - E) * Math.max(0, k - N);
   }
   function R(S, w) {
     return S.minX <= w.minX && S.minY <= w.minY && w.maxX <= S.maxX && w.maxY <= S.maxY;
   }
-  function y(S, w) {
+  function v(S, w) {
     return w.minX <= S.maxX && w.minY <= S.maxY && w.maxX >= S.minX && w.maxY >= S.minY;
   }
-  function N(S) {
+  function _(S) {
     return {
       children: S,
       height: 1,
@@ -20322,37 +20322,37 @@ function sy() {
       maxY: -1 / 0
     };
   }
-  function O(S, w, E, C, T) {
+  function O(S, w, E, N, x) {
     for (var k = [w, E], F; k.length; )
-      E = k.pop(), w = k.pop(), !(E - w <= C) && (F = w + Math.ceil((E - w) / C / 2) * C, i(S, F, w, E, T), k.push(w, F, F, E));
+      E = k.pop(), w = k.pop(), !(E - w <= N) && (F = w + Math.ceil((E - w) / N / 2) * N, i(S, F, w, E, x), k.push(w, F, F, E));
   }
   return a9.exports;
 }
-var Nt, vs;
+var Ct, vs;
 function ly() {
-  if (vs) return Nt;
-  vs = 1, Nt = i, i.polyline = i, i.polygon = o;
+  if (vs) return Ct;
+  vs = 1, Ct = i, i.polyline = i, i.polygon = o;
   function i(c, d, f) {
-    var g = c.length, p = s(c[0], d), m = [], b, v, R, y, N;
+    var g = c.length, p = s(c[0], d), m = [], b, y, R, v, _;
     for (f || (f = []), b = 1; b < g; b++) {
-      for (v = c[b - 1], R = c[b], y = N = s(R, d); ; )
-        if (p | y) {
-          if (p & y)
+      for (y = c[b - 1], R = c[b], v = _ = s(R, d); ; )
+        if (p | v) {
+          if (p & v)
             break;
-          p ? (v = r(v, R, p, d), p = s(v, d)) : (R = r(v, R, y, d), y = s(R, d));
+          p ? (y = r(y, R, p, d), p = s(y, d)) : (R = r(y, R, v, d), v = s(R, d));
         } else {
-          m.push(v), y !== N ? (m.push(R), b < g - 1 && (f.push(m), m = [])) : b === g - 1 && m.push(R);
+          m.push(y), v !== _ ? (m.push(R), b < g - 1 && (f.push(m), m = [])) : b === g - 1 && m.push(R);
           break;
         }
-      p = N;
+      p = _;
     }
     return m.length && f.push(m), f;
   }
   function o(c, d) {
-    var f, g, p, m, b, v, R;
+    var f, g, p, m, b, y, R;
     for (g = 1; g <= 8; g *= 2) {
       for (f = [], p = c[c.length - 1], m = !(s(p, d) & g), b = 0; b < c.length; b++)
-        v = c[b], R = !(s(v, d) & g), R !== m && f.push(r(p, v, g, d)), R && f.push(v), p = v, m = R;
+        y = c[b], R = !(s(y, d) & g), R !== m && f.push(r(p, y, g, d)), R && f.push(y), p = y, m = R;
       if (c = f, !c.length) break;
     }
     return f;
@@ -20376,51 +20376,51 @@ function ly() {
     var f = 0;
     return c[0] < d[0] ? f |= 1 : c[0] > d[2] && (f |= 2), c[1] < d[1] ? f |= 4 : c[1] > d[3] && (f |= 8), f;
   }
-  return Nt;
+  return Ct;
 }
-var Ct, ws;
+var Nt, ws;
 function cy() {
-  if (ws) return Ct;
+  if (ws) return Nt;
   ws = 1;
   var i = sy(), o = ly();
-  Ct = r;
+  Nt = r;
   function r(g) {
     for (var p = [], m = 0; m < g.features.length; m++) {
       var b = g.features[m];
       if (b.geometry) {
-        var v = b.geometry.coordinates;
+        var y = b.geometry.coordinates;
         if (b.geometry.type === "Polygon")
-          p.push(f(v, b.properties));
+          p.push(f(y, b.properties));
         else if (b.geometry.type === "MultiPolygon")
-          for (var R = 0; R < v.length; R++)
-            p.push(f(v[R], b.properties));
+          for (var R = 0; R < y.length; R++)
+            p.push(f(y[R], b.properties));
       }
     }
-    var y = i().load(p);
-    function N(O, S) {
-      for (var w = [], E = y.search({
+    var v = i().load(p);
+    function _(O, S) {
+      for (var w = [], E = v.search({
         minX: O[0],
         minY: O[1],
         maxX: O[0],
         maxY: O[1]
-      }), C = 0; C < E.length; C++)
-        if (c(E[C].coords, O))
+      }), N = 0; N < E.length; N++)
+        if (c(E[N].coords, O))
           if (S)
-            w.push(E[C].props);
+            w.push(E[N].props);
           else
-            return E[C].props;
+            return E[N].props;
       return S && w.length ? w : null;
     }
-    return N.tree = y, N.bbox = function(S) {
-      for (var w = [], E = y.search({
+    return _.tree = v, _.bbox = function(S) {
+      for (var w = [], E = v.search({
         minX: S[0],
         minY: S[1],
         maxX: S[2],
         maxY: S[3]
-      }), C = 0; C < E.length; C++)
-        s(E[C].coords, S) && w.push(E[C].props);
+      }), N = 0; N < E.length; N++)
+        s(E[N].coords, S) && w.push(E[N].props);
       return w;
-    }, N;
+    }, _;
   }
   function s(g, p) {
     var m = [
@@ -20433,9 +20433,9 @@ function cy() {
     return !1;
   }
   function c(g, p) {
-    for (var m = !1, b = 0, v = g.length; b < v; b++)
-      for (var R = g[b], y = 0, N = R.length, O = N - 1; y < N; O = y++)
-        d(p, R[y], R[O]) && (m = !m);
+    for (var m = !1, b = 0, y = g.length; b < y; b++)
+      for (var R = g[b], v = 0, _ = R.length, O = _ - 1; v < _; O = v++)
+        d(p, R[v], R[O]) && (m = !m);
     return m;
   }
   function d(g, p, m) {
@@ -20450,12 +20450,12 @@ function cy() {
       coords: g,
       props: p
     }, b = 0; b < g[0].length; b++) {
-      var v = g[0][b];
-      m.minX = Math.min(m.minX, v[0]), m.minY = Math.min(m.minY, v[1]), m.maxX = Math.max(m.maxX, v[0]), m.maxY = Math.max(m.maxY, v[1]);
+      var y = g[0][b];
+      m.minX = Math.min(m.minX, y[0]), m.minY = Math.min(m.minY, y[1]), m.maxX = Math.max(m.maxX, y[0]), m.maxY = Math.max(m.maxY, y[1]);
     }
     return m;
   }
-  return Ct;
+  return Nt;
 }
 var uy = cy();
 const dy = /* @__PURE__ */ It(uy);
@@ -20877,16 +20877,16 @@ function py(i) {
   let r = [];
   for (const w of i.features) {
     const E = w.properties;
-    E.id = E.iso1A2 || E.m49 || E.wikidata, d(w), f(w), g(w), p(w), c(w), N(w), S(w), w.geometry && r.push(w);
+    E.id = E.iso1A2 || E.m49 || E.wikidata, d(w), f(w), g(w), p(w), c(w), _(w), S(w), w.geometry && r.push(w);
   }
   for (const w of i.features)
     w.properties.groups = w.properties.groups.map((E) => Y1[E].properties.id), O(w);
   for (const w of i.features)
-    b(w), v(w), R(w), y(w), m(w);
+    b(w), y(w), R(w), v(w), m(w);
   for (const w of i.features)
-    w.properties.groups.sort((E, C) => q2.indexOf(Y1[E].properties.level) - q2.indexOf(Y1[C].properties.level)), w.properties.members && w.properties.members.sort((E, C) => {
-      const T = q2.indexOf(Y1[E].properties.level) - q2.indexOf(Y1[C].properties.level);
-      return T === 0 ? i.features.indexOf(Y1[E]) - i.features.indexOf(Y1[C]) : T;
+    w.properties.groups.sort((E, N) => q2.indexOf(Y1[E].properties.level) - q2.indexOf(Y1[N].properties.level)), w.properties.members && w.properties.members.sort((E, N) => {
+      const x = q2.indexOf(Y1[E].properties.level) - q2.indexOf(Y1[N].properties.level);
+      return x === 0 ? i.features.indexOf(Y1[E]) - i.features.indexOf(Y1[N]) : x;
     });
   Ga = dy({
     type: "FeatureCollection",
@@ -20915,15 +20915,15 @@ function py(i) {
   function m(w) {
     const E = w.properties;
     if (w.geometry || !E.members) return;
-    const C = q2.indexOf(E.level);
-    let T = [];
+    const N = q2.indexOf(E.level);
+    let x = [];
     E.members.forEach((k, F) => {
-      const Q = Y1[k].properties.groups.filter((B) => B !== w.properties.id && C < q2.indexOf(Y1[B].properties.level));
-      F === 0 ? T = Q : T = T.filter((B) => Q.indexOf(B) !== -1);
+      const Q = Y1[k].properties.groups.filter((B) => B !== w.properties.id && N < q2.indexOf(Y1[B].properties.level));
+      F === 0 ? x = Q : x = x.filter((B) => Q.indexOf(B) !== -1);
     }), E.groups = E.groups.concat(
-      T.filter((k) => E.groups.indexOf(k) === -1)
+      x.filter((k) => E.groups.indexOf(k) === -1)
     );
-    for (const k of T) {
+    for (const k of x) {
       const F = Y1[k];
       F.properties.members.indexOf(E.id) === -1 && F.properties.members.push(E.id);
     }
@@ -20933,31 +20933,31 @@ function py(i) {
     if (w.geometry)
       E.roadSpeedUnit || (E.roadSpeedUnit = "km/h");
     else if (E.members) {
-      const C = Array.from(
+      const N = Array.from(
         new Set(
-          E.members.map((T) => {
-            const k = Y1[T];
+          E.members.map((x) => {
+            const k = Y1[x];
             if (k.geometry) return k.properties.roadSpeedUnit || "km/h";
           }).filter(Boolean)
         )
       );
-      C.length === 1 && (E.roadSpeedUnit = C[0]);
+      N.length === 1 && (E.roadSpeedUnit = N[0]);
     }
   }
-  function v(w) {
+  function y(w) {
     const E = w.properties;
     if (w.geometry)
       E.roadHeightUnit || (E.roadHeightUnit = "m");
     else if (E.members) {
-      const C = Array.from(
+      const N = Array.from(
         new Set(
-          E.members.map((T) => {
-            const k = Y1[T];
+          E.members.map((x) => {
+            const k = Y1[x];
             if (k.geometry) return k.properties.roadHeightUnit || "m";
           }).filter(Boolean)
         )
       );
-      C.length === 1 && (E.roadHeightUnit = C[0]);
+      N.length === 1 && (E.roadHeightUnit = N[0]);
     }
   }
   function R(w) {
@@ -20965,32 +20965,32 @@ function py(i) {
     if (w.geometry)
       E.driveSide || (E.driveSide = "right");
     else if (E.members) {
-      const C = Array.from(
+      const N = Array.from(
         new Set(
-          E.members.map((T) => {
-            const k = Y1[T];
+          E.members.map((x) => {
+            const k = Y1[x];
             if (k.geometry) return k.properties.driveSide || "right";
           }).filter(Boolean)
         )
       );
-      C.length === 1 && (E.driveSide = C[0]);
+      N.length === 1 && (E.driveSide = N[0]);
     }
   }
-  function y(w) {
+  function v(w) {
     const E = w.properties;
     !w.geometry && E.members && (E.callingCodes = Array.from(
       new Set(
-        E.members.reduce((C, T) => {
-          const k = Y1[T];
-          return k.geometry && k.properties.callingCodes ? C.concat(k.properties.callingCodes) : C;
+        E.members.reduce((N, x) => {
+          const k = Y1[x];
+          return k.geometry && k.properties.callingCodes ? N.concat(k.properties.callingCodes) : N;
         }, [])
       )
     ));
   }
-  function N(w) {
+  function _(w) {
     let E = "";
-    const C = w.properties.iso1A2;
-    C && C !== "FX" && (E = F(C));
+    const N = w.properties.iso1A2;
+    N && N !== "FX" && (E = F(N));
     const k = {
       Q21: "gbeng",
       // GB-ENG (England)
@@ -21012,21 +21012,21 @@ function py(i) {
   }
   function O(w) {
     for (const E of w.properties.groups) {
-      const C = Y1[E];
-      C.properties.members || (C.properties.members = []), C.properties.members.push(w.properties.id);
+      const N = Y1[E];
+      N.properties.members || (N.properties.members = []), N.properties.members.push(w.properties.id);
     }
   }
   function S(w) {
     let E = [];
-    for (const C of o) {
-      const T = w.properties[C];
-      T && E.push(T);
+    for (const N of o) {
+      const x = w.properties[N];
+      x && E.push(x);
     }
-    for (const C of w.properties.aliases || [])
-      E.push(C);
-    for (const C of E) {
-      const T = Sc(C);
-      Y1[T] = w;
+    for (const N of w.properties.aliases || [])
+      E.push(N);
+    for (const N of E) {
+      const x = Sc(N);
+      Y1[x] = w;
     }
   }
 }
@@ -21102,26 +21102,27 @@ function Ey(i, o) {
   }
   return s;
 }
-const Ay = "" + new URL("styles.css", import.meta.url).href, My = "" + new URL("main.css", import.meta.url).href, _y = ({ domRoot: i, children: o }) => {
-  const r = {
-    components: { Portal: { defaultProps: { target: i } } }
+const Ay = "" + new URL("styles.css", import.meta.url).href, My = "" + new URL("main.css", import.meta.url).href, _y = ({ themeColour: i, domRoot: o, children: r }) => {
+  const s = {
+    components: { Portal: { defaultProps: { target: o } } }
   };
-  return /* @__PURE__ */ _.jsxs(
+  return /* @__PURE__ */ C.jsxs(
     Is,
     {
-      cssVariablesSelector: i.tagName,
-      getRootElement: () => i,
-      theme: r,
+      cssVariablesSelector: o.tagName,
+      getRootElement: () => o,
+      theme: s,
+      defaultColorScheme: i || "auto",
       children: [
-        /* @__PURE__ */ _.jsx("link", { rel: "stylesheet", href: Ay }),
-        /* @__PURE__ */ _.jsx("link", { rel: "stylesheet", href: My }),
-        o
+        /* @__PURE__ */ C.jsx("link", { rel: "stylesheet", href: Ay }),
+        /* @__PURE__ */ C.jsx("link", { rel: "stylesheet", href: My }),
+        r
       ]
     }
   );
-}, Ny = /* @__PURE__ */ JSON.parse('{"AT-V2":{"networkName":"Austria - AT-V2","networkImage":"File:Example.png","wikiPage":"","signals":{"main_repeated":[],"main":[{"id":"AT-V2:trapeztafel","name":"Main entry sign Ne 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/trapeztafel.svg","form":"sign"}],"speed_limit_distant":[{"id":"AT-V2:ankündigungstafel","name":"Ankündigungstafel","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/ankuendigungstafel-empty-sign.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"AT-V2:ankündigungssignal","name":"Ankündigungssignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/ankündigungssignal-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"AT-V2:ankündigung_ek-sicht","name":"Ankündigung EK sicht","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/ankündigung-ek-sicht.svg","form":"sign"}],"distant":[{"id":"AT-V2:kreuztafel","name":"Kreuztafel","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/kreuztafel.svg","form":"sign"}],"train_protection":[{"id":"AT-V2:lzb-bereichskennzeichen","name":"LZB Bereichskennzeichen","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/lzb-bereichskennzeichen.svg","form":"sign"}],"minor":[{"id":"AT-V2:weiterfahrt_verboten","name":"Sperrsignale (sign)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/weiterfahrt-verboten.svg","form":"sign"},{"id":"AT-V2:sperrsignal","name":"Sperrsignale (semaphore)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/weiterfahrt-erlaubt.svg","form":"semaphore"},{"id":"AT-V2:schutzsignal","name":"Schutzsignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/schutzsignal.svg","form":"light"},{"id":"AT-V2:fahrwegende","name":"Fahrwegende","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/fahrwegende.svg","form":"sign"},{"id":"AT-V2:haltscheibe","name":"Haltscheibe","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/haltscheibe.svg","form":"sign"}],"shunting":[{"id":"AT-V2:verschubsignal","name":"Verschubsignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/verschubsignal.svg","form":"light","extra":{"height":{"options":["dwarf"]}}},{"id":"AT-V2:verschubhalttafel","name":"Verschubhalttafel","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/verschubhalttafel.svg","form":"sign"}],"station_distant":[{"id":"AT-V2:haltestellentafel","name":"Haltestellentafel","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/haltestellentafel.svg","form":"sign"}],"crossing":[{"id":"AT-V2:ek_überwachungssignal","name":"Überwachungssignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/ek_gesichert.svg","form":"light"}],"crossing_distant":[{"id":"AT-V2:rautentafel","name":"Rautentafel","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/rautentafel.svg","form":"sign"}],"whistle":[{"id":"AT-V2:pfeifpflock","name":"Pfeifpflock","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/pfeifpflock.svg","form":"sign"},{"id":"AT-V2:gruppenpfeifpflock","name":"Gruppenpfeifpflock","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/gruppenpfeifpflock.svg","form":"sign"},{"id":"AT-V2:endpflock","name":"Endpflock","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/endpflock.svg","form":"sign"}],"stop":[{"id":"AT-V2:haltepunkt","name":"Haltepunkt","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/haltepunkt.svg","form":"sign"}],"departure":[{"id":"AT-V2:abfahrt","name":"Abfahrt","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/abfahrt.svg","form":"light"},{"id":"AT-V2:fahrerlaubnissignal","name":"Fahrerlaubnissignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/fahrerlaubnis.svg","form":"light"}],"speed_limit":[{"id":"AT-V2:geschwindigkeitstafel","name":"Geschwindigkeitstafel","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/geschwindigkeitstafel-empty-sign.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"AT-V2:anfangssignal","name":"Anfangssignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/anfangssignal-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"AT-V2:endsignal","name":"Endsignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/endsignal.svg","form":"sign"},{"id":"AT-V2:ek-sicht_pfeiftafel","name":"EK sicht Pfeiftafel","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/ek-sicht-pfeiftafel.svg","form":"sign"}],"electricity":[{"id":"AT-V2:ankündigung_stromabnehmer_tief","name":"Ankündigung Stromabnehmer tief","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/ankündigung_stromabnehmer_tief.svg","form":"sign"},{"id":"AT-V2:ankündigung_hauptschalter_aus","name":"Ankündigung Hauptschalter aus","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/ankündigung_hauptschalter_aus.svg","form":"light"},{"id":"AT-V2:halt_fuer_fahrzeuge_mit_angehobenem_stromabnehmer","name":"Halt für Fahrzeuge mit angehobenem Stromabnehmer","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/halt_fuer_fahrzeuge_mit_angehobenem_stromabnehmer.svg","form":"light","extra":{"turn_direction":{"options":["left","through","right"]}}},{"id":"AT-V2:hauptschalter_ein","name":"Hauptschalter ein","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/hauptschalter_ein.svg","form":"sign"},{"id":"AT-V2:stromabnehmer_hoch","name":"Stromabnehmer hoch","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/stromabnehmer_hoch.svg","form":"sign"},{"id":"AT-V2:hauptschalter_aus","name":"Hauptschalter aus","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/hauptschalter_aus.svg","form":"light"},{"id":"AT-V2:stromabnehmer_tief","name":"Stromabnehmer tief","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/stromabnehmer_tief.svg","form":"sign"},{"id":"AT-V2:bahnhof-streckentrennung_anfang","name":"Bahnhof Streckentrennung anfang","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/bahnhof-streckentrennung_anfang.svg","form":"sign"},{"id":"AT-V2:bahnhof-streckentrennung_ende","name":"Bahnhof Streckentrennung ende","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/bahnhof-streckentrennung_ende.svg","form":"sign"},{"id":"AT-V2:schaltzeiger","name":"Schaltzeiger","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/schaltzeiger.svg","form":"semaphore"}],"snowplow":[{"id":"AT-V2:räumarbeit_aufnehmen","name":"Räumarbeit aufnehmen","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/räumarbeit-aufnehmen.svg","form":"sign"},{"id":"AT-V2:mittelräumer_heben","name":"Mittelräumer heben","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/mittelräumer-heben.svg","form":"sign"},{"id":"AT-V2:räumarbeit_einstellen","name":"Räumarbeit einstellen","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/räumarbeit-einstellen.svg","form":"sign"}],"humping":[{"id":"AT-V2:abdrucksignal","name":"Abdrucksignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/abdrucksignal.svg","form":"light"}]}},"AT":{"networkName":"Austria","networkImage":"File:Example.png","wikiPage":"","signals":{"stop_demand":[{"id":"AT:bedarfshalt-signal","name":"Bedarfshalt","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/bedarfshalt.svg","form":"light"}],"resetting_switch":[{"id":"AT:weichenüberwachungssignal_plb","name":"Weichenüberwachungssignal (PLB)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/weichenüberwachungssignal_plb.svg","form":"light"}]}},"AT-SLB":{"networkName":"Austria - AT-SLB","networkImage":"File:Example.png","wikiPage":"","signals":{"stop":[{"id":"AT-SLB:zuglaufmeldestelle","name":"Zuglaufmeldestelle (SLB)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/zuglaufmeldestelle.svg","form":"sign"}],"speed_limit":[{"id":"AT-SLB:x40","name":"Salzburger Lokalbahn & Pinzgauer Lokalbahn X40","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/x40.svg","form":"sign"}]}}}'), Cy = /* @__PURE__ */ JSON.parse('{"MNWSW":{"networkName":"Australia - MNWSW","networkImage":"File:Example.png","wikiPage":"","signals":{"minor":[{"id":"AU:MNWSW:location","name":"Location Marker Board","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/metro/location.svg","form":"sign"}],"main":[{"id":"AU:MNWSW:points_indiciator","name":"Point Position Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/metro/points_indiciator.svg","form":"light"}],"route":[{"id":"AU:MNWSW:route_indicator","name":"Route Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/metro/route_indicator.svg","form":"light"}],"stop":[{"id":"AU:MNWSW:fixed_red","name":"Fixed Red","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/metro/fixed_red.svg","form":"light"}],"fouling_point":[{"id":"AU:MNWSW:points_cleared","name":"Points Cleared","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/metro/points_cleared.svg","form":"light"}]}},"LightRail":{"networkName":"Australia - LightRail","networkImage":"File:Example.png","wikiPage":"","signals":{"electricity":[{"id":"AU:LightRail:coast_off","name":"Coast Off","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/coast_off.svg","form":"sign"},{"id":"AU:LightRail:coast_on","name":"Coast On","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/coast_on.svg","form":"sign"}],"stop":[{"id":"AU:LightRail:fixed_red","name":"Fixed Red","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/fixed_red.svg","form":"sign"}],"route":[{"id":"AU:LightRail:route_indicator","name":"Route Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signals/route_indicator.svg","form":"light"}],"minor":[{"id":"AU:LightRail:PI","name":"Points Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signals/PI/straight.svg","form":"light","extra":{"states":{"options":["stop"]}}},{"id":"AU:LightRail:SPI","name":"Signal Operated Points Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signals/SPI/straight.svg","form":"light","extra":{"states":{"options":["locked"]}}}],"main":[{"id":"AU:LightRail:SI","name":"Signal System Lanterns","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signals/SI/straight.svg","form":"light","extra":{"states":{"options":["stop"]}}}]}},"NSW":{"networkName":"Australia - NSW","networkImage":"File:Example.png","wikiPage":"","signals":{"minor":[{"id":"AU:LightRail:NSW:CS","name":"CS","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/CS.svg","form":"sign"},{"id":"AU:LightRail:NSW:D","name":"Train Detector","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/D.svg","form":"sign"},{"id":"AU:NSW:close_up","name":"Close Up","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/close_up.svg","form":"light"},{"id":"AU:NSW:low_speed","name":"Low Speed","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/low_speed.svg","form":"light"},{"id":"AU:NSW:MLI","name":"Mainline Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/MLI/unknown.svg","form":"light","extra":{"states":{"options":["WYR","WR"]}}}],"shunting":[{"id":"AU:LightRail:NSW:LM","name":"Shunting Limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/LM.svg","form":"sign"},{"id":"AU:LightRail:NSW:SL","name":"Shunting Limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/SL.svg","form":"sign"},{"id":"AU:LightRail:NSW:SZ","name":"Shunting Zone","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/SZ.svg","form":"sign"},{"id":"AU:NSW:shunting_limit","name":"Shunting Limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/shunting_limit.svg","form":"sign"},{"id":"AU:NSW:shunt","name":"Shunt Signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/shunt_box.svg","form":"light","extra":{"shape":{"options":["vertical"]}}},{"id":"AU:NSW:intermediate","name":"Intermediate Shunt Signal Signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/shunt_box_int.svg","form":"light","extra":{"shape":{"options":["vertical"]}}},{"id":"AU:NSW:subsidiary","name":"Calling-On / Shunt Ahead","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/subsidiary.svg","form":"light"}],"electricity":[{"id":"AU:LightRail:NSW:lower_APS","name":"Lower APS","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/lower_APS.svg","form":"sign"},{"id":"AU:LightRail:NSW:lower_OESS","name":"Lower OESS","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/lower_OESS.svg","form":"sign"},{"id":"AU:LightRail:NSW:lower_OHW","name":"Lower OHW","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/lower_OHW.svg","form":"sign"},{"id":"AU:LightRail:NSW:raise_APS","name":"Raise APS","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/raise_APS.svg","form":"sign"},{"id":"AU:LightRail:NSW:raise_OESS","name":"Raise OESS","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/raise_OESS.svg","form":"sign"},{"id":"AU:LightRail:NSW:raise_OHW","name":"Raise OHW","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/raise_OHW.svg","form":"sign"},{"id":"AU:NSW:block_join","name":"Block Join","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/block_join.svg","form":"sign"},{"id":"AU:NSW:electric_limit","name":"Electric Train Stop","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/electric_limit.svg","form":"sign"},{"id":"AU:NSW:turnout","name":"Unelectrified Turnout","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/turnout.svg","form":"sign"}],"departure":[{"id":"AU:LightRail:NSW:RTS","name":"Ready to Start","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/RTS.svg","form":"sign"},{"id":"AU:NSW:EYL","name":"End Yard Limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/EYL.svg","form":"sign"}],"route":[{"id":"AU:LightRail:NSW:set_route","name":"Set Route","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/set_route_NSW.svg","form":"sign"},{"id":"AU:NSW:theatre_box","name":"Mainline Route Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/route_indicator.svg","form":"light"}],"stop":[{"id":"AU:LightRail:NSW:stop","name":"Stop","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/stop.svg","form":"sign"},{"id":"AU:LightRail:NSW:SWI","name":"Stop with Instruction","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/SWI.svg","form":"sign"},{"id":"AU:NSW:catch_point","name":"Catch Point","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/catch_point.svg","form":"sign"},{"id":"AU:NSW:derail","name":"Derail","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/derail.svg","form":"sign"},{"id":"AU:NSW:loading_gauge","name":"Loading Gauge Limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/loading_gauge.svg","form":"sign"},{"id":"AU:NSW:stop_position","name":"Stop Position","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/stop_position/unknown.svg","form":"sign","extra":{"states":{"options":[]}}},{"id":"AU:NSW:safety_overrun","name":"Safety Runoff Area","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/safety_overrun.svg","form":"sign"},{"id":"AU:NSW:stop","name":"Stop","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/stop.svg","form":"sign"}],"main":[{"id":"AU:LightRail:NSW:ground","name":"Ground Signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signals/ground-clear.svg","form":"light","extra":{"states":{"options":["stop"]}}},{"id":"AU:LightRail:NSW:SI","name":"Signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signals/NSW_SI.svg","form":"light"},{"id":"AU:LightRail:NSW:PI","name":"Points Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signals/NSW_PI.svg","form":"light"}],"main_repeated":[{"id":"AU:NSW:alert","name":"Alert","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/alert.svg","form":"sign"},{"id":"AU:NSW:LED_repeater","name":"LED Repeater","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/LED_repeater.svg","form":"light"},{"id":"AU:NSW:guards_indicator","name":"Guards Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/guards_indicator.svg","form":"light"}],"train_protection":[{"id":"AU:NSW:begin_ATP","name":"Begin ATP","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/begin_ATP.svg","form":"sign"},{"id":"AU:NSW:begin_CAB","name":"Begin CAB","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/begin_CAB.svg","form":"sign"},{"id":"AU:NSW:begin_single_light","name":"Begin Single Light Indication","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/begin_single_light.svg","form":"sign"},{"id":"AU:NSW:begin_TOW","name":"Begin Train Order Working","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/begin_TOW.svg","form":"sign"},{"id":"AU:NSW:end_ATP","name":"End ATP","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/end_ATP.svg","form":"sign"},{"id":"AU:NSW:end_CAB","name":"End CAB","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/end_CAB.svg","form":"sign"},{"id":"AU:NSW:end_signalled_authority","name":"End Signalled Authority","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/end_signalled_authority.svg","form":"sign"},{"id":"AU:NSW:network_control","name":"Network Control Limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/network_control.svg","form":"sign"},{"id":"AU:NSW:end_single_light","name":"End Single Light Indication","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/end_single_light.svg","form":"sign"},{"id":"AU:NSW:end_TOW","name":"End Train Order Working","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/end_TOW.svg","form":"sign"},{"id":"AU:NSW:A","name":"Automatic Light","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/automatic.svg","form":"light"}],"station_distant":[{"id":"AU:NSW:landmark","name":"Landmark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/landmark.svg","form":"sign"},{"id":"AU:NSW:location","name":"Location","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/location.svg","form":"sign"},{"id":"AU:NSW:YL","name":"Yard Limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/YL.svg","form":"sign"}],"whistle":[{"id":"AU:NSW:no_whistle","name":"No Whistle","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/no_whistle.svg","form":"sign"},{"id":"AU:NSW:whistle","name":"Whistle","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/whistle.svg","form":"sign"}],"fouling_point":[{"id":"AU:NSW:points_cleared","name":"Points Cleared","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/points_cleared.svg","form":"light"}],"crossing_hint":[{"id":"AU:NSW:signalised","name":"Signalised Level Crossing","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/signalised.svg","form":"sign"},{"id":"AU:NSW:unsignalised","name":"Unsignalised Level Crossing","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/unsignalised.svg","form":"sign"}],"switch":[{"id":"AU:NSW:facing_points","name":"Facing Points Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/points_indicator_facing.svg","form":"light"},{"id":"AU:NSW:trailing_points","name":"Trailing Points Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/points_indicator_trailing.svg","form":"light"},{"id":"AU:NSW:turnout_route","name":"Turnout Route","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/turnout_off.svg","form":"light","extra":{"states":{"options":["right","left"]}}},{"id":"AU:NSW:MLI_turnout","name":"Mainline Indicator – Turnout","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/MLI/turnout_off.svg","form":"light","extra":{"states":{"options":["right","left"]}}}],"helper_engine":[{"id":"AU:NSW:tonnage","name":"Tonnage Light","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/tonnage.svg","form":"light"}],"short_route":[],"shunting_route":[{"id":"AU:NSW:stencil","name":"Shunt Route Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/stencil.svg","form":"light"}],"distant":[],"route_distant":[]}},"ACT":{"networkName":"Australia - ACT","networkImage":"File:Example.png","wikiPage":"","signals":{"route":[{"id":"AU:LightRail:ACT:set_route","name":"Set Route","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/set_route_ACT.svg","form":"sign"}]}},"VIC":{"networkName":"Australia - VIC","networkImage":"File:Example.png","wikiPage":"","signals":{"electricity":[{"id":"AU:LightRail:VIC:cut_off","name":"Cut Off","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/cut_off.svg","form":"sign"},{"id":"AU:LightRail:VIC:isolate_5","name":"5th Isolate Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/isolate_5.svg","form":"sign"},{"id":"AU:LightRail:VIC:isolate_4","name":"4th Isolate Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/isolate_4.svg","form":"sign"},{"id":"AU:LightRail:VIC:isolate_3","name":"3rd Isolate Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/isolate_3.svg","form":"sign"},{"id":"AU:LightRail:VIC:isolate_2","name":"2nd Isolate Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/isolate_2.svg","form":"sign"},{"id":"AU:LightRail:VIC:isolate_1","name":"1st Isolate Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/isolate_1.svg","form":"sign"}],"fouling_point":[{"id":"AU:LightRail:VIC:50/50","name":"50/50","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/5050.svg","form":"sign"},{"id":"AU:LightRail:VIC:single_yellow","name":"Fouling Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/single_yellow.svg","form":"sign"}],"stop":[{"id":"AU:LightRail:VIC:double_yellow","name":"Compulsory Stop Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/double_yellow.svg","form":"sign"},{"id":"AU:LightRail:VIC:double_yellow_dashed","name":"Optional Stop Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/double_yellow_dashed.svg","form":"sign"},{"id":"AU:LightRail:VIC:double_yellow_chevron","name":"Check Point Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/double_yellow_chevron.svg","form":"sign"},{"id":"AU:LightRail:VIC:single_yellow_half","name":"Shunting Stop Mark (A/Z/W)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/single_yellow_half.svg","form":"sign"},{"id":"AU:LightRail:VIC:double_yellow_half","name":"Shunting Stop Mark (B/C1/D1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/double_yellow_half.svg","form":"sign"},{"id":"AU:LightRail:VIC:triple_yellow_half","name":"Shunting Stop Mark (C2/D2/E)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/triple_yellow_half.svg","form":"sign"},{"id":"AU:LightRail:VIC:stop_studs_square","name":"Stopping Place Studs","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/stop_studs_square.svg","form":"sign"},{"id":"AU:LightRail:VIC:stop_studs_diamond","name":"Stopping Place Studs (Long Trams)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/stop_studs_diamond.svg","form":"sign"},{"id":"AU:LightRail:VIC:provisional","name":"Provisional Stop","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/provisional_stop.svg","form":"sign"}],"route":[{"id":"AU:LightRail:VIC:command_stud_2","name":"2nd Command Stud","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/command_stud_2.svg","form":"sign"},{"id":"AU:LightRail:VIC:command_stud_1","name":"1st Command Stud","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/command_stud_1.svg","form":"sign"},{"id":"AU:LightRail:VIC:command_stud_1SPI","name":"1st Command Stud (Signal Operated Points)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/command_stud_1SPI.svg","form":"sign"}]}}}'), Oy = { BE: { networkName: "Belgium", networkImage: "File:Example.png", wikiPage: "", signals: { slope: [{ id: "BE:i12", name: "Gradient >=12‰ <18‰", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/i12.svg", form: "sign" }, { id: "BE:i18", name: "Gradient >=18‰", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/i18.svg", form: "sign" }], speed_limit: [{ id: "BE:VIS", name: "Speed limit light (part of main signal)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/VIS-empty.svg", form: "light", extra: { speed: { options: [] } } }, { id: "BE:PVR", name: "Reference speed", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PVR-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "BE:PVO", name: "Beginning of a speed limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PVO-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "BE:PVJ", name: "Higher speed limit below reference speed", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PVJ-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "BE:PVV", name: "Higher speed limit for some traffic", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PVV-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "BE:SSC", name: "Carwash", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/SSC.svg", form: "light" }], speed_limit_distant: [{ id: "BE:PVA", name: "Announcement of a speed limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PVA-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "BE:PVSA", name: "Speed sign for distant signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PVSA-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "BE:ARV", name: "Distant speed limit light (part of main signal)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/ARV-empty.svg", form: "light", extra: { speed: { options: [] } } }], main: [{ id: "BE:GSA", name: "Grand Signal d'Arrêt (normal regime)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/GSA-R.svg", form: "light", extra: { states: { options: ["BE:RB", "BE:2J", "BE:VJV", "BE:VJH", "BE:V"] } } }], distant: [{ id: "BE:SAI", name: "Distant signal (normal regime)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/SAI-V.svg", form: "light", extra: { states: { options: ["BE:2J", "BE:VJV", "BE:VJH"] } } }], main_repeated: [{ id: "BE:RTL", name: "Répétiteur à Traits Lumineux", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/RTL-open.svg", form: "light" }], minor: [{ id: "BE:SAS", name: "Signal d'Arrêt Simplifié", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/SAS.svg", form: "light" }], shunting: [], stop: [{ id: "BE:PMQ", name: "Stop position", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PMQ-unknown.svg", form: "sign", extra: { carriages: { options: [] } } }, { id: "BE:PREQ", name: "End of platform", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PREQ.svg", form: "sign" }], route: [{ id: "BE:ECS", name: "Main signal indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/ECS-unknown.svg", form: "light", extra: { states: { options: ["BE:ECS-V", "BE:ECS-U", "BE:ECS-CAB"] } } }], fouling_point: [{ id: "BE:PRB", name: "Balise marker", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PRB.svg", form: "light" }], station_distant: [{ id: "BE:PAPA", name: "Station announcement", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PAPA.svg", form: "sign" }], electricity: [{ id: "BE:PBA", name: "Panto distant", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PBA.svg", form: "sign" }, { id: "BE:PBE", name: "Panto down", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PBE.svg", form: "sign" }, { id: "BE:PRL", name: "Panto up", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PRL.svg", form: "sign" }, { id: "BE:FLC", name: "End of contact line", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/FLC.svg", form: "sign" }, { id: "BE:SLC", name: "Contact line segmentation", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/SLC.svg", form: "sign" }], train_protection: [{ id: "BE:ETCS-1LS", name: "Start ETCS Level 1 Limited Supervision zone", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/ETCS1LS.svg", form: "sign" }, { id: "BE:ETCS-1FS", name: "Start ETCS Level 1 Full Supervision zone", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/ETCS1.svg", form: "sign" }, { id: "BE:ETCS-2", name: "Start ETCS Level 2 Full Supervision zone", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/ETCS2.svg", form: "sign" }, { id: "BE:ETCS-end", name: "End ETCS zone", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/ETCS-end.svg", form: "sign" }] } }, "BE-SME": { networkName: "Belgium - BE-SME", networkImage: "File:Example.png", wikiPage: "", signals: { main: [], shunting: [{ id: "BE-SME:small_signal_two_colour", name: "(BME) Shunting signal, 2 color", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/bme/shunting_twocolour_ny.svg", form: "light" }] } } }, xy = { CA: { networkName: "Canada", networkImage: "File:Example.png", wikiPage: "", signals: { main: [{ id: "CA:main", name: "Main signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ca/main.svg", form: "light" }] } } }, Ty = { "CH-FDV": { networkName: "Switzerland - CH-FDV", networkImage: "File:Example.png", wikiPage: "", signals: { main: [{ id: "CH-FDV:l", name: "Hauptsignal System L", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-l-524.svg", form: "light", extra: { states: { options: ["CH-FDV:550", "CH-FDV:547", "CH-FDV:542", "CH-FDV:545", "CH-FDV:530"] } } }], combined: [{ id: "CH-FDV:512", name: "Mini-Hauptsignal System L", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-l-522.1.svg", form: "light" }, { id: "CH-FDV:l", name: "Hauptsignal System L (combined)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-l-525.svg", form: "light", extra: { states: { options: ["CH-FDV:548", "CH-FDV:551", "CH-FDV:546", "CH-FDV:543", "CH-FDV:539", "CH-FDV:537", "CH-FDV:535", "CH-FDV:531"] } } }, { id: "CH-FDV:n", name: "Hauptsignal System N", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-n-526.svg", form: "light", extra: { states: { options: [] } } }], distant: [{ id: "CH-FDV:l", name: "Vorsignal System L", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-l-528.svg", form: "light", extra: { states: { options: ["CH-FDV:538", "CH-FDV:536", "CH-FDV:529", "CH-FDV:534"] } } }, { id: "CH-FDV:n", name: "Vorsignal System N", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-n-533.svg", form: "light", extra: { states: { options: [] } } }], main_repeated: [{ id: "CH-FDV:559", name: "Fahrtstellungsmelder", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-559.svg", form: "light" }], minor: [{ id: "CH-FDV:232", name: "Minor signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-232.svg", form: "light" }], speed_limit_distant: [{ id: "CH-FDV:209", name: "Vorsignal verminderte Geschwindigkeit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-209-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "CH-FDV:213", name: "Vorsignal verminderte Geschwindigkeit für Neigetechnikzüge", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-213-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "CH-FDV:540", name: "Geschwindigkeits-Ankündigung", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-540-empty.svg", form: "light", extra: { speed: { options: [] } } }], speed_limit: [{ id: "CH-FDV:211", name: "Anfangssignal verminderte Geschwindigkeit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-211.svg", form: "sign" }, { id: "CH-FDV:212", name: "Endesignal verminderte Geschwindigkeit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-212.svg", form: "sign" }, { id: "CH-FDV:214", name: "Anfangssignal verminderte Geschwindigkeit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-214.svg", form: "sign" }, { id: "CH-FDV:215", name: "Endesignal verminderte Geschwindigkeit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-215.svg", form: "sign" }, { id: "CH-FDV:217", name: "Merktafel für Änderung der Höchstgeschwindigkeit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-217.svg", form: "sign" }, { id: "CH-FDV:549", name: "Geschwindigkeits-Ausführung", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-549-empty.svg", form: "light", extra: { speed: { options: [] } } }, { id: "CH-FDV:569", name: "Merktafel für Streckengeschwindigkeit beim Signalsystem N", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-569.svg", form: "sign" }], electricity: [{ id: "CH-FDV:703", name: "Vorsignal zum Senksignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-703.svg", form: "sign" }, { id: "CH-FDV:704", name: "Senksignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-704.svg", form: "light" }, { id: "CH-FDV:705", name: "Endsignal zum Senksignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-705.svg", form: "light" }, { id: "CH-FDV:707", name: "Aufhebungssignal zum Senksignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-707.svg", form: "sign" }, { id: "CH-FDV:708", name: "Vorsignal zum Ausschaltsignal (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-708.svg", form: "sign" }, { id: "CH-FDV:709", name: "Vorsignal zum Ausschaltsignal (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-709.svg", form: "light" }, { id: "CH-FDV:710", name: "Ausschaltsignal (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-710.svg", form: "sign" }, { id: "CH-FDV:711", name: "Ausschaltsignal (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-711.svg", form: "light" }, { id: "CH-FDV:712", name: "Einschaltsignal (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-712.svg", form: "sign" }, { id: "CH-FDV:713", name: "Einschaltsignal (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-713.svg", form: "light" }, { id: "CH-FDV:714", name: "Streckentrennung", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-714.svg", form: "light" }, { id: "CH-FDV:715", name: "Zonen-Schutzstreckensignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-715.svg", form: "sign" }, { id: "CH-FDV:716", name: "Zonensignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-716.svg", form: "light" }, { id: "CH-FDV:719", name: "Vorsignal zum Umschaltsignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-719.svg", form: "light" }, { id: "CH-FDV:717", name: "Umschaltsignal anfang (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-717.svg", form: "sign" }, { id: "CH-FDV:717.1", name: "Umschaltsignal anfang (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-717.1.svg", form: "light" }, { id: "CH-FDV:718", name: "Umschaltsignal ende (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-718.svg", form: "sign" }, { id: "CH-FDV:718.1", name: "Umschaltsignal ende (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-718.1.svg", form: "light" }], slope: [{ id: "CH-FDV:269", name: "Beginn oder Änderung der Steigung", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-269.svg", form: "sign" }, { id: "CH-FDV:270", name: "Beginn oder Änderung des Gefälles", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-270.svg", form: "sign" }, { id: "CH-FDV:271", name: "Beginn der Horizontalen", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-271.svg", form: "sign" }] } } }, Uy = { "CZ-D1": { networkName: "Czechia - CZ-D1", networkImage: "File:Example.png", wikiPage: "", signals: { station_distant: [{ id: "CZ-D1:vlak_se_blizi_k_zastavce", name: "Vlak se blíží k zastávce", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/vlak_se_blizi_k_zastavce.svg", form: "sign" }, { id: "CZ-D1:hlavni_navestidlo_slouceno_s_predvesti", name: "Hlavní návěstidlo sloučeno s předvěstí", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/hlavni_navestidlo_slouceno_s_predvesti.svg", form: "sign" }, { id: "CZ-D1:stanoviste_posledniho_oddiloveho_navestidla", name: "Stanoviště posledního oddílového návěstidla", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/stanoviste_posledniho_oddiloveho_navestidla.svg", form: "sign" }], shunting: [{ id: "CZ-D1:oznacnik", name: "End of shunting marker", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/shunting-end.svg", form: "sign" }, { id: "CZ-D1:posun_zakazan", name: "Shunting stop", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/shunting-stop.svg", form: "sign" }, { id: "CZ-D1:hranice_obvodu_nakladiste_nebo_vlecky", name: "Hranice obvodu nákladiště nebo vlečky", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/hranice_obvodu_nakladiste_nebo_vlecky.svg", form: "sign" }, { id: "CZ-D1:navestidlo_vykolejky", name: "Návěstidlo výkolejky", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/navestidlo_vykolejky.svg", form: "semaphore" }], distant: [{ id: "CZ-D1:vystraha", name: "Distant (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/distant-sign-triangle.svg", form: "sign", extra: { shape: { options: ["circle"] } } }], speed_limit_distant: [{ id: "CZ-D1:predvestnik_ns", name: "Distant speed limit NS (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/speed-NS-distant-empty.svg", form: "sign", extra: { speed: { options: [] } } }], speed_limit: [{ id: "CZ-D1:rychlostnik_ns", name: "Speed limit NS (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/speed-NS-sign-empty.svg", form: "sign", extra: { speed: { options: [] } } }], main: [{ id: "CZ-D1:stuj", name: "Main stop (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/main-sign-stop-rectangle.svg", form: "sign", extra: { shape: { options: ["circle"] } } }], stop: [{ id: "CZ-D1:konec_nastupiste", name: "Konec nástupiště", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/konec_nastupiste.svg", form: "sign" }, { id: "CZ-D1:misto_zastaveni", name: "Místo zastavení", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/misto_zastaveni.svg", form: "sign", extra: { caption: { options: ["Os"] } } }, { id: "CZ-D1:lichobeznikova_tabulka", name: "Lichoběžníková tabulka", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/lichobeznikova_tabulka.svg", form: "sign" }], whistle: [{ id: "CZ-D1:piskejte", name: "Pískejte", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/piskejte.svg", form: "sign" }], resetting_switch: [{ id: "CZ-D1:navestidlo_vyhybky_se_samovratnym_prestavnikem", name: "Návěstidlo výhybky se samovratným přestavníkem", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/navestidlo_vyhybky_se_samovratnym_prestavnikem.svg", form: "light", extra: { states: { options: ["CZ-D1:jizda_nezajistena"] } } }], crossing: [] } }, CZ: { networkName: "Czechia", networkImage: "File:Example.png", wikiPage: "", signals: { shunting: [{ id: "CZ", name: "Shunting (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/shunting.svg", form: "light" }], distant: [], speed_limit_distant: [], speed_limit: [], main: [], combined: [{ id: "CZ", name: "Combined signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/combined-R.svg", form: "light", extra: { states: { options: ["CZ-D1:vystraha", "CZ-D1:volno", "CZ-D1:stuj", "CZ-D1:posun_dovolen"] } } }] } } }, ky = /* @__PURE__ */ JSON.parse('{"DE-ESO":{"networkName":"Germany - DE-ESO","networkImage":"File:Example.png","wikiPage":"","signals":{"shunting":[{"id":"DE-ESO:ra10","name":"shunting stop sign Ra 10","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ra10.svg","form":"sign"},{"id":"DE-ESO:zs103","name":"main signal invalid for shunting trains Zs 103 (sign)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zs103.svg","form":"sign"},{"id":"DE-ESO:ra11b","name":"shunting signal Ra 11b (without Sh 1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ra11b.svg","form":"sign"}],"minor":[{"id":"DE-ESO:sh1","name":"minor light signals type Sh attached to main signals","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/sh1-light-dwarf.svg","form":"light"},{"id":"DE-ESO:sh0","name":"minor sign signal type Sh","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/sh0-sign.svg","form":"sign"},{"id":"DE-ESO:sh2","name":"Sh 2 buffer stop","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/sh2.svg","form":"sign"}],"train_protection":[{"id":"DE-ESO:ne14","name":"ETCS block marker Ne 14","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne14-left.svg","form":"sign"},{"id":"DE-ESO:lzb-bereichskennzeichen","name":"LZB section start","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lzb-section-start.svg","form":"sign"},{"id":"DE-ESO:blockkennzeichen","name":"Blockkennzeichen","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/blockkennzeichen.svg","form":"light"}],"main_repeated":[{"id":"DE-ESO:fahrtanzeiger","name":"Fahrtanzeiger","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/fahrtanzeiger.svg","form":"light"}],"stop_demand":[{"id":"DE-ESO:ne5","name":"stop demand post Ne 5 (light)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne5-light.svg","form":"light"}],"stop":[{"id":"DE-ESO:ne5","name":"stop demand post Ne 5 (sign)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne5-sign.svg","form":"sign"},{"id":"DE-ESO:zuglänge","name":"train length stopping marker","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zuglaenge.svg","form":"sign"}],"station_distant":[{"id":"DE-ESO:ne6","name":"station distant sign Ne 6","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne6.svg","form":"sign"}],"crossing":[],"crossing_distant":[{"id":"DE-ESO:so15","name":"crossing distant sign (warning board) So 15 (DV 301)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/so15.svg","form":"sign"},{"id":"DE-ESO:so14","name":"distant crossing So 14","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/so14.svg","form":"sign"},{"id":"DE-ESO:bü2","name":"crossing distant sign Bü 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bue2-ds.svg","form":"sign","extra":{"shortened":{"options":[]}}},{"id":"DE-ESO:bü3","name":"crossing distant sign Bü 3","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bue3.svg","form":"sign"}],"ring":[{"id":"DE-ESO:bü5","name":"ring sign Bü 5","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bue5.svg","form":"sign","extra":{"only_transit":{"options":[]}}}],"snowplow":[{"id":"DE-ESO:ne7","name":"Lift / Fold snowplow Ne 7 (sign)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne7-yellow-up.svg","form":"sign","extra":{"type":{"options":["down"]}}}],"resetting_switch":[{"id":"DE-ESO:ne13","name":"Ne13 resetting switch signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne13a.svg","form":"light"}],"resetting_switch_distant":[{"id":"DE-ESO:ne12","name":"Ne12 resetting switch distant signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne12.svg","form":"sign"}],"humping":[{"id":"DE-ESO:ra","name":"humping signal Ra 6-9","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ra7.svg","form":"light","extra":{"form":{"options":["semaphore"]}}}],"helper_engine":[{"id":"DE-ESO:ts","name":"helper engine signal Ts","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ts1.svg","form":"sign"}],"brake_test":[{"id":"DE-ESO:zp","name":"brake test signal Zp 6-8","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zp8.svg","form":"light"}],"departure":[{"id":"DE-ESO:zp","name":"Zp 9 (departure order) or Zp 10 (close doors)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zp9-db.svg","form":"light","extra":{"states":{"options":["DE-ESO:zp10"]}}}],"crossing_info":[{"id":"DE-ESO:bü-kennzeichentafel","name":"crossing info sign","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bue-crossing-info.svg","form":"sign"}],"crossing_hint":[{"id":"DE-ESO:bü-ankündetafel","name":"crossing anouncement sign","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bue-crossing-hint.svg","form":"sign"}],"short_route":[],"route_distant":[{"id":"DE-ESO:zs2v","name":"Richtungsvoranzeiger (Zs 2v)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zs2v-unknown.svg","form":"light","extra":{"states":{"options":[]}}}],"speed_limit_distant":[{"id":"DE-ESO:lf6","name":"German line speed signals (Lf 6)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf6-empty-sign-down.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"DE-ESO:lf1","name":"Langsamfahrscheibe","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf1-empty-sign-down.svg","form":"sign","extra":{"speed":{"options":[]}}}],"distant":[{"id":"DE-ESO:so106","name":"distant signal replacement by sign So 106","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/so106.svg","form":"sign"},{"id":"DE-ESO:hl","name":"distant light signals type Hl","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hl1-distant.svg","form":"light","extra":{"repeated":{"options":[]}}}],"main":[{"id":"DE-ESO:ne1","name":"main entry sign Ne 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne1.svg","form":"sign"},{"id":"DE-ESO:hl","name":"main light signals type Hl","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hl0-main.svg","form":"light","extra":{"states":{"options":["DE-ESO:hl2","DE-ESO:hl3b","DE-ESO:hl3a","DE-ESO:hl1"]}}},{"id":"DE-ESO:ks","name":"main signals type Ks","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ks-main.svg","form":"light"},{"id":"DE-ESO:sk","name":"main signals type Sk","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/sk1-light.svg","form":"light"}],"combined":[{"id":"DE-ESO:hl","name":"combined light signals type Hl","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hl0-combined.svg","form":"light","extra":{"states":{"options":["DE-ESO:hl11","DE-ESO:hl12b","DE-ESO:hl12a","DE-ESO:hl10"]}}},{"id":"DE-ESO:sv","name":"combined light signals type Sv","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/sv-sv0.svg","form":"light","extra":{"states":{"options":["DE-ESO:hp0"]}}},{"id":"DE-ESO:sk","name":"combined signals type Sk","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/sk0-light.svg","form":"light"},{"id":"DE-ESO:ks","name":"combined signals type Ks","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ks-combined.svg","form":"light","extra":{"shortened":{"options":[]}}}],"speed_limit":[{"id":"DE-ESO:lf7","name":"German line speed signals (Lf 7)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf7-empty-sign.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"DE-ESO:lf2","name":"Anfangsscheibe","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf2-sign.svg","form":"sign"},{"id":"DE-ESO:lf3","name":"Endscheibe","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf3-sign.svg","form":"sign"}],"route":[{"id":"DE-ESO:zs2","name":"Richtungsanzeiger (Zs 2)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zs2-unknown.svg","form":"light","extra":{"states":{"options":[]}}}],"electricity":[{"id":"DE-ESO:el1v","name":"power off advance sign El 1v","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el1v.svg","form":"sign"},{"id":"DE-ESO:el1","name":"power off sign El 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el1.svg","form":"sign"},{"id":"DE-ESO:el2","name":"power on sign El 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el2.svg","form":"sign"},{"id":"DE-ESO:el3","name":"pantograph down advance El 3","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el3.svg","form":"sign"},{"id":"DE-ESO:el4","name":"pantograph down El 4","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el4.svg","form":"sign"},{"id":"DE-ESO:el5","name":"pantograph up El 5","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el5.svg","form":"sign"},{"id":"DE-ESO:el6","name":"end of catenary sign El 6","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el6.svg","form":"light","extra":{"turn_direction":{"options":["left","through","right"]}}},{"id":"DE-ESO:el7","name":"power off shortly sign El 7 (S-Bahn Berlin)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el7.svg","form":"sign"},{"id":"DE-ESO:ice-schaltmerkhilfe","name":"ICE-Schaltmerkhilfe","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ice-schaltmerkhilfe.svg","form":"sign"}],"radio":[{"id":"DE-ESO:zugfunk-kanalhinweis","name":"radio channel notice","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zugfunk.svg","form":"sign"}]}},"DE-BOStrab":{"networkName":"Germany - DE-BOStrab","networkImage":"File:Example.png","wikiPage":"","signals":{"minor":[{"id":"DE-BOStrab:sh1","name":"tram minor stop sign Sh 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/sh1.svg","form":"sign"},{"id":"DE-BOStrab:sh2","name":"tram signal Sh 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/sh2.svg","form":"sign"}],"train_protection":[{"id":"DE-BOStrab:so1","name":"tram signal \\"start of train protection\\" So 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/so1.svg","form":"sign"},{"id":"DE-BOStrab:so2","name":"tram signal \\"end of train protection\\" So 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/so2.svg","form":"sign"}],"passing":[{"id":"DE-BOStrab:so5","name":"tram passing prohibited sign So 5","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/so5.svg","form":"sign"},{"id":"DE-BOStrab:so6","name":"tram passing prohibited end sign So 6","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/so6.svg","form":"sign"}],"stop":[{"id":"DE-BOStrab:sh7","name":"stop demand post BOStrab Sh 7 (sign)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/sh7.svg","form":"sign"}],"crossing":[{"id":"DE-BOStrab:bü","name":"tram crossing light Bü","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/bü.svg","form":"light"}],"crossing_distant":[{"id":"DE-BOStrab:bü2","name":"tram distant crossing light Bü 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/bü2.svg","form":"sign"}],"ring":[{"id":"DE-BOStrab:sh4","name":"tram läuten Sh 4","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/sh4.svg","form":"sign"}],"departure":[{"id":"DE-BOStrab:a","name":"tram departure signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/a1.svg","form":"light","extra":{"states":{"options":["DE-BOStrab:a1"]}}}],"speed_limit_distant":[],"distant":[{"id":"DE-BOStrab:v","name":"BOStrab distant signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/v0.svg","form":"light","extra":{"states":{"options":["DE-BOStrab:v2","DE-BOStrab:v1","DE-VAGN:vr2","DE-VAGN:vr1","DE-VAGN:vr0"]}}}],"main":[{"id":"DE-BOStrab:h","name":"BOStrab Hauptsignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/h0.svg","form":"light","extra":{"states":{"options":["DE-BOStrab:h2","DE-BOStrab:h1","DE-VAGN:hp2","DE-VAGN:hp1","DE-VAGN:hp0","off","DE-VAGN:hp3"]}}}],"combined":[{"id":"DE-BOStrab:h","name":"tram Hauptsignal mit Vorsignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/h.svg","form":"light"}],"speed_limit":[{"id":"DE-BOStrab:g3","name":"Tram signal G3","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/g3.svg","form":"sign"},{"id":"DE-BOStrab:g4","name":"German tram speed limit signals as signs (G 4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/g4-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}],"switch":[{"id":"DE-BOStrab:st1","name":"tram signal contact St 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/st1.svg","form":"sign"},{"id":"DE-BOStrab:st2","name":"tram switch contact St 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/st2.svg","form":"sign"}],"electricity":[{"id":"DE-BOStrab:st7","name":"tram power off shortly signal (St 7)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/st7.svg","form":"sign"}]}},"DE-HHA":{"networkName":"Germany - DE-HHA","networkImage":"File:Example.png","wikiPage":"","signals":{"minor":[{"id":"DE-HHA:sh3","name":"Hamburger Hochbahn Sh 3","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hha/sh3.svg","form":"light"}],"speed_limit_distant":[{"id":"DE-HHA:l1","name":"Hamburger Hochbahn L1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hha/l1-empty-sign.svg","form":"sign","extra":{"speed":{"options":[]}}}],"distant":[{"id":"DE-HHA:v","name":"Hamburger Hochbahn distant signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hha/v1.svg","form":"light"}],"main":[{"id":"DE-HHA:h","name":"Hamburger Hochbahn main signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hha/h0.svg","form":"light","extra":{"states":{"options":["DE-HHA:h1"]}}}],"speed_limit":[{"id":"DE-HHA:l4","name":"Hamburger Hochbahn L4","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hha/l4.svg","form":"sign"}]}},"DE-DB":{"networkName":"Germany - DE-DB","networkImage":"File:Example.png","wikiPage":"","signals":{"main_repeated":[{"id":"DE-DB:signalhaltmelder","name":"Signalhaltmelder Zugleitbetrieb","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zlb-haltmelder-light.svg","form":"light"}],"switch":[{"id":"DE-DB:beginn_ortsstellbereich","name":"local operated area","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ortsstellbereich.svg","form":"sign"}]}},"db":{"networkName":"Germany - db","networkImage":"File:Example.png","wikiPage":"","signals":{"whistle":[{"id":"DE-ESO:db:bü4","name":"Bü 4 Whistle Sign","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bue4-ds.svg","form":"sign","extra":{"only_transit":{"options":[]}}}],"ring":[{"id":"DE-ESO:db:lp4","name":"start ringing LP 4","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lp4.svg","form":"sign"},{"id":"DE-ESO:db:lp5","name":"stop ringing LP 5","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lp5.svg","form":"sign"}],"wrong_road":[],"speed_limit_distant":[{"id":"DE-ESO:db:lf4","name":"West German branch line speed signals (Lf 4 DS 301)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf4-ds301-empty-sign-down.svg","form":"sign","extra":{"speed":{"options":[]}}}],"distant":[{"id":"DE-ESO:db:ne2","name":"distant signal replacement by sign Ne 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne2.svg","form":"sign","extra":{"shortened":{"options":[]}}}],"speed_limit":[{"id":"DE-ESO:db:lf5","name":"West German line speed signal \\"Anfangstafel\\" (Lf 5)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf5-ds301-sign.svg","form":"sign"}]}},"dr":{"networkName":"Germany - dr","networkImage":"File:Example.png","wikiPage":"","signals":{"whistle":[{"id":"DE-ESO:dr:pf1","name":"whistle sign Pf 1 (DV 301)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/pf1-dv.svg","form":"sign","extra":{"only_transit":{"options":[]}}},{"id":"DE-ESO:dr:pf2","name":"whistle twice sign Pf 2 (DV 301)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/pf2-dv.svg","form":"sign"}],"ring":[{"id":"DE-ESO:dr:pl3","name":"start ringing Pl 3","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/pl3.svg","form":"sign"},{"id":"DE-ESO:dr:pl4","name":"stop ringing Pl 4","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/pl4.svg","form":"sign"}],"wrong_road":[{"id":"DE-ESO:dr:zs7","name":"wrong road signal Zs 7 (DR) (light)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zs7-dr-light.svg","form":"light"}],"speed_limit_distant":[{"id":"DE-ESO:dr:lf4","name":"East German branch line speed signals (Lf 4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf4-dr-sign-down-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}],"speed_limit":[{"id":"DE-ESO:dr:lf4","name":"East German branch line speed signals (Lf 4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf4-dr-sign-down-speed-limit-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"DE-ESO:dr:lf5","name":"East German line speed signal \\"Eckentafel\\" (Lf 5)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf5-dv301-sign.svg","form":"sign"},{"id":"DE-ESO:dr:lf1/2","name":"Langsamfahrbeginnscheibe","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf1-2-empty-sign.svg","form":"sign","extra":{"speed":{"options":[]}}}],"distant":[{"id":"DE-ESO:dr:so3","name":"distant signal replacement at reduced distance by sign So 3 (DV 301)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne2-dv301-reduced-distance.svg","form":"sign"}]}},"DE-AVG":{"networkName":"Germany - DE-AVG","networkImage":"File:Example.png","wikiPage":"","signals":{"crossing":[{"id":"DE-AVG:bü200","name":"Karlsruhe AVG crossing signals","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/avg/bue201.svg","form":"light"}],"crossing_distant":[{"id":"DE-AVG:bü200v","name":"Karlsruhe AVG distant crossing signals","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/avg/bue201v.svg","form":"light"}],"stop_demand":[{"id":"DE-AVG:hw1","name":"Karlsruhe AVG Stop Demand","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/avg/hw1.svg","form":"light"}],"minor":[{"id":"DE-AVG:ra14","name":"Karlsruhe AVG end of EBO structure gauge Ra 14","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/avg/ra14.svg","form":"sign"}],"main":[],"electricity":[{"id":"DE-AVG:el1","name":"tram sign power off shortly El 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/avg/el1.svg","form":"sign"}]}},"DE-VBK":{"networkName":"Germany - DE-VBK","networkImage":"File:Example.png","wikiPage":"","signals":{"distant":[],"switch":[{"id":"DE-VBK:w","name":"Karlsruhe tram switch signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/vbk/w5.svg","form":"light","extra":{"states":{"options":["DE-VBK:w15","DE-VBK:w13","DE-VBK:w3","DE-VBK:w12","DE-VBK:w2","DE-VBK:w11","DE-VBK:w1","DE-VBK:w0"]}}},{"id":"DE-VBK:wv","name":"Karlsruhe tram switch distant signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/vbk/wv1.svg","form":"light"}]}},"DE-UESTRA":{"networkName":"Germany - DE-UESTRA","networkImage":"File:Example.png","wikiPage":"","signals":{"speed_limit":[{"id":"DE-UESTRA:g5","name":"Hannover tram speed limit G5","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/g5-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}]}},"el1;DE-ESO":{"networkName":"Germany - el1;DE-ESO","networkImage":"File:Example.png","wikiPage":"","signals":{"electricity":[{"id":"DE-ESO:el1;DE-ESO:el2","name":"power off shortly","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el1-el2.svg","form":"sign"}]}},"DE-VGF":{"networkName":"Germany - DE-VGF","networkImage":"File:Example.png","wikiPage":"","signals":{"electricity":[{"id":"DE-VGF:st9","name":"VGF st9","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/vgf/st9.svg","form":"sign"},{"id":"DE-VGF:st10","name":"VGF st10","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/vgf/st10.svg","form":"sign"}]}},"st9;DE-VGF":{"networkName":"Germany - st9;DE-VGF","networkImage":"File:Example.png","wikiPage":"","signals":{"electricity":[{"id":"DE-VGF:st9;DE-VGF:st10","name":"VGF st9 & st10","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/vgf/st9-st10.svg","form":"sign"}]}},"DE-RSAG":{"networkName":"Germany - DE-RSAG","networkImage":"File:Example.png","wikiPage":"","signals":{"minor":[{"id":"DE-RSAG:so11","name":"RSAG Vorfahrt gewähren (So 11)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/rsag/so11.svg","form":"sign"},{"id":"DE-RSAG:so12","name":"RSAG Vorfahrt (So 12)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/rsag/so12.svg","form":"sign"},{"id":"DE-RSAG:so13","name":"RSAG Halt bei Überflutung (So 13)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/rsag/so13.svg","form":"sign"}]}}}'), Fy = { "DK-SR": { networkName: "Denmark - DK-SR", networkImage: "File:Example.png", wikiPage: "", signals: { main: [{ id: "DK-SR:PU", name: "Perronudkørselssignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/dk/main-PU.svg", form: "light" }, { id: "DK-SR:SU", name: "Stationsbloksignal for Udkørsel", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/dk/main-SU.svg", form: "light" }] } } }, Dy = { "ES-RCF": { networkName: "Spain - ES-RCF", networkImage: "File:Example.png", wikiPage: "", signals: { slope: [{ id: "ES-RCF:FI11A", name: "flecha ascendente", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI11A.svg", form: "sign" }, { id: "ES-RCF:FI11B", name: "línea horizontal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI11B.svg", form: "sign" }, { id: "ES-RCF:FI11C", name: "flecha descendente", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI11C.svg", form: "sign" }, { id: "ES-RCF:FI12A", name: "rampa media ascendente entre 9 y 15 mm/m", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI12A.svg", form: "sign" }, { id: "ES-RCF:FI12B", name: "rampa media ascendente entre 16 y 25 mm/m", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI12B.svg", form: "sign" }, { id: "ES-RCF:FI12C", name: "rampa media descendente entre 9 y 15 mm/m", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI12C.svg", form: "sign" }, { id: "ES-RCF:FI12D", name: "rampa media descendente entre 16 y 25 mm/m", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI12D.svg", form: "sign" }], electricity: [{ id: "ES-RCF:FI14A", name: "end of catenary", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14A.svg", form: "sign" }, { id: "ES-RCF:FI14C", name: "power off shortly", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14C.svg", form: "sign" }, { id: "ES-RCF:FI14D", name: "power off shortly (full)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14D.svg", form: "sign" }, { id: "ES-RCF:FI14E", name: "pantograph down", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14E.svg", form: "sign" }, { id: "ES-RCF:FI14F", name: "pantograph up", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14F.svg", form: "sign" }, { id: "ES-RCF:FI14G", name: "pantograph down announcement", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14G.svg", form: "sign" }, { id: "ES-RCF:FI14H", name: "power off announcement", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14H.svg", form: "sign" }, { id: "ES-RCF:FI14I", name: "power off", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14I.svg", form: "sign" }, { id: "ES-RCF:FI14J", name: "power on", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14J.svg", form: "sign" }] } } }, Py = /* @__PURE__ */ JSON.parse('{"FI":{"networkName":"Finland","networkImage":"File:Example.png","wikiPage":"","signals":{"main":[{"id":"FI:Po-v","name":"main light signals (old)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/po0-old.svg","form":"light","extra":{"states":{"options":["FI:Po2","FI:Po1"]}}},{"id":"FI:Yo","name":"Main signal type Yo","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/yo-main.svg","form":"light"}],"combined":[{"id":"FI:So","name":"combined block signal type So","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/eo1-po1-combined-block.svg","form":"light"},{"id":"FI:Yo","name":"Combined signal type Yo","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/yo-combined.svg","form":"light"}],"distant":[{"id":"FI:Eo","name":"distant light signals (new)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/eo0-new.svg","form":"light","extra":{"states":{"options":["FI:Eo2","FI:Eo1"]}}},{"id":"FI:Eo-v","name":"distant light signals (old)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/eo0-old.svg","form":"light","extra":{"states":{"options":["FI:Eo1"]}}},{"id":"FI:Yo","name":"Distant signal type Yo","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/yo-distant.svg","form":"light"},{"id":"FI:T-301A","name":"distant signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-301A.svg","form":"sign"}],"train_protection":[{"id":"FI:T-140","name":"JKV alkaa","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-140.svg","form":"sign"},{"id":"FI:T-141","name":"JKV päättyy","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-141.svg","form":"sign"},{"id":"FI:T-142","name":"JKV rakennusalue alkaa","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-142.svg","form":"sign"},{"id":"FI:T-143","name":"JKV rakennusalue päättyy","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-143.svg","form":"sign"},{"id":"FI:T-144","name":"Baliisiryhmämerkki (old)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-144.svg","form":"sign"},{"id":"FI:T-144A","name":"Baliisiryhmämerkki (new)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-144A.svg","form":"sign"}],"stop":[{"id":"FI:T-270A","name":"Stopping position (single)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-270.svg","form":"sign"},{"id":"FI:T-271A","name":"Stopping position (combination)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-270.svg","form":"sign"},{"id":"FI:T-272A","name":"Stopping position point","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-270.svg","form":"sign"},{"id":"FI:T-273A","name":"Train composition (single)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-273.svg","form":"sign"},{"id":"FI:T-274A","name":"Train composition (combination)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-273.svg","form":"sign"},{"id":"FI:T-275A","name":"Train composition point","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-273.svg","form":"sign"},{"id":"FI:T-259","name":"Stop","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-259.svg","form":"sign"},{"id":"FI:T-150","name":"Seismerkki (old)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-150.svg","form":"sign"},{"id":"FI:T-150B","name":"Seismerkki (new)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-150B.svg","form":"sign"},{"id":"FI:T-151","name":"Seislevy (old)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-151.svg","form":"sign"},{"id":"FI:T-151A","name":"Seislevy (new)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-151A.svg","form":"sign"},{"id":"FI:T-152","name":"Liikennöinnin raja","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-152.svg","form":"sign"},{"id":"FI:T-310","name":"Veturin ajokieltomerkki","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-310.svg","form":"sign"}],"main_repeated":[{"id":"FI:Ko","name":"Main repeated light","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/ko1.svg","form":"light"}],"minor":[{"id":"FI:Lo","name":"minor light signals type Lo at moveable bridges","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/lo0.svg","form":"light"}],"shunting":[{"id":"FI:Ro","name":"shunting light signals type Ro (new)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/ro0-new.svg","form":"light"},{"id":"FI:Yo","name":"Shunting signal type Yo","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/yo-shunting.svg","form":"light"}],"crossing":[{"id":"FI:To","name":"crossing signal To","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/to1.svg","form":"light"}],"speed_limit":[{"id":"FI:T-101","name":"Nopeusmerkki, speed signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-101-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"FI:T-110","name":"Merkitty nopeus päättyy -merkki, end of speed limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-110.svg","form":"sign"},{"id":"FI:T-115","name":"JKV-nopeus, JKV speed limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-115.svg","form":"sign"}],"speed_limit_distant":[{"id":"FI:T-102","name":"Nopeusmerkin etumerkki, distant signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-102-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}],"electricity":[{"id":"FI:T-120","name":"Erotusjakson etumerkki","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-120.svg","form":"sign"},{"id":"FI:T-122","name":"Erotusjakso alkaa","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-122.svg","form":"sign"},{"id":"FI:T-123","name":"Erotusjakso päättyy","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-123.svg","form":"sign"},{"id":"FI:T-121","name":"Ajojohdin päättyy","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-121.svg","form":"sign"},{"id":"FI:T-124A","name":"Laske virroitin","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-124A.svg","form":"sign"},{"id":"FI:T-133","name":"Laske virroitin -etumerkki","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-133.svg","form":"sign"},{"id":"FI:T-125","name":"Nosta virroitin","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-125.svg","form":"sign"}],"station_distant":[{"id":"FI:T-164","name":"Liikennepaikan raja -merkki","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-164.svg","form":"sign"},{"id":"FI:T-165","name":"Liikennepaikka päättyy","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-165.svg","form":"sign"},{"id":"FI:T-166","name":"Matkustajalaiturin ennakkomerkki","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-166.svg","form":"sign"}],"humping":[{"id":"FI:Jo","name":"Järjestelyopastin","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/jo4.svg","form":"light"}],"snowplow":[{"id":"FI:T-170A","name":"Raise snowplow blades (point)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-171.svg","form":"sign"},{"id":"FI:T-170B","name":"Raise snowplow blades (area)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-171A.svg","form":"sign"},{"id":"FI:T-170-v","name":"Raise snowplow blades (old)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-170-v.svg","form":"sign"},{"id":"FI:T-171B","name":"Lower snowplow blades","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-171B.svg","form":"sign"},{"id":"FI:T-171-v","name":"Lower snowplow blades (old)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-171-v.svg","form":"sign"}]}}}'), Ly = /* @__PURE__ */ JSON.parse('{"FR":{"networkName":"France","networkImage":"File:Example.png","wikiPage":"","signals":{"main":[],"distant":[{"id":"FR:A","name":"Avertissement","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/D-A.svg","form":"light"},{"id":"FR:D","name":"Disque","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/D-D.svg","form":"light"}],"speed_limit":[{"id":"FR:Z","name":"Pancarte Z","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/Tableau_Z.svg","form":"sign"},{"id":"FR:R","name":"Tableau R","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/Tableau_R.svg","form":"sign"}],"speed_limit_distant":[{"id":"FR:P","name":"Tableau P","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/Tableau_P.svg","form":"sign"},{"id":"FR:TIV-D_B","name":"TIV-D (B)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/TIV-type-B-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"FR:TIV-D_C","name":"TIV-D (C)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/TIV-type-C-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}],"electricity":[{"id":"FR:SECT","name":"Neutral Zone Announcement","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/SECT.svg","form":"light"},{"id":"FR:CC_EXE","name":"Start of Neutral Zone","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/CC_EXE.svg","form":"light"},{"id":"FR:CC_FIN","name":"End of Neutral Zone","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/CC_FIN.svg","form":"light"},{"id":"FR:REV","name":"End of Neutral Zone (reversible trains)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/REV.svg","form":"sign"},{"id":"FR:BP_DIS","name":"Pantograph Down Announcement","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/BP_DIS.svg","form":"light"},{"id":"FR:BP_EXE","name":"Start of Pantograph Down","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/BP_EXE.svg","form":"sign"},{"id":"FR:BP_FIN","name":"End of Pantograph Down","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/BP_FIN.svg","form":"sign"},{"id":"FR:BIMODE","name":"Dual-Mode Traffic","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/BIMODE.svg","form":"sign"},{"id":"FR:FIN_CAT","name":"End of Catenaries","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/FIN_CAT.svg","form":"sign"},{"id":"FR:JALON_ARRET","name":"Stop Markers","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/JALON_ARRET.svg","form":"sign"},{"id":"FR:GIVRE","name":"Frost Board","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/GIVRE.svg","form":"light"}],"train_protection":[{"id":"FR:CAB_E","name":"Cab signalling announcement","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/CAB_E.svg","form":"sign"},{"id":"FR:CAB_R","name":"Cab signalling start","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/CAB_R.svg","form":"sign"},{"id":"FR:CAB_S","name":"Cab signalling end","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/CAB_S.svg","form":"sign"},{"id":"FR:REP_TVM","name":"TVM block marker","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/REP_TVM-left.svg","form":"sign"},{"id":"FR:REP_ETCS","name":"ETCS stop marker","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/REP_ETCS-left.svg","form":"sign"}],"shunting":[{"id":"FR:JAL_MAN","name":"Shunting marker","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/JAL_MAN-right.svg","form":"sign"},{"id":"FR:G","name":"Shunting to garage","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/G.svg","form":"light"},{"id":"FR:D","name":"Shunting to depot","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/D.svg","form":"light"}],"route_distant":[{"id":"FR:TIDD","name":"Distant route indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/TIDD-off.svg","form":"light","extra":{"states":{"options":["right","left"]}}},{"id":"FR:BIF","name":"Branch line","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/BIF.svg","form":"sign"},{"id":"FR:Y","name":"Switch junction","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/Y.svg","form":"sign"}],"route":[{"id":"FR:ID","name":"Route indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ID3.svg","form":"light"}],"wrong_road":[{"id":"FR:TECS","name":"Wrong route (entry)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/TECS.svg","form":"light"},{"id":"FR:TSCS","name":"Wrong route (exit)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/TSCS.svg","form":"light"}],"station_distant":[{"id":"FR:GARE","name":"Distant station","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/GARE.svg","form":"sign"},{"id":"FR:APPROCHE_ETS_A","name":"Distant site","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/APPROCHE_ETS_A.svg","form":"sign"},{"id":"FR:APPROCHE_ETS","name":"Distant site","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/APPROCHE_ETS.svg","form":"sign"},{"id":"FR:LIMITE_ETS","name":"Station boundary","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/LIMITE_ETS.svg","form":"sign"}],"stop_distant":[{"id":"FR:ARRET_A","name":"Stop ARRET announcement","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_A.svg","form":"sign"},{"id":"FR:STOP_A","name":"STOP announcement","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/STOP_A.svg","form":"sign"}],"stop":[{"id":"FR:ARRET","name":"Stop ARRET","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET.svg","form":"sign"},{"id":"FR:ATC","name":"Stop ATC","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ATC.svg","form":"sign"},{"id":"FR:STOP","name":"STOP","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/STOP.svg","form":"sign"},{"id":"FR:JAL_ARRET","name":"STOP","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/JAL_ARRET.svg","form":"sign"},{"id":"FR:ARRET_TT","name":"Stop position for passenger trains","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_TT.svg","form":"sign"},{"id":"FR:ARRET_TTL","name":"Stop position front of train","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_TTL.svg","form":"sign"},{"id":"FR:ARRET_TT_EAS","name":"Stop position EAS","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_TT_EAS.svg","form":"sign"},{"id":"FR:ARRET_V","name":"Stop position for carriages","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_V.svg","form":"sign"},{"id":"FR:ARRET_TGV1","name":"Stop for TGV 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_TGV1.svg","form":"sign"},{"id":"FR:ARRET_TGV2","name":"Stop for TGV 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_TGV2.svg","form":"sign"},{"id":"FR:ARRET_TGV1-2","name":"Stop for TGV 1-2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_TGV1-2.svg","form":"sign"}]}},"REP_ETCS;FR":{"networkName":"France - REP_ETCS;FR","networkImage":"File:Example.png","wikiPage":"","signals":{"train_protection":[{"id":"FR:REP_ETCS;FR:REP_TVM","name":"TVM and ETCS block marker","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/REP_TVM_ETCS-left.svg","form":"sign"}]}}}'), By = { "GB-NR": { networkName: "United Kingdom - GB-NR", networkImage: "File:Example.png", wikiPage: "", signals: { whistle: [{ id: "GB-NR:stencil", name: "Whistle stencil", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/whistle-stencil.svg", form: "sign" }, { id: "GB-NR:board", name: "Whistle board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/whistle-board.svg", form: "sign" }, { id: "GB-NR:continuous", name: "Whistle continuous", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/whistle-continuous.svg", form: "sign" }], train_protection: [{ id: "GB-NR:warning", name: "Cab Signalling Start Warning Board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/cab-entry-warning.svg", form: "sign" }, { id: "GB-NR:entry", name: "Cab Signalling Start Board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/cab-entry.svg", form: "sign" }, { id: "GB-NR:exit", name: "Cab Signalling End Board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/cab-exit.svg", form: "sign" }, { id: "GB-NR:ETCS", name: "ETCS Block Marker", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/ETCS-right.svg", form: "sign" }, { id: "GB-NR:TVM-CBTC", name: "TVM/CBTC Block Marker", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/TVM-CBTC-right.svg", form: "sign" }, { id: "GB-NR:shunt-entry", name: "Cab Signalling Shunt Entry Board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/cab-shunt-right.svg", form: "sign" }], main: [{ id: "GB-NR:SPAD", name: "SPAD", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/SPAD.svg", form: "light" }], distant: [], main_repeated: [{ id: "GB-NR:banner", name: "Repeated (banner)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/repeated-banner.svg", form: "light" }, { id: "GB-NR:off", name: "Repeated off", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/repeated-off.svg", form: "light" }], route_distant: [{ id: "GB-NR:PRI", name: "Preliminary Route Indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/preliminary-route-indicator.svg", form: "light" }], shunting: [{ id: "GB-NR:shunting", name: "Shunting", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/shunting.svg", form: "light" }, { id: "GB-NR:limit", name: "Shunting limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/limit-shunt.svg", form: "light" }], route: [], departure: [{ id: "GB-NR:RA", name: "Departure", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/departure-RA.svg", form: "light" }], stop: [{ id: "GB-NR:stop", name: "Stop board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/stop-board.svg", form: "sign" }, { id: "GB-NR:engineer-stop", name: "Engineering Stop board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/stop-octagon.svg", form: "sign" }], fouling_point: [{ id: "GB-NR:rear_clear", name: "Rear Clear marker", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/rear-clear.svg", form: "sign" }], crossing: [{ id: "GB-NR:crossing", name: "Crossing", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/crossing.svg", form: "light" }], speed_limit: [{ id: "GB-NR:speed_limit", name: "Permissible speed indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/speed-limit-empty.svg", form: "sign", extra: { speed: { options: [] } } }], slope: [{ id: "GB-NR:gradient", name: "Gradient post", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/gradient-arms.svg", form: "sign", extra: { shape: { options: ["board"] } } }] } } }, zy = { IT: { networkName: "Italy", networkImage: "File:Example.png", wikiPage: "", signals: { route: [{ id: "IT:ROUTE", name: "Route", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/route-unknown.svg", form: "light", extra: { states: { options: [] } } }], departure: [], main: [{ id: "IT:1V", name: "1ª categoria (1 light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/main-1v.svg", form: "light", extra: { shape: { options: ["square"] } } }, { id: "IT:2V", name: "1ª categoria (2 lights)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/main-2v.svg", form: "light", extra: { shape: { options: ["square"] } } }, { id: "IT:3V", name: "1ª categoria (3 lights)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/main-3v.svg", form: "light", extra: { shape: { options: ["square"] } } }], combined: [{ id: "IT:1V", name: "Segnale accoppiato (1 light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/combined-1v.svg", form: "light", extra: { shape: { options: ["square"] } } }, { id: "IT:2V", name: "Segnale accoppiato (2 lights)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/combined-2v.svg", form: "light", extra: { shape: { options: ["square"] } } }, { id: "IT:3V", name: "Segnale accoppiato (3 lights)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/combined-3v.svg", form: "light", extra: { shape: { options: ["square"] } } }], distant: [{ id: "IT:1V", name: "Avviso (1 light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/avviso-1v.svg", form: "light", extra: { shape: { options: ["square"] } } }, { id: "IT:2V", name: "Avviso (2 lights)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/avviso-2v.svg", form: "light", extra: { shape: { options: ["square"] } } }], speed_limit: [{ id: "IT:TRI", name: "Triangle speed limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/tri-unknown.svg", form: "sign", extra: { speed: { options: ["30", "60"] } } }, { id: "IT:RAP", name: "Rappel", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/rappel-30.svg", form: "light", extra: { speed: { options: ["100", "60"] } } }, { id: "IT:1R", name: "Speed limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/speed-unknown.svg", form: "sign", extra: { speed: { options: [] } } }], speed_limit_distant: [], stop: [{ id: "IT:HALT", name: "Halt", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/stop.svg", form: "sign" }], stop_distant: [], shunting: [{ id: "IT:MAR", name: "Marmotte", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/marmotte.svg", form: "light" }, { id: "IT:MAN", name: "Segnali alti di manovra", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/MAN.svg", form: "light" }, { id: "IT:PLIM", name: "Picchetto limite di manovra", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/PLIM.svg", form: "sign" }], crossing_distant: [{ id: "IT:D_CT", name: "Distant crossing", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/crossing-distant.svg", form: "light" }], crossing: [{ id: "IT:CT", name: "Level crossing (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/crossing-light.svg", form: "light" }, { id: "IT:PL", name: "Level crossing (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/crossing-sign.svg", form: "sign" }] } } }, Vy = { JP: { networkName: "Japan", networkImage: "File:Example.png", wikiPage: "", signals: { main: [{ id: "JP:出発信号機", name: "Departure signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/jp/main-departure.svg", form: "light" }, { id: "JP:閉塞信号機", name: "Block signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/jp/main-block.svg", form: "light" }, { id: "JP:場内信号機", name: "Station signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/jp/main-station.svg", form: "light" }], shunting: [{ id: "JP:入換信号機", name: "Shunting signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/jp/shunting.svg", form: "light" }], distant: [{ id: "JP:遠方信号機", name: "Distant signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/jp/distant.svg", form: "light" }], main_repeated: [{ id: "JP:中継信号機", name: "Repeated signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/jp/main_repeated.svg", form: "light" }] } } }, Qy = { "LU-CFL": { networkName: "Luxembourg - LU-CFL", networkImage: "File:Example.png", wikiPage: "", signals: { electricity: [{ id: "LU-CFL:ESFA", name: "ESFA", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/lu/ESFA.svg", form: "sign" }, { id: "LU-CFL:ESFAp/TA", name: "ESFAp/TA", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/lu/ESFAp_TA.svg", form: "sign" }, { id: "LU-CFL:ESFAp/TE", name: "ESFAp/TE", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/lu/ESFAp_TE.svg", form: "sign" }, { id: "LU-CFL:ESFAp/TR", name: "ESFAp/TR", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/lu/ESFAp_TR.svg", form: "sign" }, { id: "LU-CFL:ESFCC/A", name: "ESFCC/A", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/lu/ESFCC_A.svg", form: "sign" }, { id: "LU-CFL:ESFCC/E", name: "ESFCC/E", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/lu/ESFCC_E.svg", form: "sign" }, { id: "LU-CFL:ESFCC/F", name: "ESFCC/F", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/lu/ESFCC_F.svg", form: "sign" }] } } }, Hy = { NL: { networkName: "Netherlands", networkImage: "File:Example.png", wikiPage: "", signals: { main: [], main_repeated: [{ id: "NL", name: "main repeated light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/main_repeated_light.svg", form: "light" }], distant: [{ id: "NL", name: "distant light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/distant_light.svg", form: "light" }], shunting: [{ id: "NL:227", name: "block marker light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/227a.svg", form: "light" }], train_protection: [{ id: "NL:317", name: "drive on sight", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/317.svg", form: "sign" }, { id: "NL:336", name: "ETCS cab signalling (start)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/336.svg", form: "sign" }, { id: "NL:337", name: "ETCS cab signalling (end)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/337.svg", form: "sign" }, { id: "NL:328a", name: "ATB distant", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/328a.svg", form: "sign" }, { id: "NL:328", name: "ATB start", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/328.svg", form: "sign" }, { id: "NL:328b", name: "ATB code", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/328b.svg", form: "sign" }, { id: "NL:329", name: "ATB end", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/329.svg", form: "sign" }, { id: "NL:330", name: "ATB codewissel", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/330.svg", form: "light" }, { id: "NL:333", name: "Einde beveiligd gebied", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/333.svg", form: "sign" }], minor: [{ id: "NL:middenvoetbrugsein", name: "middenvoetbrugsein", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/215b.svg", form: "light" }], departure: [{ id: "NL", name: "departure signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/departure.svg", form: "light" }], humping: [{ id: "NL:270", name: 'Humping ("heuvelen")', image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/270a.svg", form: "light" }], stop: [{ id: "NL:303", name: "stopplaatssein", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/303.svg", form: "light" }, { id: "NL:304", name: "treinlengtebord", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/304-empty.svg", form: "sign", extra: { carriages: { options: [] } } }], crossing_distant: [{ id: "NL:318a", name: "distant crossing", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/318a.svg", form: "sign" }], station_distant: [{ id: "NL:305", name: "station", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/305.svg", form: "sign" }], speed_limit: [{ id: "NL:314", name: "speed limit (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/314-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "NL:316", name: "speed limit increase (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/316-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "NL:281", name: "tunnel entry speed limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/281-empty.svg", form: "sign", extra: { speed: { options: [] } } }], speed_limit_distant: [{ id: "NL:313", name: "distant speed limit distant (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/313-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "NL", name: "distant speed limit (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/speed_limit_distant_light-empty.svg", form: "light", extra: { speed: { options: [] } } }, { id: "NL:286", name: "tunnel distant speed limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/286-empty.svg", form: "sign", extra: { speed: { options: [] } } }], electricity: [{ id: "NL:306", name: "power off", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/306a.svg", form: "sign" }, { id: "NL:307", name: "power on", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/307a.svg", form: "sign" }, { id: "NL:308", name: "announcement pantograph down", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/308a.svg", form: "sign" }, { id: "NL:309", name: "pantograph down", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/309a.svg", form: "sign" }, { id: "NL:310", name: "pantograph up", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/310a.svg", form: "sign" }, { id: "NL:311", name: "end of catenary", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/311.svg", form: "sign", extra: { turn_direction: { options: ["right", "left"] } } }, { id: "NL:320", name: "voltage change", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/320-unknown.svg", form: "sign", extra: { voltage: { options: ["1500", "25000"] } } }] } } }, jy = { NZ: { networkName: "New Zealand", networkImage: "File:Example.png", wikiPage: "", signals: { crossing_hint: [{ id: "NZ:saltire", name: "Level Crossing Ahead", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/saltire.svg", form: "sign" }], crossing_info: [{ id: "NZ:alarms_start_here", name: "Alarms Start Here", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/alarms_start_here.svg", form: "sign" }], crossing: [{ id: "NZ:XI", name: "Crossing Indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/XI.svg", form: "light" }], stop: [{ id: "NZ:all_trains_stop", name: "All Trains Stop", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/all_trains_stop.svg", form: "sign" }, { id: "NZ:stop_block", name: "Stop Block Entry", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/stop_block_entry.svg", form: "sign" }, { id: "NZ:stop_station", name: "Stop Station Entry", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/stop_station_entry.svg", form: "sign" }, { id: "NZ:stop_plate", name: "Stop Plate", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/stop_plate.svg", form: "sign" }, { id: "NZ:stop_disk", name: "Stop Disk", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/stop_disk.svg", form: "sign" }, { id: "NZ:emu_stop", name: "EMU Stop Position", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/stop_position/6.svg", form: "sign", extra: { states: { options: ["2"] } } }], switch: [{ id: "NZ:AI", name: "Arrow Indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/AI_unknown.svg", form: "light" }], main_repeated: [{ id: "NZ:banner_indicator3D", name: "Single Banner Indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/banner_indicator3D.svg", form: "light" }, { id: "NZ:banner_indicator33", name: "Double Banner Indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/banner_indicator33.svg", form: "light" }], route: [{ id: "NZ:route_indicator", name: "Route Indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/route_indicator.svg", form: "light" }, { id: "NZ:L", name: "Loop Light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/L.svg", form: "light" }, { id: "NZ:E", name: "Electrified Route Light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/E.svg", form: "light" }], train_protection: [{ id: "NZ:A", name: "A-Light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/A.svg", form: "light" }, { id: "NZ:AS_begins", name: "Automatic Signaling Begins", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/begin_AS.svg", form: "sign" }, { id: "NZ:AS_ends", name: "Automatic Signaling Ends", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/end_AS.svg", form: "sign" }, { id: "NZ:CTC_begins", name: "Centralized Traffic Control Begins", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/begin_CTC.svg", form: "sign" }, { id: "NZ:CTC_ends", name: "Centralized Traffic Control Ends", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/end_CTC.svg", form: "sign" }, { id: "NZ:ETCS_begins", name: "Entry to European Train Control System", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/begin_ETCS.svg", form: "sign" }, { id: "NZ:ETCS_ends", name: "Exit from European Train Control System", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/end_ETCS.svg", form: "sign" }, { id: "NZ:TWC_begins", name: "Track Warrant Control Begins", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/begin_TWC.svg", form: "sign" }, { id: "NZ:TWC_ends", name: "Track Warrant Control Ends", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/end_TWC.svg", form: "sign" }], electricity: [{ id: "NZ:electric_limit", name: "Electric Services Limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/electric_limit.svg", form: "sign" }], radio: [{ id: "NZ:channel_area", name: "Entering Radio Channel Area", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/channel_area.svg", form: "sign" }], minor: [{ id: "NZ:R", name: "Restricted-speed Light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/R.svg", form: "light" }, { id: "NZ:low_speed", name: "Low-speed Light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/low_speed.svg", form: "light" }, { id: "NZ:TWC_siding", name: "TWC Siding", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/TWC_siding.svg", form: "sign" }, { id: "NZ:TWC_intermediate", name: "TWC Intermediate Board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/TWC_intermediate.svg", form: "sign" }], station_distant: [{ id: "NZ:TWC_signalled", name: "TWC (signalled) Station Warning", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/TWC_signalled.svg", form: "sign" }, { id: "NZ:TWC_unsignalled", name: "TWC (unsignalled) Station Warning", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/TWC_unsignalled.svg", form: "sign" }], whistle: [{ id: "NZ:whistle", name: "Whistle", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/whistle.svg", form: "sign" }], shunting: [{ id: "NZ:shunting_limit", name: "Shunting Limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/shunting_limit.svg", form: "sign" }], main: [], distant: [], speed_limit: [{ id: "NZ:speed_indicator", name: "Dynamic Speed Indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/speed_indicator.svg", form: "light" }] } } }, Wy = /* @__PURE__ */ JSON.parse('{"PL-PKP":{"networkName":"Poland - PL-PKP","networkImage":"File:Example.png","wikiPage":"","signals":{"distant":[{"id":"PL-PKP:w1","name":"Wskaźnik usytuowania (W1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w1.svg","form":"sign"},{"id":"PL-PKP:os","name":"Tarcza ostrzegawcza świetlna (To)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/os1-1.svg","form":"light","extra":{"states":{"options":[]}}},{"id":"PL-PKP:on","name":"Tarcza ostrzegawcze kształtowe (To, nieruchoma, dwustawna i trzystawna)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/on.svg","form":"light"}],"main_repeated":[{"id":"PL-PKP:sp","name":"Sygnalizator powtarzający (Sp)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/sp1-2.svg","form":"light","extra":{"states":{"options":["PL-PKP:sp2","PL-PKP:sp3"]}}}],"train_protection":[{"id":"PL-PKP:wetcs1","name":"Wskaźniki ETCS L1 Limited Supervision","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/wetcs1.svg","form":"sign"},{"id":"PL-PKP:wetcs4","name":"Wskaźniki ETCS L1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/wetcs4.svg","form":"sign"},{"id":"PL-PKP:wetcs7","name":"Wskaźniki ETCS L2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/wetcs7.svg","form":"sign"},{"id":"PL-PKP:wetcs10","name":"Wskaźnik zatrzymania ETCS (WETCS10)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/wetcs10-left.svg","form":"sign"},{"id":"PL-PKP:wetcs11","name":"Wskaźnik lokalizacji ETCS (WETCS11)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/wetcs11-left.svg","form":"sign"}],"minor":[{"id":"PL-PKP:sz","name":"Sygnalizator sygnału zastępczego (Sz)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/sz-1.svg","form":"light"},{"id":"PL-PKP:d1","name":"Tarcza zatrzymania (D1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/d1.svg","form":"sign"},{"id":"PL-PKP:w3","name":"Wskaźnik unieważnienia (W3)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w3.svg","form":"light"}],"minor_distant":[{"id":"PL-PKP:do","name":"Tarcza ostrzegawcza nieruchoma (DO)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/do.svg","form":"sign"}],"crossing":[{"id":"PL-PKP:osp","name":"Tarcze ostrzegawcze przejazdowe (ToP)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/osp.svg","form":"light"}],"shunting":[{"id":"PL-PKP:m","name":"Tarcza manewrowa kształtowa (Tm)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/m-sign.svg","form":"light","extra":{"form":{"options":["semaphore"]}}},{"id":"PL-PKP:ms","name":"Tarcza manewrowa świetlna (Tm)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/ms-1.svg","form":"light","extra":{"states":{"options":["PL-PKP:ms2"]}}},{"id":"PL-PKP:w5","name":"Wskaźnik przetaczania (W5)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w5.svg","form":"sign"}],"humping":[{"id":"PL-PKP:rt","name":"Tarcze rozrządowe (Tr, kształtowa i świetlna)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/rt3-semaphore.svg","form":"light","extra":{"form":{"options":["light"]}}}],"passing":[{"id":"PL-PKP:w22","name":"Wskaźnik jazdy pociągu towarowego (W22)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w22.svg","form":"sign"}],"station_distant":[{"id":"PL-PKP:w18","name":"Wskaźnik SBL (W18)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w18.svg","form":"sign"},{"id":"PL-PKP:w16","name":"Wskaźnik przystanku osobowego (W16)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w16.svg","form":"sign"}],"route":[{"id":"PL-PKP:w2","name":"Wskaźniki kierunku jazdy (W2, W26a,  W26b)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w2-{K}.svg","form":"light","extra":{"states":{"options":[]}}}],"stop":[{"id":"PL-PKP:w4","name":"Wskaźnik zatrzymania (W4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w4.svg","form":"sign"},{"id":"PL-PKP:w32","name":"Wskaźnik czoła pociągu (W32)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w32-empty.svg","form":"sign","extra":{"caption":{"options":[]}}}],"whistle":[{"id":"PL-PKP:w6","name":"Wskaźniki ostrzegania (W6, W6a, W6b i W7)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w6.svg","form":"sign"}],"helper_engine":[{"id":"PL-PKP:w10a","name":"Wskaźniki odcinka z popychaniem (W10a i W10b)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w10a.svg","form":"sign"}],"crossing_distant":[{"id":"PL-PKP:w11p","name":"Wskaźnik przejazdowy (W11p)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w11p-1.svg","form":"sign"}],"steam_locomotive":[{"id":"PL-PKP:w12","name":"Wskaźnik parowozowy (W12)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w12.svg","form":"sign"}],"snowplow":[{"id":"PL-PKP:w13","name":"Wskaźnik torowy (W13)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w13.svg","form":"sign"}],"fouling_point":[{"id":"PL-PKP:w17","name":"Wskaźnik ukresu (W17)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w17.svg","form":"light"}],"short_route":[{"id":"PL-PKP:w19","name":"Wskaźniki braku drogi hamowania (W19 i W20)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w19.svg","form":"light"}],"wrong_road":[{"id":"PL-PKP:w24","name":"Wskaźnik kierunku przeciwnego (W24)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w24.svg","form":"light"}],"preheating":[{"id":"PL-PKP:w25","name":"Wskaźnik ogrzewania (W25)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w25.svg","form":"light"}],"radio":[{"id":"PL-PKP:w28","name":"Wskaźnik kanału radiowego (W28)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w28-{R1}.svg","form":"sign","extra":{"frequency":{"options":[]}}},{"id":"PL-PKP:w29","name":"Wskaźnik nawiązania łączności (W29)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w29.svg","form":"sign"},{"id":"PL-PKP:w33","name":"Wskaźnik początku obowiązywania systemu ERTMS/GSM-R (W33)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w33.svg","form":"sign"},{"id":"PL-PKP:w34","name":"Wskaźnik końca obowiązywania systemu ERTMS/GSM-R (W34)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w34.svg","form":"sign","extra":{"frequency":{"options":[]}}}],"speed_limit_distant":[{"id":"PL-PKP:d6","name":"Tarcza zwolnić bieg (D6)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/d6-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"PL-PKP:w8","name":"Wskaźnik ograniczenia prędkości (W8)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w8-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}],"speed_limit":[{"id":"PL-PKP:w21","name":"Wskaźniki podwyższenia prędkości (W21)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w21-empty.svg","form":"light","extra":{"speed":{"options":[]}}},{"id":"PL-PKP:w21wg","name":"Wskaźnik W21wg","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w21wg-empty.svg","form":"light","extra":{"speed":{"options":[]}}},{"id":"PL-PKP:w27a","name":"Wskaźnik zmiany prędkości (W27a)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w27a-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"PL-PKP:w30","name":"Wskaźnik ważenia składu (W30)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w30-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}],"main":[{"id":"PL-PKP:sr","name":"Semafor kształtowy","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/sr1.svg","form":"semaphore","extra":{"states":{"options":["PL-PKP:sr3","PL-PKP:sr1","PL-PKP:sr2"]}}}],"combined":[],"electricity":[{"id":"PL-PKP:we1a","name":"Wskaźniki uprzedzające o opuszczeniu pantografu (We1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/we1a.svg","form":"sign","extra":{"turn_direction":{"options":["right","left"]}}},{"id":"PL-PKP:we2a","name":"Wskaźniki opuszczenia pantografu (We2)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/we2a.svg","form":"sign","extra":{"turn_direction":{"options":["right","left"]}}},{"id":"PL-PKP:we3a","name":"Wskaźniki podniesienia pantografu (We3)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/we3a.svg","form":"sign"},{"id":"PL-PKP:we4a","name":"Wskaźniki zakazu wjazdu elektrycznych pojazdów trakcyjnych (We4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/we4a.svg","form":"sign","extra":{"turn_direction":{"options":["right","left"]}}},{"id":"PL-PKP:we8a","name":"Wskaźniki jazdy bezprądowej (We8)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/we8a.svg","form":"sign","extra":{"turn_direction":{"options":["right","left"]}}},{"id":"PL-PKP:we9a","name":"Wskaźniki jazdy pod prądem (We9)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/we9a.svg","form":"sign"},{"id":"PL-PKP:we10a","name":"Wskaźniki zmiany systemu zasilania (We10)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/we10a.svg","form":"sign"}]}},"PL-WKD":{"networkName":"Poland - PL-WKD","networkImage":"File:Example.png","wikiPage":"","signals":{"distant":[{"id":"PL-WKD:w2","name":"Wskaźnik WKD W2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/wkd/w2.svg","form":"sign"}],"crossing":[{"id":"PL-WKD:wk","name":"Wskaźnik WKD Wk","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/wkd/wk.svg","form":"light"}]}},"PL-metro":{"networkName":"Poland - PL-metro","networkImage":"File:Example.png","wikiPage":"","signals":{"stop":[{"id":"PL-metro:wm4","name":"Miejsce zatrzymania czoła pociągu (Wm4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/metro/wm4.svg","form":"sign"}],"station_distant":[{"id":"PL-metro:wm16","name":"Rozpocząć hamowanie przed peronem (Wm16)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/metro/wm16.svg","form":"sign"}],"fouling_point":[{"id":"PL-metro:wm17","name":"Wskaźnik ukresu (Wm17)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/metro/wm17.svg","form":"light"}]}},"PL-tram":{"networkName":"Poland - PL-tram","networkImage":"File:Example.png","wikiPage":"","signals":{"distant":[{"id":"PL-tram:at-1","name":"Sygnalizacja świetlna (AT-1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/at-1.svg","form":"sign"}],"crossing_hint":[{"id":"PL-tram:at-2","name":"Sygnalizacja świetlna wzbudzana (AT-2)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/at-2.svg","form":"sign"},{"id":"PL-tram:at-5","name":"Ruch kolizyjny (AT-5)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/at-5.svg","form":"sign"}],"slope":[{"id":"PL-tram:at-3","name":"Niebezpieczny zjazd (AT-3)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/at-3.svg","form":"sign"},{"id":"PL-tram:at-4","name":"Stromy podjazd (AT-4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/at-4.svg","form":"sign"}],"stop":[{"id":"PL-tram:bt-3","name":"Blokada zwrotnicy (BT-3)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/bt-3.svg","form":"sign"},{"id":"PL-tram:bt-4","name":"Stop – zwrotnica eksploatowana jednostronnie (BT-4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/bt-4.svg","form":"sign"}],"switch":[{"id":"PL-tram:dt-1","name":"Zwrotnica elektryczna lewoskrętna (DT-1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/dt-1.svg","form":"sign"},{"id":"PL-tram:dt-2","name":"Zwrotnica elektryczna lewoskrętna (DT-2)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/dt-2.svg","form":"sign"},{"id":"PL-tram:switch_olsztyn","name":"Znaki sterowania zwrotnicy","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/switch_warszawa.svg","form":"sign"}],"speed_limit":[{"id":"PL-tram:bt-1","name":"Ograniczenie prędkości (BT-1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/bt-1-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"PL-tram:bt-2","name":"Koniec ograniczenia prędkości (BT-2)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/bt-2-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}],"electricity":[{"id":"PL-tram:ct-1","name":"Izolator sekcyjny (CT-1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/ct-1.svg","form":"sign"},{"id":"PL-tram:ct-2","name":"Granica zasilania (CT-2)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/ct-2.svg","form":"sign"}]}},"ct-1;PL-tram":{"networkName":"Poland - ct-1;PL-tram","networkImage":"File:Example.png","wikiPage":"","signals":{"electricity":[{"id":"PL-tram:ct-1;PL-tram:ct-2","name":"Granica zasilania wraz z izolatorem sekcyjnym (CT-1 i CT-2)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/ct-1-2.svg","form":"sign"}]}}}'), Iy = { SE: { networkName: "Sweden", networkImage: "File:Example.png", wikiPage: "", signals: { main: [{ id: "SE:Utfartsblocksignal", name: "Mellanblocksignal, Utfartsblocksignal (main)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/main-block.svg", form: "light" }, { id: "SE:Linjeplatssignal", name: "Linjeplatssignal (main)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/main-section.svg", form: "light" }, { id: "SE:Huvudsignal", name: "Infartssignal, Mellansignal, Utfartssignal (main)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/main.svg", form: "light" }, { id: "SE:Mellansignal", name: "Mellansignal (dvärg)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/shunting-main.svg", form: "light" }], combined: [{ id: "SE:Utfartsblocksignal", name: "Mellanblocksignal, Utfartsblocksignal (combined)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/combined-block.svg", form: "light" }, { id: "SE:Huvudsignal", name: "Infartssignal, Mellansignal, Utfartssignal (combined)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/combined.svg", form: "light" }, { id: "SE:Linjeplatssignal", name: "Linjeplatssignal (combined)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/combined-section.svg", form: "light" }], distant: [{ id: "SE:Försignal", name: "Försignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/försignal.svg", form: "light" }, { id: "SE:orienteringstavla", name: "Orienteringstavla huvudsignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/orienteringstavla-huvudsignal.svg", form: "sign", extra: { distance: { options: [] } } }], train_protection: [{ id: "SE:Repeterbaliser", name: "Repeterbalister", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/repeterbaliser.svg", form: "sign" }], main_repeated: [{ id: "SE:Repetersignal", name: "Repetersignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/repetersignal.svg", form: "light" }], shunting: [{ id: "SE:Växlingsdvärgsignal", name: "Växlingsdvärgsignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/shunting.svg", form: "light" }, { id: "SE:Skyddsstopplykta", name: "Skyddsstopplykta", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/skyddsstopplykta.svg", form: "sign" }], crossing: [{ id: "SE:Vägskyddssignal", name: "Vägskyddssignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/vägskyddssignal.svg", form: "light" }], crossing_distant: [{ id: "SE:Vägskyddsförsignal", name: "Vägskyddsförsignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/vägskyddsförsignal.svg", form: "light" }], speed_limit: [{ id: "SE:hastighetstavla", name: "Hastighetstavla", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/hastighetstavla-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "SE:hastighetstavla med pilspets uppåt", name: "Hastighetstavla med pilspets uppåt", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/hastighetstavla-pilspets-uppåt-empty.svg", form: "sign", extra: { speed: { options: [] } } }], speed_limit_distant: [{ id: "SE:lägre_hastighet", name: "Orienteringstavla för lägre hastighet", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/orienteringstavla-hastighet-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "SE:atc_överskridande", name: "Orienteringstavla med tilläggsskylt ”ATC-överskridande”", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/orienteringstavla-hastighet-atc-överskridande-empty.svg", form: "sign", extra: { speed: { options: [] } } }], stop: [{ id: "SE:Slutpunktstopplykta", name: "Slutpunktstopplykta", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/slutpunktstopplykta.svg", form: "light" }] } } }, Gy = { US: { networkName: "United States", networkImage: "File:Example.png", wikiPage: "", signals: { main: [{ id: "US:main", name: "Main signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/us/main.svg", form: "light" }], distant: [{ id: "US:distant", name: "Distant signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/us/distant.svg", form: "light" }] } } }, Zy = {
-  AT: Ny,
-  AU: Cy,
+}, Cy = /* @__PURE__ */ JSON.parse('{"AT-V2":{"networkName":"Austria - AT-V2","networkImage":"File:Example.png","wikiPage":"","signals":{"main_repeated":[],"main":[{"id":"AT-V2:trapeztafel","name":"Main entry sign Ne 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/trapeztafel.svg","form":"sign"}],"speed_limit_distant":[{"id":"AT-V2:ankündigungstafel","name":"Ankündigungstafel","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/ankuendigungstafel-empty-sign.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"AT-V2:ankündigungssignal","name":"Ankündigungssignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/ankündigungssignal-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"AT-V2:ankündigung_ek-sicht","name":"Ankündigung EK sicht","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/ankündigung-ek-sicht.svg","form":"sign"}],"distant":[{"id":"AT-V2:kreuztafel","name":"Kreuztafel","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/kreuztafel.svg","form":"sign"}],"train_protection":[{"id":"AT-V2:lzb-bereichskennzeichen","name":"LZB Bereichskennzeichen","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/lzb-bereichskennzeichen.svg","form":"sign"}],"minor":[{"id":"AT-V2:weiterfahrt_verboten","name":"Sperrsignale (sign)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/weiterfahrt-verboten.svg","form":"sign"},{"id":"AT-V2:sperrsignal","name":"Sperrsignale (semaphore)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/weiterfahrt-erlaubt.svg","form":"semaphore"},{"id":"AT-V2:schutzsignal","name":"Schutzsignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/schutzsignal.svg","form":"light"},{"id":"AT-V2:fahrwegende","name":"Fahrwegende","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/fahrwegende.svg","form":"sign"},{"id":"AT-V2:haltscheibe","name":"Haltscheibe","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/haltscheibe.svg","form":"sign"}],"shunting":[{"id":"AT-V2:verschubsignal","name":"Verschubsignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/verschubsignal.svg","form":"light","extra":{"height":{"options":["dwarf"]}}},{"id":"AT-V2:verschubhalttafel","name":"Verschubhalttafel","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/verschubhalttafel.svg","form":"sign"}],"station_distant":[{"id":"AT-V2:haltestellentafel","name":"Haltestellentafel","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/haltestellentafel.svg","form":"sign"}],"crossing":[{"id":"AT-V2:ek_überwachungssignal","name":"Überwachungssignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/ek_gesichert.svg","form":"light"}],"crossing_distant":[{"id":"AT-V2:rautentafel","name":"Rautentafel","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/rautentafel.svg","form":"sign"}],"whistle":[{"id":"AT-V2:pfeifpflock","name":"Pfeifpflock","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/pfeifpflock.svg","form":"sign"},{"id":"AT-V2:gruppenpfeifpflock","name":"Gruppenpfeifpflock","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/gruppenpfeifpflock.svg","form":"sign"},{"id":"AT-V2:endpflock","name":"Endpflock","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/endpflock.svg","form":"sign"}],"stop":[{"id":"AT-V2:haltepunkt","name":"Haltepunkt","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/haltepunkt.svg","form":"sign"}],"departure":[{"id":"AT-V2:abfahrt","name":"Abfahrt","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/abfahrt.svg","form":"light"},{"id":"AT-V2:fahrerlaubnissignal","name":"Fahrerlaubnissignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/fahrerlaubnis.svg","form":"light"}],"speed_limit":[{"id":"AT-V2:geschwindigkeitstafel","name":"Geschwindigkeitstafel","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/geschwindigkeitstafel-empty-sign.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"AT-V2:anfangssignal","name":"Anfangssignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/anfangssignal-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"AT-V2:endsignal","name":"Endsignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/endsignal.svg","form":"sign"},{"id":"AT-V2:ek-sicht_pfeiftafel","name":"EK sicht Pfeiftafel","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/ek-sicht-pfeiftafel.svg","form":"sign"}],"electricity":[{"id":"AT-V2:ankündigung_stromabnehmer_tief","name":"Ankündigung Stromabnehmer tief","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/ankündigung_stromabnehmer_tief.svg","form":"sign"},{"id":"AT-V2:ankündigung_hauptschalter_aus","name":"Ankündigung Hauptschalter aus","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/ankündigung_hauptschalter_aus.svg","form":"light"},{"id":"AT-V2:halt_fuer_fahrzeuge_mit_angehobenem_stromabnehmer","name":"Halt für Fahrzeuge mit angehobenem Stromabnehmer","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/halt_fuer_fahrzeuge_mit_angehobenem_stromabnehmer.svg","form":"light","extra":{"turn_direction":{"options":["left","through","right"]}}},{"id":"AT-V2:hauptschalter_ein","name":"Hauptschalter ein","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/hauptschalter_ein.svg","form":"sign"},{"id":"AT-V2:stromabnehmer_hoch","name":"Stromabnehmer hoch","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/stromabnehmer_hoch.svg","form":"sign"},{"id":"AT-V2:hauptschalter_aus","name":"Hauptschalter aus","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/hauptschalter_aus.svg","form":"light"},{"id":"AT-V2:stromabnehmer_tief","name":"Stromabnehmer tief","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/stromabnehmer_tief.svg","form":"sign"},{"id":"AT-V2:bahnhof-streckentrennung_anfang","name":"Bahnhof Streckentrennung anfang","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/bahnhof-streckentrennung_anfang.svg","form":"sign"},{"id":"AT-V2:bahnhof-streckentrennung_ende","name":"Bahnhof Streckentrennung ende","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/bahnhof-streckentrennung_ende.svg","form":"sign"},{"id":"AT-V2:schaltzeiger","name":"Schaltzeiger","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/schaltzeiger.svg","form":"semaphore"}],"snowplow":[{"id":"AT-V2:räumarbeit_aufnehmen","name":"Räumarbeit aufnehmen","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/räumarbeit-aufnehmen.svg","form":"sign"},{"id":"AT-V2:mittelräumer_heben","name":"Mittelräumer heben","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/mittelräumer-heben.svg","form":"sign"},{"id":"AT-V2:räumarbeit_einstellen","name":"Räumarbeit einstellen","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/räumarbeit-einstellen.svg","form":"sign"}],"humping":[{"id":"AT-V2:abdrucksignal","name":"Abdrucksignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/abdrucksignal.svg","form":"light"}]}},"AT":{"networkName":"Austria","networkImage":"File:Example.png","wikiPage":"","signals":{"stop_demand":[{"id":"AT:bedarfshalt-signal","name":"Bedarfshalt","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/bedarfshalt.svg","form":"light"}],"resetting_switch":[{"id":"AT:weichenüberwachungssignal_plb","name":"Weichenüberwachungssignal (PLB)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/weichenüberwachungssignal_plb.svg","form":"light"}]}},"AT-SLB":{"networkName":"Austria - AT-SLB","networkImage":"File:Example.png","wikiPage":"","signals":{"stop":[{"id":"AT-SLB:zuglaufmeldestelle","name":"Zuglaufmeldestelle (SLB)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/zuglaufmeldestelle.svg","form":"sign"}],"speed_limit":[{"id":"AT-SLB:x40","name":"Salzburger Lokalbahn & Pinzgauer Lokalbahn X40","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/at/x40.svg","form":"sign"}]}}}'), Ny = /* @__PURE__ */ JSON.parse('{"MNWSW":{"networkName":"Australia - MNWSW","networkImage":"File:Example.png","wikiPage":"","signals":{"minor":[{"id":"AU:MNWSW:location","name":"Location Marker Board","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/metro/location.svg","form":"sign"}],"main":[{"id":"AU:MNWSW:points_indiciator","name":"Point Position Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/metro/points_indiciator.svg","form":"light"}],"route":[{"id":"AU:MNWSW:route_indicator","name":"Route Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/metro/route_indicator.svg","form":"light"}],"stop":[{"id":"AU:MNWSW:fixed_red","name":"Fixed Red","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/metro/fixed_red.svg","form":"light"}],"fouling_point":[{"id":"AU:MNWSW:points_cleared","name":"Points Cleared","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/metro/points_cleared.svg","form":"light"}]}},"LightRail":{"networkName":"Australia - LightRail","networkImage":"File:Example.png","wikiPage":"","signals":{"electricity":[{"id":"AU:LightRail:coast_off","name":"Coast Off","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/coast_off.svg","form":"sign"},{"id":"AU:LightRail:coast_on","name":"Coast On","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/coast_on.svg","form":"sign"}],"stop":[{"id":"AU:LightRail:fixed_red","name":"Fixed Red","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/fixed_red.svg","form":"sign"}],"route":[{"id":"AU:LightRail:route_indicator","name":"Route Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signals/route_indicator.svg","form":"light"}],"minor":[{"id":"AU:LightRail:PI","name":"Points Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signals/PI/straight.svg","form":"light","extra":{"states":{"options":["stop"]}}},{"id":"AU:LightRail:SPI","name":"Signal Operated Points Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signals/SPI/straight.svg","form":"light","extra":{"states":{"options":["locked"]}}}],"main":[{"id":"AU:LightRail:SI","name":"Signal System Lanterns","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signals/SI/straight.svg","form":"light","extra":{"states":{"options":["stop"]}}}]}},"NSW":{"networkName":"Australia - NSW","networkImage":"File:Example.png","wikiPage":"","signals":{"minor":[{"id":"AU:LightRail:NSW:CS","name":"CS","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/CS.svg","form":"sign"},{"id":"AU:LightRail:NSW:D","name":"Train Detector","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/D.svg","form":"sign"},{"id":"AU:NSW:close_up","name":"Close Up","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/close_up.svg","form":"light"},{"id":"AU:NSW:low_speed","name":"Low Speed","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/low_speed.svg","form":"light"},{"id":"AU:NSW:MLI","name":"Mainline Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/MLI/unknown.svg","form":"light","extra":{"states":{"options":["WYR","WR"]}}}],"shunting":[{"id":"AU:LightRail:NSW:LM","name":"Shunting Limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/LM.svg","form":"sign"},{"id":"AU:LightRail:NSW:SL","name":"Shunting Limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/SL.svg","form":"sign"},{"id":"AU:LightRail:NSW:SZ","name":"Shunting Zone","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/SZ.svg","form":"sign"},{"id":"AU:NSW:shunting_limit","name":"Shunting Limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/shunting_limit.svg","form":"sign"},{"id":"AU:NSW:shunt","name":"Shunt Signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/shunt_box.svg","form":"light","extra":{"shape":{"options":["vertical"]}}},{"id":"AU:NSW:intermediate","name":"Intermediate Shunt Signal Signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/shunt_box_int.svg","form":"light","extra":{"shape":{"options":["vertical"]}}},{"id":"AU:NSW:subsidiary","name":"Calling-On / Shunt Ahead","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/subsidiary.svg","form":"light"}],"electricity":[{"id":"AU:LightRail:NSW:lower_APS","name":"Lower APS","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/lower_APS.svg","form":"sign"},{"id":"AU:LightRail:NSW:lower_OESS","name":"Lower OESS","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/lower_OESS.svg","form":"sign"},{"id":"AU:LightRail:NSW:lower_OHW","name":"Lower OHW","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/lower_OHW.svg","form":"sign"},{"id":"AU:LightRail:NSW:raise_APS","name":"Raise APS","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/raise_APS.svg","form":"sign"},{"id":"AU:LightRail:NSW:raise_OESS","name":"Raise OESS","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/raise_OESS.svg","form":"sign"},{"id":"AU:LightRail:NSW:raise_OHW","name":"Raise OHW","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/raise_OHW.svg","form":"sign"},{"id":"AU:NSW:block_join","name":"Block Join","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/block_join.svg","form":"sign"},{"id":"AU:NSW:electric_limit","name":"Electric Train Stop","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/electric_limit.svg","form":"sign"},{"id":"AU:NSW:turnout","name":"Unelectrified Turnout","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/turnout.svg","form":"sign"}],"departure":[{"id":"AU:LightRail:NSW:RTS","name":"Ready to Start","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/RTS.svg","form":"sign"},{"id":"AU:NSW:EYL","name":"End Yard Limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/EYL.svg","form":"sign"}],"route":[{"id":"AU:LightRail:NSW:set_route","name":"Set Route","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/set_route_NSW.svg","form":"sign"},{"id":"AU:NSW:theatre_box","name":"Mainline Route Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/route_indicator.svg","form":"light"}],"stop":[{"id":"AU:LightRail:NSW:stop","name":"Stop","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/stop.svg","form":"sign"},{"id":"AU:LightRail:NSW:SWI","name":"Stop with Instruction","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/SWI.svg","form":"sign"},{"id":"AU:NSW:catch_point","name":"Catch Point","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/catch_point.svg","form":"sign"},{"id":"AU:NSW:derail","name":"Derail","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/derail.svg","form":"sign"},{"id":"AU:NSW:loading_gauge","name":"Loading Gauge Limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/loading_gauge.svg","form":"sign"},{"id":"AU:NSW:stop_position","name":"Stop Position","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/stop_position/unknown.svg","form":"sign","extra":{"states":{"options":[]}}},{"id":"AU:NSW:safety_overrun","name":"Safety Runoff Area","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/safety_overrun.svg","form":"sign"},{"id":"AU:NSW:stop","name":"Stop","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/stop.svg","form":"sign"}],"main":[{"id":"AU:LightRail:NSW:ground","name":"Ground Signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signals/ground-clear.svg","form":"light","extra":{"states":{"options":["stop"]}}},{"id":"AU:LightRail:NSW:SI","name":"Signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signals/NSW_SI.svg","form":"light"},{"id":"AU:LightRail:NSW:PI","name":"Points Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signals/NSW_PI.svg","form":"light"}],"main_repeated":[{"id":"AU:NSW:alert","name":"Alert","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/alert.svg","form":"sign"},{"id":"AU:NSW:LED_repeater","name":"LED Repeater","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/LED_repeater.svg","form":"light"},{"id":"AU:NSW:guards_indicator","name":"Guards Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/guards_indicator.svg","form":"light"}],"train_protection":[{"id":"AU:NSW:begin_ATP","name":"Begin ATP","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/begin_ATP.svg","form":"sign"},{"id":"AU:NSW:begin_CAB","name":"Begin CAB","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/begin_CAB.svg","form":"sign"},{"id":"AU:NSW:begin_single_light","name":"Begin Single Light Indication","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/begin_single_light.svg","form":"sign"},{"id":"AU:NSW:begin_TOW","name":"Begin Train Order Working","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/begin_TOW.svg","form":"sign"},{"id":"AU:NSW:end_ATP","name":"End ATP","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/end_ATP.svg","form":"sign"},{"id":"AU:NSW:end_CAB","name":"End CAB","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/end_CAB.svg","form":"sign"},{"id":"AU:NSW:end_signalled_authority","name":"End Signalled Authority","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/end_signalled_authority.svg","form":"sign"},{"id":"AU:NSW:network_control","name":"Network Control Limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/network_control.svg","form":"sign"},{"id":"AU:NSW:end_single_light","name":"End Single Light Indication","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/end_single_light.svg","form":"sign"},{"id":"AU:NSW:end_TOW","name":"End Train Order Working","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/end_TOW.svg","form":"sign"},{"id":"AU:NSW:A","name":"Automatic Light","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/automatic.svg","form":"light"}],"station_distant":[{"id":"AU:NSW:landmark","name":"Landmark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/landmark.svg","form":"sign"},{"id":"AU:NSW:location","name":"Location","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/location.svg","form":"sign"},{"id":"AU:NSW:YL","name":"Yard Limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/YL.svg","form":"sign"}],"whistle":[{"id":"AU:NSW:no_whistle","name":"No Whistle","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/no_whistle.svg","form":"sign"},{"id":"AU:NSW:whistle","name":"Whistle","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/whistle.svg","form":"sign"}],"fouling_point":[{"id":"AU:NSW:points_cleared","name":"Points Cleared","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/points_cleared.svg","form":"light"}],"crossing_hint":[{"id":"AU:NSW:signalised","name":"Signalised Level Crossing","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/signalised.svg","form":"sign"},{"id":"AU:NSW:unsignalised","name":"Unsignalised Level Crossing","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signs/unsignalised.svg","form":"sign"}],"switch":[{"id":"AU:NSW:facing_points","name":"Facing Points Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/points_indicator_facing.svg","form":"light"},{"id":"AU:NSW:trailing_points","name":"Trailing Points Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/points_indicator_trailing.svg","form":"light"},{"id":"AU:NSW:turnout_route","name":"Turnout Route","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/turnout_off.svg","form":"light","extra":{"states":{"options":["right","left"]}}},{"id":"AU:NSW:MLI_turnout","name":"Mainline Indicator – Turnout","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/MLI/turnout_off.svg","form":"light","extra":{"states":{"options":["right","left"]}}}],"helper_engine":[{"id":"AU:NSW:tonnage","name":"Tonnage Light","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/tonnage.svg","form":"light"}],"short_route":[],"shunting_route":[{"id":"AU:NSW:stencil","name":"Shunt Route Indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/nsw/signals/stencil.svg","form":"light"}],"distant":[],"route_distant":[]}},"ACT":{"networkName":"Australia - ACT","networkImage":"File:Example.png","wikiPage":"","signals":{"route":[{"id":"AU:LightRail:ACT:set_route","name":"Set Route","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/set_route_ACT.svg","form":"sign"}]}},"VIC":{"networkName":"Australia - VIC","networkImage":"File:Example.png","wikiPage":"","signals":{"electricity":[{"id":"AU:LightRail:VIC:cut_off","name":"Cut Off","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/cut_off.svg","form":"sign"},{"id":"AU:LightRail:VIC:isolate_5","name":"5th Isolate Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/isolate_5.svg","form":"sign"},{"id":"AU:LightRail:VIC:isolate_4","name":"4th Isolate Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/isolate_4.svg","form":"sign"},{"id":"AU:LightRail:VIC:isolate_3","name":"3rd Isolate Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/isolate_3.svg","form":"sign"},{"id":"AU:LightRail:VIC:isolate_2","name":"2nd Isolate Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/isolate_2.svg","form":"sign"},{"id":"AU:LightRail:VIC:isolate_1","name":"1st Isolate Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/isolate_1.svg","form":"sign"}],"fouling_point":[{"id":"AU:LightRail:VIC:50/50","name":"50/50","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/5050.svg","form":"sign"},{"id":"AU:LightRail:VIC:single_yellow","name":"Fouling Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/single_yellow.svg","form":"sign"}],"stop":[{"id":"AU:LightRail:VIC:double_yellow","name":"Compulsory Stop Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/double_yellow.svg","form":"sign"},{"id":"AU:LightRail:VIC:double_yellow_dashed","name":"Optional Stop Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/double_yellow_dashed.svg","form":"sign"},{"id":"AU:LightRail:VIC:double_yellow_chevron","name":"Check Point Mark","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/double_yellow_chevron.svg","form":"sign"},{"id":"AU:LightRail:VIC:single_yellow_half","name":"Shunting Stop Mark (A/Z/W)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/single_yellow_half.svg","form":"sign"},{"id":"AU:LightRail:VIC:double_yellow_half","name":"Shunting Stop Mark (B/C1/D1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/double_yellow_half.svg","form":"sign"},{"id":"AU:LightRail:VIC:triple_yellow_half","name":"Shunting Stop Mark (C2/D2/E)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/triple_yellow_half.svg","form":"sign"},{"id":"AU:LightRail:VIC:stop_studs_square","name":"Stopping Place Studs","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/stop_studs_square.svg","form":"sign"},{"id":"AU:LightRail:VIC:stop_studs_diamond","name":"Stopping Place Studs (Long Trams)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/stop_studs_diamond.svg","form":"sign"},{"id":"AU:LightRail:VIC:provisional","name":"Provisional Stop","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/provisional_stop.svg","form":"sign"}],"route":[{"id":"AU:LightRail:VIC:command_stud_2","name":"2nd Command Stud","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/command_stud_2.svg","form":"sign"},{"id":"AU:LightRail:VIC:command_stud_1","name":"1st Command Stud","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/command_stud_1.svg","form":"sign"},{"id":"AU:LightRail:VIC:command_stud_1SPI","name":"1st Command Stud (Signal Operated Points)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/au/LightRail/signs/vic/command_stud_1SPI.svg","form":"sign"}]}}}'), Oy = { BE: { networkName: "Belgium", networkImage: "File:Example.png", wikiPage: "", signals: { slope: [{ id: "BE:i12", name: "Gradient >=12‰ <18‰", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/i12.svg", form: "sign" }, { id: "BE:i18", name: "Gradient >=18‰", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/i18.svg", form: "sign" }], speed_limit: [{ id: "BE:VIS", name: "Speed limit light (part of main signal)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/VIS-empty.svg", form: "light", extra: { speed: { options: [] } } }, { id: "BE:PVR", name: "Reference speed", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PVR-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "BE:PVO", name: "Beginning of a speed limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PVO-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "BE:PVJ", name: "Higher speed limit below reference speed", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PVJ-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "BE:PVV", name: "Higher speed limit for some traffic", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PVV-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "BE:SSC", name: "Carwash", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/SSC.svg", form: "light" }], speed_limit_distant: [{ id: "BE:PVA", name: "Announcement of a speed limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PVA-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "BE:PVSA", name: "Speed sign for distant signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PVSA-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "BE:ARV", name: "Distant speed limit light (part of main signal)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/ARV-empty.svg", form: "light", extra: { speed: { options: [] } } }], main: [{ id: "BE:GSA", name: "Grand Signal d'Arrêt (normal regime)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/GSA-R.svg", form: "light", extra: { states: { options: ["BE:RB", "BE:2J", "BE:VJV", "BE:VJH", "BE:V"] } } }], distant: [{ id: "BE:SAI", name: "Distant signal (normal regime)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/SAI-V.svg", form: "light", extra: { states: { options: ["BE:2J", "BE:VJV", "BE:VJH"] } } }], main_repeated: [{ id: "BE:RTL", name: "Répétiteur à Traits Lumineux", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/RTL-open.svg", form: "light" }], minor: [{ id: "BE:SAS", name: "Signal d'Arrêt Simplifié", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/SAS.svg", form: "light" }], shunting: [], stop: [{ id: "BE:PMQ", name: "Stop position", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PMQ-unknown.svg", form: "sign", extra: { carriages: { options: [] } } }, { id: "BE:PREQ", name: "End of platform", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PREQ.svg", form: "sign" }], route: [{ id: "BE:ECS", name: "Main signal indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/ECS-unknown.svg", form: "light", extra: { states: { options: ["BE:ECS-V", "BE:ECS-U", "BE:ECS-CAB"] } } }], fouling_point: [{ id: "BE:PRB", name: "Balise marker", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PRB.svg", form: "light" }], station_distant: [{ id: "BE:PAPA", name: "Station announcement", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PAPA.svg", form: "sign" }], electricity: [{ id: "BE:PBA", name: "Panto distant", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PBA.svg", form: "sign" }, { id: "BE:PBE", name: "Panto down", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PBE.svg", form: "sign" }, { id: "BE:PRL", name: "Panto up", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/PRL.svg", form: "sign" }, { id: "BE:FLC", name: "End of contact line", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/FLC.svg", form: "sign" }, { id: "BE:SLC", name: "Contact line segmentation", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/SLC.svg", form: "sign" }], train_protection: [{ id: "BE:ETCS-1LS", name: "Start ETCS Level 1 Limited Supervision zone", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/ETCS1LS.svg", form: "sign" }, { id: "BE:ETCS-1FS", name: "Start ETCS Level 1 Full Supervision zone", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/ETCS1.svg", form: "sign" }, { id: "BE:ETCS-2", name: "Start ETCS Level 2 Full Supervision zone", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/ETCS2.svg", form: "sign" }, { id: "BE:ETCS-end", name: "End ETCS zone", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/ETCS-end.svg", form: "sign" }] } }, "BE-SME": { networkName: "Belgium - BE-SME", networkImage: "File:Example.png", wikiPage: "", signals: { main: [], shunting: [{ id: "BE-SME:small_signal_two_colour", name: "(BME) Shunting signal, 2 color", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/be/bme/shunting_twocolour_ny.svg", form: "light" }] } } }, xy = { CA: { networkName: "Canada", networkImage: "File:Example.png", wikiPage: "", signals: { main: [{ id: "CA:main", name: "Main signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ca/main.svg", form: "light" }] } } }, Ty = { "CH-FDV": { networkName: "Switzerland - CH-FDV", networkImage: "File:Example.png", wikiPage: "", signals: { main: [{ id: "CH-FDV:l", name: "Hauptsignal System L", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-l-524.svg", form: "light", extra: { states: { options: ["CH-FDV:550", "CH-FDV:547", "CH-FDV:542", "CH-FDV:545", "CH-FDV:530"] } } }], combined: [{ id: "CH-FDV:512", name: "Mini-Hauptsignal System L", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-l-522.1.svg", form: "light" }, { id: "CH-FDV:l", name: "Hauptsignal System L (combined)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-l-525.svg", form: "light", extra: { states: { options: ["CH-FDV:548", "CH-FDV:551", "CH-FDV:546", "CH-FDV:543", "CH-FDV:539", "CH-FDV:537", "CH-FDV:535", "CH-FDV:531"] } } }, { id: "CH-FDV:n", name: "Hauptsignal System N", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-n-526.svg", form: "light", extra: { states: { options: [] } } }], distant: [{ id: "CH-FDV:l", name: "Vorsignal System L", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-l-528.svg", form: "light", extra: { states: { options: ["CH-FDV:538", "CH-FDV:536", "CH-FDV:529", "CH-FDV:534"] } } }, { id: "CH-FDV:n", name: "Vorsignal System N", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-n-533.svg", form: "light", extra: { states: { options: [] } } }], main_repeated: [{ id: "CH-FDV:559", name: "Fahrtstellungsmelder", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-559.svg", form: "light" }], minor: [{ id: "CH-FDV:232", name: "Minor signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-232.svg", form: "light" }], speed_limit_distant: [{ id: "CH-FDV:209", name: "Vorsignal verminderte Geschwindigkeit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-209-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "CH-FDV:213", name: "Vorsignal verminderte Geschwindigkeit für Neigetechnikzüge", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-213-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "CH-FDV:540", name: "Geschwindigkeits-Ankündigung", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-540-empty.svg", form: "light", extra: { speed: { options: [] } } }], speed_limit: [{ id: "CH-FDV:211", name: "Anfangssignal verminderte Geschwindigkeit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-211.svg", form: "sign" }, { id: "CH-FDV:212", name: "Endesignal verminderte Geschwindigkeit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-212.svg", form: "sign" }, { id: "CH-FDV:214", name: "Anfangssignal verminderte Geschwindigkeit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-214.svg", form: "sign" }, { id: "CH-FDV:215", name: "Endesignal verminderte Geschwindigkeit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-215.svg", form: "sign" }, { id: "CH-FDV:217", name: "Merktafel für Änderung der Höchstgeschwindigkeit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-217.svg", form: "sign" }, { id: "CH-FDV:549", name: "Geschwindigkeits-Ausführung", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-549-empty.svg", form: "light", extra: { speed: { options: [] } } }, { id: "CH-FDV:569", name: "Merktafel für Streckengeschwindigkeit beim Signalsystem N", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-569.svg", form: "sign" }], electricity: [{ id: "CH-FDV:703", name: "Vorsignal zum Senksignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-703.svg", form: "sign" }, { id: "CH-FDV:704", name: "Senksignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-704.svg", form: "light" }, { id: "CH-FDV:705", name: "Endsignal zum Senksignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-705.svg", form: "light" }, { id: "CH-FDV:707", name: "Aufhebungssignal zum Senksignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-707.svg", form: "sign" }, { id: "CH-FDV:708", name: "Vorsignal zum Ausschaltsignal (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-708.svg", form: "sign" }, { id: "CH-FDV:709", name: "Vorsignal zum Ausschaltsignal (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-709.svg", form: "light" }, { id: "CH-FDV:710", name: "Ausschaltsignal (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-710.svg", form: "sign" }, { id: "CH-FDV:711", name: "Ausschaltsignal (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-711.svg", form: "light" }, { id: "CH-FDV:712", name: "Einschaltsignal (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-712.svg", form: "sign" }, { id: "CH-FDV:713", name: "Einschaltsignal (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-713.svg", form: "light" }, { id: "CH-FDV:714", name: "Streckentrennung", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-714.svg", form: "light" }, { id: "CH-FDV:715", name: "Zonen-Schutzstreckensignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-715.svg", form: "sign" }, { id: "CH-FDV:716", name: "Zonensignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-716.svg", form: "light" }, { id: "CH-FDV:719", name: "Vorsignal zum Umschaltsignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-719.svg", form: "light" }, { id: "CH-FDV:717", name: "Umschaltsignal anfang (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-717.svg", form: "sign" }, { id: "CH-FDV:717.1", name: "Umschaltsignal anfang (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-717.1.svg", form: "light" }, { id: "CH-FDV:718", name: "Umschaltsignal ende (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-718.svg", form: "sign" }, { id: "CH-FDV:718.1", name: "Umschaltsignal ende (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-718.1.svg", form: "light" }], slope: [{ id: "CH-FDV:269", name: "Beginn oder Änderung der Steigung", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-269.svg", form: "sign" }, { id: "CH-FDV:270", name: "Beginn oder Änderung des Gefälles", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-270.svg", form: "sign" }, { id: "CH-FDV:271", name: "Beginn der Horizontalen", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/ch/fdv-271.svg", form: "sign" }] } } }, Uy = { "CZ-D1": { networkName: "Czechia - CZ-D1", networkImage: "File:Example.png", wikiPage: "", signals: { station_distant: [{ id: "CZ-D1:vlak_se_blizi_k_zastavce", name: "Vlak se blíží k zastávce", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/vlak_se_blizi_k_zastavce.svg", form: "sign" }, { id: "CZ-D1:hlavni_navestidlo_slouceno_s_predvesti", name: "Hlavní návěstidlo sloučeno s předvěstí", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/hlavni_navestidlo_slouceno_s_predvesti.svg", form: "sign" }, { id: "CZ-D1:stanoviste_posledniho_oddiloveho_navestidla", name: "Stanoviště posledního oddílového návěstidla", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/stanoviste_posledniho_oddiloveho_navestidla.svg", form: "sign" }], shunting: [{ id: "CZ-D1:oznacnik", name: "End of shunting marker", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/shunting-end.svg", form: "sign" }, { id: "CZ-D1:posun_zakazan", name: "Shunting stop", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/shunting-stop.svg", form: "sign" }, { id: "CZ-D1:hranice_obvodu_nakladiste_nebo_vlecky", name: "Hranice obvodu nákladiště nebo vlečky", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/hranice_obvodu_nakladiste_nebo_vlecky.svg", form: "sign" }, { id: "CZ-D1:navestidlo_vykolejky", name: "Návěstidlo výkolejky", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/navestidlo_vykolejky.svg", form: "semaphore" }], distant: [{ id: "CZ-D1:vystraha", name: "Distant (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/distant-sign-triangle.svg", form: "sign", extra: { shape: { options: ["circle"] } } }], speed_limit_distant: [{ id: "CZ-D1:predvestnik_ns", name: "Distant speed limit NS (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/speed-NS-distant-empty.svg", form: "sign", extra: { speed: { options: [] } } }], speed_limit: [{ id: "CZ-D1:rychlostnik_ns", name: "Speed limit NS (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/speed-NS-sign-empty.svg", form: "sign", extra: { speed: { options: [] } } }], main: [{ id: "CZ-D1:stuj", name: "Main stop (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/main-sign-stop-rectangle.svg", form: "sign", extra: { shape: { options: ["circle"] } } }], stop: [{ id: "CZ-D1:konec_nastupiste", name: "Konec nástupiště", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/konec_nastupiste.svg", form: "sign" }, { id: "CZ-D1:misto_zastaveni", name: "Místo zastavení", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/misto_zastaveni.svg", form: "sign", extra: { caption: { options: ["Os"] } } }, { id: "CZ-D1:lichobeznikova_tabulka", name: "Lichoběžníková tabulka", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/lichobeznikova_tabulka.svg", form: "sign" }], whistle: [{ id: "CZ-D1:piskejte", name: "Pískejte", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/piskejte.svg", form: "sign" }], resetting_switch: [{ id: "CZ-D1:navestidlo_vyhybky_se_samovratnym_prestavnikem", name: "Návěstidlo výhybky se samovratným přestavníkem", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/navestidlo_vyhybky_se_samovratnym_prestavnikem.svg", form: "light", extra: { states: { options: ["CZ-D1:jizda_nezajistena"] } } }], crossing: [] } }, CZ: { networkName: "Czechia", networkImage: "File:Example.png", wikiPage: "", signals: { shunting: [{ id: "CZ", name: "Shunting (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/shunting.svg", form: "light" }], distant: [], speed_limit_distant: [], speed_limit: [], main: [], combined: [{ id: "CZ", name: "Combined signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/cz/combined-R.svg", form: "light", extra: { states: { options: ["CZ-D1:vystraha", "CZ-D1:volno", "CZ-D1:stuj", "CZ-D1:posun_dovolen"] } } }] } } }, ky = /* @__PURE__ */ JSON.parse('{"DE-ESO":{"networkName":"Germany - DE-ESO","networkImage":"File:Example.png","wikiPage":"","signals":{"shunting":[{"id":"DE-ESO:ra10","name":"shunting stop sign Ra 10","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ra10.svg","form":"sign"},{"id":"DE-ESO:zs103","name":"main signal invalid for shunting trains Zs 103 (sign)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zs103.svg","form":"sign"},{"id":"DE-ESO:ra11b","name":"shunting signal Ra 11b (without Sh 1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ra11b.svg","form":"sign"}],"minor":[{"id":"DE-ESO:sh1","name":"minor light signals type Sh attached to main signals","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/sh1-light-dwarf.svg","form":"light"},{"id":"DE-ESO:sh0","name":"minor sign signal type Sh","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/sh0-sign.svg","form":"sign"},{"id":"DE-ESO:sh2","name":"Sh 2 buffer stop","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/sh2.svg","form":"sign"}],"train_protection":[{"id":"DE-ESO:ne14","name":"ETCS block marker Ne 14","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne14-left.svg","form":"sign"},{"id":"DE-ESO:lzb-bereichskennzeichen","name":"LZB section start","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lzb-section-start.svg","form":"sign"},{"id":"DE-ESO:blockkennzeichen","name":"Blockkennzeichen","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/blockkennzeichen.svg","form":"light"}],"main_repeated":[{"id":"DE-ESO:fahrtanzeiger","name":"Fahrtanzeiger","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/fahrtanzeiger.svg","form":"light"}],"stop_demand":[{"id":"DE-ESO:ne5","name":"stop demand post Ne 5 (light)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne5-light.svg","form":"light"}],"stop":[{"id":"DE-ESO:ne5","name":"stop demand post Ne 5 (sign)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne5-sign.svg","form":"sign"},{"id":"DE-ESO:zuglänge","name":"train length stopping marker","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zuglaenge.svg","form":"sign"}],"station_distant":[{"id":"DE-ESO:ne6","name":"station distant sign Ne 6","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne6.svg","form":"sign"}],"crossing":[],"crossing_distant":[{"id":"DE-ESO:so15","name":"crossing distant sign (warning board) So 15 (DV 301)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/so15.svg","form":"sign"},{"id":"DE-ESO:so14","name":"distant crossing So 14","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/so14.svg","form":"sign"},{"id":"DE-ESO:bü2","name":"crossing distant sign Bü 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bue2-ds.svg","form":"sign","extra":{"shortened":{"options":[]}}},{"id":"DE-ESO:bü3","name":"crossing distant sign Bü 3","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bue3.svg","form":"sign"}],"ring":[{"id":"DE-ESO:bü5","name":"ring sign Bü 5","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bue5.svg","form":"sign","extra":{"only_transit":{"options":[]}}}],"snowplow":[{"id":"DE-ESO:ne7","name":"Lift / Fold snowplow Ne 7 (sign)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne7-yellow-up.svg","form":"sign","extra":{"type":{"options":["down"]}}}],"resetting_switch":[{"id":"DE-ESO:ne13","name":"Ne13 resetting switch signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne13a.svg","form":"light"}],"resetting_switch_distant":[{"id":"DE-ESO:ne12","name":"Ne12 resetting switch distant signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne12.svg","form":"sign"}],"humping":[{"id":"DE-ESO:ra","name":"humping signal Ra 6-9","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ra7.svg","form":"light","extra":{"form":{"options":["semaphore"]}}}],"helper_engine":[{"id":"DE-ESO:ts","name":"helper engine signal Ts","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ts1.svg","form":"sign"}],"brake_test":[{"id":"DE-ESO:zp","name":"brake test signal Zp 6-8","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zp8.svg","form":"light"}],"departure":[{"id":"DE-ESO:zp","name":"Zp 9 (departure order) or Zp 10 (close doors)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zp9-db.svg","form":"light","extra":{"states":{"options":["DE-ESO:zp10"]}}}],"crossing_info":[{"id":"DE-ESO:bü-kennzeichentafel","name":"crossing info sign","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bue-crossing-info.svg","form":"sign"}],"crossing_hint":[{"id":"DE-ESO:bü-ankündetafel","name":"crossing anouncement sign","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bue-crossing-hint.svg","form":"sign"}],"short_route":[],"route_distant":[{"id":"DE-ESO:zs2v","name":"Richtungsvoranzeiger (Zs 2v)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zs2v-unknown.svg","form":"light","extra":{"states":{"options":[]}}}],"speed_limit_distant":[{"id":"DE-ESO:lf6","name":"German line speed signals (Lf 6)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf6-empty-sign-down.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"DE-ESO:lf1","name":"Langsamfahrscheibe","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf1-empty-sign-down.svg","form":"sign","extra":{"speed":{"options":[]}}}],"distant":[{"id":"DE-ESO:so106","name":"distant signal replacement by sign So 106","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/so106.svg","form":"sign"},{"id":"DE-ESO:hl","name":"distant light signals type Hl","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hl1-distant.svg","form":"light","extra":{"repeated":{"options":[]}}}],"main":[{"id":"DE-ESO:ne1","name":"main entry sign Ne 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne1.svg","form":"sign"},{"id":"DE-ESO:hl","name":"main light signals type Hl","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hl0-main.svg","form":"light","extra":{"states":{"options":["DE-ESO:hl2","DE-ESO:hl3b","DE-ESO:hl3a","DE-ESO:hl1"]}}},{"id":"DE-ESO:ks","name":"main signals type Ks","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ks-main.svg","form":"light"},{"id":"DE-ESO:sk","name":"main signals type Sk","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/sk1-light.svg","form":"light"}],"combined":[{"id":"DE-ESO:hl","name":"combined light signals type Hl","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hl0-combined.svg","form":"light","extra":{"states":{"options":["DE-ESO:hl11","DE-ESO:hl12b","DE-ESO:hl12a","DE-ESO:hl10"]}}},{"id":"DE-ESO:sv","name":"combined light signals type Sv","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/sv-sv0.svg","form":"light","extra":{"states":{"options":["DE-ESO:hp0"]}}},{"id":"DE-ESO:sk","name":"combined signals type Sk","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/sk0-light.svg","form":"light"},{"id":"DE-ESO:ks","name":"combined signals type Ks","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ks-combined.svg","form":"light","extra":{"shortened":{"options":[]}}}],"speed_limit":[{"id":"DE-ESO:lf7","name":"German line speed signals (Lf 7)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf7-empty-sign.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"DE-ESO:lf2","name":"Anfangsscheibe","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf2-sign.svg","form":"sign"},{"id":"DE-ESO:lf3","name":"Endscheibe","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf3-sign.svg","form":"sign"}],"route":[{"id":"DE-ESO:zs2","name":"Richtungsanzeiger (Zs 2)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zs2-unknown.svg","form":"light","extra":{"states":{"options":[]}}}],"electricity":[{"id":"DE-ESO:el1v","name":"power off advance sign El 1v","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el1v.svg","form":"sign"},{"id":"DE-ESO:el1","name":"power off sign El 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el1.svg","form":"sign"},{"id":"DE-ESO:el2","name":"power on sign El 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el2.svg","form":"sign"},{"id":"DE-ESO:el3","name":"pantograph down advance El 3","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el3.svg","form":"sign"},{"id":"DE-ESO:el4","name":"pantograph down El 4","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el4.svg","form":"sign"},{"id":"DE-ESO:el5","name":"pantograph up El 5","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el5.svg","form":"sign"},{"id":"DE-ESO:el6","name":"end of catenary sign El 6","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el6.svg","form":"light","extra":{"turn_direction":{"options":["left","through","right"]}}},{"id":"DE-ESO:el7","name":"power off shortly sign El 7 (S-Bahn Berlin)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el7.svg","form":"sign"},{"id":"DE-ESO:ice-schaltmerkhilfe","name":"ICE-Schaltmerkhilfe","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ice-schaltmerkhilfe.svg","form":"sign"}],"radio":[{"id":"DE-ESO:zugfunk-kanalhinweis","name":"radio channel notice","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zugfunk.svg","form":"sign"}]}},"DE-BOStrab":{"networkName":"Germany - DE-BOStrab","networkImage":"File:Example.png","wikiPage":"","signals":{"minor":[{"id":"DE-BOStrab:sh1","name":"tram minor stop sign Sh 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/sh1.svg","form":"sign"},{"id":"DE-BOStrab:sh2","name":"tram signal Sh 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/sh2.svg","form":"sign"}],"train_protection":[{"id":"DE-BOStrab:so1","name":"tram signal \\"start of train protection\\" So 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/so1.svg","form":"sign"},{"id":"DE-BOStrab:so2","name":"tram signal \\"end of train protection\\" So 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/so2.svg","form":"sign"}],"passing":[{"id":"DE-BOStrab:so5","name":"tram passing prohibited sign So 5","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/so5.svg","form":"sign"},{"id":"DE-BOStrab:so6","name":"tram passing prohibited end sign So 6","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/so6.svg","form":"sign"}],"stop":[{"id":"DE-BOStrab:sh7","name":"stop demand post BOStrab Sh 7 (sign)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/sh7.svg","form":"sign"}],"crossing":[{"id":"DE-BOStrab:bü","name":"tram crossing light Bü","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/bü.svg","form":"light"}],"crossing_distant":[{"id":"DE-BOStrab:bü2","name":"tram distant crossing light Bü 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/bü2.svg","form":"sign"}],"ring":[{"id":"DE-BOStrab:sh4","name":"tram läuten Sh 4","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/sh4.svg","form":"sign"}],"departure":[{"id":"DE-BOStrab:a","name":"tram departure signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/a1.svg","form":"light","extra":{"states":{"options":["DE-BOStrab:a1"]}}}],"speed_limit_distant":[],"distant":[{"id":"DE-BOStrab:v","name":"BOStrab distant signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/v0.svg","form":"light","extra":{"states":{"options":["DE-BOStrab:v2","DE-BOStrab:v1","DE-VAGN:vr2","DE-VAGN:vr1","DE-VAGN:vr0"]}}}],"main":[{"id":"DE-BOStrab:h","name":"BOStrab Hauptsignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/h0.svg","form":"light","extra":{"states":{"options":["DE-BOStrab:h2","DE-BOStrab:h1","DE-VAGN:hp2","DE-VAGN:hp1","DE-VAGN:hp0","off","DE-VAGN:hp3"]}}}],"combined":[{"id":"DE-BOStrab:h","name":"tram Hauptsignal mit Vorsignal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/h.svg","form":"light"}],"speed_limit":[{"id":"DE-BOStrab:g3","name":"Tram signal G3","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/g3.svg","form":"sign"},{"id":"DE-BOStrab:g4","name":"German tram speed limit signals as signs (G 4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/g4-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}],"switch":[{"id":"DE-BOStrab:st1","name":"tram signal contact St 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/st1.svg","form":"sign"},{"id":"DE-BOStrab:st2","name":"tram switch contact St 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/st2.svg","form":"sign"}],"electricity":[{"id":"DE-BOStrab:st7","name":"tram power off shortly signal (St 7)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/st7.svg","form":"sign"}]}},"DE-HHA":{"networkName":"Germany - DE-HHA","networkImage":"File:Example.png","wikiPage":"","signals":{"minor":[{"id":"DE-HHA:sh3","name":"Hamburger Hochbahn Sh 3","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hha/sh3.svg","form":"light"}],"speed_limit_distant":[{"id":"DE-HHA:l1","name":"Hamburger Hochbahn L1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hha/l1-empty-sign.svg","form":"sign","extra":{"speed":{"options":[]}}}],"distant":[{"id":"DE-HHA:v","name":"Hamburger Hochbahn distant signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hha/v1.svg","form":"light"}],"main":[{"id":"DE-HHA:h","name":"Hamburger Hochbahn main signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hha/h0.svg","form":"light","extra":{"states":{"options":["DE-HHA:h1"]}}}],"speed_limit":[{"id":"DE-HHA:l4","name":"Hamburger Hochbahn L4","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/hha/l4.svg","form":"sign"}]}},"DE-DB":{"networkName":"Germany - DE-DB","networkImage":"File:Example.png","wikiPage":"","signals":{"main_repeated":[{"id":"DE-DB:signalhaltmelder","name":"Signalhaltmelder Zugleitbetrieb","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zlb-haltmelder-light.svg","form":"light"}],"switch":[{"id":"DE-DB:beginn_ortsstellbereich","name":"local operated area","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ortsstellbereich.svg","form":"sign"}]}},"db":{"networkName":"Germany - db","networkImage":"File:Example.png","wikiPage":"","signals":{"whistle":[{"id":"DE-ESO:db:bü4","name":"Bü 4 Whistle Sign","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bue4-ds.svg","form":"sign","extra":{"only_transit":{"options":[]}}}],"ring":[{"id":"DE-ESO:db:lp4","name":"start ringing LP 4","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lp4.svg","form":"sign"},{"id":"DE-ESO:db:lp5","name":"stop ringing LP 5","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lp5.svg","form":"sign"}],"wrong_road":[],"speed_limit_distant":[{"id":"DE-ESO:db:lf4","name":"West German branch line speed signals (Lf 4 DS 301)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf4-ds301-empty-sign-down.svg","form":"sign","extra":{"speed":{"options":[]}}}],"distant":[{"id":"DE-ESO:db:ne2","name":"distant signal replacement by sign Ne 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne2.svg","form":"sign","extra":{"shortened":{"options":[]}}}],"speed_limit":[{"id":"DE-ESO:db:lf5","name":"West German line speed signal \\"Anfangstafel\\" (Lf 5)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf5-ds301-sign.svg","form":"sign"}]}},"dr":{"networkName":"Germany - dr","networkImage":"File:Example.png","wikiPage":"","signals":{"whistle":[{"id":"DE-ESO:dr:pf1","name":"whistle sign Pf 1 (DV 301)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/pf1-dv.svg","form":"sign","extra":{"only_transit":{"options":[]}}},{"id":"DE-ESO:dr:pf2","name":"whistle twice sign Pf 2 (DV 301)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/pf2-dv.svg","form":"sign"}],"ring":[{"id":"DE-ESO:dr:pl3","name":"start ringing Pl 3","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/pl3.svg","form":"sign"},{"id":"DE-ESO:dr:pl4","name":"stop ringing Pl 4","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/pl4.svg","form":"sign"}],"wrong_road":[{"id":"DE-ESO:dr:zs7","name":"wrong road signal Zs 7 (DR) (light)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/zs7-dr-light.svg","form":"light"}],"speed_limit_distant":[{"id":"DE-ESO:dr:lf4","name":"East German branch line speed signals (Lf 4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf4-dr-sign-down-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}],"speed_limit":[{"id":"DE-ESO:dr:lf4","name":"East German branch line speed signals (Lf 4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf4-dr-sign-down-speed-limit-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"DE-ESO:dr:lf5","name":"East German line speed signal \\"Eckentafel\\" (Lf 5)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf5-dv301-sign.svg","form":"sign"},{"id":"DE-ESO:dr:lf1/2","name":"Langsamfahrbeginnscheibe","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/lf1-2-empty-sign.svg","form":"sign","extra":{"speed":{"options":[]}}}],"distant":[{"id":"DE-ESO:dr:so3","name":"distant signal replacement at reduced distance by sign So 3 (DV 301)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/ne2-dv301-reduced-distance.svg","form":"sign"}]}},"DE-AVG":{"networkName":"Germany - DE-AVG","networkImage":"File:Example.png","wikiPage":"","signals":{"crossing":[{"id":"DE-AVG:bü200","name":"Karlsruhe AVG crossing signals","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/avg/bue201.svg","form":"light"}],"crossing_distant":[{"id":"DE-AVG:bü200v","name":"Karlsruhe AVG distant crossing signals","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/avg/bue201v.svg","form":"light"}],"stop_demand":[{"id":"DE-AVG:hw1","name":"Karlsruhe AVG Stop Demand","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/avg/hw1.svg","form":"light"}],"minor":[{"id":"DE-AVG:ra14","name":"Karlsruhe AVG end of EBO structure gauge Ra 14","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/avg/ra14.svg","form":"sign"}],"main":[],"electricity":[{"id":"DE-AVG:el1","name":"tram sign power off shortly El 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/avg/el1.svg","form":"sign"}]}},"DE-VBK":{"networkName":"Germany - DE-VBK","networkImage":"File:Example.png","wikiPage":"","signals":{"distant":[],"switch":[{"id":"DE-VBK:w","name":"Karlsruhe tram switch signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/vbk/w5.svg","form":"light","extra":{"states":{"options":["DE-VBK:w15","DE-VBK:w13","DE-VBK:w3","DE-VBK:w12","DE-VBK:w2","DE-VBK:w11","DE-VBK:w1","DE-VBK:w0"]}}},{"id":"DE-VBK:wv","name":"Karlsruhe tram switch distant signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/vbk/wv1.svg","form":"light"}]}},"DE-UESTRA":{"networkName":"Germany - DE-UESTRA","networkImage":"File:Example.png","wikiPage":"","signals":{"speed_limit":[{"id":"DE-UESTRA:g5","name":"Hannover tram speed limit G5","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/bostrab/g5-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}]}},"el1;DE-ESO":{"networkName":"Germany - el1;DE-ESO","networkImage":"File:Example.png","wikiPage":"","signals":{"electricity":[{"id":"DE-ESO:el1;DE-ESO:el2","name":"power off shortly","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/el1-el2.svg","form":"sign"}]}},"DE-VGF":{"networkName":"Germany - DE-VGF","networkImage":"File:Example.png","wikiPage":"","signals":{"electricity":[{"id":"DE-VGF:st9","name":"VGF st9","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/vgf/st9.svg","form":"sign"},{"id":"DE-VGF:st10","name":"VGF st10","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/vgf/st10.svg","form":"sign"}]}},"st9;DE-VGF":{"networkName":"Germany - st9;DE-VGF","networkImage":"File:Example.png","wikiPage":"","signals":{"electricity":[{"id":"DE-VGF:st9;DE-VGF:st10","name":"VGF st9 & st10","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/vgf/st9-st10.svg","form":"sign"}]}},"DE-RSAG":{"networkName":"Germany - DE-RSAG","networkImage":"File:Example.png","wikiPage":"","signals":{"minor":[{"id":"DE-RSAG:so11","name":"RSAG Vorfahrt gewähren (So 11)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/rsag/so11.svg","form":"sign"},{"id":"DE-RSAG:so12","name":"RSAG Vorfahrt (So 12)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/rsag/so12.svg","form":"sign"},{"id":"DE-RSAG:so13","name":"RSAG Halt bei Überflutung (So 13)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/de/rsag/so13.svg","form":"sign"}]}}}'), Fy = { "DK-SR": { networkName: "Denmark - DK-SR", networkImage: "File:Example.png", wikiPage: "", signals: { main: [{ id: "DK-SR:PU", name: "Perronudkørselssignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/dk/main-PU.svg", form: "light" }, { id: "DK-SR:SU", name: "Stationsbloksignal for Udkørsel", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/dk/main-SU.svg", form: "light" }] } } }, Dy = { "ES-RCF": { networkName: "Spain - ES-RCF", networkImage: "File:Example.png", wikiPage: "", signals: { slope: [{ id: "ES-RCF:FI11A", name: "flecha ascendente", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI11A.svg", form: "sign" }, { id: "ES-RCF:FI11B", name: "línea horizontal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI11B.svg", form: "sign" }, { id: "ES-RCF:FI11C", name: "flecha descendente", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI11C.svg", form: "sign" }, { id: "ES-RCF:FI12A", name: "rampa media ascendente entre 9 y 15 mm/m", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI12A.svg", form: "sign" }, { id: "ES-RCF:FI12B", name: "rampa media ascendente entre 16 y 25 mm/m", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI12B.svg", form: "sign" }, { id: "ES-RCF:FI12C", name: "rampa media descendente entre 9 y 15 mm/m", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI12C.svg", form: "sign" }, { id: "ES-RCF:FI12D", name: "rampa media descendente entre 16 y 25 mm/m", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI12D.svg", form: "sign" }], electricity: [{ id: "ES-RCF:FI14A", name: "end of catenary", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14A.svg", form: "sign" }, { id: "ES-RCF:FI14C", name: "power off shortly", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14C.svg", form: "sign" }, { id: "ES-RCF:FI14D", name: "power off shortly (full)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14D.svg", form: "sign" }, { id: "ES-RCF:FI14E", name: "pantograph down", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14E.svg", form: "sign" }, { id: "ES-RCF:FI14F", name: "pantograph up", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14F.svg", form: "sign" }, { id: "ES-RCF:FI14G", name: "pantograph down announcement", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14G.svg", form: "sign" }, { id: "ES-RCF:FI14H", name: "power off announcement", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14H.svg", form: "sign" }, { id: "ES-RCF:FI14I", name: "power off", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14I.svg", form: "sign" }, { id: "ES-RCF:FI14J", name: "power on", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/es/FI14J.svg", form: "sign" }] } } }, Py = /* @__PURE__ */ JSON.parse('{"FI":{"networkName":"Finland","networkImage":"File:Example.png","wikiPage":"","signals":{"main":[{"id":"FI:Po-v","name":"main light signals (old)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/po0-old.svg","form":"light","extra":{"states":{"options":["FI:Po2","FI:Po1"]}}},{"id":"FI:Yo","name":"Main signal type Yo","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/yo-main.svg","form":"light"}],"combined":[{"id":"FI:So","name":"combined block signal type So","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/eo1-po1-combined-block.svg","form":"light"},{"id":"FI:Yo","name":"Combined signal type Yo","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/yo-combined.svg","form":"light"}],"distant":[{"id":"FI:Eo","name":"distant light signals (new)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/eo0-new.svg","form":"light","extra":{"states":{"options":["FI:Eo2","FI:Eo1"]}}},{"id":"FI:Eo-v","name":"distant light signals (old)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/eo0-old.svg","form":"light","extra":{"states":{"options":["FI:Eo1"]}}},{"id":"FI:Yo","name":"Distant signal type Yo","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/yo-distant.svg","form":"light"},{"id":"FI:T-301A","name":"distant signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-301A.svg","form":"sign"}],"train_protection":[{"id":"FI:T-140","name":"JKV alkaa","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-140.svg","form":"sign"},{"id":"FI:T-141","name":"JKV päättyy","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-141.svg","form":"sign"},{"id":"FI:T-142","name":"JKV rakennusalue alkaa","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-142.svg","form":"sign"},{"id":"FI:T-143","name":"JKV rakennusalue päättyy","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-143.svg","form":"sign"},{"id":"FI:T-144","name":"Baliisiryhmämerkki (old)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-144.svg","form":"sign"},{"id":"FI:T-144A","name":"Baliisiryhmämerkki (new)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-144A.svg","form":"sign"}],"stop":[{"id":"FI:T-270A","name":"Stopping position (single)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-270.svg","form":"sign"},{"id":"FI:T-271A","name":"Stopping position (combination)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-270.svg","form":"sign"},{"id":"FI:T-272A","name":"Stopping position point","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-270.svg","form":"sign"},{"id":"FI:T-273A","name":"Train composition (single)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-273.svg","form":"sign"},{"id":"FI:T-274A","name":"Train composition (combination)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-273.svg","form":"sign"},{"id":"FI:T-275A","name":"Train composition point","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-273.svg","form":"sign"},{"id":"FI:T-259","name":"Stop","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-259.svg","form":"sign"},{"id":"FI:T-150","name":"Seismerkki (old)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-150.svg","form":"sign"},{"id":"FI:T-150B","name":"Seismerkki (new)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-150B.svg","form":"sign"},{"id":"FI:T-151","name":"Seislevy (old)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-151.svg","form":"sign"},{"id":"FI:T-151A","name":"Seislevy (new)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-151A.svg","form":"sign"},{"id":"FI:T-152","name":"Liikennöinnin raja","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-152.svg","form":"sign"},{"id":"FI:T-310","name":"Veturin ajokieltomerkki","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-310.svg","form":"sign"}],"main_repeated":[{"id":"FI:Ko","name":"Main repeated light","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/ko1.svg","form":"light"}],"minor":[{"id":"FI:Lo","name":"minor light signals type Lo at moveable bridges","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/lo0.svg","form":"light"}],"shunting":[{"id":"FI:Ro","name":"shunting light signals type Ro (new)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/ro0-new.svg","form":"light"},{"id":"FI:Yo","name":"Shunting signal type Yo","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/yo-shunting.svg","form":"light"}],"crossing":[{"id":"FI:To","name":"crossing signal To","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/to1.svg","form":"light"}],"speed_limit":[{"id":"FI:T-101","name":"Nopeusmerkki, speed signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-101-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"FI:T-110","name":"Merkitty nopeus päättyy -merkki, end of speed limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-110.svg","form":"sign"},{"id":"FI:T-115","name":"JKV-nopeus, JKV speed limit","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-115.svg","form":"sign"}],"speed_limit_distant":[{"id":"FI:T-102","name":"Nopeusmerkin etumerkki, distant signal","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-102-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}],"electricity":[{"id":"FI:T-120","name":"Erotusjakson etumerkki","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-120.svg","form":"sign"},{"id":"FI:T-122","name":"Erotusjakso alkaa","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-122.svg","form":"sign"},{"id":"FI:T-123","name":"Erotusjakso päättyy","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-123.svg","form":"sign"},{"id":"FI:T-121","name":"Ajojohdin päättyy","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-121.svg","form":"sign"},{"id":"FI:T-124A","name":"Laske virroitin","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-124A.svg","form":"sign"},{"id":"FI:T-133","name":"Laske virroitin -etumerkki","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-133.svg","form":"sign"},{"id":"FI:T-125","name":"Nosta virroitin","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-125.svg","form":"sign"}],"station_distant":[{"id":"FI:T-164","name":"Liikennepaikan raja -merkki","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-164.svg","form":"sign"},{"id":"FI:T-165","name":"Liikennepaikka päättyy","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-165.svg","form":"sign"},{"id":"FI:T-166","name":"Matkustajalaiturin ennakkomerkki","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-166.svg","form":"sign"}],"humping":[{"id":"FI:Jo","name":"Järjestelyopastin","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/jo4.svg","form":"light"}],"snowplow":[{"id":"FI:T-170A","name":"Raise snowplow blades (point)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-171.svg","form":"sign"},{"id":"FI:T-170B","name":"Raise snowplow blades (area)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-171A.svg","form":"sign"},{"id":"FI:T-170-v","name":"Raise snowplow blades (old)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-170-v.svg","form":"sign"},{"id":"FI:T-171B","name":"Lower snowplow blades","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-171B.svg","form":"sign"},{"id":"FI:T-171-v","name":"Lower snowplow blades (old)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fi/t-171-v.svg","form":"sign"}]}}}'), Ly = /* @__PURE__ */ JSON.parse('{"FR":{"networkName":"France","networkImage":"File:Example.png","wikiPage":"","signals":{"main":[],"distant":[{"id":"FR:A","name":"Avertissement","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/D-A.svg","form":"light"},{"id":"FR:D","name":"Disque","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/D-D.svg","form":"light"}],"speed_limit":[{"id":"FR:Z","name":"Pancarte Z","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/Tableau_Z.svg","form":"sign"},{"id":"FR:R","name":"Tableau R","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/Tableau_R.svg","form":"sign"}],"speed_limit_distant":[{"id":"FR:P","name":"Tableau P","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/Tableau_P.svg","form":"sign"},{"id":"FR:TIV-D_B","name":"TIV-D (B)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/TIV-type-B-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"FR:TIV-D_C","name":"TIV-D (C)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/TIV-type-C-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}],"electricity":[{"id":"FR:SECT","name":"Neutral Zone Announcement","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/SECT.svg","form":"light"},{"id":"FR:CC_EXE","name":"Start of Neutral Zone","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/CC_EXE.svg","form":"light"},{"id":"FR:CC_FIN","name":"End of Neutral Zone","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/CC_FIN.svg","form":"light"},{"id":"FR:REV","name":"End of Neutral Zone (reversible trains)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/REV.svg","form":"sign"},{"id":"FR:BP_DIS","name":"Pantograph Down Announcement","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/BP_DIS.svg","form":"light"},{"id":"FR:BP_EXE","name":"Start of Pantograph Down","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/BP_EXE.svg","form":"sign"},{"id":"FR:BP_FIN","name":"End of Pantograph Down","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/BP_FIN.svg","form":"sign"},{"id":"FR:BIMODE","name":"Dual-Mode Traffic","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/BIMODE.svg","form":"sign"},{"id":"FR:FIN_CAT","name":"End of Catenaries","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/FIN_CAT.svg","form":"sign"},{"id":"FR:JALON_ARRET","name":"Stop Markers","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/JALON_ARRET.svg","form":"sign"},{"id":"FR:GIVRE","name":"Frost Board","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/GIVRE.svg","form":"light"}],"train_protection":[{"id":"FR:CAB_E","name":"Cab signalling announcement","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/CAB_E.svg","form":"sign"},{"id":"FR:CAB_R","name":"Cab signalling start","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/CAB_R.svg","form":"sign"},{"id":"FR:CAB_S","name":"Cab signalling end","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/CAB_S.svg","form":"sign"},{"id":"FR:REP_TVM","name":"TVM block marker","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/REP_TVM-left.svg","form":"sign"},{"id":"FR:REP_ETCS","name":"ETCS stop marker","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/REP_ETCS-left.svg","form":"sign"}],"shunting":[{"id":"FR:JAL_MAN","name":"Shunting marker","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/JAL_MAN-right.svg","form":"sign"},{"id":"FR:G","name":"Shunting to garage","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/G.svg","form":"light"},{"id":"FR:D","name":"Shunting to depot","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/D.svg","form":"light"}],"route_distant":[{"id":"FR:TIDD","name":"Distant route indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/TIDD-off.svg","form":"light","extra":{"states":{"options":["right","left"]}}},{"id":"FR:BIF","name":"Branch line","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/BIF.svg","form":"sign"},{"id":"FR:Y","name":"Switch junction","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/Y.svg","form":"sign"}],"route":[{"id":"FR:ID","name":"Route indicator","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ID3.svg","form":"light"}],"wrong_road":[{"id":"FR:TECS","name":"Wrong route (entry)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/TECS.svg","form":"light"},{"id":"FR:TSCS","name":"Wrong route (exit)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/TSCS.svg","form":"light"}],"station_distant":[{"id":"FR:GARE","name":"Distant station","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/GARE.svg","form":"sign"},{"id":"FR:APPROCHE_ETS_A","name":"Distant site","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/APPROCHE_ETS_A.svg","form":"sign"},{"id":"FR:APPROCHE_ETS","name":"Distant site","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/APPROCHE_ETS.svg","form":"sign"},{"id":"FR:LIMITE_ETS","name":"Station boundary","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/LIMITE_ETS.svg","form":"sign"}],"stop_distant":[{"id":"FR:ARRET_A","name":"Stop ARRET announcement","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_A.svg","form":"sign"},{"id":"FR:STOP_A","name":"STOP announcement","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/STOP_A.svg","form":"sign"}],"stop":[{"id":"FR:ARRET","name":"Stop ARRET","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET.svg","form":"sign"},{"id":"FR:ATC","name":"Stop ATC","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ATC.svg","form":"sign"},{"id":"FR:STOP","name":"STOP","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/STOP.svg","form":"sign"},{"id":"FR:JAL_ARRET","name":"STOP","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/JAL_ARRET.svg","form":"sign"},{"id":"FR:ARRET_TT","name":"Stop position for passenger trains","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_TT.svg","form":"sign"},{"id":"FR:ARRET_TTL","name":"Stop position front of train","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_TTL.svg","form":"sign"},{"id":"FR:ARRET_TT_EAS","name":"Stop position EAS","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_TT_EAS.svg","form":"sign"},{"id":"FR:ARRET_V","name":"Stop position for carriages","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_V.svg","form":"sign"},{"id":"FR:ARRET_TGV1","name":"Stop for TGV 1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_TGV1.svg","form":"sign"},{"id":"FR:ARRET_TGV2","name":"Stop for TGV 2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_TGV2.svg","form":"sign"},{"id":"FR:ARRET_TGV1-2","name":"Stop for TGV 1-2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/ARRET_TGV1-2.svg","form":"sign"}]}},"REP_ETCS;FR":{"networkName":"France - REP_ETCS;FR","networkImage":"File:Example.png","wikiPage":"","signals":{"train_protection":[{"id":"FR:REP_ETCS;FR:REP_TVM","name":"TVM and ETCS block marker","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/fr/REP_TVM_ETCS-left.svg","form":"sign"}]}}}'), By = { "GB-NR": { networkName: "United Kingdom - GB-NR", networkImage: "File:Example.png", wikiPage: "", signals: { whistle: [{ id: "GB-NR:stencil", name: "Whistle stencil", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/whistle-stencil.svg", form: "sign" }, { id: "GB-NR:board", name: "Whistle board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/whistle-board.svg", form: "sign" }, { id: "GB-NR:continuous", name: "Whistle continuous", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/whistle-continuous.svg", form: "sign" }], train_protection: [{ id: "GB-NR:warning", name: "Cab Signalling Start Warning Board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/cab-entry-warning.svg", form: "sign" }, { id: "GB-NR:entry", name: "Cab Signalling Start Board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/cab-entry.svg", form: "sign" }, { id: "GB-NR:exit", name: "Cab Signalling End Board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/cab-exit.svg", form: "sign" }, { id: "GB-NR:ETCS", name: "ETCS Block Marker", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/ETCS-right.svg", form: "sign" }, { id: "GB-NR:TVM-CBTC", name: "TVM/CBTC Block Marker", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/TVM-CBTC-right.svg", form: "sign" }, { id: "GB-NR:shunt-entry", name: "Cab Signalling Shunt Entry Board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/cab-shunt-right.svg", form: "sign" }], main: [{ id: "GB-NR:SPAD", name: "SPAD", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/SPAD.svg", form: "light" }], distant: [], main_repeated: [{ id: "GB-NR:banner", name: "Repeated (banner)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/repeated-banner.svg", form: "light" }, { id: "GB-NR:off", name: "Repeated off", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/repeated-off.svg", form: "light" }], route_distant: [{ id: "GB-NR:PRI", name: "Preliminary Route Indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/preliminary-route-indicator.svg", form: "light" }], shunting: [{ id: "GB-NR:shunting", name: "Shunting", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/shunting.svg", form: "light" }, { id: "GB-NR:limit", name: "Shunting limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/limit-shunt.svg", form: "light" }], route: [], departure: [{ id: "GB-NR:RA", name: "Departure", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/departure-RA.svg", form: "light" }], stop: [{ id: "GB-NR:stop", name: "Stop board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/stop-board.svg", form: "sign" }, { id: "GB-NR:engineer-stop", name: "Engineering Stop board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/stop-octagon.svg", form: "sign" }], fouling_point: [{ id: "GB-NR:rear_clear", name: "Rear Clear marker", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/rear-clear.svg", form: "sign" }], crossing: [{ id: "GB-NR:crossing", name: "Crossing", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/crossing.svg", form: "light" }], speed_limit: [{ id: "GB-NR:speed_limit", name: "Permissible speed indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/speed-limit-empty.svg", form: "sign", extra: { speed: { options: [] } } }], slope: [{ id: "GB-NR:gradient", name: "Gradient post", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/gb/gradient-arms.svg", form: "sign", extra: { shape: { options: ["board"] } } }] } } }, zy = { IT: { networkName: "Italy", networkImage: "File:Example.png", wikiPage: "", signals: { route: [{ id: "IT:ROUTE", name: "Route", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/route-unknown.svg", form: "light", extra: { states: { options: [] } } }], departure: [], main: [{ id: "IT:1V", name: "1ª categoria (1 light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/main-1v.svg", form: "light", extra: { shape: { options: ["square"] } } }, { id: "IT:2V", name: "1ª categoria (2 lights)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/main-2v.svg", form: "light", extra: { shape: { options: ["square"] } } }, { id: "IT:3V", name: "1ª categoria (3 lights)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/main-3v.svg", form: "light", extra: { shape: { options: ["square"] } } }], combined: [{ id: "IT:1V", name: "Segnale accoppiato (1 light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/combined-1v.svg", form: "light", extra: { shape: { options: ["square"] } } }, { id: "IT:2V", name: "Segnale accoppiato (2 lights)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/combined-2v.svg", form: "light", extra: { shape: { options: ["square"] } } }, { id: "IT:3V", name: "Segnale accoppiato (3 lights)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/combined-3v.svg", form: "light", extra: { shape: { options: ["square"] } } }], distant: [{ id: "IT:1V", name: "Avviso (1 light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/avviso-1v.svg", form: "light", extra: { shape: { options: ["square"] } } }, { id: "IT:2V", name: "Avviso (2 lights)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/avviso-2v.svg", form: "light", extra: { shape: { options: ["square"] } } }], speed_limit: [{ id: "IT:TRI", name: "Triangle speed limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/tri-unknown.svg", form: "sign", extra: { speed: { options: ["30", "60"] } } }, { id: "IT:RAP", name: "Rappel", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/rappel-30.svg", form: "light", extra: { speed: { options: ["100", "60"] } } }, { id: "IT:1R", name: "Speed limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/speed-unknown.svg", form: "sign", extra: { speed: { options: [] } } }], speed_limit_distant: [], stop: [{ id: "IT:HALT", name: "Halt", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/stop.svg", form: "sign" }], stop_distant: [], shunting: [{ id: "IT:MAR", name: "Marmotte", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/marmotte.svg", form: "light" }, { id: "IT:MAN", name: "Segnali alti di manovra", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/MAN.svg", form: "light" }, { id: "IT:PLIM", name: "Picchetto limite di manovra", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/PLIM.svg", form: "sign" }], crossing_distant: [{ id: "IT:D_CT", name: "Distant crossing", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/crossing-distant.svg", form: "light" }], crossing: [{ id: "IT:CT", name: "Level crossing (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/crossing-light.svg", form: "light" }, { id: "IT:PL", name: "Level crossing (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/it/crossing-sign.svg", form: "sign" }] } } }, Vy = { JP: { networkName: "Japan", networkImage: "File:Example.png", wikiPage: "", signals: { main: [{ id: "JP:出発信号機", name: "Departure signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/jp/main-departure.svg", form: "light" }, { id: "JP:閉塞信号機", name: "Block signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/jp/main-block.svg", form: "light" }, { id: "JP:場内信号機", name: "Station signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/jp/main-station.svg", form: "light" }], shunting: [{ id: "JP:入換信号機", name: "Shunting signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/jp/shunting.svg", form: "light" }], distant: [{ id: "JP:遠方信号機", name: "Distant signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/jp/distant.svg", form: "light" }], main_repeated: [{ id: "JP:中継信号機", name: "Repeated signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/jp/main_repeated.svg", form: "light" }] } } }, Qy = { "LU-CFL": { networkName: "Luxembourg - LU-CFL", networkImage: "File:Example.png", wikiPage: "", signals: { electricity: [{ id: "LU-CFL:ESFA", name: "ESFA", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/lu/ESFA.svg", form: "sign" }, { id: "LU-CFL:ESFAp/TA", name: "ESFAp/TA", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/lu/ESFAp_TA.svg", form: "sign" }, { id: "LU-CFL:ESFAp/TE", name: "ESFAp/TE", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/lu/ESFAp_TE.svg", form: "sign" }, { id: "LU-CFL:ESFAp/TR", name: "ESFAp/TR", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/lu/ESFAp_TR.svg", form: "sign" }, { id: "LU-CFL:ESFCC/A", name: "ESFCC/A", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/lu/ESFCC_A.svg", form: "sign" }, { id: "LU-CFL:ESFCC/E", name: "ESFCC/E", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/lu/ESFCC_E.svg", form: "sign" }, { id: "LU-CFL:ESFCC/F", name: "ESFCC/F", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/lu/ESFCC_F.svg", form: "sign" }] } } }, Hy = { NL: { networkName: "Netherlands", networkImage: "File:Example.png", wikiPage: "", signals: { main: [], main_repeated: [{ id: "NL", name: "main repeated light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/main_repeated_light.svg", form: "light" }], distant: [{ id: "NL", name: "distant light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/distant_light.svg", form: "light" }], shunting: [{ id: "NL:227", name: "block marker light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/227a.svg", form: "light" }], train_protection: [{ id: "NL:317", name: "drive on sight", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/317.svg", form: "sign" }, { id: "NL:336", name: "ETCS cab signalling (start)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/336.svg", form: "sign" }, { id: "NL:337", name: "ETCS cab signalling (end)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/337.svg", form: "sign" }, { id: "NL:328a", name: "ATB distant", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/328a.svg", form: "sign" }, { id: "NL:328", name: "ATB start", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/328.svg", form: "sign" }, { id: "NL:328b", name: "ATB code", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/328b.svg", form: "sign" }, { id: "NL:329", name: "ATB end", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/329.svg", form: "sign" }, { id: "NL:330", name: "ATB codewissel", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/330.svg", form: "light" }, { id: "NL:333", name: "Einde beveiligd gebied", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/333.svg", form: "sign" }], minor: [{ id: "NL:middenvoetbrugsein", name: "middenvoetbrugsein", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/215b.svg", form: "light" }], departure: [{ id: "NL", name: "departure signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/departure.svg", form: "light" }], humping: [{ id: "NL:270", name: 'Humping ("heuvelen")', image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/270a.svg", form: "light" }], stop: [{ id: "NL:303", name: "stopplaatssein", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/303.svg", form: "light" }, { id: "NL:304", name: "treinlengtebord", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/304-empty.svg", form: "sign", extra: { carriages: { options: [] } } }], crossing_distant: [{ id: "NL:318a", name: "distant crossing", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/318a.svg", form: "sign" }], station_distant: [{ id: "NL:305", name: "station", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/305.svg", form: "sign" }], speed_limit: [{ id: "NL:314", name: "speed limit (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/314-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "NL:316", name: "speed limit increase (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/316-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "NL:281", name: "tunnel entry speed limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/281-empty.svg", form: "sign", extra: { speed: { options: [] } } }], speed_limit_distant: [{ id: "NL:313", name: "distant speed limit distant (sign)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/313-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "NL", name: "distant speed limit (light)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/speed_limit_distant_light-empty.svg", form: "light", extra: { speed: { options: [] } } }, { id: "NL:286", name: "tunnel distant speed limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/286-empty.svg", form: "sign", extra: { speed: { options: [] } } }], electricity: [{ id: "NL:306", name: "power off", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/306a.svg", form: "sign" }, { id: "NL:307", name: "power on", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/307a.svg", form: "sign" }, { id: "NL:308", name: "announcement pantograph down", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/308a.svg", form: "sign" }, { id: "NL:309", name: "pantograph down", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/309a.svg", form: "sign" }, { id: "NL:310", name: "pantograph up", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/310a.svg", form: "sign" }, { id: "NL:311", name: "end of catenary", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/311.svg", form: "sign", extra: { turn_direction: { options: ["right", "left"] } } }, { id: "NL:320", name: "voltage change", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nl/320-unknown.svg", form: "sign", extra: { voltage: { options: ["1500", "25000"] } } }] } } }, jy = { NZ: { networkName: "New Zealand", networkImage: "File:Example.png", wikiPage: "", signals: { crossing_hint: [{ id: "NZ:saltire", name: "Level Crossing Ahead", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/saltire.svg", form: "sign" }], crossing_info: [{ id: "NZ:alarms_start_here", name: "Alarms Start Here", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/alarms_start_here.svg", form: "sign" }], crossing: [{ id: "NZ:XI", name: "Crossing Indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/XI.svg", form: "light" }], stop: [{ id: "NZ:all_trains_stop", name: "All Trains Stop", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/all_trains_stop.svg", form: "sign" }, { id: "NZ:stop_block", name: "Stop Block Entry", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/stop_block_entry.svg", form: "sign" }, { id: "NZ:stop_station", name: "Stop Station Entry", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/stop_station_entry.svg", form: "sign" }, { id: "NZ:stop_plate", name: "Stop Plate", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/stop_plate.svg", form: "sign" }, { id: "NZ:stop_disk", name: "Stop Disk", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/stop_disk.svg", form: "sign" }, { id: "NZ:emu_stop", name: "EMU Stop Position", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/stop_position/6.svg", form: "sign", extra: { states: { options: ["2"] } } }], switch: [{ id: "NZ:AI", name: "Arrow Indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/AI_unknown.svg", form: "light" }], main_repeated: [{ id: "NZ:banner_indicator3D", name: "Single Banner Indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/banner_indicator3D.svg", form: "light" }, { id: "NZ:banner_indicator33", name: "Double Banner Indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/banner_indicator33.svg", form: "light" }], route: [{ id: "NZ:route_indicator", name: "Route Indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/route_indicator.svg", form: "light" }, { id: "NZ:L", name: "Loop Light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/L.svg", form: "light" }, { id: "NZ:E", name: "Electrified Route Light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/E.svg", form: "light" }], train_protection: [{ id: "NZ:A", name: "A-Light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/A.svg", form: "light" }, { id: "NZ:AS_begins", name: "Automatic Signaling Begins", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/begin_AS.svg", form: "sign" }, { id: "NZ:AS_ends", name: "Automatic Signaling Ends", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/end_AS.svg", form: "sign" }, { id: "NZ:CTC_begins", name: "Centralized Traffic Control Begins", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/begin_CTC.svg", form: "sign" }, { id: "NZ:CTC_ends", name: "Centralized Traffic Control Ends", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/end_CTC.svg", form: "sign" }, { id: "NZ:ETCS_begins", name: "Entry to European Train Control System", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/begin_ETCS.svg", form: "sign" }, { id: "NZ:ETCS_ends", name: "Exit from European Train Control System", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/end_ETCS.svg", form: "sign" }, { id: "NZ:TWC_begins", name: "Track Warrant Control Begins", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/begin_TWC.svg", form: "sign" }, { id: "NZ:TWC_ends", name: "Track Warrant Control Ends", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/end_TWC.svg", form: "sign" }], electricity: [{ id: "NZ:electric_limit", name: "Electric Services Limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/electric_limit.svg", form: "sign" }], radio: [{ id: "NZ:channel_area", name: "Entering Radio Channel Area", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/channel_area.svg", form: "sign" }], minor: [{ id: "NZ:R", name: "Restricted-speed Light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/R.svg", form: "light" }, { id: "NZ:low_speed", name: "Low-speed Light", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/low_speed.svg", form: "light" }, { id: "NZ:TWC_siding", name: "TWC Siding", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/TWC_siding.svg", form: "sign" }, { id: "NZ:TWC_intermediate", name: "TWC Intermediate Board", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/TWC_intermediate.svg", form: "sign" }], station_distant: [{ id: "NZ:TWC_signalled", name: "TWC (signalled) Station Warning", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/TWC_signalled.svg", form: "sign" }, { id: "NZ:TWC_unsignalled", name: "TWC (unsignalled) Station Warning", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/TWC_unsignalled.svg", form: "sign" }], whistle: [{ id: "NZ:whistle", name: "Whistle", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/whistle.svg", form: "sign" }], shunting: [{ id: "NZ:shunting_limit", name: "Shunting Limit", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/shunting_limit.svg", form: "sign" }], main: [], distant: [], speed_limit: [{ id: "NZ:speed_indicator", name: "Dynamic Speed Indicator", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/nz/speed_indicator.svg", form: "light" }] } } }, Wy = /* @__PURE__ */ JSON.parse('{"PL-PKP":{"networkName":"Poland - PL-PKP","networkImage":"File:Example.png","wikiPage":"","signals":{"distant":[{"id":"PL-PKP:w1","name":"Wskaźnik usytuowania (W1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w1.svg","form":"sign"},{"id":"PL-PKP:os","name":"Tarcza ostrzegawcza świetlna (To)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/os1-1.svg","form":"light","extra":{"states":{"options":[]}}},{"id":"PL-PKP:on","name":"Tarcza ostrzegawcze kształtowe (To, nieruchoma, dwustawna i trzystawna)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/on.svg","form":"light"}],"main_repeated":[{"id":"PL-PKP:sp","name":"Sygnalizator powtarzający (Sp)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/sp1-2.svg","form":"light","extra":{"states":{"options":["PL-PKP:sp2","PL-PKP:sp3"]}}}],"train_protection":[{"id":"PL-PKP:wetcs1","name":"Wskaźniki ETCS L1 Limited Supervision","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/wetcs1.svg","form":"sign"},{"id":"PL-PKP:wetcs4","name":"Wskaźniki ETCS L1","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/wetcs4.svg","form":"sign"},{"id":"PL-PKP:wetcs7","name":"Wskaźniki ETCS L2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/wetcs7.svg","form":"sign"},{"id":"PL-PKP:wetcs10","name":"Wskaźnik zatrzymania ETCS (WETCS10)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/wetcs10-left.svg","form":"sign"},{"id":"PL-PKP:wetcs11","name":"Wskaźnik lokalizacji ETCS (WETCS11)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/wetcs11-left.svg","form":"sign"}],"minor":[{"id":"PL-PKP:sz","name":"Sygnalizator sygnału zastępczego (Sz)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/sz-1.svg","form":"light"},{"id":"PL-PKP:d1","name":"Tarcza zatrzymania (D1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/d1.svg","form":"sign"},{"id":"PL-PKP:w3","name":"Wskaźnik unieważnienia (W3)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w3.svg","form":"light"}],"minor_distant":[{"id":"PL-PKP:do","name":"Tarcza ostrzegawcza nieruchoma (DO)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/do.svg","form":"sign"}],"crossing":[{"id":"PL-PKP:osp","name":"Tarcze ostrzegawcze przejazdowe (ToP)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/osp.svg","form":"light"}],"shunting":[{"id":"PL-PKP:m","name":"Tarcza manewrowa kształtowa (Tm)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/m-sign.svg","form":"light","extra":{"form":{"options":["semaphore"]}}},{"id":"PL-PKP:ms","name":"Tarcza manewrowa świetlna (Tm)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/ms-1.svg","form":"light","extra":{"states":{"options":["PL-PKP:ms2"]}}},{"id":"PL-PKP:w5","name":"Wskaźnik przetaczania (W5)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w5.svg","form":"sign"}],"humping":[{"id":"PL-PKP:rt","name":"Tarcze rozrządowe (Tr, kształtowa i świetlna)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/rt3-semaphore.svg","form":"light","extra":{"form":{"options":["light"]}}}],"passing":[{"id":"PL-PKP:w22","name":"Wskaźnik jazdy pociągu towarowego (W22)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w22.svg","form":"sign"}],"station_distant":[{"id":"PL-PKP:w18","name":"Wskaźnik SBL (W18)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w18.svg","form":"sign"},{"id":"PL-PKP:w16","name":"Wskaźnik przystanku osobowego (W16)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w16.svg","form":"sign"}],"route":[{"id":"PL-PKP:w2","name":"Wskaźniki kierunku jazdy (W2, W26a,  W26b)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w2-{K}.svg","form":"light","extra":{"states":{"options":[]}}}],"stop":[{"id":"PL-PKP:w4","name":"Wskaźnik zatrzymania (W4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w4.svg","form":"sign"},{"id":"PL-PKP:w32","name":"Wskaźnik czoła pociągu (W32)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w32-empty.svg","form":"sign","extra":{"caption":{"options":[]}}}],"whistle":[{"id":"PL-PKP:w6","name":"Wskaźniki ostrzegania (W6, W6a, W6b i W7)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w6.svg","form":"sign"}],"helper_engine":[{"id":"PL-PKP:w10a","name":"Wskaźniki odcinka z popychaniem (W10a i W10b)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w10a.svg","form":"sign"}],"crossing_distant":[{"id":"PL-PKP:w11p","name":"Wskaźnik przejazdowy (W11p)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w11p-1.svg","form":"sign"}],"steam_locomotive":[{"id":"PL-PKP:w12","name":"Wskaźnik parowozowy (W12)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w12.svg","form":"sign"}],"snowplow":[{"id":"PL-PKP:w13","name":"Wskaźnik torowy (W13)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w13.svg","form":"sign"}],"fouling_point":[{"id":"PL-PKP:w17","name":"Wskaźnik ukresu (W17)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w17.svg","form":"light"}],"short_route":[{"id":"PL-PKP:w19","name":"Wskaźniki braku drogi hamowania (W19 i W20)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w19.svg","form":"light"}],"wrong_road":[{"id":"PL-PKP:w24","name":"Wskaźnik kierunku przeciwnego (W24)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w24.svg","form":"light"}],"preheating":[{"id":"PL-PKP:w25","name":"Wskaźnik ogrzewania (W25)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w25.svg","form":"light"}],"radio":[{"id":"PL-PKP:w28","name":"Wskaźnik kanału radiowego (W28)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w28-{R1}.svg","form":"sign","extra":{"frequency":{"options":[]}}},{"id":"PL-PKP:w29","name":"Wskaźnik nawiązania łączności (W29)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w29.svg","form":"sign"},{"id":"PL-PKP:w33","name":"Wskaźnik początku obowiązywania systemu ERTMS/GSM-R (W33)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w33.svg","form":"sign"},{"id":"PL-PKP:w34","name":"Wskaźnik końca obowiązywania systemu ERTMS/GSM-R (W34)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w34.svg","form":"sign","extra":{"frequency":{"options":[]}}}],"speed_limit_distant":[{"id":"PL-PKP:d6","name":"Tarcza zwolnić bieg (D6)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/d6-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"PL-PKP:w8","name":"Wskaźnik ograniczenia prędkości (W8)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w8-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}],"speed_limit":[{"id":"PL-PKP:w21","name":"Wskaźniki podwyższenia prędkości (W21)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w21-empty.svg","form":"light","extra":{"speed":{"options":[]}}},{"id":"PL-PKP:w21wg","name":"Wskaźnik W21wg","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w21wg-empty.svg","form":"light","extra":{"speed":{"options":[]}}},{"id":"PL-PKP:w27a","name":"Wskaźnik zmiany prędkości (W27a)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w27a-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"PL-PKP:w30","name":"Wskaźnik ważenia składu (W30)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/w30-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}],"main":[{"id":"PL-PKP:sr","name":"Semafor kształtowy","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/sr1.svg","form":"semaphore","extra":{"states":{"options":["PL-PKP:sr3","PL-PKP:sr1","PL-PKP:sr2"]}}}],"combined":[],"electricity":[{"id":"PL-PKP:we1a","name":"Wskaźniki uprzedzające o opuszczeniu pantografu (We1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/we1a.svg","form":"sign","extra":{"turn_direction":{"options":["right","left"]}}},{"id":"PL-PKP:we2a","name":"Wskaźniki opuszczenia pantografu (We2)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/we2a.svg","form":"sign","extra":{"turn_direction":{"options":["right","left"]}}},{"id":"PL-PKP:we3a","name":"Wskaźniki podniesienia pantografu (We3)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/we3a.svg","form":"sign"},{"id":"PL-PKP:we4a","name":"Wskaźniki zakazu wjazdu elektrycznych pojazdów trakcyjnych (We4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/we4a.svg","form":"sign","extra":{"turn_direction":{"options":["right","left"]}}},{"id":"PL-PKP:we8a","name":"Wskaźniki jazdy bezprądowej (We8)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/we8a.svg","form":"sign","extra":{"turn_direction":{"options":["right","left"]}}},{"id":"PL-PKP:we9a","name":"Wskaźniki jazdy pod prądem (We9)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/we9a.svg","form":"sign"},{"id":"PL-PKP:we10a","name":"Wskaźniki zmiany systemu zasilania (We10)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/we10a.svg","form":"sign"}]}},"PL-WKD":{"networkName":"Poland - PL-WKD","networkImage":"File:Example.png","wikiPage":"","signals":{"distant":[{"id":"PL-WKD:w2","name":"Wskaźnik WKD W2","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/wkd/w2.svg","form":"sign"}],"crossing":[{"id":"PL-WKD:wk","name":"Wskaźnik WKD Wk","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/wkd/wk.svg","form":"light"}]}},"PL-metro":{"networkName":"Poland - PL-metro","networkImage":"File:Example.png","wikiPage":"","signals":{"stop":[{"id":"PL-metro:wm4","name":"Miejsce zatrzymania czoła pociągu (Wm4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/metro/wm4.svg","form":"sign"}],"station_distant":[{"id":"PL-metro:wm16","name":"Rozpocząć hamowanie przed peronem (Wm16)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/metro/wm16.svg","form":"sign"}],"fouling_point":[{"id":"PL-metro:wm17","name":"Wskaźnik ukresu (Wm17)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/metro/wm17.svg","form":"light"}]}},"PL-tram":{"networkName":"Poland - PL-tram","networkImage":"File:Example.png","wikiPage":"","signals":{"distant":[{"id":"PL-tram:at-1","name":"Sygnalizacja świetlna (AT-1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/at-1.svg","form":"sign"}],"crossing_hint":[{"id":"PL-tram:at-2","name":"Sygnalizacja świetlna wzbudzana (AT-2)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/at-2.svg","form":"sign"},{"id":"PL-tram:at-5","name":"Ruch kolizyjny (AT-5)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/at-5.svg","form":"sign"}],"slope":[{"id":"PL-tram:at-3","name":"Niebezpieczny zjazd (AT-3)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/at-3.svg","form":"sign"},{"id":"PL-tram:at-4","name":"Stromy podjazd (AT-4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/at-4.svg","form":"sign"}],"stop":[{"id":"PL-tram:bt-3","name":"Blokada zwrotnicy (BT-3)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/bt-3.svg","form":"sign"},{"id":"PL-tram:bt-4","name":"Stop – zwrotnica eksploatowana jednostronnie (BT-4)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/bt-4.svg","form":"sign"}],"switch":[{"id":"PL-tram:dt-1","name":"Zwrotnica elektryczna lewoskrętna (DT-1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/dt-1.svg","form":"sign"},{"id":"PL-tram:dt-2","name":"Zwrotnica elektryczna lewoskrętna (DT-2)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/dt-2.svg","form":"sign"},{"id":"PL-tram:switch_olsztyn","name":"Znaki sterowania zwrotnicy","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/tram/switch_warszawa.svg","form":"sign"}],"speed_limit":[{"id":"PL-tram:bt-1","name":"Ograniczenie prędkości (BT-1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/bt-1-empty.svg","form":"sign","extra":{"speed":{"options":[]}}},{"id":"PL-tram:bt-2","name":"Koniec ograniczenia prędkości (BT-2)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/bt-2-empty.svg","form":"sign","extra":{"speed":{"options":[]}}}],"electricity":[{"id":"PL-tram:ct-1","name":"Izolator sekcyjny (CT-1)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/ct-1.svg","form":"sign"},{"id":"PL-tram:ct-2","name":"Granica zasilania (CT-2)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/ct-2.svg","form":"sign"}]}},"ct-1;PL-tram":{"networkName":"Poland - ct-1;PL-tram","networkImage":"File:Example.png","wikiPage":"","signals":{"electricity":[{"id":"PL-tram:ct-1;PL-tram:ct-2","name":"Granica zasilania wraz z izolatorem sekcyjnym (CT-1 i CT-2)","image":"https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/pl/ct-1-2.svg","form":"sign"}]}}}'), Iy = { SE: { networkName: "Sweden", networkImage: "File:Example.png", wikiPage: "", signals: { main: [{ id: "SE:Utfartsblocksignal", name: "Mellanblocksignal, Utfartsblocksignal (main)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/main-block.svg", form: "light" }, { id: "SE:Linjeplatssignal", name: "Linjeplatssignal (main)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/main-section.svg", form: "light" }, { id: "SE:Huvudsignal", name: "Infartssignal, Mellansignal, Utfartssignal (main)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/main.svg", form: "light" }, { id: "SE:Mellansignal", name: "Mellansignal (dvärg)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/shunting-main.svg", form: "light" }], combined: [{ id: "SE:Utfartsblocksignal", name: "Mellanblocksignal, Utfartsblocksignal (combined)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/combined-block.svg", form: "light" }, { id: "SE:Huvudsignal", name: "Infartssignal, Mellansignal, Utfartssignal (combined)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/combined.svg", form: "light" }, { id: "SE:Linjeplatssignal", name: "Linjeplatssignal (combined)", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/combined-section.svg", form: "light" }], distant: [{ id: "SE:Försignal", name: "Försignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/försignal.svg", form: "light" }, { id: "SE:orienteringstavla", name: "Orienteringstavla huvudsignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/orienteringstavla-huvudsignal.svg", form: "sign", extra: { distance: { options: [] } } }], train_protection: [{ id: "SE:Repeterbaliser", name: "Repeterbalister", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/repeterbaliser.svg", form: "sign" }], main_repeated: [{ id: "SE:Repetersignal", name: "Repetersignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/repetersignal.svg", form: "light" }], shunting: [{ id: "SE:Växlingsdvärgsignal", name: "Växlingsdvärgsignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/shunting.svg", form: "light" }, { id: "SE:Skyddsstopplykta", name: "Skyddsstopplykta", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/skyddsstopplykta.svg", form: "sign" }], crossing: [{ id: "SE:Vägskyddssignal", name: "Vägskyddssignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/vägskyddssignal.svg", form: "light" }], crossing_distant: [{ id: "SE:Vägskyddsförsignal", name: "Vägskyddsförsignal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/vägskyddsförsignal.svg", form: "light" }], speed_limit: [{ id: "SE:hastighetstavla", name: "Hastighetstavla", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/hastighetstavla-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "SE:hastighetstavla med pilspets uppåt", name: "Hastighetstavla med pilspets uppåt", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/hastighetstavla-pilspets-uppåt-empty.svg", form: "sign", extra: { speed: { options: [] } } }], speed_limit_distant: [{ id: "SE:lägre_hastighet", name: "Orienteringstavla för lägre hastighet", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/orienteringstavla-hastighet-empty.svg", form: "sign", extra: { speed: { options: [] } } }, { id: "SE:atc_överskridande", name: "Orienteringstavla med tilläggsskylt ”ATC-överskridande”", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/orienteringstavla-hastighet-atc-överskridande-empty.svg", form: "sign", extra: { speed: { options: [] } } }], stop: [{ id: "SE:Slutpunktstopplykta", name: "Slutpunktstopplykta", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/se/slutpunktstopplykta.svg", form: "light" }] } } }, Gy = { US: { networkName: "United States", networkImage: "File:Example.png", wikiPage: "", signals: { main: [{ id: "US:main", name: "Main signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/us/main.svg", form: "light" }], distant: [{ id: "US:distant", name: "Distant signal", image: "https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/185832f242270b4a8ebba1310ef186aea3d895f7/symbols/us/distant.svg", form: "light" }] } } }, Zy = {
+  AT: Cy,
+  AU: Ny,
   BE: Oy,
   CA: xy,
   CH: Ty,
@@ -23328,61 +23329,61 @@ const $y = ({ limitToCategory: i, country: o, onClose: r, onSelect: s }) => {
     g && (Ot = g.networkName);
   }, [g]);
   let m = !1;
-  return /* @__PURE__ */ _.jsx(
+  return /* @__PURE__ */ C.jsx(
     l2,
     {
       opened: !0,
       yOffset: 100,
       zIndex: 102,
       onClose: r,
-      title: /* @__PURE__ */ _.jsxs(k3, { justify: "space-between", w: "100%", align: "center", children: [
-        /* @__PURE__ */ _.jsx(p2, { fw: 700, children: i ? `Replace ${M7[i]} Signal` : "Add Signal" }),
-        /* @__PURE__ */ _.jsx(
+      title: /* @__PURE__ */ C.jsxs(k3, { justify: "space-between", w: "100%", align: "center", children: [
+        /* @__PURE__ */ C.jsx(p2, { fw: 700, children: i ? `Replace ${M7[i]} Signal` : "Add Signal" }),
+        /* @__PURE__ */ C.jsx(
           y8,
           {
             leftSectionPointerEvents: "none",
-            leftSection: /* @__PURE__ */ _.jsx(ny, { stroke: 1.5 }),
+            leftSection: /* @__PURE__ */ C.jsx(ny, { stroke: 1.5 }),
             placeholder: "Search",
             w: "50%",
             value: d,
             onChange: (b) => f(b.target.value)
           }
         ),
-        /* @__PURE__ */ _.jsx("span", { children: "­" })
+        /* @__PURE__ */ C.jsx("span", { children: "­" })
       ] }),
       transitionProps: { transition: "pop", duration: 50 },
       size: "80vw",
       overlayProps: { backgroundOpacity: 0.5, blur: 4 },
       scrollAreaComponent: v8.Autosize,
-      children: g ? /* @__PURE__ */ _.jsxs("div", { children: [
-        c.length > 1 && /* @__PURE__ */ _.jsxs(_.Fragment, { children: [
-          /* @__PURE__ */ _.jsx(
+      children: g ? /* @__PURE__ */ C.jsxs("div", { children: [
+        c.length > 1 && /* @__PURE__ */ C.jsxs(C.Fragment, { children: [
+          /* @__PURE__ */ C.jsx(
             t3,
             {
-              leftSection: /* @__PURE__ */ _.jsx(vc, { size: 14 }),
+              leftSection: /* @__PURE__ */ C.jsx(vc, { size: 14 }),
               variant: "transparent",
               size: "sm",
               p: 0,
               onClick: () => p(void 0),
-              children: /* @__PURE__ */ _.jsxs("span", { children: [
+              children: /* @__PURE__ */ C.jsxs("span", { children: [
                 "Only showing ",
-                /* @__PURE__ */ _.jsx("em", { children: g.networkName }),
+                /* @__PURE__ */ C.jsx("em", { children: g.networkName }),
                 " (click to change)"
               ] })
             }
           ),
-          /* @__PURE__ */ _.jsx("br", {})
+          /* @__PURE__ */ C.jsx("br", {})
         ] }),
-        Object.entries(g.signals).map(([b, v]) => {
+        Object.entries(g.signals).map(([b, y]) => {
           const R = b;
           if (i && i !== R) return null;
-          const y = v.filter((N) => {
-            const O = N.name + (N.terms || []).join(",") + N.id;
+          const v = y.filter((_) => {
+            const O = _.name + (_.terms || []).join(",") + _.id;
             return d ? O.toLowerCase().includes(d.toLowerCase()) : !0;
           });
-          return y.length ? (m = !0, /* @__PURE__ */ _.jsxs(A.Fragment, { children: [
-            /* @__PURE__ */ _.jsx(p2, { fw: 500, children: M7[R] }),
-            /* @__PURE__ */ _.jsx(k3, { gap: 12, wrap: "wrap", mb: "lg", children: y.map((N) => /* @__PURE__ */ _.jsx(
+          return v.length ? (m = !0, /* @__PURE__ */ C.jsxs(A.Fragment, { children: [
+            /* @__PURE__ */ C.jsx(p2, { fw: 500, children: M7[R] }),
+            /* @__PURE__ */ C.jsx(k3, { gap: 12, wrap: "wrap", mb: "lg", children: v.map((_) => /* @__PURE__ */ C.jsx(
               t3,
               {
                 variant: "default",
@@ -23391,36 +23392,36 @@ const $y = ({ limitToCategory: i, country: o, onClose: r, onSelect: s }) => {
                 w: 150,
                 p: "sm",
                 onClick: () => {
-                  s({ category: R, signal: N }), r();
+                  s({ category: R, signal: _ }), r();
                 },
-                children: /* @__PURE__ */ _.jsxs("div", { style: { whiteSpace: "wrap" }, children: [
-                  /* @__PURE__ */ _.jsx(
-                    C7,
+                children: /* @__PURE__ */ C.jsxs("div", { style: { whiteSpace: "wrap" }, children: [
+                  /* @__PURE__ */ C.jsx(
+                    N7,
                     {
-                      src: x7(N.image),
+                      src: x7(_.image),
                       height: 50,
-                      alt: N.name,
+                      alt: _.name,
                       style: { objectFit: "contain" }
                     }
                   ),
-                  /* @__PURE__ */ _.jsx(p2, { size: "xs", children: N.name })
+                  /* @__PURE__ */ C.jsx(p2, { size: "xs", children: _.name })
                 ] })
               },
-              Yy(N)
+              Yy(_)
             )) })
           ] }, R)) : null;
         }),
-        !m && /* @__PURE__ */ _.jsx(k3, { w: "100%", justify: "center", my: 32, children: /* @__PURE__ */ _.jsx(p2, { c: "dimmed", size: "sm", children: "No results" }) })
-      ] }) : /* @__PURE__ */ _.jsx(k3, { gap: 12, children: c.map((b) => /* @__PURE__ */ _.jsx(
+        !m && /* @__PURE__ */ C.jsx(k3, { w: "100%", justify: "center", my: 32, children: /* @__PURE__ */ C.jsx(p2, { c: "dimmed", size: "sm", children: "No results" }) })
+      ] }) : /* @__PURE__ */ C.jsx(k3, { gap: 12, children: c.map((b) => /* @__PURE__ */ C.jsx(
         t3,
         {
           variant: "default",
           size: "xl",
           h: "auto",
           onClick: () => p(b),
-          children: /* @__PURE__ */ _.jsxs("div", { style: { whiteSpace: "wrap", padding: 8 }, children: [
-            /* @__PURE__ */ _.jsx(
-              C7,
+          children: /* @__PURE__ */ C.jsxs("div", { style: { whiteSpace: "wrap", padding: 8 }, children: [
+            /* @__PURE__ */ C.jsx(
+              N7,
               {
                 src: x7(b.networkImage),
                 height: 30,
@@ -23428,7 +23429,7 @@ const $y = ({ limitToCategory: i, country: o, onClose: r, onSelect: s }) => {
                 style: { objectFit: "contain" }
               }
             ),
-            /* @__PURE__ */ _.jsx("span", { children: b.networkName })
+            /* @__PURE__ */ C.jsx("span", { children: b.networkName })
           ] })
         },
         b.networkName
@@ -23439,18 +23440,18 @@ const $y = ({ limitToCategory: i, country: o, onClose: r, onSelect: s }) => {
 function Ky() {
   const [i, o] = A.useState(), r = A.useCallback((c) => new Promise((d) => {
     o({ options: c, resolve: d });
-  }), []), s = i && /* @__PURE__ */ _.jsxs(
+  }), []), s = i && /* @__PURE__ */ C.jsxs(
     l2,
     {
       opened: !0,
       zIndex: 102,
-      title: /* @__PURE__ */ _.jsx(p2, { fw: 700, children: i.options.title }),
+      title: /* @__PURE__ */ C.jsx(p2, { fw: 700, children: i.options.title }),
       onClose: () => {
         i.resolve(!1), o(void 0);
       },
       children: [
         i.options.description,
-        /* @__PURE__ */ _.jsx(k3, { justify: "end", children: /* @__PURE__ */ _.jsx(
+        /* @__PURE__ */ C.jsx(k3, { justify: "end", children: /* @__PURE__ */ C.jsx(
           t3,
           {
             ...i.options.buttonProps,
@@ -23469,33 +23470,33 @@ const Xy = ({ tags: i, category: o, onChange: r }) => {
   const s = A.useRef(/* @__PURE__ */ new Map()), c = `railway:signal:${o}:states`, d = `railway:signal:${o}:states_long`, f = i[c]?.split(";") || [], g = i[d]?.split(";") || [], p = Math.max(1, f.length, g.length), m = f[p - 1] || g[p - 1];
   function b() {
     if (!m) return;
-    const R = [...f], y = [...g];
-    R[p] = "", y[p] = "", r({
+    const R = [...f], v = [...g];
+    R[p] = "", v[p] = "", r({
       [c]: R.join(";"),
-      [d]: y.join(";")
+      [d]: v.join(";")
     });
   }
-  function v(R, y) {
-    const N = R.shiftKey ? -1 : 1;
+  function y(R, v) {
+    const _ = R.shiftKey ? -1 : 1;
     if (R.key === "Enter") {
-      const O = () => s.current.get(y + N);
+      const O = () => s.current.get(v + _);
       O() || b(), requestAnimationFrame(() => O()?.focus());
     }
   }
-  return /* @__PURE__ */ _.jsxs("div", { style: { width: "100%" }, children: [
-    /* @__PURE__ */ _.jsx(p2, { size: "sm", fw: 600, children: "States" }),
-    Array.from({ length: p }).fill(0).map((R, y) => (
+  return /* @__PURE__ */ C.jsxs("div", { style: { width: "100%" }, children: [
+    /* @__PURE__ */ C.jsx(p2, { size: "sm", fw: 600, children: "States" }),
+    Array.from({ length: p }).fill(0).map((R, v) => (
       // eslint-disable-next-line @eslint-react/no-array-index-key
-      /* @__PURE__ */ _.jsxs(U3, { gap: 0, style: { marginBottom: -1 }, children: [
-        /* @__PURE__ */ _.jsx(
+      /* @__PURE__ */ C.jsxs(U3, { gap: 0, style: { marginBottom: -1 }, children: [
+        /* @__PURE__ */ C.jsx(
           y8,
           {
-            ref: (N) => void s.current.set(y, N),
-            onKeyDown: (N) => v(N, y),
-            value: f[y] || "",
-            onChange: (N) => {
+            ref: (_) => void s.current.set(v, _),
+            onKeyDown: (_) => y(_, v),
+            value: f[v] || "",
+            onChange: (_) => {
               const O = [...f];
-              O[y] = N.target.value, r({
+              O[v] = _.target.value, r({
                 [c]: O.join(";"),
                 [d]: g.join(";")
               });
@@ -23507,7 +23508,7 @@ const Xy = ({ tags: i, category: o, onChange: r }) => {
               input: {
                 paddingLeft: 4,
                 borderRight: "none",
-                ...y && { borderTopLeftRadius: 0 },
+                ...v && { borderTopLeftRadius: 0 },
                 borderTopRightRadius: 0,
                 borderBottomLeftRadius: 0,
                 borderBottomRightRadius: 0
@@ -23515,34 +23516,34 @@ const Xy = ({ tags: i, category: o, onChange: r }) => {
             }
           }
         ),
-        /* @__PURE__ */ _.jsx(
+        /* @__PURE__ */ C.jsx(
           y8,
           {
-            ref: (N) => void s.current.set(y + 0.5, N),
-            onKeyDown: (N) => v(N, y + 0.5),
-            value: g[y] || "",
-            onChange: (N) => {
+            ref: (_) => void s.current.set(v + 0.5, _),
+            onKeyDown: (_) => y(_, v + 0.5),
+            value: g[v] || "",
+            onChange: (_) => {
               const O = [...g];
-              O[y] = N.target.value, r({
+              O[v] = _.target.value, r({
                 [c]: f.join(";"),
                 [d]: O.join(";")
               });
             },
             size: "xs",
             placeholder: "Up Main",
-            rightSection: /* @__PURE__ */ _.jsx(D3, { label: "Delete", children: /* @__PURE__ */ _.jsx(
+            rightSection: /* @__PURE__ */ C.jsx(D3, { label: "Delete", children: /* @__PURE__ */ C.jsx(
               p8,
               {
                 variant: "transparent",
                 size: "xs",
                 onClick: () => {
-                  const N = [...f], O = [...g];
-                  N.splice(y, 1), O.splice(y, 1), r({
-                    [c]: N.join(";"),
+                  const _ = [...f], O = [...g];
+                  _.splice(v, 1), O.splice(v, 1), r({
+                    [c]: _.join(";"),
                     [d]: O.join(";")
                   });
                 },
-                children: /* @__PURE__ */ _.jsx(wc, { stroke: 1.5, color: "red" })
+                children: /* @__PURE__ */ C.jsx(wc, { stroke: 1.5, color: "red" })
               }
             ) }),
             style: { width: "calc(100% - 40px)" },
@@ -23550,21 +23551,21 @@ const Xy = ({ tags: i, category: o, onChange: r }) => {
               input: {
                 borderTopLeftRadius: 0,
                 borderBottomLeftRadius: 0,
-                ...y && { borderTopRightRadius: 0 },
-                ...y !== p - 1 && { borderBottomRightRadius: 0 }
+                ...v && { borderTopRightRadius: 0 },
+                ...v !== p - 1 && { borderBottomRightRadius: 0 }
               }
             }
           }
         )
-      ] }, y)
+      ] }, v)
     )),
-    /* @__PURE__ */ _.jsx(D3, { label: "Add value", children: /* @__PURE__ */ _.jsx(
+    /* @__PURE__ */ C.jsx(D3, { label: "Add value", children: /* @__PURE__ */ C.jsx(
       t3,
       {
         size: "xs",
         variant: "default",
         w: "41px",
-        leftSection: /* @__PURE__ */ _.jsx(yc, { size: 14 }),
+        leftSection: /* @__PURE__ */ C.jsx(yc, { size: 14 }),
         style: { borderTopLeftRadius: 0, borderTopRightRadius: 0 },
         onClick: b,
         disabled: !m
@@ -23575,9 +23576,9 @@ const Xy = ({ tags: i, category: o, onChange: r }) => {
   option: i
 }) => {
   const o = i;
-  return /* @__PURE__ */ _.jsxs(U3, { gap: "sm", children: [
-    o.icon && /* @__PURE__ */ _.jsx("img", { src: x7(o.icon), alt: "icon", height: 20 }),
-    /* @__PURE__ */ _.jsx(p2, { size: "sm", children: o.label })
+  return /* @__PURE__ */ C.jsxs(U3, { gap: "sm", children: [
+    o.icon && /* @__PURE__ */ C.jsx("img", { src: x7(o.icon), alt: "icon", height: 20 }),
+    /* @__PURE__ */ C.jsx(p2, { size: "sm", children: o.label })
   ] });
 };
 function qy(i) {
@@ -23586,162 +23587,163 @@ function qy(i) {
 const _c = ({
   domRoot: i,
   tagsStore: o,
-  map: r
+  map: r,
+  theme: s
 }) => {
-  const s = A.useMemo(
+  const c = A.useMemo(
     () => (
       // just for debugging (since the country currently isn't configurable in the UI)
       new URLSearchParams(window.location.search).get("iDpO_country")?.toUpperCase() || Ry(r.center)
     ),
     [r.center]
-  ), [c, d] = A.useState(), f = Ky(), g = A.useSyncExternalStore(o.subscribe, o.getValue);
-  return qy(g) ? /* @__PURE__ */ _.jsxs(_y, { domRoot: i, children: [
-    Object.entries(M7).map(([p, m]) => {
-      const b = p, v = g[`railway:signal:${b}`];
-      if (!v) return null;
-      const R = Ss(g, b);
-      return R?.extra?.states && R.extra.states_long && delete R.extra.states, /* @__PURE__ */ _.jsxs(z9, { shadow: "sm", p: 0, radius: "md", my: 8, withBorder: !0, children: [
-        /* @__PURE__ */ _.jsxs(U3, { justify: "space-between", pe: "sm", children: [
-          /* @__PURE__ */ _.jsxs(U3, { children: [
-            R && /* @__PURE__ */ _.jsx(C7, { src: x7(R?.image), height: 50, p: 4 }),
-            /* @__PURE__ */ _.jsxs(k3, { direction: "column", children: [
-              /* @__PURE__ */ _.jsx(p2, { size: "sm", fw: 500, children: R?.name || /* @__PURE__ */ _.jsx("em", { children: "Unknown" }) }),
-              /* @__PURE__ */ _.jsx(p2, { c: "dimmed", size: "xs", children: v })
+  ), [d, f] = A.useState(), g = Ky(), p = A.useSyncExternalStore(o.subscribe, o.getValue);
+  return qy(p) ? /* @__PURE__ */ C.jsxs(_y, { domRoot: i, themeColour: s, children: [
+    Object.entries(M7).map(([m, b]) => {
+      const y = m, R = p[`railway:signal:${y}`];
+      if (!R) return null;
+      const v = Ss(p, y);
+      return v?.extra?.states && v.extra.states_long && delete v.extra.states, /* @__PURE__ */ C.jsxs(z9, { shadow: "sm", p: 0, radius: "md", my: 8, withBorder: !0, children: [
+        /* @__PURE__ */ C.jsxs(U3, { justify: "space-between", pe: "sm", children: [
+          /* @__PURE__ */ C.jsxs(U3, { children: [
+            v && /* @__PURE__ */ C.jsx(N7, { src: x7(v?.image), height: 50, p: 4 }),
+            /* @__PURE__ */ C.jsxs(k3, { direction: "column", children: [
+              /* @__PURE__ */ C.jsx(p2, { size: "sm", fw: 500, children: v?.name || /* @__PURE__ */ C.jsx("em", { children: "Unknown" }) }),
+              /* @__PURE__ */ C.jsx(p2, { c: "dimmed", size: "xs", children: R })
             ] })
           ] }),
-          /* @__PURE__ */ _.jsxs(U3, { gap: 6, children: [
-            /* @__PURE__ */ _.jsx(D3, { label: `Swap ${m} Signal`, children: /* @__PURE__ */ _.jsx(
+          /* @__PURE__ */ C.jsxs(U3, { gap: 6, children: [
+            /* @__PURE__ */ C.jsx(D3, { label: `Swap ${b} Signal`, children: /* @__PURE__ */ C.jsx(
               p8,
               {
                 variant: "default",
                 size: "sm",
-                onClick: () => d(b),
-                children: /* @__PURE__ */ _.jsx(vc, { stroke: 1.5 })
+                onClick: () => f(y),
+                children: /* @__PURE__ */ C.jsx(vc, { stroke: 1.5 })
               }
             ) }),
-            /* @__PURE__ */ _.jsx(D3, { label: "Delete", children: /* @__PURE__ */ _.jsx(
+            /* @__PURE__ */ C.jsx(D3, { label: "Delete", children: /* @__PURE__ */ C.jsx(
               p8,
               {
                 variant: "default",
                 size: "sm",
                 onClick: () => {
-                  const y = structuredClone(g);
-                  for (const N in y)
-                    (N === `railway:signal:${b}` || N.startsWith(`railway:signal:${b}:`) && // extra check to handle double categories like `train_protection:main`
-                    !N.replace(`railway:signal:${b}:`, "").includes(":")) && delete y[N];
-                  o.setValue(y);
+                  const _ = structuredClone(p);
+                  for (const O in _)
+                    (O === `railway:signal:${y}` || O.startsWith(`railway:signal:${y}:`) && // extra check to handle double categories like `train_protection:main`
+                    !O.replace(`railway:signal:${y}:`, "").includes(":")) && delete _[O];
+                  o.setValue(_);
                 },
-                children: /* @__PURE__ */ _.jsx(wc, { stroke: 1.5, color: "red" })
+                children: /* @__PURE__ */ C.jsx(wc, { stroke: 1.5, color: "red" })
               }
             ) })
           ] })
         ] }),
-        R?.extra && /* @__PURE__ */ _.jsx(U3, { p: "sm", style: { textTransform: "capitalize" }, children: Object.entries(R.extra).map(([y, N]) => {
-          if (y === "states_long")
-            return /* @__PURE__ */ _.jsx(
+        v?.extra && /* @__PURE__ */ C.jsx(U3, { p: "sm", style: { textTransform: "capitalize" }, children: Object.entries(v.extra).map(([_, O]) => {
+          if (_ === "states_long")
+            return /* @__PURE__ */ C.jsx(
               Xy,
               {
-                tags: g,
-                category: b,
-                onChange: (E) => o.setValue({ ...g, ...E })
+                tags: p,
+                category: y,
+                onChange: (N) => o.setValue({ ...p, ...N })
               },
-              y
+              _
             );
-          if (!N.options.length)
-            return /* @__PURE__ */ _.jsx(
+          if (!O.options.length)
+            return /* @__PURE__ */ C.jsx(
               y8,
               {
-                label: y,
+                label: _,
                 size: "xs",
-                defaultValue: g[`railway:signal:${b}:${y}`],
-                onBlur: (E) => {
-                  const C = { ...g };
-                  return E.target.value ? C[`railway:signal:${b}:${y}`] = E.target.value : delete C[`railway:signal:${b}:${y}`], o.setValue(C);
+                defaultValue: p[`railway:signal:${y}:${_}`],
+                onBlur: (N) => {
+                  const x = { ...p };
+                  return N.target.value ? x[`railway:signal:${y}:${_}`] = N.target.value : delete x[`railway:signal:${y}:${_}`], o.setValue(x);
                 }
               },
-              y
+              _
             );
-          const O = N.options.map((E) => {
-            const C = typeof E == "string" ? { label: E } : E;
-            return { value: C.label, ...C };
+          const S = O.options.map((N) => {
+            const x = typeof N == "string" ? { label: N } : N;
+            return { value: x.label, ...x };
           });
-          if (N.multiple)
-            return /* @__PURE__ */ _.jsx(
+          if (O.multiple)
+            return /* @__PURE__ */ C.jsx(
               Ha,
               {
-                label: y,
+                label: _,
                 size: "xs",
                 style: { minWidth: "100%" },
                 renderOption: Rs,
-                data: O,
+                data: S,
                 clearable: !0,
-                value: g[`railway:signal:${b}:${y}`]?.split(";") || [],
-                onChange: (E) => {
-                  const C = { ...g };
-                  E.length ? C[`railway:signal:${b}:${y}`] = E.join(";") : delete C[`railway:signal:${b}:${y}`], o.setValue(C);
+                value: p[`railway:signal:${y}:${_}`]?.split(";") || [],
+                onChange: (N) => {
+                  const x = { ...p };
+                  N.length ? x[`railway:signal:${y}:${_}`] = N.join(";") : delete x[`railway:signal:${y}:${_}`], o.setValue(x);
                 }
               },
-              y
+              _
             );
-          const S = g[`railway:signal:${b}:${y}`] || "", w = O.find((E) => E.label === S);
-          return /* @__PURE__ */ _.jsx(
+          const w = p[`railway:signal:${y}:${_}`] || "", E = S.find((N) => N.label === w);
+          return /* @__PURE__ */ C.jsx(
             Ia,
             {
-              label: y,
+              label: _,
               size: "xs",
               renderOption: Rs,
-              data: O,
+              data: S,
               clearable: !0,
-              required: N.required,
-              value: S,
-              leftSection: w?.icon && /* @__PURE__ */ _.jsx(
+              required: O.required,
+              value: w,
+              leftSection: E?.icon && /* @__PURE__ */ C.jsx(
                 "img",
                 {
-                  src: x7(w.icon),
+                  src: x7(E.icon),
                   alt: "icon",
                   height: 20
                 }
               ),
-              onChange: (E) => {
-                const C = { ...g };
-                E ? C[`railway:signal:${b}:${y}`] = E : delete C[`railway:signal:${b}:${y}`], o.setValue(C);
+              onChange: (N) => {
+                const x = { ...p };
+                N ? x[`railway:signal:${y}:${_}`] = N : delete x[`railway:signal:${y}:${_}`], o.setValue(x);
               }
             },
-            y
+            _
           );
         }) })
-      ] }, b);
+      ] }, y);
     }),
-    /* @__PURE__ */ _.jsx(
+    /* @__PURE__ */ C.jsx(
       t3,
       {
         size: "xs",
-        leftSection: /* @__PURE__ */ _.jsx(yc, { size: 18 }),
-        onClick: () => d(Symbol("")),
+        leftSection: /* @__PURE__ */ C.jsx(yc, { size: 18 }),
+        onClick: () => f(Symbol("")),
         children: "Add"
       }
     ),
-    c && /* @__PURE__ */ _.jsx(
+    d && /* @__PURE__ */ C.jsx(
       $y,
       {
-        limitToCategory: typeof c == "string" ? c : void 0,
-        country: s,
-        onClose: () => d(void 0),
-        onSelect: async (p) => {
-          const m = structuredClone(g), b = g[`railway:signal:${p.category}`], v = Ss(g, p.category);
-          if (b && typeof c != "string") {
-            await f.open({
-              title: `Override existing ${M7[p.category]} signal?`,
-              description: /* @__PURE__ */ _.jsxs(_.Fragment, { children: [
+        limitToCategory: typeof d == "string" ? d : void 0,
+        country: c,
+        onClose: () => f(void 0),
+        onSelect: async (m) => {
+          const b = structuredClone(p), y = p[`railway:signal:${m.category}`], R = Ss(p, m.category);
+          if (y && typeof d != "string") {
+            await g.open({
+              title: `Override existing ${M7[m.category]} signal?`,
+              description: /* @__PURE__ */ C.jsxs(C.Fragment, { children: [
                 "There is aready a ",
-                /* @__PURE__ */ _.jsx("em", { children: M7[p.category] }),
+                /* @__PURE__ */ C.jsx("em", { children: M7[m.category] }),
                 " ",
                 "signal, so if you continue,",
                 " ",
-                /* @__PURE__ */ _.jsx(m9, { children: p.signal.name }),
+                /* @__PURE__ */ C.jsx(m9, { children: m.signal.name }),
                 " will replace",
                 " ",
-                /* @__PURE__ */ _.jsx(m9, { children: v?.name || b }),
+                /* @__PURE__ */ C.jsx(m9, { children: R?.name || y }),
                 "."
               ] }),
               buttonProps: {
@@ -23749,23 +23751,23 @@ const _c = ({
                 children: "Continue"
               }
             });
-            for (const R in m)
-              R.startsWith(`railway:signal:${p.category}`) && delete m[R];
+            for (const v in b)
+              v.startsWith(`railway:signal:${m.category}`) && delete b[v];
           }
-          if (v?.const)
-            for (const R in v.const)
-              delete m[`railway:signal:${p.category}:${R}`];
-          m[`railway:signal:${p.category}`] = p.signal.id, m[`railway:signal:${p.category}:form`] = p.signal.form;
-          for (const [R, y] of Object.entries(
-            p.signal.const || {}
+          if (R?.const)
+            for (const v in R.const)
+              delete b[`railway:signal:${m.category}:${v}`];
+          b[`railway:signal:${m.category}`] = m.signal.id, b[`railway:signal:${m.category}:form`] = m.signal.form;
+          for (const [v, _] of Object.entries(
+            m.signal.const || {}
           ))
-            m[`railway:signal:${p.category}:${R}`] = y;
-          o.setValue(m);
+            b[`railway:signal:${m.category}:${v}`] = _;
+          o.setValue(b);
         }
       }
     ),
-    f.container
-  ] }) : /* @__PURE__ */ _.jsx(_.Fragment, { children: "cannot use in this field with a multiselect" });
+    g.container
+  ] }) : /* @__PURE__ */ C.jsx(C.Fragment, { children: "cannot use in this field with a multiselect" });
 };
 _c.displayName = "SignalEditor";
 class Jy extends HTMLElement {
@@ -23776,7 +23778,7 @@ class Jy extends HTMLElement {
     super(), this.attachShadow({ mode: "open" }), this.#e = document.createElement("body"), this.shadowRoot.append(this.#e), this.#t = Id.createRoot(this.#e);
   }
   init(o) {
-    this.#a = o, this.#t.render(/* @__PURE__ */ _.jsx(_c, { domRoot: this.#e, ...this.#a }));
+    this.#a = o, this.#t.render(/* @__PURE__ */ C.jsx(_c, { domRoot: this.#e, ...this.#a }));
   }
   disconnectedCallback() {
     this.#t.unmount();
