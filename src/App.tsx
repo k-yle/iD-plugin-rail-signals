@@ -34,6 +34,7 @@ export const App: React.FC<{ domRoot: HTMLElement } & iD.PluginData> = ({
   domRoot,
   tagsStore,
   map,
+  theme,
 }) => {
   const country = useMemo(
     () =>
@@ -55,7 +56,7 @@ export const App: React.FC<{ domRoot: HTMLElement } & iD.PluginData> = ({
   }
 
   return (
-    <ThemeProvider domRoot={domRoot}>
+    <ThemeProvider domRoot={domRoot} themeColour={theme}>
       {Object.entries(CATEGORIES).map(([_cat, label]) => {
         const cat = _cat as Category;
         const value = tags[`railway:signal:${cat}`];

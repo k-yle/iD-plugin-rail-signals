@@ -23,5 +23,6 @@ element.init({
   map: {
     center: [151.0977, -33.8935],
   },
+  theme: 'light',
 });
 document.body.append(element);
