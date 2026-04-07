@@ -37,6 +37,7 @@ export const CATEGORIES = {
   fouling_point: 'Fouling Point',
   helper_engine: 'Helper Engine',
   train_protection: 'Train Protection',
+  'train_protection:main': 'Train Protection – Main',
   steam_locomotive: 'Steam Locomotive',
 };
 
@@ -45,7 +46,7 @@ export const SCHEMA: Schema.Root = {
     MNWSW: {
       networkName: 'Sydney Metro',
       networkImage: 'File:Sydney Metro Line.svg',
-      wikiPage: 'Australian_Tagging_Guidelines/Railway_Signals',
+      wikiPage: 'Australian_Tagging_Guidelines/Railway_Signals#Sydney_Metro',
       signals: {
         minor: [
           {
@@ -109,7 +110,7 @@ export const SCHEMA: Schema.Root = {
     LightRail: {
       networkName: 'Light Rail',
       networkImage: 'File:205_Tramvaj.png',
-      wikiPage: '',
+      wikiPage: 'Australian_Tagging_Guidelines/Railway_Signals#Light_Rail',
       signals: {
         speed_limit: [
           {
@@ -147,6 +148,20 @@ export const SCHEMA: Schema.Root = {
             // TODO: also sync: traffic_sign=AU:G9-390N[X;Y]
           },
         ],
+        fouling_point: [
+          {
+            id: 'AU:LightRail:VIC:50/50',
+            name: '[VIC] 50/50',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_50_50.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:single_yellow',
+            name: '[VIC] Single solid yellow line (Fouling Mark)',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_Stop_line_single.svg',
+          },
+        ],
         stop: [
           {
             id: 'AU:LightRail:fixed_red',
@@ -173,10 +188,58 @@ export const SCHEMA: Schema.Root = {
             image: 'File:AU-VIC Tram Stop line double.svg',
           },
           {
-            id: 'AU:LightRail:VIC:single_yellow',
-            name: '[VIC] Single solid yellow line (Fouling Mark)',
+            id: 'AU:LightRail:VIC:double_yellow_dashed',
+            name: '[VIC] Double dashed yellow line (Optional Stop Mark)',
             form: 'sign',
-            image: 'File:AU-VIC Tram Stop line single.svg',
+            image: 'File:AU-VIC_Tram_Stop_line_double_dashed.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:double_yellow_chevron',
+            name: '[VIC] Double chevron yellow line (Check Point Mark)',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_Stop_line_double_chevron.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:single_yellow_half',
+            name: '[VIC] Single half-width yellow line (Shunting Mark A/Z/W)',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_Stop_line_single_half.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:single_yellow_half',
+            name: '[VIC] Single half-width yellow line (Shunting Mark A/Z/W)',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_Stop_line_single_half.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:double_yellow_half',
+            name: '[VIC] Double half-width yellow line (Shunting Mark B/C1/D1)',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_Stop_line_double_half.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:triple_yellow_half',
+            name: '[VIC] Triple half-width yellow line (Shunting Mark C2/D2/E)',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_Stop_line_triple_half.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:stop_studs_square',
+            name: '[VIC] Stopping Place Studs',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_Stop_studs_square.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:stop_studs_diamond',
+            name: '[VIC] Stopping Place Studs (for long trams)',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_Stop_studs_diamond.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:provisional',
+            name: '[VIC] Provisional Stop',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_provisional_stop_studs.svg',
           },
         ],
         electricity: [
@@ -233,6 +296,36 @@ export const SCHEMA: Schema.Root = {
             name: '[VIC] Cut Off',
             form: 'sign',
             image: 'File:AU-VIC Tram Sign Cut Off.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:isolate_5',
+            name: '[VIC] Section Isolation 5',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_section_isolation_5.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:isolate_4',
+            name: '[VIC] Section Isolation 4',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_section_isolation_4.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:isolate_3',
+            name: '[VIC] Section Isolation 3',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_section_isolation_3.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:isolate_2',
+            name: '[VIC] Section Isolation 2',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_section_isolation_2.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:isolate_1',
+            name: '[VIC] Section Isolation 1',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_section_isolation_1.svg',
           },
         ],
         main: [
@@ -438,6 +531,24 @@ export const SCHEMA: Schema.Root = {
             form: 'light',
             image: 'File:AU-QLD Light Rail Sign Select Points Now.svg',
           },
+          {
+            id: 'AU:LightRail:VIC:command_stud_2',
+            name: '[VIC] Two Command Studs (for Automatic Points)',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_command_studs_2.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:command_stud_1',
+            name: '[VIC] One Command Stud (for Automatic Points)',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_command_stud.svg',
+          },
+          {
+            id: 'AU:LightRail:VIC:command_stud_1SPI',
+            name: '[VIC] Command Stud (for Signal Operated Points)',
+            form: 'sign',
+            image: 'File:AU-VIC_Tram_command_stud_SPI.svg',
+          },
         ],
         shunting: [
           {
@@ -472,7 +583,7 @@ export const SCHEMA: Schema.Root = {
     NSW: {
       networkName: 'NSW',
       networkImage: 'File:TfNSW T.svg',
-      wikiPage: 'Australian_Tagging_Guidelines/Railway_Signals',
+      wikiPage: 'Australian_Tagging_Guidelines/Railway_Signals#NSW',
       signals: {
         route_distant: [
           {
@@ -1090,6 +1201,559 @@ export const SCHEMA: Schema.Root = {
             name: 'Signalised Level Crossing Ahead',
             form: 'sign',
             image: 'File:Australia road sign W7-4.svg',
+            extra: { caption: { options: [] } },
+          },
+        ],
+      },
+    },
+    VIC: {
+      networkName: 'VIC',
+      networkImage: 'File:Logo_PTV_2022.png',
+      wikiPage: 'Australian_Tagging_Guidelines/Railway_Signals#VIC',
+      signals: {
+        main: [
+          {
+            id: 'AU:VIC:main_33',
+            name: 'Main Signal 3+3',
+            form: 'light',
+            image: 'File:NZ Railway Signal MM.svg',
+            extra: {
+              shape: {
+                options: [
+                  {
+                    label: 'home',
+                    icon: 'File:NZ Railway Signal MM.svg',
+                  },
+                  {
+                    label: 'auto',
+                    icon: 'File:NZ Railway Signal MM-staggered.svg',
+                  },
+                ],
+              },
+            },
+          },
+          {
+            id: 'AU:VIC:main_31',
+            name: 'Main Signal 3+1',
+            form: 'light',
+            image: 'File:NZ Railway Signal MS.svg',
+            extra: {
+              shape: {
+                options: [
+                  {
+                    label: 'home',
+                    icon: 'File:NZ Railway Signal MS.svg',
+                  },
+                  {
+                    label: 'auto',
+                    icon: 'File:NZ Railway Signal MS-staggered.svg',
+                  },
+                ],
+              },
+            },
+          },
+          {
+            id: 'AU:VIC:main_13',
+            name: 'Main Signal 1+3',
+            form: 'light',
+            image: 'File:NZ Railway Signal SM.svg',
+            extra: {
+              shape: {
+                options: [
+                  {
+                    label: 'home',
+                    icon: 'File:NZ Railway Signal SM.svg',
+                  },
+                  {
+                    label: 'auto',
+                    icon: 'File:NZ Railway Signal SM-staggered.svg',
+                  },
+                ],
+              },
+            },
+          },
+          {
+            id: 'AU:VIC:main_12',
+            name: 'Main Signal 1+2',
+            form: 'light',
+            image: 'File:VIC Railway Signal Main 12 aligned.svg',
+            extra: {
+              shape: {
+                options: [
+                  {
+                    label: 'home',
+                    icon: 'File:VIC Railway Signal Main 12 aligned.svg',
+                  },
+                  {
+                    label: 'auto',
+                    icon: 'File:VIC Railway Signal Main 12 staggered.svg',
+                  },
+                ],
+              },
+            },
+          },
+          {
+            id: 'AU:VIC:main_11',
+            name: 'Main Signal 1+1',
+            form: 'light',
+            image: 'File:NZ Railway Signal SS.svg',
+            extra: {
+              shape: {
+                options: [
+                  {
+                    label: 'home',
+                    icon: 'File:NZ Railway Signal SS.svg',
+                  },
+                  {
+                    label: 'auto',
+                    icon: 'File:NZ Railway Signal SS-staggered.svg',
+                  },
+                ],
+              },
+            },
+          },
+          {
+            id: 'AU:VIC:main_2',
+            name: '2-position main signal',
+            form: 'light',
+            image: 'File:NZ Railway Signal 2-aspect main.svg',
+          },
+        ],
+        distant: [
+          {
+            id: 'AU:VIC:distant_2',
+            name: '2-position distant signal',
+            form: 'light',
+            image: 'File:NZ_Railway_Signal_2-aspect_distant.svg',
+          },
+          {
+            id: 'AU:VIC:distant_22',
+            name: 'Distant Signal 2+2',
+            form: 'light',
+            image: 'File:VIC Railway Signal Distant 22 aligned.svg',
+            extra: {
+              shape: {
+                options: [
+                  {
+                    label: 'home',
+                    icon: 'File:VIC Railway Signal Distant 22 aligned.svg',
+                  },
+                  {
+                    label: 'auto',
+                    icon: 'File:VIC Railway Signal Distant 22 staggered.svg',
+                  },
+                ],
+              },
+            },
+          },
+          {
+            id: 'AU:VIC:distant_21',
+            name: 'Distant Signal 2+1',
+            form: 'light',
+            image: 'File:VIC Railway Signal Distant 21 aligned.svg',
+            extra: {
+              shape: {
+                options: [
+                  {
+                    label: 'home',
+                    icon: 'File:VIC Railway Signal Distant 21 aligned.svg',
+                  },
+                  {
+                    label: 'auto',
+                    icon: 'File:VIC Railway Signal Distant 21 staggered.svg',
+                  },
+                ],
+              },
+            },
+          },
+          {
+            id: 'AU:VIC:distant_12',
+            name: 'Distant Signal 1+2',
+            form: 'light',
+            image: 'File:VIC Railway Signal Distant 12 aligned.svg',
+            extra: {
+              shape: {
+                options: [
+                  {
+                    label: 'home',
+                    icon: 'File:VIC Railway Signal Distant 12 aligned.svg',
+                  },
+                  {
+                    label: 'auto',
+                    icon: 'File:VIC Railway Signal Distant 12 staggered.svg',
+                  },
+                ],
+              },
+            },
+          },
+        ],
+        minor: [
+          {
+            id: 'AU:VIC:low_speed',
+            name: 'Low Speed Caution',
+            form: 'light',
+            image: 'File:NSW_Railway_Signal_orange_light.svg',
+          },
+          {
+            id: 'AU:VIC:landmark',
+            name: 'Landmark',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_landmark.svg',
+            extra: { caption: { options: [] } },
+          },
+          {
+            id: 'AU:VIC:block_point',
+            name: 'Block Point',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_block_point.svg',
+            extra: { caption: { options: [] } },
+          },
+        ],
+        train_protection: [
+          {
+            id: 'AU:VIC:A',
+            name: 'Automatic indicator',
+            form: 'light',
+            image: 'File:VIC Railway Signal A.svg',
+          },
+          {
+            id: 'AU:VIC:start_CBTC',
+            name: 'Start CBTC',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_start_CBTC.svg',
+          },
+          {
+            id: 'AU:VIC:end_CBTC',
+            name: 'End CBTC',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_end_CBTC.svg',
+          },
+
+          {
+            id: 'AU:VIC:start_AXC',
+            name: 'Start AXC',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_start_AXC.svg',
+          },
+          {
+            id: 'AU:VIC:end_AXC',
+            name: 'End AXC',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_end_AXC.svg',
+          },
+
+          {
+            id: 'AU:VIC:start_CHC',
+            name: 'Start CHC',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_start_CHC.svg',
+          },
+          {
+            id: 'AU:VIC:end_CHC',
+            name: 'End CHC',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_end_CHC.svg',
+          },
+
+          {
+            id: 'AU:VIC:start_CTC',
+            name: 'Start CTC',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_start_CTC.svg',
+          },
+          {
+            id: 'AU:VIC:end_CTC',
+            name: 'End CTC',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_end_CTC.svg',
+          },
+
+          {
+            id: 'AU:VIC:start_RFR',
+            name: 'Start RFR',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_start_RFR.svg',
+          },
+          {
+            id: 'AU:VIC:end_RFR',
+            name: 'End RFR',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_end_RFR.svg',
+          },
+
+          {
+            id: 'AU:VIC:start_TPWS',
+            name: 'Start TPWS',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_start_TPWS.svg',
+          },
+          {
+            id: 'AU:VIC:end_TPWS',
+            name: 'End TPWS',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_end_TPWS.svg',
+          },
+
+          {
+            id: 'AU:VIC:start_TOW',
+            name: 'Start Train Order Working',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_start_TOW.svg',
+          },
+          {
+            id: 'AU:VIC:end_TOW',
+            name: 'End Train Order Working',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_end_TOW.svg',
+          },
+        ],
+        shunting: [
+          {
+            id: 'AU:VIC:shunt_2',
+            name: 'Dwarf Shunt Signal (2-aspect)',
+            form: 'light',
+            image: 'File:VIC Railway Signal shunt.svg',
+          },
+          {
+            id: 'AU:VIC:shunt_3',
+            name: 'Dwarf Shunt Signal (3-aspect)',
+            form: 'light',
+            image: 'File:VIC Railway Signal shunt_3.svg',
+          },
+          {
+            id: 'AU:VIC:siding',
+            name: 'Siding Light',
+            form: 'light',
+            image: 'File:NSW Railway Signal End of Track R.svg',
+          },
+          {
+            id: 'AU:VIC:shunting_limit',
+            name: 'Limit of Shunt',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_shunt_limit.svg',
+          },
+        ],
+        stop: [
+          {
+            id: 'AU:VIC:end_of_track',
+            name: 'End of Track Light',
+            form: 'light',
+            image: 'File:NSW Railway Signal End of Track R.svg',
+          },
+          {
+            id: 'AU:VIC:baulks',
+            name: 'Baulks',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_baulks.svg',
+          },
+        ],
+        main_repeated: [
+          {
+            id: 'AU:VIC:banner_indicator',
+            name: 'Banner Indicator',
+            form: 'light',
+            image: 'File:NZ Railway Signal Banner Indicator double.svg',
+            extra: {
+              shape: {
+                required: true,
+                options: [
+                  {
+                    label: 'theatre_box',
+                    icon: 'File:NZ Railway Signal Banner Indicator double.svg',
+                  },
+                  {
+                    label: 'compact',
+                    icon: 'File:VIC Railway Signal Banner Indicator compact.svg',
+                  },
+                  {
+                    label: 'shunt',
+                    icon: 'File:VIC Railway Signal Banner Indicator shunt.svg',
+                  },
+                  {
+                    label: 'single',
+                    icon: 'File:NZ Railway Signal Banner Indicator single.svg',
+                  },
+                ],
+              },
+            },
+          },
+        ],
+        switch: [
+          {
+            id: 'AU:VIC:gauge_indicator',
+            name: 'Gauge Indicator',
+            form: 'light',
+            image: 'File:VIC Railway Signal gauge light.svg',
+          },
+        ],
+        route: [
+          {
+            id: 'AU:VIC:points_direction',
+            name: 'Route Indicator (Illuminated Arrows)',
+            form: 'light',
+            image: 'File:BOStrab W1.svg',
+            extra: {
+              states: {
+                multiple: true,
+                options: [
+                  { label: 'straight', icon: 'File:BOStrab W1.svg' },
+                  { label: 'right', icon: 'File:BOStrab W2.svg' },
+                  { label: 'left', icon: 'File:BOStrab W3.svg' },
+                ],
+              },
+            },
+          },
+          {
+            id: 'AU:VIC:points_direction',
+            name: 'Route Indicator (Painted Arrows)',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_painted_arrow_RL.svg',
+            extra: {
+              states: {
+                multiple: true,
+                options: [
+                  {
+                    label: 'LR',
+                    icon: 'File:VIC_Railway_Sign_painted_arrow_LR.svg',
+                  },
+                  {
+                    label: 'RL',
+                    icon: 'File:VIC Railway Sign painted arrow RL.svg',
+                  },
+                ],
+              },
+            },
+          },
+          {
+            id: 'AU:VIC:theatre_box',
+            name: 'Route Indicator (Theatre Box)',
+            form: 'light',
+            image: 'File:Theatre-boxes.jpg',
+            extra: { states: { options: [] }, states_long: { options: [] } },
+          },
+          {
+            id: 'GB-NR:junction',
+            name: 'Route Indicator (Feather)',
+            form: 'light',
+            const: { design: 'feather' },
+            image: 'File:NSW_Railway_Signal_Turnout_Repeater_-_feather.svg',
+            extra: {
+              states: {
+                options: [
+                  {
+                    label: 'position_1',
+                    icon: 'File:Arrow top left Pinhead icon.svg',
+                  },
+                  {
+                    label: 'position_2',
+                    icon: 'File:Arrow left Pinhead icon.svg',
+                  },
+                  {
+                    label: 'position_3',
+                    icon: 'File:Arrow bottom left Pinhead icon.svg',
+                  },
+                  {
+                    label: 'position_4',
+                    icon: 'File:Arrow bottom right Pinhead icon.svg',
+                  },
+                  {
+                    label: 'position_5',
+                    icon: 'File:Arrow right Pinhead icon.svg',
+                  },
+                  {
+                    label: 'position_6',
+                    icon: 'File:Arrow top right Pinhead icon.svg',
+                  },
+                  {
+                    label: 'position_7',
+                    icon: 'File:Arrow up Pinhead icon.svg',
+                  },
+                  {
+                    label: 'off',
+                  },
+                ],
+              },
+            },
+          },
+          {
+            id: 'AU:VIC:lamp',
+            name: 'Route Indicator (Stencil Light)',
+            form: 'light',
+            image: 'File:NSW_Railway_Signal_Route_Indicator_-_stencil.svg',
+            extra: { states: { options: [] }, states_long: { options: [] } },
+          },
+          {
+            id: 'AU:VIC:sign',
+            name: 'Route Indicator (Stencil Light)',
+            form: 'sign',
+            image: 'File:H_black_white.svg',
+            extra: { states: { options: [] }, states_long: { options: [] } },
+          },
+        ],
+        speed_limit: [
+          {
+            id: 'AU:VIC:medium',
+            name: 'Medium Speed Indicator',
+            form: 'light',
+            image: 'File:NZ_Railway_Signal_Speed_Indicator.svg',
+            extra: { speed: { options: [] } },
+          },
+          {
+            id: 'AU:VIC:curve',
+            name: 'Curve Board',
+            form: 'sign',
+            image: 'File:NSW_Railway_Sign_Speed_Normal.svg',
+            extra: { speed: { options: [] } },
+          },
+          {
+            id: 'AU:VIC:line',
+            name: 'Line Speed Limit',
+            form: 'sign',
+            image: 'File:NSW Railway Sign Speed Medium.svg',
+            extra: { speed: { options: [] } },
+          },
+        ],
+        'train_protection:main': [
+          {
+            id: 'AU:VIC:block_marker',
+            name: 'Conventional Block Marker',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_Block_Marker_(pointing_right).svg',
+          },
+          {
+            id: 'AU:VIC:block_marker',
+            name: 'CBTC Block Marker',
+            form: 'sign',
+            image: 'File:GB_TVM_Block_Marker_(pointing_right).svg',
+          },
+        ],
+        whistle: [
+          {
+            id: 'AU:VIC:whistle',
+            name: 'Whistle Post',
+            form: 'sign',
+            image: 'File:Vic_Railway_Sign_Whistle.svg',
+            extra: {
+              type: {
+                options: [{ label: 'white' }, { label: 'yellow' }],
+              },
+            },
+          },
+        ],
+        // TODO: crossing_distant
+        station_distant: [
+          {
+            id: 'AU:VIC:location',
+            name: 'Location Ahead',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_station_distant_rural.svg',
+            extra: { caption: { options: [] } },
+          },
+          {
+            id: 'AU:VIC:station',
+            name: 'Station Approach',
+            form: 'sign',
+            image: 'File:VIC_Railway_Sign_station_distant_urban.svg',
             extra: { caption: { options: [] } },
           },
         ],

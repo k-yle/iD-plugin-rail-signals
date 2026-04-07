@@ -4,6 +4,7 @@ export type Category = keyof typeof CATEGORIES;
 
 export type ExtraField =
   | 'type'
+  | 'design'
   | 'shape'
   | 'states'
   | 'states_long'
