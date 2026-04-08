@@ -79,12 +79,12 @@ export const SCHEMA: Schema.Root = {
                 multiple: true,
                 options: [
                   {
-                    label: 'stop',
+                    value: 'stop',
                     icon: 'File:Australia_tram_signal_aspect_single-stop-red.svg',
                   },
-                  { label: 'straight', icon: 'File:DFStrab_F1.svg' },
-                  { label: 'right', icon: 'File:DFStrab_F2.svg' },
-                  { label: 'left', icon: 'File:DFStrab_F3.svg' },
+                  { value: 'straight', icon: 'File:DFStrab_F1.svg' },
+                  { value: 'right', icon: 'File:DFStrab_F2.svg' },
+                  { value: 'left', icon: 'File:DFStrab_F3.svg' },
                 ],
               },
             },
@@ -342,15 +342,15 @@ export const SCHEMA: Schema.Root = {
                 multiple: true,
                 options: [
                   {
-                    label: 'stop',
+                    value: 'stop',
                     icon: 'File:UK Ground Position Light Signal - Shunt Signal - On.svg',
                   },
                   {
-                    label: 'caution',
+                    value: 'caution',
                     icon: 'File:UK Ground Position Light Signal - Shunt Signal - On - Pre-1996.svg',
                   },
                   {
-                    label: 'clear',
+                    value: 'clear',
                     icon: 'File:UK Ground Position Light Signal - Shunt Signal - Off.svg',
                   },
                 ],
@@ -367,19 +367,19 @@ export const SCHEMA: Schema.Root = {
                 multiple: true,
                 options: [
                   {
-                    label: 'stop',
+                    value: 'stop',
                     icon: 'File:AU-NSW LightRail Signal Stop.svg',
                   },
                   {
-                    label: 'straight',
+                    value: 'straight',
                     icon: 'File:AU-NSW LightRail Signal Straight.svg',
                   },
                   {
-                    label: 'right',
+                    value: 'right',
                     icon: 'File:AU-NSW LightRail Signal Right.svg',
                   },
                   {
-                    label: 'left',
+                    value: 'left',
                     icon: 'File:AU-NSW LightRail Signal Left.svg',
                   },
                 ],
@@ -396,19 +396,19 @@ export const SCHEMA: Schema.Root = {
                 multiple: true,
                 options: [
                   {
-                    label: 'stop',
+                    value: 'stop',
                     icon: 'File:AU-NSW LightRail Signal Stop.svg',
                   },
                   {
-                    label: 'straight',
+                    value: 'straight',
                     icon: 'File:AU-NSW LightRail Points Indicator Straight.svg',
                   },
                   {
-                    label: 'right',
+                    value: 'right',
                     icon: 'File:AU-NSW LightRail Points Indicator Right.svg',
                   },
                   {
-                    label: 'left',
+                    value: 'left',
                     icon: 'File:AU-NSW LightRail Points Indicator Left.svg',
                   },
                 ],
@@ -426,24 +426,24 @@ export const SCHEMA: Schema.Root = {
                 multiple: true,
                 options: [
                   {
-                    label: 'stop',
+                    value: 'stop',
                     icon: 'File:Australia_tram_signal_aspect_double-stop.svg',
                   },
                   {
-                    label: 'straight',
+                    value: 'straight',
                     icon: 'File:Australia_tram_signal_aspect_double-straight.svg',
                   },
                   {
-                    label: 'right',
+                    value: 'right',
                     icon: 'File:Australia_tram_signal_aspect_double-right.svg',
                   },
                   {
-                    label: 'left',
+                    value: 'left',
                     icon: 'File:Australia_tram_signal_aspect_double-left.svg',
                   },
-                  { label: 'error', icon: 'File:DFStrab F4.svg' },
+                  { value: 'error', icon: 'File:DFStrab F4.svg' },
                   {
-                    label: 'warning',
+                    value: 'warning',
                     icon: 'File:Australia tram signal aspect orange.svg',
                   },
                 ],
@@ -462,13 +462,13 @@ export const SCHEMA: Schema.Root = {
                 multiple: true,
                 options: [
                   {
-                    label: 'stop_red',
+                    value: 'stop_red',
                     icon: 'File:Australia_tram_signal_aspect_single-stop-red.svg',
                   },
-                  { label: 'stop', icon: 'File:DFStrab_F0.svg' },
-                  { label: 'straight', icon: 'File:DFStrab_F1.svg' },
-                  { label: 'right', icon: 'File:DFStrab_F2.svg' },
-                  { label: 'left', icon: 'File:DFStrab_F3.svg' },
+                  { value: 'stop', icon: 'File:DFStrab_F0.svg' },
+                  { value: 'straight', icon: 'File:DFStrab_F1.svg' },
+                  { value: 'right', icon: 'File:DFStrab_F2.svg' },
+                  { value: 'left', icon: 'File:DFStrab_F3.svg' },
                 ],
               },
             },
@@ -483,12 +483,12 @@ export const SCHEMA: Schema.Root = {
                 multiple: true,
                 options: [
                   {
-                    label: 'locked',
+                    value: 'locked',
                     icon: 'File:Australia tram signal aspect diamond.svg',
                   },
-                  { label: 'straight', icon: 'File:BOStrab W1.svg' },
-                  { label: 'right', icon: 'File:BOStrab W2.svg' },
-                  { label: 'left', icon: 'File:BOStrab W3.svg' },
+                  { value: 'straight', icon: 'File:BOStrab W1.svg' },
+                  { value: 'right', icon: 'File:BOStrab W2.svg' },
+                  { value: 'left', icon: 'File:BOStrab W3.svg' },
                 ],
               },
             },
@@ -597,11 +597,11 @@ export const SCHEMA: Schema.Root = {
               shape: {
                 options: [
                   {
-                    label: 'theatre_box',
+                    value: 'theatre_box',
                     icon: 'File:NSW Railway Signal Turnout Repeater - theatre box.svg',
                   },
                   {
-                    label: 'feather',
+                    value: 'feather',
                     icon: 'File:NSW Railway Signal Turnout Repeater - feather.svg',
                   },
                 ],
@@ -609,11 +609,11 @@ export const SCHEMA: Schema.Root = {
               states: {
                 multiple: true,
                 options: [
-                  { label: 'straight', icon: 'File:DFStrab_F1.svg' },
-                  { label: 'right', icon: 'File:DFStrab_F2.svg' },
-                  { label: 'left', icon: 'File:DFStrab_F3.svg' },
+                  { value: 'straight', icon: 'File:DFStrab_F1.svg' },
+                  { value: 'right', icon: 'File:DFStrab_F2.svg' },
+                  { value: 'left', icon: 'File:DFStrab_F3.svg' },
                   {
-                    label: 'off',
+                    value: 'off',
                     icon: 'File:BOStrab_Weichensignal_Kompakt_Basis.svg',
                   },
                 ],
@@ -641,23 +641,23 @@ export const SCHEMA: Schema.Root = {
                 required: true,
                 options: [
                   {
-                    label: 'GYR',
+                    value: 'GYR',
                     icon: 'File:NSW_Railway_Signal_(single)_GYR.svg',
                   },
                   {
-                    label: 'GR',
+                    value: 'GR',
                     icon: 'File:NSW_Railway_Signal_(single)_GR.svg',
                   },
                   {
-                    label: 'YR',
+                    value: 'YR',
                     icon: 'File:NSW_Railway_Signal_(single)_YR.svg',
                   },
                   {
-                    label: 'R',
+                    value: 'R',
                     icon: 'File:NSW_Railway_Signal_(single)_R.svg',
                   },
                   {
-                    label: 'G',
+                    value: 'G',
                     icon: 'File:NSW_Railway_Signal_(single)_G.svg',
                   },
                 ],
@@ -665,11 +665,11 @@ export const SCHEMA: Schema.Root = {
               type: {
                 options: [
                   {
-                    label: 'aligned',
+                    value: 'aligned',
                     icon: 'File:NSW_Railway_Signal_(double)_GR-GR.svg',
                   },
                   {
-                    label: 'staggered',
+                    value: 'staggered',
                     icon: 'File:NSW Railway Signal (double) GR-GR staggered.svg',
                   },
                 ],
@@ -677,10 +677,10 @@ export const SCHEMA: Schema.Root = {
               shape: {
                 options: [
                   {
-                    label: 'multi_unit',
+                    value: 'multi_unit',
                     icon: 'File:Traffic lights dark all-on.svg',
                   },
-                  { label: 'searchlight', icon: 'File:Searchlight_signal.gif' },
+                  { value: 'searchlight', icon: 'File:Searchlight_signal.gif' },
                 ],
               },
             },
@@ -697,35 +697,35 @@ export const SCHEMA: Schema.Root = {
                 required: true,
                 options: [
                   {
-                    label: 'GYR',
+                    value: 'GYR',
                     icon: 'File:NSW_Railway_Signal_(single)_GYR.svg',
                   },
                   {
-                    label: 'GR',
+                    value: 'GR',
                     icon: 'File:NSW_Railway_Signal_(single)_GR.svg',
                   },
                   {
-                    label: 'YR',
+                    value: 'YR',
                     icon: 'File:NSW_Railway_Signal_(single)_YR.svg',
                   },
                   {
-                    label: 'R',
+                    value: 'R',
                     icon: 'File:NSW_Railway_Signal_(single)_R.svg',
                   },
                   {
-                    label: 'GYRg',
+                    value: 'GYRg',
                     icon: 'File:NSW_Railway_Signal_(single)_GYRg.svg',
                   },
                   {
-                    label: 'GRg',
+                    value: 'GRg',
                     icon: 'File:NSW_Railway_Signal_(single)_GRg.svg',
                   },
                   {
-                    label: 'YRg',
+                    value: 'YRg',
                     icon: 'File:NSW_Railway_Signal_(single)_YRg.svg',
                   },
                   {
-                    label: 'GY',
+                    value: 'GY',
                     icon: 'File:NSW Railway Signal (single) GY.svg',
                   },
                 ],
@@ -733,10 +733,10 @@ export const SCHEMA: Schema.Root = {
               shape: {
                 options: [
                   {
-                    label: 'multi_unit',
+                    value: 'multi_unit',
                     icon: 'File:Traffic lights dark all-on.svg',
                   },
-                  { label: 'searchlight', icon: 'File:Searchlight_signal.gif' },
+                  { value: 'searchlight', icon: 'File:Searchlight_signal.gif' },
                 ],
               },
             },
@@ -754,15 +754,15 @@ export const SCHEMA: Schema.Root = {
                 multiple: true,
                 options: [
                   {
-                    label: 'right',
+                    value: 'right',
                     icon: 'File:NSW Railway Signal (single) Turnout Route R.svg',
                   },
                   {
-                    label: 'left',
+                    value: 'left',
                     icon: 'File:NSW Railway Signal (single) Turnout Route L.svg',
                   },
                   {
-                    label: 'off',
+                    value: 'off',
                     icon: 'File:NSW Railway Signal (single) Turnout Route Off.svg',
                   },
                 ],
@@ -821,9 +821,9 @@ export const SCHEMA: Schema.Root = {
             extra: {
               shape: {
                 options: [
-                  { label: 'box', icon: 'File:NSW Railway Signal Shunt.svg' },
+                  { value: 'box', icon: 'File:NSW Railway Signal Shunt.svg' },
                   {
-                    label: 'vertical',
+                    value: 'vertical',
                     icon: 'File:NSW Railway Signal Shunt - Vertical.svg',
                   },
                 ],
@@ -839,11 +839,11 @@ export const SCHEMA: Schema.Root = {
               shape: {
                 options: [
                   {
-                    label: 'box',
+                    value: 'box',
                     icon: 'File:NSW Railway Signal Shunt - Intermediate.svg',
                   },
                   {
-                    label: 'vertical',
+                    value: 'vertical',
                     icon: 'File:NSW Railway Signal Shunt - Intermediate Vertical.svg',
                   },
                 ],
@@ -874,11 +874,11 @@ export const SCHEMA: Schema.Root = {
               shape: {
                 options: [
                   {
-                    label: 'right',
+                    value: 'right',
                     icon: 'File:NSW Railway Signal Deadend Siding R.svg',
                   },
                   {
-                    label: 'left',
+                    value: 'left',
                     icon: 'File:NSW Railway Signal Deadend Siding L.svg',
                   },
                 ],
@@ -902,11 +902,11 @@ export const SCHEMA: Schema.Root = {
               shape: {
                 options: [
                   {
-                    label: 'bulb',
+                    value: 'bulb',
                     icon: 'File:NSW Railway Signal Warning Light - bulb.svg',
                   },
                   {
-                    label: 'array',
+                    value: 'array',
                     icon: 'File:NSW Railway Signal Warning Light - array.svg',
                   },
                 ],
@@ -995,11 +995,11 @@ export const SCHEMA: Schema.Root = {
               states: {
                 options: [
                   {
-                    label: 'WR',
+                    value: 'WR',
                     icon: 'File:NSW Railway Signal End of Track WR.svg',
                   },
                   {
-                    label: 'R',
+                    value: 'R',
                     icon: 'File:NSW Railway Signal End of Track R.svg',
                   },
                 ],
@@ -1028,15 +1028,15 @@ export const SCHEMA: Schema.Root = {
               shape: {
                 options: [
                   {
-                    label: 'horizontal',
+                    value: 'horizontal',
                     icon: 'File:NSW Railway Sign Stop.svg',
                   },
                   {
-                    label: 'vertical',
+                    value: 'vertical',
                     icon: 'File:NSW Railway Sign Stop.svg',
                   },
                   {
-                    label: 'octogon',
+                    value: 'octogon',
                     icon: 'File:Australia road sign R1-1.svg',
                   },
                 ],
@@ -1223,11 +1223,11 @@ export const SCHEMA: Schema.Root = {
               shape: {
                 options: [
                   {
-                    label: 'home',
+                    value: 'home',
                     icon: 'File:NZ Railway Signal MM.svg',
                   },
                   {
-                    label: 'auto',
+                    value: 'auto',
                     icon: 'File:NZ Railway Signal MM-staggered.svg',
                   },
                 ],
@@ -1243,11 +1243,11 @@ export const SCHEMA: Schema.Root = {
               shape: {
                 options: [
                   {
-                    label: 'home',
+                    value: 'home',
                     icon: 'File:NZ Railway Signal MS.svg',
                   },
                   {
-                    label: 'auto',
+                    value: 'auto',
                     icon: 'File:NZ Railway Signal MS-staggered.svg',
                   },
                 ],
@@ -1263,11 +1263,11 @@ export const SCHEMA: Schema.Root = {
               shape: {
                 options: [
                   {
-                    label: 'home',
+                    value: 'home',
                     icon: 'File:NZ Railway Signal SM.svg',
                   },
                   {
-                    label: 'auto',
+                    value: 'auto',
                     icon: 'File:NZ Railway Signal SM-staggered.svg',
                   },
                 ],
@@ -1283,11 +1283,11 @@ export const SCHEMA: Schema.Root = {
               shape: {
                 options: [
                   {
-                    label: 'home',
+                    value: 'home',
                     icon: 'File:VIC Railway Signal Main 12 aligned.svg',
                   },
                   {
-                    label: 'auto',
+                    value: 'auto',
                     icon: 'File:VIC Railway Signal Main 12 staggered.svg',
                   },
                 ],
@@ -1303,11 +1303,11 @@ export const SCHEMA: Schema.Root = {
               shape: {
                 options: [
                   {
-                    label: 'home',
+                    value: 'home',
                     icon: 'File:NZ Railway Signal SS.svg',
                   },
                   {
-                    label: 'auto',
+                    value: 'auto',
                     icon: 'File:NZ Railway Signal SS-staggered.svg',
                   },
                 ],
@@ -1337,11 +1337,11 @@ export const SCHEMA: Schema.Root = {
               shape: {
                 options: [
                   {
-                    label: 'home',
+                    value: 'home',
                     icon: 'File:VIC Railway Signal Distant 22 aligned.svg',
                   },
                   {
-                    label: 'auto',
+                    value: 'auto',
                     icon: 'File:VIC Railway Signal Distant 22 staggered.svg',
                   },
                 ],
@@ -1357,11 +1357,11 @@ export const SCHEMA: Schema.Root = {
               shape: {
                 options: [
                   {
-                    label: 'home',
+                    value: 'home',
                     icon: 'File:VIC Railway Signal Distant 21 aligned.svg',
                   },
                   {
-                    label: 'auto',
+                    value: 'auto',
                     icon: 'File:VIC Railway Signal Distant 21 staggered.svg',
                   },
                 ],
@@ -1377,11 +1377,11 @@ export const SCHEMA: Schema.Root = {
               shape: {
                 options: [
                   {
-                    label: 'home',
+                    value: 'home',
                     icon: 'File:VIC Railway Signal Distant 12 aligned.svg',
                   },
                   {
-                    label: 'auto',
+                    value: 'auto',
                     icon: 'File:VIC Railway Signal Distant 12 staggered.svg',
                   },
                 ],
@@ -1560,19 +1560,19 @@ export const SCHEMA: Schema.Root = {
                 required: true,
                 options: [
                   {
-                    label: 'theatre_box',
+                    value: 'theatre_box',
                     icon: 'File:NZ Railway Signal Banner Indicator double.svg',
                   },
                   {
-                    label: 'compact',
+                    value: 'compact',
                     icon: 'File:VIC Railway Signal Banner Indicator compact.svg',
                   },
                   {
-                    label: 'shunt',
+                    value: 'shunt',
                     icon: 'File:VIC Railway Signal Banner Indicator shunt.svg',
                   },
                   {
-                    label: 'single',
+                    value: 'single',
                     icon: 'File:NZ Railway Signal Banner Indicator single.svg',
                   },
                 ],
@@ -1598,9 +1598,9 @@ export const SCHEMA: Schema.Root = {
               states: {
                 multiple: true,
                 options: [
-                  { label: 'straight', icon: 'File:BOStrab W1.svg' },
-                  { label: 'right', icon: 'File:BOStrab W2.svg' },
-                  { label: 'left', icon: 'File:BOStrab W3.svg' },
+                  { value: 'straight', icon: 'File:BOStrab W1.svg' },
+                  { value: 'right', icon: 'File:BOStrab W2.svg' },
+                  { value: 'left', icon: 'File:BOStrab W3.svg' },
                 ],
               },
             },
@@ -1615,11 +1615,11 @@ export const SCHEMA: Schema.Root = {
                 multiple: true,
                 options: [
                   {
-                    label: 'LR',
+                    value: 'LR',
                     icon: 'File:VIC_Railway_Sign_painted_arrow_LR.svg',
                   },
                   {
-                    label: 'RL',
+                    value: 'RL',
                     icon: 'File:VIC Railway Sign painted arrow RL.svg',
                   },
                 ],
@@ -1641,37 +1641,38 @@ export const SCHEMA: Schema.Root = {
             image: 'File:NSW_Railway_Signal_Turnout_Repeater_-_feather.svg',
             extra: {
               states: {
+                multiple: true,
                 options: [
                   {
-                    label: 'position_1',
+                    value: 'position_1',
                     icon: 'File:Arrow top left Pinhead icon.svg',
                   },
                   {
-                    label: 'position_2',
+                    value: 'position_2',
                     icon: 'File:Arrow left Pinhead icon.svg',
                   },
                   {
-                    label: 'position_3',
+                    value: 'position_3',
                     icon: 'File:Arrow bottom left Pinhead icon.svg',
                   },
                   {
-                    label: 'position_4',
+                    value: 'position_4',
                     icon: 'File:Arrow bottom right Pinhead icon.svg',
                   },
                   {
-                    label: 'position_5',
+                    value: 'position_5',
                     icon: 'File:Arrow right Pinhead icon.svg',
                   },
                   {
-                    label: 'position_6',
+                    value: 'position_6',
                     icon: 'File:Arrow top right Pinhead icon.svg',
                   },
                   {
-                    label: 'position_7',
+                    value: 'position_7',
                     icon: 'File:Arrow up Pinhead icon.svg',
                   },
                   {
-                    label: 'off',
+                    value: 'off',
                   },
                 ],
               },
@@ -1737,7 +1738,7 @@ export const SCHEMA: Schema.Root = {
             image: 'File:Vic_Railway_Sign_Whistle.svg',
             extra: {
               type: {
-                options: [{ label: 'white' }, { label: 'yellow' }],
+                options: [{ value: 'white' }, { value: 'yellow' }],
               },
             },
           },

@@ -165,8 +165,8 @@ export const App: React.FC<{ domRoot: HTMLElement } & iD.PluginData> = ({
                   // there are limited options
                   const mappedOptions = options.options.map((o) => {
                     const option: FieldOption =
-                      typeof o === 'string' ? { label: o } : o;
-                    return { value: option.label, ...option };
+                      typeof o === 'string' ? { label: o, value: o } : o;
+                    return { label: option.label || option.value, ...option };
                   });
 
                   // multi-select
@@ -199,7 +199,7 @@ export const App: React.FC<{ domRoot: HTMLElement } & iD.PluginData> = ({
 
                   // single-select
                   const v = tags[`railway:signal:${cat}:${key}`] || '';
-                  const selected = mappedOptions.find((o) => o.label === v);
+                  const selected = mappedOptions.find((o) => o.value === v);
                   return (
                     <Select
                       key={key}

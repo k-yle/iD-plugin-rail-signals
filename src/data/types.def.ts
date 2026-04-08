@@ -11,7 +11,13 @@ export type ExtraField =
   | 'speed'
   | 'caption';
 
-export type FieldOption = { icon?: string; label: string };
+export interface FieldOption {
+  /** the osm tag value */
+  value: string;
+  /** human-readable label (uses the tag value if not defined) */
+  label?: string;
+  icon?: string;
+}
 export type FieldConfig = {
   /** @default false */
   multiple?: true;

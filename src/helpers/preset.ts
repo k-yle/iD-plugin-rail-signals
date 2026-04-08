@@ -7,7 +7,7 @@ export function createSignalId(signal: Schema.Signal) {
     .map((kv) => kv.join('='))
     .join('|');
 
-  return `${signal.id} ${extra}`.trim();
+  return `${signal.id} ${signal.form} ${signal.name} ${extra}`.trim();
 }
 
 export function findPreset(tags: Tags, category: Category) {

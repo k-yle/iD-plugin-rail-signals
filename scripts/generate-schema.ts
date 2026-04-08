@@ -3,6 +3,19 @@ import { join } from 'node:path';
 import yaml from 'yaml';
 import type { Category, Schema } from '../src/data/types.def.js';
 
+interface Case {
+  // for matching:
+  regex?: string;
+  all?: string[];
+  any?: string[];
+  exact?: string;
+
+  // for data:
+  example?: string;
+  value: string;
+  description?: string;
+}
+
 interface Yaml {
   features: {
     country?: string;
@@ -11,7 +24,7 @@ interface Yaml {
     icon: {
       default: string;
       match?: string;
-      cases?: { all?: string[]; exact?: string }[];
+      cases?: Case[];
     }[];
     tags: { tag: string; value?: string; any: string[] }[];
   }[];
@@ -29,8 +42,11 @@ const signals: Yaml = await fetch(
   .then((r) => r.text())
   .then(yaml.parse);
 
+function iconToUrl(fileName: string) {
+  return `https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/${LATEST_COMMIT}/symbols/${fileName}.svg`;
+}
+
 const grouped: Schema.Root = {};
-const seen = new Set<string>();
 
 for (const signal of signals.features) {
   if (!signal.country) continue; // skip global features
@@ -62,7 +78,7 @@ for (const signal of signals.features) {
     (tag) => tag.tag.split(':')[2] !== cat,
   );
   if (otherTagsDiffCat.length) {
-    console.log('complex extra', key);
+    console.log(`skip ${key}\t(tags include multiple categories)`);
     continue; // skip if a subtag is from a different category
   }
 
@@ -70,30 +86,47 @@ for (const signal of signals.features) {
     tag.tag.replace(`railway:signal:${cat}:`, ''),
     tag.value || tag.any?.[0],
   ]);
-  if (otherValues.length) console.log(Object.fromEntries(otherValues));
-
-  if (seen.has(key)) {
-    console.log('dupe', key);
-    grouped[signal.country]![region]!.signals[cat] = grouped[signal.country]![
-      region
-    ]!.signals[cat]?.filter((k) => k.id !== mainValue);
-    continue;
-  }
-  seen.add(key);
 
   const countryName = new Intl.DisplayNames(['en'], { type: 'region' }).of(
     signal.country,
   )!;
 
-  const icon = signal.icon[0]?.match?.split(':');
   const extra: Schema.Signal['extra'] = {};
-  const values =
-    signal.icon[0]?.cases?.every((c) => c.all || c.exact) &&
-    new Set(signal.icon[0].cases.flatMap((c) => c.all || [c.exact!]));
-  if (icon && icon[3] && icon[2] === cat) {
-    extra[icon[3] as keyof typeof extra] = {
-      options: values ? [...values] : [],
-    };
+
+  for (const icon of signal.icon) {
+    const iconMatchKey = icon.match?.split(':');
+
+    const values: Record<string, Case> = {};
+    for (const casē of icon.cases || []) {
+      if (casē.regex) {
+        // values[casē.regex] = casē; // TODO: support this
+      } else if (casē.exact) {
+        values[casē.exact] = casē;
+      } else if (casē.any) {
+        for (const value of casē.any) {
+          values[value] = casē;
+        }
+      } else if (casē.all) {
+        values[casē.all.join(';')] = casē;
+      } else {
+        values[''] = casē;
+      }
+    }
+
+    if (iconMatchKey && iconMatchKey[3] && iconMatchKey[2] === cat) {
+      const extraField = iconMatchKey[3] as keyof typeof extra;
+      extra[extraField] ||= { options: [] };
+
+      extra[extraField].options.push(
+        ...(Object.values(values).some(Boolean)
+          ? Object.entries(values).map(([value, casē]) => ({
+              value,
+              label: casē.description,
+              icon: iconToUrl(casē.example || casē.value),
+            }))
+          : Object.keys(values)),
+      );
+    }
   }
 
   grouped[signal.country] ||= {};
@@ -108,9 +141,10 @@ for (const signal of signals.features) {
   grouped[signal.country]![region]!.signals[cat]!.push({
     id: mainValue,
     name: signal.description,
-    image: `https://raw.githubusercontent.com/hiddewie/OpenRailwayMap-vector/${LATEST_COMMIT}/symbols/${signal.icon[0]?.default || signal.exampleIcon}.svg`,
+    image: iconToUrl((signal.icon[0]?.default || signal.exampleIcon)!),
     form: (form?.value || 'light') as 'sign' | 'light',
     extra: Object.keys(extra).length ? extra : undefined,
+    const: otherValues.length ? Object.fromEntries(otherValues) : undefined,
   });
 }
 
