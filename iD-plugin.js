@@ -23756,7 +23756,7 @@ const _v = "" + new URL("styles.css", import.meta.url).href, Av = "" + new URL("
             form: "light",
             image: "File:WA Railway Signal SRP coloured right down.svg",
             extra: {
-              shape: {
+              turn_direction: {
                 options: [
                   {
                     value: "left",
@@ -23768,7 +23768,7 @@ const _v = "" + new URL("styles.css", import.meta.url).href, Av = "" + new URL("
                   }
                 ]
               },
-              turn_direction: {
+              shape: {
                 options: [
                   {
                     value: "point_down",
