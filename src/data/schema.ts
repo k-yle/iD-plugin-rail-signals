@@ -2618,7 +2618,7 @@ export const SCHEMA: Schema.Root = {
             form: 'light',
             image: 'File:WA Railway Signal SRP coloured right down.svg',
             extra: {
-              shape: {
+              turn_direction: {
                 options: [
                   {
                     value: 'left',
@@ -2630,7 +2630,7 @@ export const SCHEMA: Schema.Root = {
                   },
                 ],
               },
-              turn_direction: {
+              shape: {
                 options: [
                   {
                     value: 'point_down',
